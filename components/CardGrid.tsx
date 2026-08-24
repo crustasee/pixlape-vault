@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
-import { CARDS, CardItem } from "@/app/data/card";
+import { CARDS, CardItem } from "@/data/card";
 
 interface CardGridProps {
   cards?: CardItem[];

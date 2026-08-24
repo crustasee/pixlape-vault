@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Header from "../component/Header";
-import Footer from "../component/Footer";
-import TeamProfileCard from "../component/TeamProfileCard";
-import { TEAM_MEMBERS } from "../data/adminaccount";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import TeamProfileCard from "@/components/TeamProfileCard";
+import { TEAM_MEMBERS } from "@/data/team";
 
 export default function PixlTeam() {
   const [selectedRoleFilter] = useState<string>("ALL");

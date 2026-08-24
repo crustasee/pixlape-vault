@@ -1,34 +1,11 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail("");
-      setTimeout(() => setSubscribed(false), 3000);
-    }
-  };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const categories = [
-    { label: "APPS & .EXE", href: "/" },
-    { label: "DESIGN TOOLS", href: "/" },
-    { label: "BRUSH PACKS", href: "/" },
-    { label: "TEMPLATES", href: "/" },
-    { label: "ICON SETS", href: "/" },
-    { label: "ART & 3D ASSETS", href: "/" },
-  ];
 
   const resources = [
     { label: "Help Center", href: "/help" },

@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "./component/Header";
-import HeroBanner from "./component/HeroBanner";
-import Sidebar from "./component/Sidebar";
-import CardGrid from "./component/CardGrid";
-import ArticleSection from "./component/ArticleSection";
-import Footer from "./component/Footer";
+import Header from "@/components/Header";
+import HeroBanner from "@/components/HeroBanner";
+import Sidebar from "@/components/Sidebar";
+import CardGrid from "@/components/CardGrid";
+import ArticleSection from "@/components/ArticleSection";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg- text-text-primary font-mono">
+    <div className="min-h-screen bg-surface text-text-primary font-mono">
       <Header />
 
       <HeroBanner />

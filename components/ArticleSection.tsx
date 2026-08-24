@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ARTICLES, ArticleItem } from "@/app/data/article";
+import { ARTICLES } from "@/data/article";
 
 export default function ArticleSection() {
   const [likesMap, setLikesMap] = useState<Record<string, { count: number; liked: boolean }>>(() => {

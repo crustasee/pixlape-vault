@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/app/component/Header";
-import Footer from "@/app/component/Footer";
-import { ArticleItem } from "@/app/data/article";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ArticleItem } from "@/data/article";
 
 interface ArticlePageProps {
   article: ArticleItem;

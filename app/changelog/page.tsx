@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
-import Header from "@/app/component/Header";
-import Footer from "@/app/component/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Link from "next/link";
 
 const CHANGELOG_LOGS = [
@@ -32,7 +34,7 @@ export default function ChangelogPage() {
     <div className="min-h-screen bg-surface text-text-primary font-mono flex flex-col">
       <Header />
 
-      <main className="mx-24 mt-[52px] pb-14 flex-1 flex flex-col gap-4">
+      <main className="mx-24 mt-13 pb-14 flex-1 flex flex-col gap-4">
         <Link
           href="/"
           className="self-start mt-4 text-xs font-mono text-text-secondary hover:text-primary transition-colors flex items-center gap-3"
@@ -46,7 +48,7 @@ export default function ChangelogPage() {
 
         <div className="bg-border border border-black rounded-md p-8 flex flex-col gap-7 shadow-xs">
           {CHANGELOG_LOGS.map((log) => (
-            <div key={log.version} className="border-b border-border pb-6 last:border-0 last:pb-0 flex flex-col gap-3">
+            <div key={log.version} className="border-b border-border pb-6 last:border-0 flex flex-col gap-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="px-7 py-2 bg-black-primary/30 text-black-primary text-xs font-pixel rounded-md">
                   {log.version}

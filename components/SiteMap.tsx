@@ -2,10 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Header from "./Header";
 import Footer from "./Footer";
-import { CARDS } from "../data/card";
+import { CARDS } from "@/data/card";
 
 export default function SiteMap() {
   return (
@@ -13,7 +12,7 @@ export default function SiteMap() {
       <Header />
 
       {/* Main Content */}
-      <main className="flex-grow w-full max-w-full mx-auto px-6 mt-[68px] py-8 flex flex-col gap-6">
+      <main className="grow w-full max-w-full mx-auto px-6 mt-17 py-8 flex flex-col gap-6">
         {/* Back Link */}
         <Link
           href="/"
