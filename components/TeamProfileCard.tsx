@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { TeamMember } from "@/data/team";
+import { TeamMember } from "@/lib/db/team";
 
 interface TeamProfileCardProps {
   member: TeamMember;

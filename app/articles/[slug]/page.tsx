@@ -1,26 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArticleItem } from "@/data/article";
+import { getArticleById } from "@/lib/db/article";
+import { notFound } from "next/navigation";
 
-interface ArticlePageProps {
-  article: ArticleItem;
-}
+export default function ArticleDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = use(params);
+  const article = getArticleById(slug);
 
-export default function ArticlePage({ article }: ArticlePageProps) {
+  if (!article) {
+    notFound();
+  }
+
   const [likes, setLikes] = useState(article.likes);
   const [hasLiked, setHasLiked] = useState(false);
 
   const toggleLike = () => {
     if (hasLiked) {
-      setLikes((prev) => prev - 1);
+      setLikes((prev: number) => prev - 1);
       setHasLiked(false);
     } else {
-      setLikes((prev) => prev + 1);
+      setLikes((prev: number) => prev + 1);
       setHasLiked(true);
     }
   };
@@ -237,13 +245,13 @@ export default function ArticlePage({ article }: ArticlePageProps) {
         {/* ──========================================= Related Article Navigation Links =========================================── */}
         <div className="flex items-center justify-between pt-4 text-xs font-mono">
           <Link
-            href="/article"
+            href="/articles"
             className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors"
           >
             &lt; PREVIOUS ARTICLE
           </Link>
           <Link
-            href="/article"
+            href="/articles"
             className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors"
           >
             NEXT ARTICLE &gt;

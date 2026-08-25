@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +12,7 @@ export default function Footer() {
   const resources = [
     { label: "Help Center", href: "/help" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Article & Blog", href: "/article" },
+    { label: "Article & Blog", href: "/articles" },
     { label: "Pixlape Team", href: "/pixlteam" },
     { label: "Sitemap", href: "/sitemap" },
     { label: "Changelog", href: "/changelog" },

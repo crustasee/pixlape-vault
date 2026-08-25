@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
-import { CARDS, CardItem } from "@/data/card";
+import { CARDS, CardItem } from "@/lib/db/card";
 
 interface CardGridProps {
   cards?: CardItem[];
@@ -69,7 +69,7 @@ export default function CardGrid({
                   {card.title}
                 </h2>
                 <Link
-                  href={`/card/${card.id}`}
+                  href={`/cards/${card.id}`}
                   className="w-full py-2 bg-black-secondary text-white text-xs font-mono font-semibold rounded-md hover:bg-primary hover:text-green-700 transition-opacity text-center block"
                 >
                   VIEW DETAIL PAGE &gt;

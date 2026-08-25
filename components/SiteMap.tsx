@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
-import { CARDS } from "@/data/card";
+import { CARDS } from "@/lib/db/card";
 
 export default function SiteMap() {
   return (
@@ -83,11 +83,11 @@ export default function SiteMap() {
                     </Link>
 
                     <Link
-                      href="/article"
+                      href="/articles"
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:underline">/article (ARTICLES & BLOG)</span>
+                      <span className="text-white group-hover:underline">/articles (ARTICLES & BLOG)</span>
                       <span className="text-text-secondary text-[11px] ml-auto">[LISTING] [DYNAMIC]</span>
                     </Link>
 
@@ -121,7 +121,7 @@ export default function SiteMap() {
                     {CARDS.map((card) => (
                       <Link
                         key={card.id}
-                        href={`/card/${card.id}`}
+                        href={`/cards/${card.id}`}
                         className="flex items-center justify-between p-2 bg-black-primary border border-black-secondary rounded-xs hover:border-primary hover:text-primary transition-all group"
                       >
                         <div className="flex items-center gap-8 overflow-hidden">
@@ -144,7 +144,7 @@ export default function SiteMap() {
 
                   <div className="ml-9 space-y-1.5 font-mono text-xs">
                     <Link
-                      href="/article/1"
+                      href="/articles/1"
                       className="flex items-center justify-between p-3 bg-black-primary border border-black-secondary rounded-xs hover:border-primary hover:text-primary transition-all group"
                     >
                       <div className="flex items-center gap-9">

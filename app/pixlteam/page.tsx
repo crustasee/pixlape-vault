@@ -5,7 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamProfileCard from "@/components/TeamProfileCard";
-import { TEAM_MEMBERS } from "@/data/team";
+import { TEAM_MEMBERS } from "@/lib/db/team";
 
 export default function PixlTeam() {
   const [selectedRoleFilter] = useState<string>("ALL");

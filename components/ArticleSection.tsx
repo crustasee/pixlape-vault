@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ARTICLES } from "@/data/article";
+import { ARTICLES } from "@/lib/db/article";
 
 export default function ArticleSection() {
   const [likesMap, setLikesMap] = useState<Record<string, { count: number; liked: boolean }>>(() => {
@@ -82,7 +82,7 @@ export default function ArticleSection() {
                     </div>
 
                     {/* Title & Excerpt */}
-                    <Link href={`/article/${article.id}`}>
+                    <Link href={`/articles/${article.id}`}>
                       <h3 className="text-base sm:text-lg font-mono font-bold text-black-primary hover:text-green-600 transition-colors leading-snug">
                         {article.title}
                       </h3>
@@ -109,7 +109,7 @@ export default function ArticleSection() {
                     </button>
 
                     <Link
-                      href={`/article/${article.id}`}
+                      href={`/articles/${article.id}`}
                       className="px-5 py-1 rounded-lg bg-primary/50 border border-green-600 text-green-700 text-xs font-mono font-bold hover:scale-[1.03] active:scale-[0.98] transition-all inline-block text-center cursor-pointer uppercase shadow-xs"
                     >
                       Read &gt;
@@ -156,7 +156,7 @@ export default function ArticleSection() {
                       </span>
                     </div>
 
-                    <Link href={`/article/${article.id}`}>
+                    <Link href={`/articles/${article.id}`}>
                       <h4 className="text-xs sm:text-sm font-mono font-bold text-black-primary hover:text-green-600 transition-colors leading-snug line-clamp-2">
                        ▦ {article.title}
                       </h4>
@@ -182,7 +182,7 @@ export default function ArticleSection() {
                     </button>
 
                     <Link
-                      href={`/article/${article.id}`}
+                      href={`/articles/${article.id}`}
                       className="px-2 py-1 rounded-lg bg-primary/50 border text-green-700 text-xs font-mono font-bold hover:scale-[1.05] transition-all inline-block text-center cursor-pointer uppercase"
                     >
                       Read &gt;
@@ -198,7 +198,7 @@ export default function ArticleSection() {
       {/* ── Bottom Section Button ── */}
       <div className="flex justify-end mt-6 pt-4 border-t border-black">
         <Link
-          href="/article"
+          href="/articles"
           className="px-6 py-2 bg-surface border border-black-primary text-text-secondary text-sm font-mono font-semibold rounded-xl hover:bg-primary hover:text-white transition-all cursor-pointer"
         >
           ALL ARTICLES &gt;

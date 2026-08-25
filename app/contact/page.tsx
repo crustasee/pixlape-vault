@@ -159,7 +159,7 @@ export default function ContactPage() {
                 </li>
                 <li>
                   <Link
-                    href="/article"
+                    href="/articles"
                     className="text-text-secondary hover:text-primary hover:translate-x-1 inline-block transition-transform duration-150"
                   >
                     &gt; Guides & Vault Articles

@@ -4,14 +4,14 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { label: "HOME", href: "/" },
-  { label: "ARTICLES", href: "/article" },
+  { label: "ARTICLES", href: "/articles" },
   { label: "CONTACT US", href: "/contact" },
   { label: "HELP", href: "/help" },
 ];
 
 export default function Header() {
   return (
-    <header className="h-[51px] flex items-center px-6 fixed top-0 w-full z-50 font-mono border-b border-border bg-border text-surface shadow-xs">
+    <header className="h-12.75 flex items-center px-6 fixed top-0 w-full z-50 font-mono border-b border-border bg-border text-surface shadow-xs">
       {/* Brand / Logo */}
       <Link href="/" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
         <div className="w-7 h-7 rounded-sm flex items-center justify-center bg-surface border shadow-xs">

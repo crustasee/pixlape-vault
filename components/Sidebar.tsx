@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CARDS } from "@/data/card";
+import { CARDS } from "@/lib/db/card";
 
 const categories = [
   "ALL ASSETS",

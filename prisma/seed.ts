@@ -2,10 +2,10 @@ import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config();
 
-import { prisma } from "../lib/prisma";
-import { CARDS } from "../data/card";
-import { ARTICLES } from "../data/article";
-import { TEAM_MEMBERS } from "../data/team";
+import { prisma } from "../lib/db/prisma";
+import { CARDS } from "../lib/db/card";
+import { ARTICLES } from "../lib/db/article";
+import { TEAM_MEMBERS } from "../lib/db/team";
 import { BadgeVariant, CardCategory } from "../generated/prisma/client";
 
 async function main() {

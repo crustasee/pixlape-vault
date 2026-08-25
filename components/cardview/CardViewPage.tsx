@@ -10,7 +10,7 @@ import Badge, { CategoryBadge } from "../Badge";
 import DownloadModal from "../modal/DownloadModal";
 import DonateModal from "../modal/DonateModal";
 import MarkdownDescription from "./MarkdownDescription";
-import { getCardById, CARDS, CardDetail } from "@/data/card";
+import { getCardById, CARDS, CardDetail } from "@/lib/db/card";
 
 interface CardViewPageProps {
   cardId?: string;
