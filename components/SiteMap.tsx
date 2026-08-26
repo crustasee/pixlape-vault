@@ -57,7 +57,7 @@ export default function SiteMap() {
           <div className="space-y-6 text-sm">
             {/* Root Node */}
             <div>
-              <div className="flex items-center gap-9 mb-4 border-b-1 border-black-secondary pb-8">
+              <div className="flex items-center gap-9 mb-4 border-b border-black-secondary pb-8">
             
                 <span className="font-pixel text-lg sm:text-xl text-primary">
                   _______PIXLAPE_VAULT//__
