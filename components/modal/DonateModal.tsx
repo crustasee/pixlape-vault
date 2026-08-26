@@ -15,7 +15,7 @@ export interface DonateModalProps {
 export default function DonateModal({
   isOpen,
   onClose,
-  trakteerUrl = "https://trakteer.id",
+  trakteerUrl = "https://trakteer.id/galih_addi/tip",
   saweriaUrl = "https://saweria.co",
   qrisImageUrl,
 }: DonateModalProps) {
@@ -49,13 +49,22 @@ export default function DonateModal({
       </div>
 
       {/* Trakteer Button */}
-      <button
-        type="button"
-        onClick={() => openLink(trakteerUrl)}
-        className="w-full py-3 mt-2.5 rounded-md bg-pink-400 text-white text-sm font-pixel font-bold border border-black hover:bg-purple-400 hover:text-white hover:scale-[1.01] active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+      <a
+        href={trakteerUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full flex items-center justify-center mt-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-150"
       >
-        TRAKTEER
-      </button>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          id="wse-buttons-preview"
+          src="https://edge-cdn.trakteer.id/images/embed/trbtn-red-1.png?v=14-05-2025"
+          height={40}
+          style={{ border: "0px", height: "40px" }}
+          alt="Trakteer Saya"
+          className="h-10 object-contain"
+        />
+      </a>
 
       {/* Saweria Button */}
       <button
