@@ -89,7 +89,7 @@ export const CARDS: CardDetail[] = [
       "- Fixed: Canvas truncation on 80mm wide paper rolls.\n\n" +
       "### v1.00.00 (Initial Launch) — 2026-06-12\n" +
       "- First stable release with standard ESC/POS printing pipeline.",
-    downloadUrl: "#",
+    downloadUrl: "http://drive.google.com",
     donateUrl: "https://trakteer.id",
   },
   {
