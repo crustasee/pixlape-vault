@@ -12,7 +12,7 @@ export default function SiteMap() {
       <Header />
 
       {/* Main Content */}
-      <main className="grow w-full max-w-full mx-auto px-6 mt-17 py-8 flex flex-col gap-6">
+      <main className="grow w-full max-w-full mx-auto px-6 mt-12 py-8 flex flex-col gap-6">
         {/* Back Link */}
         <Link
           href="/"
