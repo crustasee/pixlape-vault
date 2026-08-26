@@ -10,6 +10,7 @@ export interface DonateModalProps {
   trakteerUrl?: string;
   saweriaUrl?: string;
   qrisImageUrl?: string;
+  midtranseUrl?: string;
 }
 
 export default function DonateModal({

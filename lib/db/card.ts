@@ -31,6 +31,16 @@ export interface CardDetail extends CardItem {
   requirements: string[];
   downloadUrl: string;
   donateUrl?: string;
+  version?: string;
+  fileSize?: string;
+  fileType?: string;
+  license?: string;
+  changelog?: string | string[];
+  features?: string[];
+  specs?: Record<string, string>;
+  checksum?: string;
+  author?: string;
+  updatedAt?: string;
 }
 
 // __________________________________________ Sample Data ________________________________________________
@@ -44,16 +54,43 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp1.svg",
     badge: "free",
     categories: ["APPS"],
+    version: "v1.02.00",
+    fileSize: "18.4 MB",
+    fileType: ".APK / .EXE",
+    license: "Free Commercial",
+    author: "PIXLape Lab",
+    updatedAt: "2026-08-20",
+    checksum: "sha256: 4a9f8b2c7e1109a3de88b43f1190bcda",
     description:
-      "Pixprint is an application that allows you to print your pixel art to a physical paper.
-      "Work in android version 11 and above"
-      "with bluetooth ble connection to printer",
-    requirements: [
-      "Windows 10 / macOS 12+",
-      "4 GB RAM minimum",
-      "500 MB free disk space",
+      "Pixprint is a lightweight utility that allows you to print your retro pixel art directly to physical thermal paper and standard home printers. Supports thermal ESC/POS 58mm/80mm bluetooth receipt printers, USB connection, and system print dialogs.",
+    features: [
+      "Zero Dithering Distortion with 1-to-1 dot matrix mapping",
+      "Wireless Bluetooth BLE & USB ESC/POS thermal printer support",
+      "Instant canvas aspect ratio calculator and paper preview",
+      "Preset profiles for 58mm and 80mm roll printers",
     ],
+    specs: {
+      "App Version": "v1.02.00 (Build #1042)",
+      "Runtime Engine": "Android 11+ / Windows 10+ (Electron/Native)",
+      "Printer Protocol": "ESC/POS, Bluetooth SPP/BLE, USB Direct",
+      "RAM Target": "< 65 MB Active Working Set",
+      "License": "Free for Personal & Commercial Use",
+    },
+    requirements: [
+      "Android 11.0+ or Windows 10/11 (64-bit)",
+      "Bluetooth 4.2+ (BLE) or USB-OTG connection",
+      "100 MB free device storage",
+      "ESC/POS compatible printer (optional)",
+    ],
+    changelog:
+      "### v1.02.00 (Current Build) — 2026-08-20\n" +
+      "- Added: Android 14 target SDK compatibility and permission handling.\n" +
+      "- Improved: BLE auto-reconnect reliability on low-energy thermal devices.\n" +
+      "- Fixed: Canvas truncation on 80mm wide paper rolls.\n\n" +
+      "### v1.00.00 (Initial Launch) — 2026-06-12\n" +
+      "- First stable release with standard ESC/POS printing pipeline.",
     downloadUrl: "#",
+    donateUrl: "https://trakteer.id",
   },
   {
     id: "card-2",
@@ -63,16 +100,40 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp2.svg",
     badge: "free",
     categories: ["BRUSH"],
+    version: "v2.1.0",
+    fileSize: "34.2 MB",
+    fileType: ".ABR / .BRUSHSET",
+    license: "Free Commercial",
+    author: "Brandon Herera",
+    updatedAt: "2026-08-15",
+    checksum: "sha256: 8f4a9b2c7e9903b12dc34509aa88fe12",
     description:
-      "Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. " +
-      "Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis " +
-      "dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus.",
+      "A complete pixel-perfect brush set designed specifically for vintage game art, pixel illustration, and textured halftone shading.\n\n" +
+      "Includes 48 unique handcrafted dynamic brushes formatted for Photoshop, Procreate, Aseprite, and Clip Studio Paint.",
+    features: [
+      "48 Custom pressure-sensitive pixel and stippling brushes",
+      "Native .brushset format for Procreate 5+ on iPad",
+      "High-res ABR format compatible with Photoshop CS6 through CC 2026",
+      "Includes 16 dithering pattern texture stamps",
+    ],
+    specs: {
+      "Brush Count": "48 Handcrafted Presets",
+      "Canvas Target": "300 DPI High-Resolution & Low-Res Sprite Modes",
+      "File Formats": ".ABR, .BRUSHSET, .SUT (Clip Studio)",
+      "License": "CC-BY 4.0 (Commercial OK)",
+    },
     requirements: [
-      "Photoshop CS6+ / Procreate 5+",
+      "Photoshop CS6+ / CC 2020+",
+      "Procreate 5+ on iPadOS 15+",
+      "Clip Studio Paint 1.10+",
       "300 DPI canvas recommended",
     ],
+    changelog:
+      "### v2.1.0 — 2026-08-15\n" +
+      "- Added 12 new retro halftone stippling brushes.\n" +
+      "- Optimized pressure curves for Apple Pencil 2 and Pro.",
     downloadUrl: "#",
-    donateUrl: "#",
+    donateUrl: "https://trakteer.id",
   },
   {
     id: "card-3",
@@ -82,15 +143,35 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp1.svg",
     badge: "premium",
     categories: ["ICON"],
+    version: "v3.0.0",
+    fileSize: "12.8 MB",
+    fileType: ".SVG / .PNG / .FIG",
+    license: "Royalty-Free Premium",
+    author: "PIXLape Design",
+    updatedAt: "2026-08-10",
+    checksum: "sha256: e3b0c44298fc1c149afbf4c8996fb924",
     description:
-      "Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, " +
-      "sed rhoncus pronin sapien nunc accuan eget. Aenean euismod bibendum laoreet.",
+      "Over 450+ pixel-aligned retro cyber interface icons crafted on an ultra-sharp 16x16 grid with 24x24 and 32x32 scaled variants.\n\n" +
+      "Perfect for web dashboards, developer tools, indie games, and terminal UI design.",
+    features: [
+      "450+ Pixel-perfect SVG vector icons",
+      "Figma component library with auto-layout variants",
+      "React & Vue icon component packages included",
+      "Light and dark mode optical sizing",
+    ],
+    specs: {
+      "Icon Total": "450+ Icons across 14 categories",
+      "Base Grid": "16x16 px (with 24px and 32px variants)",
+      "Color Palettes": "Monochrome, Terminal Green, Amber, Cyber Blue",
+      "Format": "SVG, PNG (1x, 2x, 4x), Figma (.FIG)",
+    },
     requirements: [
-      "Figma / Adobe XD / Illustrator",
-      "SVG & PNG formats included",
+      "Figma / Adobe XD / Illustrator / Penpot",
+      "SVG & PNG viewer or any modern browser",
+      "React 18+ or Vue 3+ for web package",
     ],
     downloadUrl: "#",
-    donateUrl: "#",
+    donateUrl: "https://trakteer.id",
   },
   {
     id: "card-4",
@@ -100,12 +181,24 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp2.svg",
     badge: "paid",
     categories: ["TEMPLATE"],
+    version: "v1.4.0",
+    fileSize: "56.1 MB",
+    fileType: ".FIG / Next.js Source",
+    license: "Single & Extended Commercial",
+    author: "Vault Studio",
+    updatedAt: "2026-07-28",
     description:
-      "Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus " +
-      "mus. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus.",
+      "A high-converting, retro monospace landing page design system and Next.js starter template for indie hackers, developer tools, and creative digital studios.",
+    features: [
+      "Full Next.js App Router + TailwindCSS source code",
+      "Interactive retro terminal components and modals",
+      "Figma design system with 80+ UI components",
+      "100/100 Google Lighthouse performance score",
+    ],
     requirements: [
-      "Figma 2024+",
-      "Auto Layout knowledge recommended",
+      "Node.js 18+ & npm/pnpm",
+      "Figma 2024+ for design files",
+      "Modern web browser",
     ],
     downloadUrl: "#",
   },
@@ -117,12 +210,22 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp1.svg",
     badge: "free",
     categories: ["TOOLS"],
+    version: "v0.9.4",
+    fileSize: "8.2 MB",
+    fileType: "Binary (Cross-Platform)",
+    license: "MIT Open Source",
+    author: "Alex Mercer",
+    updatedAt: "2026-08-01",
     description:
-      "Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis " +
-      "parturient montes. Nam fermentum, nulla luctus pharetra vulputate.",
+      "A fast cross-platform developer terminal CLI for converting image assets, generating sprite sheets, and packing game resources on the fly.",
+    features: [
+      "Batch asset compression with multi-threaded C++ backend",
+      "Direct sprite atlas packing with JSON coordinates export",
+      "WebAssembly browser preview build included",
+    ],
     requirements: [
-      "Node.js 18+",
-      "Unix / Windows PowerShell",
+      "Windows 10+, macOS 12+, or Linux x86_64",
+      "PowerShell 7+ or Bash terminal",
     ],
     downloadUrl: "#",
   },
@@ -134,15 +237,26 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp2.svg",
     badge: "free",
     categories: ["ART FOR SELL"],
+    version: "v1.0.0",
+    fileSize: "124 MB",
+    fileType: ".PSD / .TIFF / .PDF",
+    license: "Personal & Print Ready",
+    author: "PIXLape Collective",
+    updatedAt: "2026-07-15",
     description:
-      "Felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. " +
-      "Aenean euismod bibendum laoreet proin gravida.",
+      "Ultra high resolution 300 DPI print-ready cyberpunk pixel city landscape poster artwork with separated atmospheric depth layers.",
+    features: [
+      "300 DPI CMYK print-ready master file (A1 / A2 / A3)",
+      "Layered PSD with isolated lighting and neon effects",
+      "Includes non-compressed TIFF and vector PDF copies",
+    ],
     requirements: [
-      "300 DPI print-ready",
-      "CMYK color profile",
+      "Photoshop / Affinity Photo / GIMP",
+      "300 DPI color-accurate monitor recommended",
+      "CMYK color profile support",
     ],
     downloadUrl: "#",
-    donateUrl: "#",
+    donateUrl: "https://trakteer.id",
   },
   {
     id: "card-7",
@@ -152,11 +266,17 @@ export const CARDS: CardDetail[] = [
     icon: "/img/Icontemp1.svg",
     badge: "free",
     categories: ["OTHERS"],
+    version: "v1.1.0",
+    fileSize: "42.0 MB",
+    fileType: ".ZIP Archive",
+    license: "Free Commercial",
+    author: "PIXLape Team",
+    updatedAt: "2026-06-30",
     description:
-      "Nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus " +
-      "pronin sapien nunc accuan eget lorem ipsum dolor sit amet.",
+      "A miscellaneous collection of retro sound effects (8-bit chiptune WAVs), pixel patterns, UI sound cues, and monospace fonts.",
     requirements: [
-      "No special requirements",
+      "Any standard ZIP unarchiver",
+      "Audio player supporting 24-bit WAV files",
     ],
     downloadUrl: "#",
   },
