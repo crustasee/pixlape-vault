@@ -1,40 +1,223 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-/* ─── Design Tokens ───────────────────────────────────────────────────────── */
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Design Tokens & Modern Token System ────────────────────────────────────────── */
 @theme {
-  /* Colors */
+  /* ── Typography & Font Family Tokens (JetBrains Mono Family) ── */
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+  --font-heading: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-pixel: var(--font-pixel), monospace;
+
+  /* ── Core Brand / Terminal Neon Accent Colors ── */
   --color-primary: #00ff00;
+  --color-primary-hover: #00dd00;
+  --color-primary-dim: #003300;
+  --color-primary-light: #e6ffe6;
+  --color-primary-foreground: #0f2910;
+
+  /* ── Surface & Background Tokens ── */
   --color-surface: #f0f0f0;
-  --color-border: #cccccc;
+  --color-surface-subtle: #f8fafc;
+  --color-surface-hover: #e4e4e7;
+  --color-surface-card: #ffffff;
+  --color-surface-dark: #1e1e1e;
+
+  /* ── Text Color Tokens (Full Semantic Set) ── */
+  --color-text-primary: #222222;
+  --color-text-secondary: #666666;
+  --color-text-muted: #888888;
+  --color-text-inverse: #ffffff;
+  --color-text-accent: #00aa00;
+
+  /* ── Neutral & Retro Dark Tokens ── */
   --color-black-primary: #333333;
   --color-black-secondary: #666666;
-  --color-black: #2A2A2A;
+  --color-black-tertiary: #999999;
+  --color-black: #2a2a2a;
   --color-white: #ffffff;
 
-  /* ------------------------- Spacing ------------------------- */
+  /* ── Border Tokens ── */
+  --color-border: #cccccc;
+  --color-border-subtle: #e5e5e5;
+  --color-border-strong: #333333;
+
+  /* ── Spacing Tokens ── */
   --spacing-1: 4px;
   --spacing-2: 8px;
+  --spacing-3: 12px;
   --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
   --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
 
-  /* ------------------------- Border Radius ------------------------- */
+  /* ── Border Radius Tokens ── */
+  --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
 
-  /* ----------------------------- Fonts ----------------------------- */
-  --font-pixel: var(--font-pixel), monospace;
-  --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
+  /* ── Custom Shadow & Elevation Tokens ── */
+  --shadow-pixel: 2px 2px 0px #2a2a2a;
+  --shadow-pixel-sm: 1px 1px 0px #2a2a2a;
+  --shadow-pixel-lg: 4px 4px 0px #2a2a2a;
+  --shadow-glow: 0 0 16px rgba(0, 255, 0, 0.4);
 }
 
-/* ------------------------- Base Styles ------------------------- */
+@theme inline {
+  --font-heading: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --font-sans: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+
 :root {
-  --background: var(--color-surface);
-  --foreground: var(--color-text-primary);
+  --background: #f0f0f0;
+  --foreground: #222222;
+  --card: #ffffff;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+  --primary: #00ff00;
+  --primary-foreground: #18181b;
+  --secondary: #e4e4e7;
+  --secondary-foreground: #222222;
+  --muted: #e4e4e7;
+  --muted-foreground: #71717a;
+  --accent: #e6ffe6;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --border: #cccccc;
+  --input: #cccccc;
+  --ring: #00ff00;
+  --radius: 0.5rem;
+  --sidebar: #f0f0f0;
+  --sidebar-foreground: #222222;
+  --sidebar-primary: #00ff00;
+  --sidebar-primary-foreground: #18181b;
+  --sidebar-accent: #e4e4e7;
+  --sidebar-accent-foreground: #222222;
+  --sidebar-border: #cccccc;
+  --sidebar-ring: #00ff00;
+  --chart-1: #10b981;
+  --chart-2: #3b82f6;
+  --chart-3: #f59e0b;
+  --chart-4: #8b5cf6;
+  --chart-5: #ec4899;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-mono);
+.dark {
+  --background: #18181b;
+  --foreground: #f4f4f5;
+  --card: #27272a;
+  --card-foreground: #f4f4f5;
+  --popover: #27272a;
+  --popover-foreground: #f4f4f5;
+  --primary: #00ff00;
+  --primary-foreground: #18181b;
+  --secondary: #3f3f46;
+  --secondary-foreground: #f4f4f5;
+  --muted: #3f3f46;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #00ff00;
+  --destructive: #f87171;
+  --border: #3f3f46;
+  --input: #3f3f46;
+  --ring: #00ff00;
+  --sidebar: #18181b;
+  --sidebar-foreground: #f4f4f5;
+  --sidebar-primary: #00ff00;
+  --sidebar-primary-foreground: #18181b;
+  --sidebar-accent: #27272a;
+  --sidebar-accent-foreground: #f4f4f5;
+  --sidebar-border: #3f3f46;
+  --sidebar-ring: #00ff00;
+  --chart-1: #10b981;
+  --chart-2: #3b82f6;
+  --chart-3: #f59e0b;
+  --chart-4: #8b5cf6;
+  --chart-5: #ec4899;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "calt" 1, "zero" 1;
+  }
+
+  body {
+    font-family: var(--font-mono);
+    @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    background-color: #00ff00;
+    color: #18181b;
+  }
+
+  /* Monospace JetBrains themed custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 4px;
+    border: 1px solid #333333;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+  }
 }

@@ -6,12 +6,14 @@ const pressStart2P = Press_Start_2P({
   variable: "--font-pixel",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,9 +29,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pressStart2P.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} ${pressStart2P.variable} font-mono h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-mono bg-surface text-text-primary">
+        {children}
+      </body>
     </html>
   );
 }
+
