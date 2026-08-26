@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getArticleById } from "@/lib/db/article";
+import { getArticleById, getAdjacentArticles } from "@/lib/db/article";
 import { notFound } from "next/navigation";
 
 export interface ArticleDetailPageProps {
@@ -20,8 +20,11 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
     notFound();
   }
 
+  const { prev: prevArticle, next: nextArticle } = getAdjacentArticles(article.id);
+
   const [likes, setLikes] = useState<number>(article.likes);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const toggleLike = () => {
     if (hasLiked) {
@@ -33,20 +36,31 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
     }
   };
 
+  const handleShare = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-border text-text-primary font-mono flex flex-col">
       <Header />
 
-      <main className="max-w-full w-full px-24 mt-13 pb-12 flex-1 flex flex-col gap-3">
+      <main className="max-w-full w-full px-6 sm:px-12 md:px-20 lg:px-24 mt-13 pb-12 flex-1 flex flex-col gap-3">
         {/* ──========================================= Top Navigation & Meta Header =========================================── */}
-        <div className="flex items-center justify-between mt-4">
-          <Link
-            href="/"
-            className="text-xs font-mono text-text-secondary hover:text-black-secondary transition-colors flex items-center gap-1"
-          >
-            &lt; BACK
-          </Link>
-          <div className="flex items-center gap-3 text-xs text-text-secondary font-mono">
+        <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
+          <div className="flex items-center gap-2">
+            <Link
+              href="/articles"
+              className="text-xs font-mono text-text-secondary hover:text-black-secondary transition-colors flex items-center gap-1 bg-surface px-2.5 py-1 rounded-sm border border-border hover:border-black"
+            >
+              &lt; BACK TO ARTICLES
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 text-xs text-text-secondary font-mono">
             <span>📅 {article.date}</span>
             <span>•</span>
             <span>⏱️ {article.readTime}</span>
@@ -61,13 +75,13 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
         <article className="bg-surface border border-black rounded-lg p-5 sm:p-10 flex flex-col gap-8 shadow-xs">
           
           {/* ========================================== Article Header ========================================== */}
-          <header className="flex flex-col gap-3 border-border pb">
-            <div className="flex items-center gap-6">
+          <header className="flex flex-col gap-3 border-border pb-2">
+            <div className="flex items-center gap-4">
               <span className="px-4 py-0.5 bg-border border border-black text-black-primary text-xs font-black rounded-md uppercase tracking-wide">
                 {article.category}
               </span>
               <span className="text-xs font-mono text-black-secondary">
-                by {article.author}
+                by <strong className="text-black-primary">{article.author}</strong>
               </span>
             </div>
 
@@ -75,13 +89,15 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
               {article.title}
             </h1>
 
-            <p className="text-sm font-mono text-text-secondary leading-relaxed">
-             ▦ {article.subtitle}
-            </p>
+            {article.subtitle && (
+              <p className="text-sm font-mono text-text-secondary leading-relaxed">
+                ▦ {article.subtitle}
+              </p>
+            )}
           </header>
 
           {/* ========================================== Cover Hero Banner Image ========================================== */}
-          <div className="relative w-full h-70 sm:h-75 rounded-md overflow-hidden border border-black bg-white flex items-center justify-center p-5">
+          <div className="relative w-full h-64 sm:h-75 rounded-md overflow-hidden border border-black bg-white flex items-center justify-center p-5">
             <Image
               src={article.image}
               alt={article.title}
@@ -92,100 +108,107 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           </div>
 
           {/* ========================================== Document Content Body ========================================== */}
-          <div className="flex flex-col gap-5 text-sm font-mono text-black-primary leading-relaxed">
+          <div className="flex flex-col gap-6 text-sm font-mono text-black-primary leading-relaxed">
             
             {/* ========================================== Lead Paragraph ========================================== */}
-            <p className="text-base font-medium leading-relaxed border-l-2 border-primary pl-4 text-black-primary">
-              {article.excerpt}
+            <p className="text-base font-medium leading-relaxed border-l-3 border-primary pl-4 text-black-primary bg-white/50 py-2 rounded-r-sm">
+              {article.leadParagraph || article.excerpt}
             </p>
 
-            {/* ========================================== Section 1 ========================================== */}
-            <div className="flex flex-col gap-3 pt-2">
-              <h2 className="text-lg font-pixel text-black-primary border-b border-black-secondary pb-1 flex items-center gap-2">
-                <span className="text-black-secondary">#1</span> Structural Architecture & Modular Design
-              </h2>
-              <p>
-                A well-structured design system separates core UI components into predictable, single-responsibility units. By using standardized token themes (such as retro monochrome surfaces, pixelated headers, and high-contrast borders), user interfaces remain clean, consistent, and instantly recognizable.
-              </p>
-              <p>
-                When organizing digital vault archives, metadata such as bundle sizes, license types, and system requirements must be presented clearly alongside asset downloads to minimize user friction.
-              </p>
-            </div>
-
-            {/* ========================================== Quote Callout Box ========================================== */}
-            <blockquote className="p-5 bg-white border-l-4 border-l-black-primary border border-border rounded-r-md my-2 flex flex-col gap-2">
-              <p className="italic text-sm text-black-primary font-mono">
-                &ldquo;Simplicity is not the lack of clutter, that&apos;s a consequence of simplicity. Simplicity is somehow almost describing the purpose and essential nature of a tool.&rdquo;
-              </p>
-              <cite className="text-xs font-pixel text-black-secondary not-italic uppercase text-right">
-                — Vault Architecture Guidelines
-              </cite>
-            </blockquote>
-
-            {/* ========================================== Section 2 ========================================== */}
-            <div className="flex flex-col gap-3 pt-2">
-              <h2 className="text-lg font-pixel text-black-primary border-b border-black-secondary pb-1 flex items-center gap-2">
-                <span className="text-black-secondary">#2</span> Essential Takeaways & Implementation Rules
-              </h2>
-              <p>
-                Below is a quick checklist of rules enforced across all PIXLape vault components to ensure peak client-side performance:
-              </p>
-
-              {/* ========================================== Bulleted checklist ========================================== */}
-              <ul className="flex flex-col gap-2.5 pl-2 pt-1">
-                <li className="flex items-start gap-3 p-3 bg-white border border-border rounded-sm">
-                  <span className="text-primary font-bold text-base leading-none">✔</span>
-                  <div>
-                    <strong className="font-bold text-black-primary block">SVG Vector Pre-Scaling</strong>
-                    Always define explicit aspect ratios and viewport bounds to avoid layout shifts during dynamic rendering.
+            {/* ========================================== Dynamic Sections ========================================== */}
+            {article.sections && article.sections.length > 0 && (
+              <div className="flex flex-col gap-6">
+                {article.sections.map((section, idx) => (
+                  <div key={idx} className="flex flex-col gap-3 pt-2">
+                    {section.title && (
+                      <h2 className="text-lg font-pixel text-black-primary border-b border-black-secondary pb-1.5 flex items-center gap-2">
+                        <span className="text-black-secondary">#{idx + 1}</span> {section.title}
+                      </h2>
+                    )}
+                    {section.paragraphs.map((paragraph, pIdx) => (
+                      <p key={pIdx} className="leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
-                </li>
-                <li className="flex items-start gap-3 p-3 bg-white border border-border rounded-sm">
-                  <span className="text-primary font-bold text-base leading-none">✔</span>
-                  <div>
-                    <strong className="font-bold text-black-primary block">Absolute Asset Path Resolution</strong>
-                    Enforce root-relative resource URLs (<code className="bg-surface px-1.5 py-0.5 border border-border rounded-xs text-xs">/img/...</code>) across nested dynamic route handlers.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3 p-3 bg-white border border-border rounded-sm">
-                  <span className="text-primary font-bold text-base leading-none">✔</span>
-                  <div>
-                    <strong className="font-bold text-black-primary block">Responsive Grid Breakdown</strong>
-                    Adapt card grids dynamically across standard desktop breakpoint containers for balanced scannability.
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* ========================================== Terminal Command Code Snippet Box ========================================== */}
-            <div className="flex flex-col gap-3 pt-2">
-              <span className="text-xs font-pixel text-black-secondary uppercase">
-                ▤ Example CLI Vault Inspection:
-              </span>
-              <div className="rounded-sm border border-black bg-border overflow-hidden font-mono text-xs">
-                <div className="bg-black-secondary px-7 py-1.5 border-b border-black flex items-center justify-between text-[11px] text-white">
-                  <span>vault-cli inspect --article={article.id}</span>
-                  <span>BASH</span>
-                </div>
-                <pre className="p-4 text-green-700 overflow-x-auto">
-                  <code>
-                    <span className="text-black"># Fetching article package metadata...</span>{"\n"}
-                    pixlape-vault get article --id={article.id} --format=json{"\n\n"}
-                    <span className="text-black"># Status: 200 OK | Payload: 48.5KB</span>
-                  </code>
-                </pre>
+                ))}
               </div>
-            </div>
+            )}
 
-            {/* ========================================== Summary Conclusion ========================================== */}
-            <div className="p-4 bg-green-100 border border-black rounded-sm flex flex-col gap-4">
-              <h3 className="font-pixel text-xs text-black-primary uppercase flex items-center gap-2">
-                <span>📌</span> Conclusion
-              </h3>
-              <p className="text-xs text-text-secondary">
-                Following modular document standards ensures your web application stays fast, accessible, and easily maintainable as the vault library expands.
-              </p>
-            </div>
+            {/* ========================================== Dynamic Quote Callout Box ========================================== */}
+            {article.quote && (
+              <blockquote className="p-5 bg-white border-l-4 border-l-black-primary border border-border rounded-r-md my-2 flex flex-col gap-2 shadow-xs">
+                <p className="italic text-sm text-black-primary font-mono leading-relaxed">
+                  &ldquo;{article.quote.text}&rdquo;
+                </p>
+                <cite className="text-xs font-pixel text-black-secondary not-italic uppercase text-right">
+                  — {article.quote.author}
+                </cite>
+              </blockquote>
+            )}
+
+            {/* ========================================== Dynamic Checklist ========================================== */}
+            {article.checklist && article.checklist.items.length > 0 && (
+              <div className="flex flex-col gap-3 pt-2">
+                <h2 className="text-lg font-pixel text-black-primary border-b border-black-secondary pb-1.5 flex items-center gap-2">
+                  <span className="text-black-secondary">#✓</span> {article.checklist.title || "Checklist & Guidelines"}
+                </h2>
+
+                <ul className="flex flex-col gap-2.5 pl-1 pt-1">
+                  {article.checklist.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3 p-3 bg-white border border-border rounded-sm hover:border-black transition-colors">
+                      <span className="text-primary-dim bg-primary/20 border border-primary/40 px-1.5 py-0.5 rounded-xs font-bold text-xs leading-none select-none mt-0.5">
+                        ✔
+                      </span>
+                      <div className="flex flex-col gap-0.5">
+                        <strong className="font-bold text-black-primary block text-xs sm:text-sm">
+                          {item.label}
+                        </strong>
+                        <span className="text-xs text-text-secondary leading-relaxed">
+                          {item.desc}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* ========================================== Dynamic Code / CLI Snippet Box ========================================== */}
+            {article.codeSnippet && (
+              <div className="flex flex-col gap-2.5 pt-2">
+                {article.codeSnippet.label && (
+                  <span className="text-xs font-pixel text-black-secondary uppercase flex items-center gap-1.5">
+                    <span>▤</span> {article.codeSnippet.label}:
+                  </span>
+                )}
+                <div className="rounded-sm border border-black bg-border overflow-hidden font-mono text-xs shadow-xs">
+                  <div className="bg-black-secondary px-4 py-2 border-b border-black flex items-center justify-between text-[11px] text-white">
+                    <span className="font-bold truncate max-w-sm">
+                      {article.codeSnippet.command || "terminal"}
+                    </span>
+                    <span className="bg-black/60 px-2 py-0.5 rounded-xs text-[10px] font-pixel uppercase tracking-wide">
+                      {article.codeSnippet.lang || "CODE"}
+                    </span>
+                  </div>
+                  <pre className="p-4 text-green-700 bg-white font-mono overflow-x-auto text-xs leading-relaxed">
+                    <code>{article.codeSnippet.code}</code>
+                  </pre>
+                </div>
+              </div>
+            )}
+
+            {/* ========================================== Dynamic Summary Conclusion ========================================== */}
+            {article.conclusion && (
+              <div className="p-5 bg-green-50 border border-black rounded-sm flex flex-col gap-2 shadow-xs">
+                <h3 className="font-pixel text-xs text-black-primary uppercase flex items-center gap-2">
+                  <span>📌</span> {article.conclusion.title || "Conclusion"}
+                </h3>
+                <p className="text-xs text-text-secondary leading-relaxed font-mono">
+                  {article.conclusion.text}
+                </p>
+              </div>
+            )}
 
           </div>
 
@@ -193,69 +216,80 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           <footer className="border-t border-black pt-6 flex flex-wrap items-center justify-between gap-4">
             {/* ========================================== Author Profile ========================================== */}
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-md border border-black overflow-hidden bg-white relative">
+              <div className="w-11 h-11 rounded-md border border-black overflow-hidden bg-white relative shrink-0 shadow-xs">
                 <Image
-                  src="/img/Icontemp1.svg"
-                  alt="Author Avatar"
+                  src={article.authorAvatar || "/img/Icontemp1.svg"}
+                  alt={article.author}
                   fill
-                  className="object-cover"
+                  className="object-cover p-1"
                 />
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-black-primary font-mono">{article.author}</span>
-                <span className="text-xs text-black-primary">Published in Vault Articles</span>
+                <span className="text-[11px] text-text-secondary font-mono">
+                  {article.authorRole || "Published in Vault Articles"}
+                </span>
               </div>
             </div>
 
             {/* ========================================== Interactive Actions (Like & Share) ========================================== */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={toggleLike}
-                className={`px-4 py-1.5 text-xs font-mono font-semibold rounded-lg border border-black transition-all cursor-pointer flex items-center gap-3 ${
+                className={`px-4 py-1.5 text-xs font-mono font-semibold rounded-lg border border-black transition-all cursor-pointer flex items-center gap-2.5 shadow-xs ${
                   hasLiked
-                    ? "bg-pink-300 text-red-500 font-bold"
-                    : "bg-surface text-black-primary hover:bg-pink-400 hover:text-white"
+                    ? "bg-pink-300 text-red-600 font-bold"
+                    : "bg-surface text-black-primary hover:bg-pink-300 hover:text-black"
                 }`}
               >
                 <span>♥</span>
                 <span>{hasLiked ? "Liked" : "Like"}</span>
-                <span className="px-1.5 py-0.2 bg-pink-200 rounded-xs text-[11px]">
+                <span className="px-1.5 py-0.5 bg-white border border-border rounded-xs text-[11px] font-bold">
                   {likes}
                 </span>
               </button>
 
               <button
                 type="button"
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    navigator.clipboard.writeText(window.location.href);
-                    alert("Article link copied to clipboard!");
-                  }
-                }}
-                className="px-4 py-1.5 text-xs font-mono font-semibold bg-surface border border-black text-black-primary rounded-lg hover:bg-green-300 hover:text-black-primary transition-all cursor-pointer"
+                onClick={handleShare}
+                className="px-4 py-1.5 text-xs font-mono font-semibold bg-surface border border-black text-black-primary rounded-lg hover:bg-primary hover:text-black transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
               >
-                🔗 Share
+                <span>🔗</span>
+                <span>{copied ? "Copied!" : "Share"}</span>
               </button>
             </div>
           </footer>
 
         </article>
 
-        {/* ──========================================= Related Article Navigation Links =========================================── */}
+        {/* ──========================================= Dynamic Related Article Navigation Links =========================================── */}
         <div className="flex items-center justify-between pt-4 text-xs font-mono">
-          <Link
-            href="/articles"
-            className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors"
-          >
-            &lt; PREVIOUS ARTICLE
-          </Link>
-          <Link
-            href="/articles"
-            className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors"
-          >
-            NEXT ARTICLE &gt;
-          </Link>
+          {prevArticle ? (
+            <Link
+              href={`/articles/${prevArticle.id}`}
+              className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
+            >
+              <span>&lt;</span> PREV: {prevArticle.title.slice(0, 24)}...
+            </Link>
+          ) : (
+            <span className="px-4 py-2 border border-border rounded-sm bg-surface/50 text-text-muted cursor-not-allowed">
+              &lt; FIRST ARTICLE
+            </span>
+          )}
+
+          {nextArticle ? (
+            <Link
+              href={`/articles/${nextArticle.id}`}
+              className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
+            >
+              NEXT: {nextArticle.title.slice(0, 24)}... <span>&gt;</span>
+            </Link>
+          ) : (
+            <span className="px-4 py-2 border border-border rounded-sm bg-surface/50 text-text-muted cursor-not-allowed">
+              LATEST ARTICLE &gt;
+            </span>
+          )}
         </div>
       </main>
 

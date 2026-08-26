@@ -18,7 +18,7 @@ export default function HeroBanner() {
         <input
           type="text"
           placeholder="Search assets..."
-          className="w-auto h-9.25 px-7 rounded-md bg-surface text-black-primary text-xs font-mono outline-none border border-black-primary  focus:border-primary transition-colors"
+          className="w-auto h-9.25 px-7 rounded-md bg-surface text-black-primary text-xs font-mono outline-none border border-black-primary transition-colors"
         />
         <button className="h-9.25 px-6 bg-black-secondary text-white text-xs font-mono rounded-md hover:bg-primary hover:text-black-primary hover:scale-105 transition-opacity">
           SEARCH
