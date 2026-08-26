@@ -167,7 +167,7 @@ export default function MarkdownDescription({ description, requirements, title }
                   : "text-black-secondary hover:text-black-primary"
               }`}
             >
-            Formatted
+              Formatted
             </button>
             <button
               type="button"
@@ -178,7 +178,7 @@ export default function MarkdownDescription({ description, requirements, title }
                   : "text-black-secondary hover:text-black-primary"
               }`}
             >
-            Formating
+              Raw
             </button>
           </div>
 
@@ -224,7 +224,7 @@ export default function MarkdownDescription({ description, requirements, title }
                 </div>
 
                 {/* ...........................................................................................Callout Note Box................................................................................................................................................... */}
-                <div className="p-4 bg-white border-l-4 border-black-primary rounded-md text-xs font-mono text-black-primary flex items-start gap-4 border border-border">
+                <div className="p-4 bg-white border border-border border-l-4 border-l-black-primary rounded-md text-xs font-mono text-black-primary flex items-start gap-4">
                   <span className="text-base leading-none">💡</span>
                   <div>
                     <strong className="font-bold text-md text-black uppercase tracking-wide block mb-2">

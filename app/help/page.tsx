@@ -145,7 +145,7 @@ export default function HelpPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions or keywords (e.g. download, license, donate)..."
-              className="w-full px-5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-black-secondary/60 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full px-5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
         </section>

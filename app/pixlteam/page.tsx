@@ -32,7 +32,7 @@ export default function PixlTeam() {
         </Link>
 
         <h1 className="text-lg sm:text-md font-pixel text-black-secondary tracking-wide uppercase">
-          +++ PIXLAPE_TEAM // CREATORS & ARCHITECTS ++++
+          +++ PIXLAPE_TEAM + CREATORS & ARCHITECTS ++++
         </h1>
 
         {/* Console Container */}
