@@ -300,9 +300,9 @@ export default function MarkdownDescription({ description, requirements, title }
                     </div>
                     <pre className="p-4 text-sm font-mono text-green-400 overflow-x-auto">
                       <code>
-                        <span className="text-[#888888]"># Install package via PIXLape CLI runner</span>{"\n"}
+                        <span className="text-muted"># Install package via PIXLape CLI runner</span>{"\n"}
                         <span className="text-white">pixlape-cli</span> install --package=pixel-vault-core --version=1.4.2{"\n\n"}
-                        <span className="text-[#888888]"># Run health diagnostics</span>{"\n"}
+                        <span className="text-muted"># Run health diagnostics</span>{"\n"}
                         <span className="text-white">pixlape-cli</span> test --all --verbose
                       </code>
                     </pre>

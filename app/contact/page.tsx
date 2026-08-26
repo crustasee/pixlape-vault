@@ -230,7 +230,7 @@ export default function ContactPage() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g. PixelHacker99"
-                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
 
@@ -244,7 +244,7 @@ export default function ContactPage() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="creator@domain.com"
-                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
@@ -260,7 +260,7 @@ export default function ContactPage() {
                     value={form.handle}
                     onChange={(e) => setForm({ ...form, handle: e.target.value })}
                     placeholder="@username#0001"
-                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
 
@@ -273,7 +273,7 @@ export default function ContactPage() {
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     placeholder={`[${selectedChannel.toUpperCase()}] Quick summary...`}
-                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                       ? "Tell us about your asset, format (SVG/EXE/PNG/ABR), demo link, and how creators can use it..."
                       : "Describe your question or message in detail..."
                   }
-                  className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary placeholder:text-text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-y leading-relaxed"
+                  className="w-full px-3.5 py-2.5 text-xs font-mono border border-black bg-white rounded-md text-black-primary outline-none focus:ring-1 focus:ring-primary transition-all resize-y leading-relaxed"
                 />
               </div>
 
