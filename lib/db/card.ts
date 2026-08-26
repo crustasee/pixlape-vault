@@ -38,17 +38,16 @@ export interface CardDetail extends CardItem {
 export const CARDS: CardDetail[] = [
   {
     id: "card-1",
-    title: "PixelForge App",
+    title: "Pixprint App V.1.02.00",
     thumbnail: "/img/minicard001.svg",
     banner: "/img/banner01.svg",
     icon: "/img/Icontemp1.svg",
     badge: "free",
     categories: ["APPS"],
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod " +
-      "bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra " +
-      "justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus " +
-      "et magnis dis parturient montes, nascetur ridiculus mus.",
+      "Pixprint is an application that allows you to print your pixel art to a physical paper.
+      "Work in android version 11 and above"
+      "with bluetooth ble connection to printer",
     requirements: [
       "Windows 10 / macOS 12+",
       "4 GB RAM minimum",

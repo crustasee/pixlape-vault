@@ -121,7 +121,7 @@ export default function CardViewPage({ cardId, initialCard }: CardViewPageProps)
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="mt-1 py-3 px-3 bg-pink-300 text-pink-500 border border-red-500 text-xs font-pixel rounded-md hover:bg-pink-200 hover:text-pink-600 hover:scale-[1.03] transition-all duration-200 cursor-pointer text-center"
+                  className="mt-1 py-3 px-3 bg-pink-300 text-pink-600 border border-red-600 text-xs font-pixel rounded-md hover:text-pink-600 hover:scale-97 transition-all duration-200 cursor-pointer text-center"
                 >
                   DONATE NOW &gt;
                 </button>
@@ -131,7 +131,7 @@ export default function CardViewPage({ cardId, initialCard }: CardViewPageProps)
               <button
                 type="button"
                 onClick={() => setIsDownloadOpen(true)}
-                className="w-full max-w-full py-3 bg-primary text-green-700 text-sm font-pixel rounded-md border border-green-700 hover:bg-green-400 hover:text-black-primary hover:scale-[1.03] transition-all duration-200 cursor-pointer"
+                className="w-full max-w-full py-3 bg-primary text-green-700 text-sm font-pixel rounded-md border border-green-700 hover:text-black-primary hover:scale-97 transition-all duration-200 cursor-pointer"
               >
                 DOWNLOAD
               </button>
