@@ -43,10 +43,13 @@ export type ArticleMinAggregateOutputType = {
   date: string | null
   readTime: string | null
   author: string | null
+  authorAvatar: string | null
+  authorRole: string | null
   image: string | null
   category: string | null
   likes: number | null
   featured: boolean | null
+  leadParagraph: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,10 +63,13 @@ export type ArticleMaxAggregateOutputType = {
   date: string | null
   readTime: string | null
   author: string | null
+  authorAvatar: string | null
+  authorRole: string | null
   image: string | null
   category: string | null
   likes: number | null
   featured: boolean | null
+  leadParagraph: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -77,10 +83,18 @@ export type ArticleCountAggregateOutputType = {
   date: number
   readTime: number
   author: number
+  authorAvatar: number
+  authorRole: number
   image: number
   category: number
   likes: number
   featured: number
+  leadParagraph: number
+  sections: number
+  quote: number
+  checklist: number
+  codeSnippet: number
+  conclusion: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -104,10 +118,13 @@ export type ArticleMinAggregateInputType = {
   date?: true
   readTime?: true
   author?: true
+  authorAvatar?: true
+  authorRole?: true
   image?: true
   category?: true
   likes?: true
   featured?: true
+  leadParagraph?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -121,10 +138,13 @@ export type ArticleMaxAggregateInputType = {
   date?: true
   readTime?: true
   author?: true
+  authorAvatar?: true
+  authorRole?: true
   image?: true
   category?: true
   likes?: true
   featured?: true
+  leadParagraph?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -138,10 +158,18 @@ export type ArticleCountAggregateInputType = {
   date?: true
   readTime?: true
   author?: true
+  authorAvatar?: true
+  authorRole?: true
   image?: true
   category?: true
   likes?: true
   featured?: true
+  leadParagraph?: true
+  sections?: true
+  quote?: true
+  checklist?: true
+  codeSnippet?: true
+  conclusion?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -242,10 +270,18 @@ export type ArticleGroupByOutputType = {
   date: string
   readTime: string | null
   author: string
+  authorAvatar: string | null
+  authorRole: string | null
   image: string | null
   category: string
   likes: number
   featured: boolean
+  leadParagraph: string | null
+  sections: runtime.JsonValue | null
+  quote: runtime.JsonValue | null
+  checklist: runtime.JsonValue | null
+  codeSnippet: runtime.JsonValue | null
+  conclusion: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: ArticleCountAggregateOutputType | null
@@ -282,10 +318,18 @@ export type ArticleWhereInput = {
   date?: Prisma.StringFilter<"Article"> | string
   readTime?: Prisma.StringNullableFilter<"Article"> | string | null
   author?: Prisma.StringFilter<"Article"> | string
+  authorAvatar?: Prisma.StringNullableFilter<"Article"> | string | null
+  authorRole?: Prisma.StringNullableFilter<"Article"> | string | null
   image?: Prisma.StringNullableFilter<"Article"> | string | null
   category?: Prisma.StringFilter<"Article"> | string
   likes?: Prisma.IntFilter<"Article"> | number
   featured?: Prisma.BoolFilter<"Article"> | boolean
+  leadParagraph?: Prisma.StringNullableFilter<"Article"> | string | null
+  sections?: Prisma.JsonNullableFilter<"Article">
+  quote?: Prisma.JsonNullableFilter<"Article">
+  checklist?: Prisma.JsonNullableFilter<"Article">
+  codeSnippet?: Prisma.JsonNullableFilter<"Article">
+  conclusion?: Prisma.JsonNullableFilter<"Article">
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
 }
@@ -299,10 +343,18 @@ export type ArticleOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   readTime?: Prisma.SortOrderInput | Prisma.SortOrder
   author?: Prisma.SortOrder
+  authorAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
+  authorRole?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  leadParagraph?: Prisma.SortOrderInput | Prisma.SortOrder
+  sections?: Prisma.SortOrderInput | Prisma.SortOrder
+  quote?: Prisma.SortOrderInput | Prisma.SortOrder
+  checklist?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeSnippet?: Prisma.SortOrderInput | Prisma.SortOrder
+  conclusion?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -319,10 +371,18 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.StringFilter<"Article"> | string
   readTime?: Prisma.StringNullableFilter<"Article"> | string | null
   author?: Prisma.StringFilter<"Article"> | string
+  authorAvatar?: Prisma.StringNullableFilter<"Article"> | string | null
+  authorRole?: Prisma.StringNullableFilter<"Article"> | string | null
   image?: Prisma.StringNullableFilter<"Article"> | string | null
   category?: Prisma.StringFilter<"Article"> | string
   likes?: Prisma.IntFilter<"Article"> | number
   featured?: Prisma.BoolFilter<"Article"> | boolean
+  leadParagraph?: Prisma.StringNullableFilter<"Article"> | string | null
+  sections?: Prisma.JsonNullableFilter<"Article">
+  quote?: Prisma.JsonNullableFilter<"Article">
+  checklist?: Prisma.JsonNullableFilter<"Article">
+  codeSnippet?: Prisma.JsonNullableFilter<"Article">
+  conclusion?: Prisma.JsonNullableFilter<"Article">
   createdAt?: Prisma.DateTimeFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Article"> | Date | string
 }, "id">
@@ -336,10 +396,18 @@ export type ArticleOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   readTime?: Prisma.SortOrderInput | Prisma.SortOrder
   author?: Prisma.SortOrder
+  authorAvatar?: Prisma.SortOrderInput | Prisma.SortOrder
+  authorRole?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  leadParagraph?: Prisma.SortOrderInput | Prisma.SortOrder
+  sections?: Prisma.SortOrderInput | Prisma.SortOrder
+  quote?: Prisma.SortOrderInput | Prisma.SortOrder
+  checklist?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeSnippet?: Prisma.SortOrderInput | Prisma.SortOrder
+  conclusion?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ArticleCountOrderByAggregateInput
@@ -361,10 +429,18 @@ export type ArticleScalarWhereWithAggregatesInput = {
   date?: Prisma.StringWithAggregatesFilter<"Article"> | string
   readTime?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
   author?: Prisma.StringWithAggregatesFilter<"Article"> | string
+  authorAvatar?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
+  authorRole?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
   category?: Prisma.StringWithAggregatesFilter<"Article"> | string
   likes?: Prisma.IntWithAggregatesFilter<"Article"> | number
   featured?: Prisma.BoolWithAggregatesFilter<"Article"> | boolean
+  leadParagraph?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
+  sections?: Prisma.JsonNullableWithAggregatesFilter<"Article">
+  quote?: Prisma.JsonNullableWithAggregatesFilter<"Article">
+  checklist?: Prisma.JsonNullableWithAggregatesFilter<"Article">
+  codeSnippet?: Prisma.JsonNullableWithAggregatesFilter<"Article">
+  conclusion?: Prisma.JsonNullableWithAggregatesFilter<"Article">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Article"> | Date | string
 }
@@ -378,10 +454,18 @@ export type ArticleCreateInput = {
   date: string
   readTime?: string | null
   author: string
+  authorAvatar?: string | null
+  authorRole?: string | null
   image?: string | null
   category: string
   likes?: number
   featured?: boolean
+  leadParagraph?: string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -395,10 +479,18 @@ export type ArticleUncheckedCreateInput = {
   date: string
   readTime?: string | null
   author: string
+  authorAvatar?: string | null
+  authorRole?: string | null
   image?: string | null
   category: string
   likes?: number
   featured?: boolean
+  leadParagraph?: string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -412,10 +504,18 @@ export type ArticleUpdateInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.StringFieldUpdateOperationsInput | string
+  authorAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leadParagraph?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -429,10 +529,18 @@ export type ArticleUncheckedUpdateInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.StringFieldUpdateOperationsInput | string
+  authorAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leadParagraph?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -446,10 +554,18 @@ export type ArticleCreateManyInput = {
   date: string
   readTime?: string | null
   author: string
+  authorAvatar?: string | null
+  authorRole?: string | null
   image?: string | null
   category: string
   likes?: number
   featured?: boolean
+  leadParagraph?: string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -463,10 +579,18 @@ export type ArticleUpdateManyMutationInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.StringFieldUpdateOperationsInput | string
+  authorAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leadParagraph?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -480,10 +604,18 @@ export type ArticleUncheckedUpdateManyInput = {
   date?: Prisma.StringFieldUpdateOperationsInput | string
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.StringFieldUpdateOperationsInput | string
+  authorAvatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authorRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leadParagraph?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sections?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  quote?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  checklist?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  codeSnippet?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  conclusion?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -497,10 +629,18 @@ export type ArticleCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
   author?: Prisma.SortOrder
+  authorAvatar?: Prisma.SortOrder
+  authorRole?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  leadParagraph?: Prisma.SortOrder
+  sections?: Prisma.SortOrder
+  quote?: Prisma.SortOrder
+  checklist?: Prisma.SortOrder
+  codeSnippet?: Prisma.SortOrder
+  conclusion?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -518,10 +658,13 @@ export type ArticleMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
   author?: Prisma.SortOrder
+  authorAvatar?: Prisma.SortOrder
+  authorRole?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  leadParagraph?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -535,10 +678,13 @@ export type ArticleMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
   author?: Prisma.SortOrder
+  authorAvatar?: Prisma.SortOrder
+  authorRole?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   featured?: Prisma.SortOrder
+  leadParagraph?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -570,10 +716,18 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   date?: boolean
   readTime?: boolean
   author?: boolean
+  authorAvatar?: boolean
+  authorRole?: boolean
   image?: boolean
   category?: boolean
   likes?: boolean
   featured?: boolean
+  leadParagraph?: boolean
+  sections?: boolean
+  quote?: boolean
+  checklist?: boolean
+  codeSnippet?: boolean
+  conclusion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["article"]>
@@ -587,10 +741,18 @@ export type ArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   date?: boolean
   readTime?: boolean
   author?: boolean
+  authorAvatar?: boolean
+  authorRole?: boolean
   image?: boolean
   category?: boolean
   likes?: boolean
   featured?: boolean
+  leadParagraph?: boolean
+  sections?: boolean
+  quote?: boolean
+  checklist?: boolean
+  codeSnippet?: boolean
+  conclusion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["article"]>
@@ -604,10 +766,18 @@ export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   date?: boolean
   readTime?: boolean
   author?: boolean
+  authorAvatar?: boolean
+  authorRole?: boolean
   image?: boolean
   category?: boolean
   likes?: boolean
   featured?: boolean
+  leadParagraph?: boolean
+  sections?: boolean
+  quote?: boolean
+  checklist?: boolean
+  codeSnippet?: boolean
+  conclusion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["article"]>
@@ -621,15 +791,23 @@ export type ArticleSelectScalar = {
   date?: boolean
   readTime?: boolean
   author?: boolean
+  authorAvatar?: boolean
+  authorRole?: boolean
   image?: boolean
   category?: boolean
   likes?: boolean
   featured?: boolean
+  leadParagraph?: boolean
+  sections?: boolean
+  quote?: boolean
+  checklist?: boolean
+  codeSnippet?: boolean
+  conclusion?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "subtitle" | "excerpt" | "content" | "date" | "readTime" | "author" | "image" | "category" | "likes" | "featured" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "subtitle" | "excerpt" | "content" | "date" | "readTime" | "author" | "authorAvatar" | "authorRole" | "image" | "category" | "likes" | "featured" | "leadParagraph" | "sections" | "quote" | "checklist" | "codeSnippet" | "conclusion" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
 
 export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Article"
@@ -643,10 +821,18 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     date: string
     readTime: string | null
     author: string
+    authorAvatar: string | null
+    authorRole: string | null
     image: string | null
     category: string
     likes: number
     featured: boolean
+    leadParagraph: string | null
+    sections: runtime.JsonValue | null
+    quote: runtime.JsonValue | null
+    checklist: runtime.JsonValue | null
+    codeSnippet: runtime.JsonValue | null
+    conclusion: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["article"]>
@@ -1080,10 +1266,18 @@ export interface ArticleFieldRefs {
   readonly date: Prisma.FieldRef<"Article", 'String'>
   readonly readTime: Prisma.FieldRef<"Article", 'String'>
   readonly author: Prisma.FieldRef<"Article", 'String'>
+  readonly authorAvatar: Prisma.FieldRef<"Article", 'String'>
+  readonly authorRole: Prisma.FieldRef<"Article", 'String'>
   readonly image: Prisma.FieldRef<"Article", 'String'>
   readonly category: Prisma.FieldRef<"Article", 'String'>
   readonly likes: Prisma.FieldRef<"Article", 'Int'>
   readonly featured: Prisma.FieldRef<"Article", 'Boolean'>
+  readonly leadParagraph: Prisma.FieldRef<"Article", 'String'>
+  readonly sections: Prisma.FieldRef<"Article", 'Json'>
+  readonly quote: Prisma.FieldRef<"Article", 'Json'>
+  readonly checklist: Prisma.FieldRef<"Article", 'Json'>
+  readonly codeSnippet: Prisma.FieldRef<"Article", 'Json'>
+  readonly conclusion: Prisma.FieldRef<"Article", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Article", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Article", 'DateTime'>
 }

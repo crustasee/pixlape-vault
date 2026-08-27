@@ -282,7 +282,7 @@ export const CARDS: CardDetail[] = [
   },
 ];
 
-// ───__________________________________________________Helpers ──────────────────────────────────────────────────────────────────
+// ────────────────────────────────────────── Synchronous Helpers ──────────────────────────────────────────
 
 export function getCardById(id: string): CardDetail | undefined {
   if (!id) return CARDS[0];
@@ -294,12 +294,12 @@ export function getCardById(id: string): CardDetail | undefined {
   );
 }
 
-/** ................................................Filter cards by category......................................... */
+/** Filter cards by category */
 export function getCardsByCategory(category: CardCategory): CardDetail[] {
   return CARDS.filter((c) => c.categories.includes(category));
 }
 
-/** ................................................Filter cards by badge variant......................................... */
+/** Filter cards by badge variant */
 export function getCardsByBadge(badge: BadgeVariant): CardDetail[] {
   return CARDS.filter((c) => c.badge === badge);
 }

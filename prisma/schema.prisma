@@ -28,40 +28,57 @@ enum CardCategory {
 
 /// Card / Digital Asset table
 model DigitalAsset {
-  id           String       @id @default(cuid())
+  id           String         @id @default(cuid())
   title        String
   thumbnail    String
   banner       String
   icon         String
   badge        BadgeVariant
   categories   CardCategory[]
-  description  String       @db.Text
-  requirements String[]     @default([])
+  description  String         @db.Text
+  requirements String[]       @default([])
   downloadUrl  String
   donateUrl    String?
   price        Float?
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  version      String?
+  fileSize     String?
+  fileType     String?
+  license      String?
+  author       String?
+  checksum     String?
+  features     String[]       @default([])
+  specs        Json?
+  changelog    String?        @db.Text
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 
   @@map("digital_assets")
 }
 
 /// Article / Blog Post table
 model Article {
-  id        String   @id @default(cuid())
-  title     String
-  subtitle  String?
-  excerpt   String?  @db.Text
-  content   String?  @db.Text
-  date      String
-  readTime  String?
-  author    String
-  image     String?
-  category  String
-  likes     Int      @default(0)
-  featured  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String
+  subtitle      String?
+  excerpt       String?  @db.Text
+  content       String?  @db.Text
+  date          String
+  readTime      String?
+  author        String
+  authorAvatar  String?
+  authorRole    String?
+  image         String?
+  category      String
+  likes         Int      @default(0)
+  featured      Boolean  @default(false)
+  leadParagraph String?  @db.Text
+  sections      Json?
+  quote         Json?
+  checklist     Json?
+  codeSnippet   Json?
+  conclusion    Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map("articles")
 }
@@ -83,3 +100,4 @@ model TeamMember {
 
   @@map("team_members")
 }
+

@@ -45,6 +45,13 @@ export type DigitalAssetMinAggregateOutputType = {
   downloadUrl: string | null
   donateUrl: string | null
   price: number | null
+  version: string | null
+  fileSize: string | null
+  fileType: string | null
+  license: string | null
+  author: string | null
+  checksum: string | null
+  changelog: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +67,13 @@ export type DigitalAssetMaxAggregateOutputType = {
   downloadUrl: string | null
   donateUrl: string | null
   price: number | null
+  version: string | null
+  fileSize: string | null
+  fileType: string | null
+  license: string | null
+  author: string | null
+  checksum: string | null
+  changelog: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -77,6 +91,15 @@ export type DigitalAssetCountAggregateOutputType = {
   downloadUrl: number
   donateUrl: number
   price: number
+  version: number
+  fileSize: number
+  fileType: number
+  license: number
+  author: number
+  checksum: number
+  features: number
+  specs: number
+  changelog: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -102,6 +125,13 @@ export type DigitalAssetMinAggregateInputType = {
   downloadUrl?: true
   donateUrl?: true
   price?: true
+  version?: true
+  fileSize?: true
+  fileType?: true
+  license?: true
+  author?: true
+  checksum?: true
+  changelog?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -117,6 +147,13 @@ export type DigitalAssetMaxAggregateInputType = {
   downloadUrl?: true
   donateUrl?: true
   price?: true
+  version?: true
+  fileSize?: true
+  fileType?: true
+  license?: true
+  author?: true
+  checksum?: true
+  changelog?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -134,6 +171,15 @@ export type DigitalAssetCountAggregateInputType = {
   downloadUrl?: true
   donateUrl?: true
   price?: true
+  version?: true
+  fileSize?: true
+  fileType?: true
+  license?: true
+  author?: true
+  checksum?: true
+  features?: true
+  specs?: true
+  changelog?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -238,6 +284,15 @@ export type DigitalAssetGroupByOutputType = {
   downloadUrl: string
   donateUrl: string | null
   price: number | null
+  version: string | null
+  fileSize: string | null
+  fileType: string | null
+  license: string | null
+  author: string | null
+  checksum: string | null
+  features: string[]
+  specs: runtime.JsonValue | null
+  changelog: string | null
   createdAt: Date
   updatedAt: Date
   _count: DigitalAssetCountAggregateOutputType | null
@@ -278,6 +333,15 @@ export type DigitalAssetWhereInput = {
   downloadUrl?: Prisma.StringFilter<"DigitalAsset"> | string
   donateUrl?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
   price?: Prisma.FloatNullableFilter<"DigitalAsset"> | number | null
+  version?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  fileSize?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  fileType?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  license?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  author?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  checksum?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  features?: Prisma.StringNullableListFilter<"DigitalAsset">
+  specs?: Prisma.JsonNullableFilter<"DigitalAsset">
+  changelog?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DigitalAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DigitalAsset"> | Date | string
 }
@@ -295,6 +359,15 @@ export type DigitalAssetOrderByWithRelationInput = {
   downloadUrl?: Prisma.SortOrder
   donateUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  version?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileType?: Prisma.SortOrderInput | Prisma.SortOrder
+  license?: Prisma.SortOrderInput | Prisma.SortOrder
+  author?: Prisma.SortOrderInput | Prisma.SortOrder
+  checksum?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
+  specs?: Prisma.SortOrderInput | Prisma.SortOrder
+  changelog?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -315,6 +388,15 @@ export type DigitalAssetWhereUniqueInput = Prisma.AtLeast<{
   downloadUrl?: Prisma.StringFilter<"DigitalAsset"> | string
   donateUrl?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
   price?: Prisma.FloatNullableFilter<"DigitalAsset"> | number | null
+  version?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  fileSize?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  fileType?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  license?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  author?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  checksum?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
+  features?: Prisma.StringNullableListFilter<"DigitalAsset">
+  specs?: Prisma.JsonNullableFilter<"DigitalAsset">
+  changelog?: Prisma.StringNullableFilter<"DigitalAsset"> | string | null
   createdAt?: Prisma.DateTimeFilter<"DigitalAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DigitalAsset"> | Date | string
 }, "id">
@@ -332,6 +414,15 @@ export type DigitalAssetOrderByWithAggregationInput = {
   downloadUrl?: Prisma.SortOrder
   donateUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  version?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileType?: Prisma.SortOrderInput | Prisma.SortOrder
+  license?: Prisma.SortOrderInput | Prisma.SortOrder
+  author?: Prisma.SortOrderInput | Prisma.SortOrder
+  checksum?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
+  specs?: Prisma.SortOrderInput | Prisma.SortOrder
+  changelog?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DigitalAssetCountOrderByAggregateInput
@@ -357,6 +448,15 @@ export type DigitalAssetScalarWhereWithAggregatesInput = {
   downloadUrl?: Prisma.StringWithAggregatesFilter<"DigitalAsset"> | string
   donateUrl?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
   price?: Prisma.FloatNullableWithAggregatesFilter<"DigitalAsset"> | number | null
+  version?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  fileSize?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  fileType?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  license?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  author?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  checksum?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
+  features?: Prisma.StringNullableListFilter<"DigitalAsset">
+  specs?: Prisma.JsonNullableWithAggregatesFilter<"DigitalAsset">
+  changelog?: Prisma.StringNullableWithAggregatesFilter<"DigitalAsset"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DigitalAsset"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DigitalAsset"> | Date | string
 }
@@ -374,6 +474,15 @@ export type DigitalAssetCreateInput = {
   downloadUrl: string
   donateUrl?: string | null
   price?: number | null
+  version?: string | null
+  fileSize?: string | null
+  fileType?: string | null
+  license?: string | null
+  author?: string | null
+  checksum?: string | null
+  features?: Prisma.DigitalAssetCreatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -391,6 +500,15 @@ export type DigitalAssetUncheckedCreateInput = {
   downloadUrl: string
   donateUrl?: string | null
   price?: number | null
+  version?: string | null
+  fileSize?: string | null
+  fileType?: string | null
+  license?: string | null
+  author?: string | null
+  checksum?: string | null
+  features?: Prisma.DigitalAssetCreatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -408,6 +526,15 @@ export type DigitalAssetUpdateInput = {
   downloadUrl?: Prisma.StringFieldUpdateOperationsInput | string
   donateUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  license?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.DigitalAssetUpdatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -425,6 +552,15 @@ export type DigitalAssetUncheckedUpdateInput = {
   downloadUrl?: Prisma.StringFieldUpdateOperationsInput | string
   donateUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  license?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.DigitalAssetUpdatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -442,6 +578,15 @@ export type DigitalAssetCreateManyInput = {
   downloadUrl: string
   donateUrl?: string | null
   price?: number | null
+  version?: string | null
+  fileSize?: string | null
+  fileType?: string | null
+  license?: string | null
+  author?: string | null
+  checksum?: string | null
+  features?: Prisma.DigitalAssetCreatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -459,6 +604,15 @@ export type DigitalAssetUpdateManyMutationInput = {
   downloadUrl?: Prisma.StringFieldUpdateOperationsInput | string
   donateUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  license?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.DigitalAssetUpdatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -476,6 +630,15 @@ export type DigitalAssetUncheckedUpdateManyInput = {
   downloadUrl?: Prisma.StringFieldUpdateOperationsInput | string
   donateUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  version?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  license?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checksum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.DigitalAssetUpdatefeaturesInput | string[]
+  specs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  changelog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,6 +672,15 @@ export type DigitalAssetCountOrderByAggregateInput = {
   downloadUrl?: Prisma.SortOrder
   donateUrl?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  fileSize?: Prisma.SortOrder
+  fileType?: Prisma.SortOrder
+  license?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  checksum?: Prisma.SortOrder
+  features?: Prisma.SortOrder
+  specs?: Prisma.SortOrder
+  changelog?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -528,6 +700,13 @@ export type DigitalAssetMaxOrderByAggregateInput = {
   downloadUrl?: Prisma.SortOrder
   donateUrl?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  fileSize?: Prisma.SortOrder
+  fileType?: Prisma.SortOrder
+  license?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  checksum?: Prisma.SortOrder
+  changelog?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -543,6 +722,13 @@ export type DigitalAssetMinOrderByAggregateInput = {
   downloadUrl?: Prisma.SortOrder
   donateUrl?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  fileSize?: Prisma.SortOrder
+  fileType?: Prisma.SortOrder
+  license?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  checksum?: Prisma.SortOrder
+  changelog?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -556,6 +742,10 @@ export type DigitalAssetCreatecategoriesInput = {
 }
 
 export type DigitalAssetCreaterequirementsInput = {
+  set: string[]
+}
+
+export type DigitalAssetCreatefeaturesInput = {
   set: string[]
 }
 
@@ -589,6 +779,11 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type DigitalAssetUpdatefeaturesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
@@ -608,6 +803,15 @@ export type DigitalAssetSelect<ExtArgs extends runtime.Types.Extensions.Internal
   downloadUrl?: boolean
   donateUrl?: boolean
   price?: boolean
+  version?: boolean
+  fileSize?: boolean
+  fileType?: boolean
+  license?: boolean
+  author?: boolean
+  checksum?: boolean
+  features?: boolean
+  specs?: boolean
+  changelog?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["digitalAsset"]>
@@ -625,6 +829,15 @@ export type DigitalAssetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   downloadUrl?: boolean
   donateUrl?: boolean
   price?: boolean
+  version?: boolean
+  fileSize?: boolean
+  fileType?: boolean
+  license?: boolean
+  author?: boolean
+  checksum?: boolean
+  features?: boolean
+  specs?: boolean
+  changelog?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["digitalAsset"]>
@@ -642,6 +855,15 @@ export type DigitalAssetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   downloadUrl?: boolean
   donateUrl?: boolean
   price?: boolean
+  version?: boolean
+  fileSize?: boolean
+  fileType?: boolean
+  license?: boolean
+  author?: boolean
+  checksum?: boolean
+  features?: boolean
+  specs?: boolean
+  changelog?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["digitalAsset"]>
@@ -659,11 +881,20 @@ export type DigitalAssetSelectScalar = {
   downloadUrl?: boolean
   donateUrl?: boolean
   price?: boolean
+  version?: boolean
+  fileSize?: boolean
+  fileType?: boolean
+  license?: boolean
+  author?: boolean
+  checksum?: boolean
+  features?: boolean
+  specs?: boolean
+  changelog?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DigitalAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "thumbnail" | "banner" | "icon" | "badge" | "categories" | "description" | "requirements" | "downloadUrl" | "donateUrl" | "price" | "createdAt" | "updatedAt", ExtArgs["result"]["digitalAsset"]>
+export type DigitalAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "thumbnail" | "banner" | "icon" | "badge" | "categories" | "description" | "requirements" | "downloadUrl" | "donateUrl" | "price" | "version" | "fileSize" | "fileType" | "license" | "author" | "checksum" | "features" | "specs" | "changelog" | "createdAt" | "updatedAt", ExtArgs["result"]["digitalAsset"]>
 
 export type $DigitalAssetPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DigitalAsset"
@@ -681,6 +912,15 @@ export type $DigitalAssetPayload<ExtArgs extends runtime.Types.Extensions.Intern
     downloadUrl: string
     donateUrl: string | null
     price: number | null
+    version: string | null
+    fileSize: string | null
+    fileType: string | null
+    license: string | null
+    author: string | null
+    checksum: string | null
+    features: string[]
+    specs: runtime.JsonValue | null
+    changelog: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["digitalAsset"]>
@@ -1118,6 +1358,15 @@ export interface DigitalAssetFieldRefs {
   readonly downloadUrl: Prisma.FieldRef<"DigitalAsset", 'String'>
   readonly donateUrl: Prisma.FieldRef<"DigitalAsset", 'String'>
   readonly price: Prisma.FieldRef<"DigitalAsset", 'Float'>
+  readonly version: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly fileSize: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly fileType: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly license: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly author: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly checksum: Prisma.FieldRef<"DigitalAsset", 'String'>
+  readonly features: Prisma.FieldRef<"DigitalAsset", 'String[]'>
+  readonly specs: Prisma.FieldRef<"DigitalAsset", 'Json'>
+  readonly changelog: Prisma.FieldRef<"DigitalAsset", 'String'>
   readonly createdAt: Prisma.FieldRef<"DigitalAsset", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"DigitalAsset", 'DateTime'>
 }

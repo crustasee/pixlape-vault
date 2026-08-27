@@ -369,11 +369,11 @@ export const ARTICLES: ArticleItem[] = [
   },
 ];
 
-// ====================================================== Helpers =====================================================
+// ────────────────────────────────────────── Synchronous Helpers ──────────────────────────────────────────
 
 export function getArticleById(id: string): ArticleItem | undefined {
   if (!id) return ARTICLES[0];
-  return ARTICLES.find((article) => article.id === id);
+  return ARTICLES.find((article) => article.id === id) || ARTICLES[0];
 }
 
 export function getAdjacentArticles(id: string): {
@@ -390,3 +390,5 @@ export function getAdjacentArticles(id: string): {
 
   return { prev, next };
 }
+
+

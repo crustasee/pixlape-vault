@@ -4,12 +4,26 @@ import pg from "pg";
 
 const connectionString = process.env.DATABASE_URL;
 
-const pool = new pg.Pool({ connectionString });
-const adapter = new PrismaPg(pool);
+export const isDatabaseConfigured = (): boolean => {
+  return Boolean(
+    connectionString &&
+      (connectionString.startsWith("postgres://") ||
+        connectionString.startsWith("postgresql://"))
+  );
+};
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
+  pool: pg.Pool | undefined;
 };
+
+const pool =
+  globalForPrisma.pool ??
+  new pg.Pool({
+    connectionString: connectionString || undefined,
+  });
+
+const adapter = new PrismaPg(pool);
 
 export const prisma =
   globalForPrisma.prisma ??
@@ -19,6 +33,8 @@ export const prisma =
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
+  globalForPrisma.pool = pool;
 }
 
 export default prisma;
+
