@@ -237,15 +237,15 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
               <button
                 type="button"
                 onClick={toggleLike}
-                className={`px-4 py-1.5 text-xs font-mono font-semibold rounded-lg border border-black transition-all cursor-pointer flex items-center gap-2.5 shadow-xs ${
+                className={`px-4 py-1 text-xs font-mono font-semibold rounded-md border border-black transition-all hover:scale-96 cursor-pointer flex items-center gap-2.5 shadow-pixel ${
                   hasLiked
                     ? "bg-pink-300 text-red-600 font-bold"
-                    : "bg-surface text-black-primary hover:bg-pink-300 hover:text-black"
+                    : "bg-border text-black-primary hover:bg-pink-300 hover:text-black"
                 }`}
               >
                 <span>♥</span>
                 <span>{hasLiked ? "Liked" : "Like"}</span>
-                <span className="px-1.5 py-0.5 bg-white border border-border rounded-xs text-[11px] font-bold">
+                <span className="px-2 py-0.5 bg-surface border border-black rounded-sm text-[10px] font-bold">
                   {likes}
                 </span>
               </button>
@@ -253,7 +253,7 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
               <button
                 type="button"
                 onClick={handleShare}
-                className="px-4 py-1.5 text-xs font-mono font-semibold bg-surface border border-black text-black-primary rounded-lg hover:bg-primary hover:text-black transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                className="px-4 py-1.5 shadow-pixel text-xs font-mono font-semibold bg-surface border border-black text-black-primary rounded-md hover:bg-primary hover:scale-96 transition-all cursor-pointer flex items-center gap-1.5"
               >
                 <span>🔗</span>
                 <span>{copied ? "Copied!" : "Share"}</span>
@@ -268,12 +268,12 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           {prevArticle ? (
             <Link
               href={`/articles/${prevArticle.id}`}
-              className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
+              className="px-4 py-2 border border-black rounded-md bg-surface hover:bg-black-secondary hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
             >
               <span>&lt;</span> PREV: {prevArticle.title.slice(0, 24)}...
             </Link>
           ) : (
-            <span className="px-4 py-2 border border-border rounded-sm bg-surface/50 text-text-muted cursor-not-allowed">
+            <span className="px-4 py-2 border border-border rounded-md bg-surface/50 text-text-muted cursor-not-allowed">
               &lt; FIRST ARTICLE
             </span>
           )}

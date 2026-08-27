@@ -268,7 +268,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsDownloadOpen(true)}
-                  className="w-full py-3 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black hover:bg-primary-hover hover:scale-98 transition-all duration-150 cursor-pointer shadow-pixel font-bold flex items-center justify-center gap-2 text-center"
+                  className="w-full py-3 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black hover:scale-98 transition-all duration-150 cursor-pointer shadow-pixel font-bold flex items-center justify-center gap-2 text-center"
                 >
                   <span>⬇</span> DOWNLOAD
                 </button>
@@ -324,7 +324,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Support Creator Donation Box */}
-              <div className="bg-pink-50 border border-black rounded-md p-4 flex flex-col gap-3 shadow-xs">
+              <div className="bg-pink-50 border border-red-400 rounded-md p-4 flex flex-col gap-3 shadow-xs">
                 <div className="flex items-center gap-2 border-b border-pink-200 pb-2">
                   <span className="text-base select-none">💖</span>
                   <h4 className="font-pixel text-xs text-black-primary uppercase">Support Creator</h4>
@@ -335,9 +335,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-pink-300 text-pink-900 border border-pink-700 text-xs font-pixel rounded-md hover:bg-pink-400 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold shadow-xs flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-pink-300 text-red-600 border border-red-600 shadow-pixel shadow-xs text-xs font-pixel rounded-md hover:bg-pink-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold shadow-xs flex items-center justify-center gap-2"
                 >
-                  <span>☕</span> DONATE NOW &gt;
+                  DONATE →
                 </button>
               </div>
             </div>

@@ -52,7 +52,7 @@ export default function ArticleSection() {
             return (
               <div
                 key={article.id}
-                className="rounded-md border border-black p-5 flex flex-col sm:flex-row gap-5 min-h-55 bg-surface hover:bg-green-100 hover:scale-[1.01] hover:shadow-md transition-all duration-200"
+                className="rounded-md border border-black p-5 flex flex-col sm:flex-row gap-5 min-h-55 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-md transition-all duration-200"
               >
                 {/* Image Frame Box */}
                 <div className="w-full sm:w-47.5 h-40 sm:h-auto bg-white border border-black rounded-sm flex items-center justify-center shrink-0 overflow-hidden relative p-3">
@@ -133,7 +133,7 @@ export default function ArticleSection() {
             return (
               <div
                 key={article.id}
-                className="rounded-md border border-black p-4 flex gap-4 min-h-40 bg-surface hover:bg-green-100 hover:scale-[1.01] hover:shadow-sm transition-all duration-200"
+                className="rounded-md border border-black p-4 flex gap-4 min-h-40 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-sm transition-all duration-200"
               >
                 {/* Image Icon Box */}
                 <div className="w-30 self-stretch bg-white border border-black rounded-sm flex items-center justify-center shrink-0 overflow-hidden relative p-2">
@@ -149,7 +149,7 @@ export default function ArticleSection() {
                 <div className="flex-1 flex flex-col justify-between gap-2">
                   <div className="flex flex-col gap-1">
                     {/* Date Meta Badge */}
-                    <div className="flex items-center justify-between text-[10px] text-text-secondary border-b border-border pb-1">
+                    <div className="flex items-center justify-between text-[10px] text-text-secondary pb-1">
                       <span className="font-bold text-black-primary">📅 {article.date}</span>
                       <span className="px-2 py-0.2 bg-black-secondary text-white rounded-md uppercase font-mono">
                         {article.category}
@@ -167,7 +167,7 @@ export default function ArticleSection() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center justify-between pt-2 border-t border-border mt-auto">
+                  <div className="flex items-center justify-between pt-2 border-border mt-auto">
                     <button
                       type="button"
                       onClick={() => toggleLike(article.id)}
@@ -196,10 +196,10 @@ export default function ArticleSection() {
       </div>
 
       {/* ── Bottom Section Button ── */}
-      <div className="flex justify-end mt-6 pt-4 border-t border-black">
+      <div className="flex justify-end mt-6 pt-4 border-black">
         <Link
           href="/articles"
-          className="px-6 py-2 bg-surface border border-black-primary text-text-secondary text-sm font-mono font-semibold rounded-xl hover:bg-primary hover:text-white transition-all cursor-pointer"
+          className="px-5 py-1 bg-surface border border-black-primary text-text-secondary text-sm font-mono font-semibold rounded-lg shadow-pixel hover:scale-97 transition-all cursor-pointer"
         >
           ALL ARTICLES &gt;
         </Link>

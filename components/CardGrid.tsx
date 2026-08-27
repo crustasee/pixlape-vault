@@ -70,7 +70,7 @@ export default function CardGrid({
                 </h2>
                 <Link
                   href={`/cards/${card.id}`}
-                  className="w-full py-2 bg-black-secondary text-white text-xs font-mono font-semibold rounded-md hover:bg-primary hover:text-green-700 transition-opacity text-center block"
+                  className="w-full py-2 bg-border border border-black-primary text-black-primary text-xs font-mono font-semibold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-opacity text-center block"
                 >
                   VIEW DETAIL PAGE &gt;
                 </Link>
@@ -91,7 +91,7 @@ export default function CardGrid({
 
       {/* Next Button */}
       <div className="flex justify-end mt-4">
-        <button className="px-5 py-1 bg-border border border-black-primary text-black-secondary text-lg font-mono font-semibold rounded-lg hover:bg-black-secondary hover:text-white transition-opacity">
+        <button className="px-5 py-1 bg-surface border border-black-primary text-black-secondary text-sm font-mono font-semibold rounded-lg hover:scale-97 shadow-pixel hover:text-border transition-all">
           NEXT &gt;
         </button>
       </div>
