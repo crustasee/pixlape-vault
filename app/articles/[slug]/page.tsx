@@ -176,7 +176,7 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
 
             {/* ========================================== Dynamic Code / CLI Snippet Box ========================================== */}
             {article.codeSnippet && (
-              <div className="flex flex-col gap-2.5 pt-2">
+              <div className="flex flex-col gap-2 pt-2">
                 {article.codeSnippet.label && (
                   <span className="text-xs font-pixel text-black-secondary uppercase flex items-center gap-1.5">
                     <span>▤</span> {article.codeSnippet.label}:
@@ -187,11 +187,11 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
                     <span className="font-bold truncate max-w-sm">
                       {article.codeSnippet.command || "terminal"}
                     </span>
-                    <span className="bg-black/60 px-2 py-0.5 rounded-xs text-[10px] font-pixel uppercase tracking-wide">
+                    <span className="bg-black/60 px-2 py-0.5 rounded-xs text-[10px] font-black uppercase tracking-wide">
                       {article.codeSnippet.lang || "CODE"}
                     </span>
                   </div>
-                  <pre className="p-4 text-green-700 bg-white font-mono overflow-x-auto text-xs leading-relaxed">
+                  <pre className="p-4 text-black-secondary bg-white font-mono overflow-x-auto text-xs leading-relaxed">
                     <code>{article.codeSnippet.code}</code>
                   </pre>
                 </div>

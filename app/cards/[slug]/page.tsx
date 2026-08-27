@@ -335,7 +335,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-pink-300 text-red-600 border border-red-600 shadow-pixel shadow-xs text-xs font-pixel rounded-md hover:bg-pink-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold shadow-xs flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-pink-300 text-red-600 border border-red-600 shadow-pixel text-xs font-pixel rounded-md hover:bg-pink-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
                   DONATE →
                 </button>
