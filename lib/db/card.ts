@@ -56,7 +56,7 @@ export const CARDS: CardDetail[] = [
     categories: ["APPS"],
     version: "v1.02.00",
     fileSize: "18.4 MB",
-    fileType: ".APK / .EXE",
+    fileType: ".APK / .ZIP",
     license: "Free Commercial",
     author: "PIXLape Lab",
     updatedAt: "2026-08-20",
@@ -89,7 +89,7 @@ export const CARDS: CardDetail[] = [
       "- Fixed: Canvas truncation on 80mm wide paper rolls.\n\n" +
       "### v1.00.00 (Initial Launch) — 2026-06-12\n" +
       "- First stable release with standard ESC/POS printing pipeline.",
-    downloadUrl: "http://drive.google.com",
+    downloadUrl: "https://www.mediafire.com/file/f62118y1doja5eh/Pixlape-download.rar/file",
     donateUrl: "https://trakteer.id",
   },
   {
@@ -170,7 +170,7 @@ export const CARDS: CardDetail[] = [
       "SVG & PNG viewer or any modern browser",
       "React 18+ or Vue 3+ for web package",
     ],
-    downloadUrl: "#",
+    downloadUrl: "https://www.mediafire.com/file/f62118y1doja5eh/Pixlape-download.rar/file",
     donateUrl: "https://trakteer.id",
   },
   {
@@ -255,7 +255,7 @@ export const CARDS: CardDetail[] = [
       "300 DPI color-accurate monitor recommended",
       "CMYK color profile support",
     ],
-    downloadUrl: "#",
+    downloadUrl: "https://www.mediafire.com/file/f62118y1doja5eh/Pixlape-download.rar/file",
     donateUrl: "https://trakteer.id",
   },
   {
@@ -278,7 +278,7 @@ export const CARDS: CardDetail[] = [
       "Any standard ZIP unarchiver",
       "Audio player supporting 24-bit WAV files",
     ],
-    downloadUrl: "#",
+    downloadUrl: "https://www.mediafire.com/file/f62118y1doja5eh/Pixlape-download.rar/file",
   },
 ];
 
