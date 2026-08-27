@@ -309,13 +309,13 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => setForm({ name: "", email: "", handle: "", subject: "", message: "" })}
-                  className="px-5 py-2 rounded-md border border-black bg-border text-black-primary text-xs font-mono font-semibold hover:bg-pink-300 transition-all duration-150 cursor-pointer"
+                  className="px-5 py-2 rounded-md border border-black bg-border text-black-primary text-xs font-mono font-semibold hover:bg-pink-300 shadow-pixel hover:scale-98 active:scale-97 transition-all duration-150 cursor-pointer"
                 >
                   CLEAR FORM
                 </button>
                 <button
                   type="submit"
-                  className="px-7 py-2 rounded-md bg-black-secondary border border-black text-surface text-xs font-mono font-bold hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer shadow-xs"
+                  className="px-7 py-2 rounded-md bg-black-secondary border shadow-pixel border-black text-surface text-xs font-mono font-bold hover:opacity-90 hover:scale-98 active:scale-97 transition-all duration-150 cursor-pointer"
                 >
                   DISPATCH TRANSMISSION &gt;
                 </button>

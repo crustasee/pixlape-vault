@@ -29,7 +29,7 @@ export default function DonateModal({
         type="button"
         onClick={onClose}
         aria-label="Close modal"
-        className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-pink-500 text-white border border-black hover:scale-105 transition-all duration-150 flex items-center justify-center text-xl font-mono font-bold cursor-pointer"
+        className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-pink-500 text-white border border-black hover:scale-97 active:scale-97 transition-all duration-150 flex items-center shadow-pixel justify-center text-xl font-mono font-bold cursor-pointer"
       >
         ✕
       </button>
@@ -50,28 +50,20 @@ export default function DonateModal({
       </div>
 
       {/* Trakteer Button */}
-      <a
-        href={trakteerUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-full max-w-full flex items-center justify-center mt-2.5 hover:scale-96 active:scale-[0.98] transition-all duration-150"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          id="wse-buttons-preview"
-          src="https://edge-cdn.trakteer.id/images/embed/trbtn-red-1.png?v=14-05-2025"
-          height={40}
-          style={{ border: "1px", height: "40px" }}
-          alt="Trakteer Saya"
-          className="w-full h-full object-contain"
-        />
-      </a>
+    <button
+    type="button"
+    onClick={() => openLink(trakteerUrl)}
+    className="w-full py-3 mt-2.5 rounded-lg bg-red-400 shadow-pixel text-white text-sm font-black font-bold border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+    >
+      TRAKTEER
+    </button>
+     
 
       {/* Saweria Button */}
       <button
         type="button"
         onClick={() => openLink(saweriaUrl)}
-        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 text-white text-sm font-black font-bold border border-red-600 hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 shadow-pixel text-white text-sm font-black font-bold border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
       >
         SAWERIA
       </button>
@@ -81,10 +73,10 @@ export default function DonateModal({
         type="button"
         onClick={() => midtranseUrl && openLink(midtranseUrl)}
         disabled={!midtranseUrl}
-        className={`w-full py-3 mt-2.5 rounded-lg text-sm font-black font-bold border transition-all duration-150 text-center tracking-wider ${
+        className={`w-full py-3 mt-2.5 rounded-lg text-sm shadow-pixel font-black font-bold border transition-all duration-150 text-center tracking-wider ${
           midtranseUrl
-            ? "bg-green-300 text-black-primary border-green-500 hover:bg-green-200 hover:scale-96 active:scale-99 cursor-pointer"
-            : "bg-green-400 text-black-primary border-green-700 hover:bg-green-200 hover:scale-96 active:scale-99 cursor-not-allowed"
+            ? "bg-green-400 text-black-primary border-black hover:scale-96 active:scale-99 cursor-pointer"
+            : "bg-green-400 text-black-primary border-black hover:bg-green-200 hover:scale-96 active:scale-99 cursor-not-allowed"
         }`}
       >MIDTRANS
       </button>

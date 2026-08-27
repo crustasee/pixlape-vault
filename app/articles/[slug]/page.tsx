@@ -54,7 +54,7 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           <div className="flex items-center gap-2">
             <Link
               href="/articles"
-              className="text-xs font-mono text-text-secondary hover:text-black-secondary transition-colors flex items-center gap-1 bg-surface px-2.5 py-1 rounded-sm border border-border hover:border-black"
+              className="text-xs font-mono text-text-secondary hover:text-black-secondary transition-colors flex items-center gap-1 bg-surface px-2.5 py-1 rounded-sm border border-border hover:border-primary"
             >
               &lt; BACK TO ARTICLES
             </Link>
@@ -281,7 +281,7 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           {nextArticle ? (
             <Link
               href={`/articles/${nextArticle.id}`}
-              className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-black-secondary hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
+              className="px-4 py-2 border border-black rounded-sm bg-surface hover:bg-border hover:text-white transition-colors flex items-center gap-1.5 font-bold shadow-xs"
             >
               NEXT: {nextArticle.title.slice(0, 24)}... <span>&gt;</span>
             </Link>

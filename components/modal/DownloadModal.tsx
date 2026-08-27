@@ -47,7 +47,7 @@ function DownloadModalContent({
         type="button"
         onClick={onClose}
         aria-label="Close modal"
-        className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-pink-400 text-white border border-black hover:bg-pink-500 hover:text-black-primary transition-all duration-150 flex items-center justify-center text-xl font-mono font-bold cursor-pointer"
+        className="absolute top-3 right-4 w-9 h-9 rounded-lg bg-pink-400 text-white border border-black hover:scale-96 shadow-pixel hover:text-red-600 transition-all duration-150 flex items-center justify-center text-xl font-mono font-bold cursor-pointer"
       >
         ✕
       </button>
@@ -69,14 +69,14 @@ function DownloadModalContent({
         type="button"
         onClick={handleDownload}
         disabled={!isReady}
-        className={`w-full rounded-lg py-3 mt-3 text-sm font-pixel font-bold border transition-all duration-150 text-center ${
+        className={`w-full rounded-lg py-3 mt-3 text-sm font-pixel shadow-pixel font-bold border transition-all duration-150 text-center ${
           isReady
-            ? "bg-green-400 text-black-primary border-black hover:bg-primary hover:scale-[1.1] active:scale-[0.99] cursor-pointer"
+            ? "bg-green-400 text-black-primary border-black hover:bg-primary hover:scale-96 active:scale-98 cursor-pointer"
             : "bg-black-secondary/20 text-black-secondary border-border cursor-not-allowed"
         }`}
       >
         {isReady
-          ? "YOUR LINK IS READY .."
+          ? "READY TO DOWNLOAD !"
           : `PLEASE WAIT ${secondsLeft} SECONDS`}
       </button>
 
@@ -84,7 +84,7 @@ function DownloadModalContent({
       <button
         type="button"
         onClick={onDonateOpen}
-        className="w-full py-3 mt-3 rounded-lg bg-pink-400 text-black-primary text-xs sm:text-sm font-pixel font-bold border border-black hover:bg-pink-300 hover:scale-[1.01] active:scale-[0.99] transition-all duration-150 cursor-pointer text-center"
+        className="w-full py-3 mt-3 rounded-lg bg-pink-400 text-black-primary text-xs sm:text-sm font-pixel shadow-pixel font-bold border border-black hover:scale-97 active:scale-98 transition-all duration-150 cursor-pointer text-center"
       >
         DONATE ❤️
       </button>
