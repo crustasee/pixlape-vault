@@ -1,14 +1,19 @@
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
+dotenv.config();
+
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 import * as schema from "./schema";
 
-const connectionString = process.env.DATABASE_URL;
+const getConnectionString = () =>
+  process.env.DATABASE_URL || process.env.DATABASE_URL_UNPOOLED || process.env.DIRECT_URL;
 
 export const isDatabaseConfigured = (): boolean => {
+  const conn = getConnectionString();
   return Boolean(
-    connectionString &&
-      (connectionString.startsWith("postgres://") ||
-        connectionString.startsWith("postgresql://"))
+    conn &&
+      (conn.startsWith("postgres://") || conn.startsWith("postgresql://"))
   );
 };
 
@@ -20,7 +25,13 @@ const globalForDrizzle = globalThis as unknown as {
 export const pool =
   globalForDrizzle.pool ??
   new pg.Pool({
-    connectionString: connectionString || undefined,
+    connectionString: getConnectionString() || undefined,
+    ssl:
+      process.env.NODE_ENV === "production" ||
+      getConnectionString()?.includes("neon.tech") ||
+      getConnectionString()?.includes("supabase.co")
+        ? { rejectUnauthorized: false }
+        : undefined,
   });
 
 export const db =
