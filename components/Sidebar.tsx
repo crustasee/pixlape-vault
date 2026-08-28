@@ -43,7 +43,7 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-92.5 bg-surface rounded-md border border-black-primary p-6 flex flex-col gap-4 shrink-0 font-mono">
+    <aside className="w-72 bg-surface rounded-md border border-black-primary p-6 flex flex-col gap-4 shrink-0 font-mono">
       {/* ================================TAB filter Cattegory============================================ */}
       <div className="flex items-center justify-between mt-1 border-b border-black pb-2">
         <h3 className="text-xs font-pixel text-black-primary uppercase tracking-wider">
@@ -76,7 +76,7 @@ export default function Sidebar({
               className={`w-full py-2.5 px-4 border rounded-md text-sm font-mono font-semibold transition-all cursor-pointer flex items-center justify-between text-left ${
                 isSelected
                   ? "bg-primary border-green-700 text-green-700 shadow-xs font-bold scale-[1.04]"
-                  : "bg-border border-black-primary text-black-primary hover:bg-green-100 hover:border-primary"
+                  : "bg-border border-black-primary text-black-primary hover:bg-black-secondary/40 hover:scale-98"
               }`}
             >
               <span>{cat}</span>
