@@ -53,7 +53,7 @@ export default function DonateModal({
     <button
     type="button"
     onClick={() => openLink(trakteerUrl)}
-    className="w-full py-3 mt-2.5 rounded-lg bg-red-400 shadow-pixel text-white text-sm font-black font-bold border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+    className="w-full py-3 mt-2.5 rounded-lg bg-red-400 shadow-pixel text-white text-sm font-black border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
     >
       TRAKTEER
     </button>
@@ -63,7 +63,7 @@ export default function DonateModal({
       <button
         type="button"
         onClick={() => openLink(saweriaUrl)}
-        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 shadow-pixel text-white text-sm font-black font-bold border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 shadow-pixel text-white text-sm font-black border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
       >
         SAWERIA
       </button>
@@ -73,7 +73,7 @@ export default function DonateModal({
         type="button"
         onClick={() => midtranseUrl && openLink(midtranseUrl)}
         disabled={!midtranseUrl}
-        className={`w-full py-3 mt-2.5 rounded-lg text-sm shadow-pixel font-black font-bold border transition-all duration-150 text-center tracking-wider ${
+        className={`w-full py-3 mt-2.5 rounded-lg text-sm shadow-pixel font-black border transition-all duration-150 text-center tracking-wider ${
           midtranseUrl
             ? "bg-green-400 text-black-primary border-black hover:scale-96 active:scale-99 cursor-pointer"
             : "bg-green-400 text-black-primary border-black hover:bg-green-200 hover:scale-96 active:scale-99 cursor-not-allowed"

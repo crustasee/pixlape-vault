@@ -70,7 +70,7 @@ export default function CardGrid({
                 </h2>
                 <Link
                   href={`/cards/${card.id}`}
-                  className="w-full py-2 bg-border border border-black-primary text-black-primary text-xs font-mono font-semibold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-opacity text-center block"
+                  className="w-full py-2 bg-border border border-black-primary text-black-primary text-xs font-mono font-semibold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-all duration-200 text-center block"
                 >
                   VIEW DETAIL PAGE &gt;
                 </Link>
