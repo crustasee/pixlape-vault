@@ -1,5 +1,14 @@
 import "server-only";
-import { prisma, isDatabaseConfigured } from "./prisma";
+import { eq, or, desc, asc, ilike, sql, and, SQL } from "drizzle-orm";
+import { db, isDatabaseConfigured } from "./drizzle";
+import {
+  digitalAssets,
+  articles,
+  teamMembers,
+  type DigitalAssetSelect,
+  type ArticleSelect,
+  type TeamMemberSelect,
+} from "./schema";
 import { CARDS, CardDetail, CardCategory, BadgeVariant } from "./card";
 import {
   ARTICLES,
@@ -11,22 +20,14 @@ import {
   ArticleConclusion,
 } from "./article";
 import { TEAM_MEMBERS, TeamMember } from "./team";
-import type {
-  DigitalAsset,
-  Article,
-  TeamMember as PrismaTeamMember,
-  BadgeVariant as PrismaBadgeVariant,
-  CardCategory as PrismaCardCategory,
-  Prisma,
-} from "@/generated/prisma/client";
 
 // ────────────────────────────────────────── Digital Assets Server Service ──────────────────────────────────────────
 
 /**
- * Maps a Prisma DigitalAsset record to a frontend CardDetail object
+ * Maps a Drizzle DigitalAsset record to a frontend CardDetail object
  */
-export function mapPrismaAssetToCardDetail(
-  asset: DigitalAsset | (Omit<DigitalAsset, "createdAt" | "updatedAt"> & {
+export function mapAssetToCardDetail(
+  asset: DigitalAssetSelect | (Omit<DigitalAssetSelect, "createdAt" | "updatedAt"> & {
     createdAt?: Date | string;
     updatedAt?: Date | string;
   })
@@ -59,6 +60,9 @@ export function mapPrismaAssetToCardDetail(
   };
 }
 
+// Backward compatibility alias
+export const mapPrismaAssetToCardDetail = mapAssetToCardDetail;
+
 /**
  * Fetches all digital assets from the database with in-memory fallback
  */
@@ -72,34 +76,32 @@ export async function fetchCardsFromDb(options?: {
       return filterStaticCards(options);
     }
 
-    const whereClause: Prisma.DigitalAssetWhereInput = {};
+    const conditions: (SQL | undefined)[] = [];
 
     if (options?.badge) {
-      whereClause.badge = options.badge.toUpperCase() as PrismaBadgeVariant;
+      const badgeLower = options.badge.toLowerCase() as "free" | "paid" | "premium";
+      conditions.push(eq(digitalAssets.badge, badgeLower));
     }
 
     if (options?.category && options.category !== "ALL" && options.category !== "ALL ASSETS") {
-      const normalizedCat = (
+      const normalizedCat =
         options.category === "ART FOR SELL"
-          ? "ART_FOR_SELL"
-          : options.category.toUpperCase().replace(/\s+/g, "_")
-      ) as PrismaCardCategory;
-      whereClause.categories = {
-        has: normalizedCat,
-      };
+          ? "ART FOR SELL"
+          : options.category.toUpperCase().replace(/\s+/g, "_");
+      conditions.push(sql`${normalizedCat} = ANY(${digitalAssets.categories})`);
     }
 
-    const assets = await prisma.digitalAsset.findMany({
-      where: whereClause,
-      take: options?.limit,
-      orderBy: { createdAt: "desc" },
+    const rows = await db.query.digitalAssets.findMany({
+      where: conditions.length > 0 ? and(...conditions) : undefined,
+      limit: options?.limit,
+      orderBy: [desc(digitalAssets.createdAt)],
     });
 
-    if (!assets || assets.length === 0) {
+    if (!rows || rows.length === 0) {
       return filterStaticCards(options);
     }
 
-    return assets.map(mapPrismaAssetToCardDetail);
+    return rows.map(mapAssetToCardDetail);
   } catch (error) {
     console.warn("⚠️ Database query failed in fetchCardsFromDb, falling back to static CARDS:", error);
     return filterStaticCards(options);
@@ -116,17 +118,15 @@ export async function fetchCardByIdFromDb(id: string): Promise<CardDetail | unde
     }
 
     const normalizedId = id.toLowerCase().startsWith("card-") ? id : `card-${id}`;
-    const asset = await prisma.digitalAsset.findFirst({
-      where: {
-        OR: [{ id: id }, { id: normalizedId }],
-      },
+    const asset = await db.query.digitalAssets.findFirst({
+      where: or(eq(digitalAssets.id, id), eq(digitalAssets.id, normalizedId)),
     });
 
     if (!asset) {
       return getCardById(id);
     }
 
-    return mapPrismaAssetToCardDetail(asset);
+    return mapAssetToCardDetail(asset);
   } catch (error) {
     console.warn(`⚠️ Database query failed for asset ID ${id}, falling back to static CARDS:`, error);
     return getCardById(id);
@@ -175,10 +175,10 @@ function getCardById(id: string): CardDetail | undefined {
 // ────────────────────────────────────────── Articles Server Service ──────────────────────────────────────────
 
 /**
- * Maps a Prisma Article record to a frontend ArticleItem object
+ * Maps a Drizzle Article record to a frontend ArticleItem object
  */
-export function mapPrismaArticleToItem(
-  article: Article | (Omit<Article, "createdAt" | "updatedAt"> & {
+export function mapArticleToItem(
+  article: ArticleSelect | (Omit<ArticleSelect, "createdAt" | "updatedAt"> & {
     createdAt?: Date | string;
     updatedAt?: Date | string;
   })
@@ -206,6 +206,9 @@ export function mapPrismaArticleToItem(
   };
 }
 
+// Backward compatibility alias
+export const mapPrismaArticleToItem = mapArticleToItem;
+
 /**
  * Fetches articles from the database with in-memory fallback
  */
@@ -219,25 +222,26 @@ export async function fetchArticlesFromDb(options?: {
       return filterStaticArticles(options);
     }
 
-    const whereClause: Prisma.ArticleWhereInput = {};
+    const conditions: (SQL | undefined)[] = [];
+
     if (typeof options?.featured === "boolean") {
-      whereClause.featured = options.featured;
+      conditions.push(eq(articles.featured, options.featured));
     }
     if (options?.category && options.category !== "ALL") {
-      whereClause.category = { equals: options.category, mode: "insensitive" };
+      conditions.push(ilike(articles.category, options.category));
     }
 
-    const articles = await prisma.article.findMany({
-      where: whereClause,
-      take: options?.limit,
-      orderBy: { createdAt: "desc" },
+    const rows = await db.query.articles.findMany({
+      where: conditions.length > 0 ? and(...conditions) : undefined,
+      limit: options?.limit,
+      orderBy: [desc(articles.createdAt)],
     });
 
-    if (!articles || articles.length === 0) {
+    if (!rows || rows.length === 0) {
       return filterStaticArticles(options);
     }
 
-    return articles.map(mapPrismaArticleToItem);
+    return rows.map(mapArticleToItem);
   } catch (error) {
     console.warn("⚠️ Database query failed in fetchArticlesFromDb, falling back to static ARTICLES:", error);
     return filterStaticArticles(options);
@@ -253,15 +257,15 @@ export async function fetchArticleByIdFromDb(id: string): Promise<ArticleItem | 
       return ARTICLES.find((article) => article.id === id) || ARTICLES[0];
     }
 
-    const article = await prisma.article.findUnique({
-      where: { id },
+    const article = await db.query.articles.findFirst({
+      where: eq(articles.id, id),
     });
 
     if (!article) {
       return ARTICLES.find((item) => item.id === id) || ARTICLES[0];
     }
 
-    return mapPrismaArticleToItem(article);
+    return mapArticleToItem(article);
   } catch (error) {
     console.warn(`⚠️ Database query failed for article ID ${id}, falling back to static ARTICLES:`, error);
     return ARTICLES.find((item) => item.id === id) || ARTICLES[0];
@@ -282,13 +286,13 @@ export async function incrementArticleLikesInDb(id: string): Promise<number | nu
       return null;
     }
 
-    const updated = await prisma.article.update({
-      where: { id },
-      data: { likes: { increment: 1 } },
-      select: { likes: true },
-    });
+    const updated = await db
+      .update(articles)
+      .set({ likes: sql`${articles.likes} + 1` })
+      .where(eq(articles.id, id))
+      .returning({ likes: articles.likes });
 
-    return updated.likes;
+    return updated[0]?.likes ?? null;
   } catch (error) {
     console.warn(`⚠️ Failed to increment likes for article ${id} in DB:`, error);
     return null;
@@ -322,10 +326,10 @@ function filterStaticArticles(options?: {
 // ────────────────────────────────────────── Team Members Server Service ──────────────────────────────────────────
 
 /**
- * Maps a Prisma TeamMember record to a frontend TeamMember object
+ * Maps a Drizzle TeamMember record to a frontend TeamMember object
  */
-export function mapPrismaTeamMember(
-  member: PrismaTeamMember | (Omit<PrismaTeamMember, "createdAt" | "updatedAt"> & {
+export function mapTeamMember(
+  member: TeamMemberSelect | (Omit<TeamMemberSelect, "createdAt" | "updatedAt"> & {
     createdAt?: Date | string;
     updatedAt?: Date | string;
   })
@@ -349,6 +353,9 @@ export function mapPrismaTeamMember(
   };
 }
 
+// Backward compatibility alias
+export const mapPrismaTeamMember = mapTeamMember;
+
 /**
  * Fetches all team members from the database with in-memory fallback
  */
@@ -358,24 +365,21 @@ export async function fetchTeamMembersFromDb(roleFilter?: string): Promise<TeamM
       return filterStaticTeam(roleFilter);
     }
 
-    const whereClause: Prisma.TeamMemberWhereInput = {};
-    if (roleFilter && roleFilter !== "ALL") {
-      whereClause.role = {
-        contains: roleFilter,
-        mode: "insensitive",
-      };
-    }
+    const whereClause =
+      roleFilter && roleFilter !== "ALL"
+        ? ilike(teamMembers.role, `%${roleFilter}%`)
+        : undefined;
 
-    const members = await prisma.teamMember.findMany({
+    const members = await db.query.teamMembers.findMany({
       where: whereClause,
-      orderBy: { joinedYear: "asc" },
+      orderBy: [asc(teamMembers.joinedYear)],
     });
 
     if (!members || members.length === 0) {
       return filterStaticTeam(roleFilter);
     }
 
-    return members.map(mapPrismaTeamMember);
+    return members.map(mapTeamMember);
   } catch (error) {
     console.warn("⚠️ Database query failed in fetchTeamMembersFromDb, falling back to static TEAM_MEMBERS:", error);
     return filterStaticTeam(roleFilter);
