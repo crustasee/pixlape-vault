@@ -31,9 +31,12 @@ export interface CardDetail extends CardItem {
   requirements: string[];
   downloadUrl: string;
   donateUrl?: string;
+  price?: number;
   version?: string;
   fileSize?: string;
   fileType?: string;
+  fileFormat?: string;
+  downloads?: number;
   license?: string;
   changelog?: string | string[];
   features?: string[];
@@ -284,24 +287,153 @@ export const CARDS: CardDetail[] = [
   },
 ];
 
-// ────────────────────────────────────────── Synchronous Helpers ──────────────────────────────────────────
+// ────────────────────────────────────────── Synchronous Helpers & Reactive Store ──────────────────────────────────────────
 
+// In-memory dynamic store initialized with CARDS
+export let memoryCards: CardDetail[] = [...CARDS];
+
+type StoreListener = () => void;
+const listeners: Set<StoreListener> = new Set();
+
+function notifyListeners() {
+  listeners.forEach((listener) => {
+    try {
+      listener();
+    } catch {
+      // ignore errors in listeners
+    }
+  });
+}
+
+/**
+ * React hook to subscribe to asset cards state changes
+ */
+export function useAssets(): CardDetail[] {
+  // Use React dynamic import/hook safely for both client and server
+  const [assets, setAssets] = typeof window !== 'undefined'
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      require('react').useState(() => [...memoryCards])
+    : [[...memoryCards], () => {}];
+
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    require('react').useEffect(() => {
+      const update = () => setAssets([...memoryCards]);
+      listeners.add(update);
+      return () => {
+        listeners.delete(update);
+      };
+    }, []);
+  }
+
+  return assets;
+}
+
+/**
+ * Add a new asset to in-memory store
+ */
+export function addAssetToStore(data: Partial<CardDetail> & { title: string; category?: CardCategory }): CardDetail {
+  const nextNumber = memoryCards.length + 1;
+  const id = data.id && data.id.trim() !== '' ? data.id.trim() : `card-${nextNumber}`;
+  const categories: CardCategory[] = data.categories || (data.category ? [data.category] : ['TOOLS']);
+
+  const newAsset: CardDetail = {
+    id,
+    title: data.title,
+    thumbnail: data.thumbnail || '/img/minicard001.svg',
+    banner: data.banner || '/img/banner01.svg',
+    icon: data.icon || '/img/Icontemp1.svg',
+    badge: data.badge || 'free',
+    categories,
+    description: data.description || 'No description provided.',
+    requirements: data.requirements || ['Standard web or design software'],
+    downloadUrl: data.downloadUrl || '#',
+    donateUrl: data.donateUrl || 'https://trakteer.id',
+    version: data.version || 'v1.0.0',
+    fileSize: data.fileSize || '10.0 MB',
+    fileType: data.fileType || '.ZIP',
+    license: data.license || 'Free Commercial',
+    author: data.author || 'PIXLape Lab',
+    checksum: data.checksum || `sha256: ${Math.random().toString(16).substring(2, 18)}`,
+    features: data.features || ['High-performance digital asset package', '100% Vector and pixel aligned'],
+    specs: data.specs || {
+      'Asset Engine': 'PIXLApe Vault Architecture',
+      'Compatibility': 'Cross-Platform',
+    },
+    changelog: data.changelog || '### v1.0.0 (Initial Release)\n- First stable vault asset package.',
+    updatedAt: data.updatedAt || new Date().toISOString().split('T')[0],
+  };
+
+  // Prepend new asset
+  memoryCards = [newAsset, ...memoryCards.filter((c) => c.id !== id)];
+  notifyListeners();
+  return newAsset;
+}
+
+/**
+ * Update an existing asset in the in-memory store
+ */
+export function updateAssetInStore(id: string, updates: Partial<CardDetail> & { category?: CardCategory }): CardDetail | null {
+  const index = memoryCards.findIndex(
+    (c) => c.id === id || c.id === `card-${id}` || c.id.endsWith(id)
+  );
+
+  if (index === -1) {
+    // If not found, add as new asset if title is provided
+    return addAssetToStore({
+      ...updates,
+      id,
+      title: updates.title || `Asset #${id}`,
+    });
+  }
+
+  const existing = memoryCards[index];
+  const categories: CardCategory[] = updates.categories || (updates.category ? [updates.category] : existing.categories);
+
+  const updated: CardDetail = {
+    ...existing,
+    ...updates,
+    categories,
+    updatedAt: updates.updatedAt || new Date().toISOString().split('T')[0],
+  };
+
+  memoryCards[index] = updated;
+  notifyListeners();
+  return updated;
+}
+
+/**
+ * Delete an asset from in-memory store
+ */
+export function deleteAssetFromStore(id: string): boolean {
+  const initialLength = memoryCards.length;
+  memoryCards = memoryCards.filter((c) => c.id !== id && c.id !== `card-${id}`);
+  const removed = memoryCards.length < initialLength;
+  if (removed) {
+    notifyListeners();
+  }
+  return removed;
+}
+
+/** Filter cards by ID */
 export function getCardById(id: string): CardDetail | undefined {
-  if (!id) return CARDS[0];
-  const normalizedId = id.toLowerCase().startsWith("card-") ? id : `card-${id}`;
+  if (!id) return memoryCards[0] || CARDS[0];
+  const normalizedId = id.toLowerCase().startsWith('card-') ? id : `card-${id}`;
   return (
+    memoryCards.find((c) => c.id === id || c.id === normalizedId) ||
+    memoryCards.find((c) => c.id.endsWith(id)) ||
     CARDS.find((c) => c.id === id || c.id === normalizedId) ||
-    CARDS.find((c) => c.id.endsWith(id)) ||
+    memoryCards[0] ||
     CARDS[0]
   );
 }
 
 /** Filter cards by category */
 export function getCardsByCategory(category: CardCategory): CardDetail[] {
-  return CARDS.filter((c) => c.categories.includes(category));
+  return memoryCards.filter((c) => c.categories.includes(category));
 }
 
 /** Filter cards by badge variant */
 export function getCardsByBadge(badge: BadgeVariant): CardDetail[] {
-  return CARDS.filter((c) => c.badge === badge);
+  return memoryCards.filter((c) => c.badge === badge);
 }

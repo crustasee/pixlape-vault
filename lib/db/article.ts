@@ -369,26 +369,182 @@ export const ARTICLES: ArticleItem[] = [
   },
 ];
 
-// ────────────────────────────────────────── Synchronous Helpers ──────────────────────────────────────────
+// ────────────────────────────────────────── Synchronous Helpers & Reactive Store ──────────────────────────────────────────
 
-export function getArticleById(id: string): ArticleItem | undefined {
-  if (!id) return ARTICLES[0];
-  return ARTICLES.find((article) => article.id === id) || ARTICLES[0];
+export let memoryArticles: ArticleItem[] = [...ARTICLES];
+
+type ArticleListener = () => void;
+const articleListeners: Set<ArticleListener> = new Set();
+
+function notifyArticleListeners() {
+  articleListeners.forEach((listener) => {
+    try {
+      listener();
+    } catch {
+      // ignore errors
+    }
+  });
 }
 
+/**
+ * React hook to subscribe to articles state changes
+ */
+export function useArticles(): ArticleItem[] {
+  const [articles, setArticles] = typeof window !== 'undefined'
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      require('react').useState(() => [...memoryArticles])
+    : [[...memoryArticles], () => {}];
+
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    require('react').useEffect(() => {
+      const update = () => setArticles([...memoryArticles]);
+      articleListeners.add(update);
+      return () => {
+        articleListeners.delete(update);
+      };
+    }, []);
+  }
+
+  return articles;
+}
+
+/**
+ * Add a new article to in-memory store
+ */
+export function addArticleToStore(data: Partial<ArticleItem> & { title: string }): ArticleItem {
+  const nextId = String(memoryArticles.length + 1);
+  const id = data.id && data.id.trim() !== '' ? data.id.trim() : nextId;
+
+  const now = new Date();
+  const dateString = now.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).toUpperCase();
+
+  const newArticle: ArticleItem = {
+    id,
+    title: data.title,
+    subtitle: data.subtitle || '',
+    excerpt: data.excerpt || 'Technical article documentation from the PIXLApe Vault library.',
+    date: data.date || dateString,
+    readTime: data.readTime || '4 MIN READ',
+    author: data.author || 'PIXLape Team',
+    authorAvatar: data.authorAvatar || '/img/Icontemp1.svg',
+    authorRole: data.authorRole || 'Contributor & Engineer',
+    image: data.image || '/img/article1.svg',
+    category: data.category || 'DEV',
+    likes: data.likes || 0,
+    featured: Boolean(data.featured),
+    leadParagraph: data.leadParagraph || data.excerpt,
+    sections: data.sections || [
+      {
+        title: 'Overview & Implementation Details',
+        paragraphs: [
+          data.excerpt || 'Technical overview of the project component and architecture.',
+        ],
+      },
+    ],
+    quote: data.quote,
+    checklist: data.checklist,
+    codeSnippet: data.codeSnippet,
+    conclusion: data.conclusion || {
+      title: 'Conclusion',
+      text: 'Summary of the technical implementation and design decisions.',
+    },
+  };
+
+  memoryArticles = [newArticle, ...memoryArticles.filter((a) => a.id !== id)];
+  notifyArticleListeners();
+  return newArticle;
+}
+
+/**
+ * Update an existing article in the in-memory store
+ */
+export function updateArticleInStore(id: string, updates: Partial<ArticleItem>): ArticleItem | null {
+  const index = memoryArticles.findIndex((a) => a.id === id);
+
+  if (index === -1) {
+    return addArticleToStore({
+      ...updates,
+      id,
+      title: updates.title || `Article #${id}`,
+    });
+  }
+
+  const existing = memoryArticles[index];
+  const updated: ArticleItem = {
+    ...existing,
+    ...updates,
+    leadParagraph: updates.leadParagraph || existing.leadParagraph || updates.excerpt || existing.excerpt,
+  };
+
+  memoryArticles[index] = updated;
+  notifyArticleListeners();
+  return updated;
+}
+
+/**
+ * Delete an article from in-memory store
+ */
+export function deleteArticleFromStore(id: string): boolean {
+  const initialLength = memoryArticles.length;
+  memoryArticles = memoryArticles.filter((a) => a.id !== id);
+  const removed = memoryArticles.length < initialLength;
+  if (removed) {
+    notifyArticleListeners();
+  }
+  return removed;
+}
+
+/**
+ * Toggle featured state for an article
+ */
+export function toggleArticleFeatured(id: string): boolean {
+  const index = memoryArticles.findIndex((a) => a.id === id);
+  if (index === -1) return false;
+
+  memoryArticles[index] = {
+    ...memoryArticles[index],
+    featured: !memoryArticles[index].featured,
+  };
+  notifyArticleListeners();
+  return Boolean(memoryArticles[index].featured);
+}
+
+/**
+ * Get article by ID
+ */
+export function getArticleById(id: string): ArticleItem | undefined {
+  if (!id) return memoryArticles[0] || ARTICLES[0];
+  return (
+    memoryArticles.find((article) => article.id === id) ||
+    ARTICLES.find((article) => article.id === id) ||
+    memoryArticles[0] ||
+    ARTICLES[0]
+  );
+}
+
+/**
+ * Get adjacent articles for prev/next navigation
+ */
 export function getAdjacentArticles(id: string): {
   prev: ArticleItem | null;
   next: ArticleItem | null;
 } {
-  const index = ARTICLES.findIndex((article) => article.id === id);
+  const list = memoryArticles.length > 0 ? memoryArticles : ARTICLES;
+  const index = list.findIndex((article) => article.id === id);
   if (index === -1) {
     return { prev: null, next: null };
   }
 
-  const prev = index > 0 ? ARTICLES[index - 1] : null;
-  const next = index < ARTICLES.length - 1 ? ARTICLES[index + 1] : null;
+  const prev = index > 0 ? list[index - 1] : null;
+  const next = index < list.length - 1 ? list[index + 1] : null;
 
   return { prev, next };
 }
+
 
 
