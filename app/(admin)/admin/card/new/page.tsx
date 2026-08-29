@@ -268,7 +268,7 @@ export default function AddAssetCardPage() {
                   disabled={badge === 'free'}
                   value={badge === 'free' ? 0 : price}
                   onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none disabled:bg-surface disabled:text-black-secondary"
+                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none disabled:text-black-secondary"
                 />
               </div>
 

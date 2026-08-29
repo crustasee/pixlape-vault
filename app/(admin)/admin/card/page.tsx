@@ -315,7 +315,7 @@ export default function AssetCardsAdminPage() {
               {/* Requirements & Features */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="p-3.5 bg-white border border-border rounded text-xs">
-                  <span className="font-bold text-black-primary block mb-2 uppercase flex items-center gap-1.5">
+                  <span className="font-bold text-black-primary mb-2 uppercase flex items-center gap-1.5">
                     <Tag className="w-3.5 h-3.5 text-emerald-700" weight="bold" />
                     KEY FEATURES
                   </span>
@@ -329,7 +329,7 @@ export default function AssetCardsAdminPage() {
                 </div>
 
                 <div className="p-3.5 bg-white border border-border rounded text-xs">
-                  <span className="font-bold text-black-primary block mb-2 uppercase flex items-center gap-1.5">
+                  <span className="font-bold text-black-primary mb-2 uppercase flex items-center gap-1.5">
                     <HardDrives className="w-3.5 h-3.5 text-blue-700" weight="bold" />
                     SYSTEM REQUIREMENTS
                   </span>
