@@ -553,7 +553,7 @@ export default function AddAssetCardPage() {
               <span className="text-[11px] text-black-secondary">
                 * Digital assets immediately syndicate to PIXLApe Vault public feed
               </span>
-              <SubmitButton label="COMMIT ASSET TO VAULT" loadingLabel="COMMITTING..." />
+              <SubmitButton label="SAVE" loadingLabel="COMMITTING..." />
             </div>
           </form>
         </div>

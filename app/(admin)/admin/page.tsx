@@ -58,11 +58,11 @@ export default function AdminDashboardPage() {
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
       {/* Metrics Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4 font-mono">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-4 font-mono">
         {/* Metric 1 */}
-        <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-sm">
+        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-black-secondary uppercase tracking-wider">
+            <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               TOTAL ASSETS
             </span>
             <div className="p-1.5 bg-primary/20 border border-black-primary rounded">
@@ -78,9 +78,9 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 2 */}
-        <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-sm">
+        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-black-secondary uppercase tracking-wider">
+            <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               EDITORIAL POSTS
             </span>
             <div className="p-1.5 bg-blue-100 border border-black-primary rounded">
@@ -96,9 +96,9 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 3 */}
-        <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-sm">
+        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-black-secondary uppercase tracking-wider">
+            <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               CATEGORIES ACTIVE
             </span>
             <div className="p-1.5 bg-amber-100 border border-black-primary rounded">
@@ -114,9 +114,9 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 4 */}
-        <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-sm">
+        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-black-secondary uppercase tracking-wider">
+            <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               DATABASE ENGINE
             </span>
             <div className="p-1.5 bg-emerald-100 border border-black-primary rounded">
@@ -135,49 +135,10 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Quick Launchpad Action Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 font-mono">
-        <div className="bg-emerald-50 border border-emerald-500 rounded-md p-4 flex items-center justify-between shadow-sm">
-          <div>
-            <h3 className="text-xs font-black text-emerald-950 uppercase flex items-center gap-1.5">
-              <Lightning className="w-4 h-4 text-emerald-700" weight="bold" />
-              CREATE DIGITAL ASSET CARD
-            </h3>
-            <p className="text-[11px] text-emerald-800 mt-0.5">
-              Add new brush sets, apps, vector packs, or templates with custom specifications.
-            </p>
-          </div>
-          <Link
-            href="/admin/card/new"
-            className="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-mono font-bold text-xs rounded border border-black-primary shadow-pixel hover:scale-98 transition-all"
-          >
-            <PlusCircle className="w-3.5 h-3.5" weight="bold" />
-            <span>NEW ASSET</span>
-          </Link>
-        </div>
 
-        <div className="bg-blue-50 border border-blue-500 rounded-md p-4 flex items-center justify-between shadow-sm">
-          <div>
-            <h3 className="text-xs font-black text-blue-950 uppercase flex items-center gap-1.5">
-              <Article className="w-4 h-4 text-blue-700" weight="bold" />
-              PUBLISH EDITORIAL POST
-            </h3>
-            <p className="text-[11px] text-blue-800 mt-0.5">
-              Draft technical articles, architectural guidelines, or release notes for creators.
-            </p>
-          </div>
-          <Link
-            href="/admin/article/new"
-            className="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded border border-black-primary shadow-pixel hover:scale-98 transition-all"
-          >
-            <PlusCircle className="w-3.5 h-3.5" weight="bold" />
-            <span>NEW ARTICLE</span>
-          </Link>
-        </div>
-      </div>
 
       {/* Main Two-Column Tables Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 font-mono">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 font-mono">
         {/* Recent Assets */}
         <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-sm">
           <div>

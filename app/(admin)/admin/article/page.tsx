@@ -86,7 +86,7 @@ export default function ArticleListPage() {
       actionSlot={
         <Link
           href="/admin/article/new"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white border border-black-primary shadow-pixel rounded-md text-xs font-mono font-black hover:scale-98 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-green-400 hover:bg-green-500 text-black-primary border border-black-primary shadow-pixel rounded-md text-xs font-mono font-black hover:scale-98 transition-all cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" weight="bold" />
           <span>PUBLISH ARTICLE</span>

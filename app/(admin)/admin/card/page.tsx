@@ -118,7 +118,7 @@ export default function AssetCardsAdminPage() {
                 onClick={() => setSelectedBadge(b)}
                 className={`px-2.5 py-1 text-[11px] font-mono font-bold rounded border transition-all cursor-pointer uppercase ${
                   selectedBadge === b
-                    ? 'bg-black-primary text-primary border-black-primary shadow-xs'
+                    ? 'bg-primary text-black-primary border-black-primary shadow-xs'
                     : 'bg-white text-black-secondary border-border hover:border-black-primary'
                 }`}
               >
@@ -129,7 +129,7 @@ export default function AssetCardsAdminPage() {
         </div>
 
         {/* Category filters */}
-        <div className="flex items-center gap-1.5 flex-wrap border-t border-border pt-2.5">
+        <div className="flex items-center gap-1.5 flex-wrap ">
           <span className="text-[11px] font-bold text-black-secondary uppercase mr-1">CATEGORY:</span>
           {CATEGORIES.map((cat) => (
             <button
