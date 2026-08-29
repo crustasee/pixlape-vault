@@ -139,7 +139,7 @@ export default function AssetCardsAdminPage() {
               className={`px-2.5 py-1 text-[11px] font-mono font-bold rounded border transition-all cursor-pointer uppercase ${
                 selectedCategory === cat
                   ? 'bg-primary text-black-primary border-black-primary font-black shadow-xs'
-                  : 'bg-white text-black-secondary border-border hover:bg-[#e4e4e7] hover:border-black-primary'
+                  : 'bg-white text-black-secondary border-surface hover:border-black-primary'
               }`}
             >
               {cat}
@@ -355,7 +355,7 @@ export default function AssetCardsAdminPage() {
                   <button
                     type="button"
                     onClick={() => setPreviewAsset(null)}
-                    className="px-4 py-1.5 bg-[#e4e4e7] hover:bg-border text-black-primary rounded text-xs font-bold cursor-pointer"
+                    className="px-4 py-1.5 bg-surface hover:bg-border text-black-primary rounded text-xs font-bold cursor-pointer"
                   >
                     CLOSE
                   </button>

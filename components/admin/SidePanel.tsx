@@ -105,7 +105,7 @@ export function SidePanel({
               className={`w-full py-2.5 px-3 border rounded-md text-xs font-mono font-bold transition-all flex items-center justify-between text-left group ${
                 isSelected
                   ? 'bg-primary border-black-primary text-black-primary shadow-pixel font-black'
-                  : 'bg-white border-border text-black-primary hover:bg-[#e4e4e7] hover:border-black-primary'
+                  : 'bg-white border-border text-black-primary hover:bg-border hover:border-black-primary'
               }`}
             >
               <div className="flex items-center gap-2.5 truncate">

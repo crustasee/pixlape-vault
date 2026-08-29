@@ -26,7 +26,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={isDisabled}
-      className={`relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-black-primary border border-black-primary font-mono font-black text-xs tracking-wider uppercase shadow-pixel hover:bg-emerald-400 hover:scale-98 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer rounded ${className}`}
+      className={`relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-black-primary border border-black-primary font-mono font-black text-xs tracking-wider uppercase shadow-pixel hover:bg-emerald-400 hover:scale-98 active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-50 transition-all cursor-pointer rounded ${className}`}
     >
       {pending ? (
         <>
