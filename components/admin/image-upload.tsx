@@ -54,8 +54,6 @@ export default function ImageUpload({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [customUrlInput, setCustomUrlInput] = useState("");
-  const [showUrlInput, setShowUrlInput] = useState(false);
 
   // Adjust state during render if controlled prop changed
   if (value !== undefined && value !== prevValue) {
@@ -266,7 +264,7 @@ export default function ImageUpload({
                 onClick={() => updateImage(preset.path)}
                 className={`px-2 py-0.5 rounded text-[10px] transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-black-primary text-primary font-bold border border-black-primary"
+                    ? "bg-border text-black-primary font-bold border border-black-primary"
                     : "bg-white text-black-secondary border border-border hover:border-black-primary hover:text-black-primary"
                 }`}
               >
@@ -285,7 +283,7 @@ export default function ImageUpload({
         }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`relative border-2 border-dashed rounded-lg p-3 text-center transition-all bg-white overflow-hidden ${
+        className={`relative border border-black rounded-lg p-3 text-center transition-all bg-white overflow-hidden ${
           dragOver
             ? "border-primary bg-green-50 ring-2 ring-primary/40"
             : "border-border hover:border-black-primary"
@@ -301,9 +299,9 @@ export default function ImageUpload({
         />
 
         {preview ? (
-          <div className="relative flex flex-col items-center gap-2 py-1">
+          <div className="relative flex flex-col-2 items-center gap-2 py-1">
             {/* Image Preview Container */}
-            <div className={`relative rounded border border-black-primary bg-zinc-900 overflow-hidden shadow-xs ${getAspectClass()}`}>
+            <div className={`relative rounded border border-black-primary bg-white overflow-hidden shadow-xs ${getAspectClass()}`}>
               {preview.startsWith("/") ? (
                 // Local static preset
                 <Image
@@ -419,41 +417,19 @@ export default function ImageUpload({
         </div>
       )}
 
-      {/* Optional Direct URL Input Toggle */}
-      <div className="flex items-center justify-between text-[11px] text-black-secondary">
-        <button
-          type="button"
-          onClick={() => setShowUrlInput(!showUrlInput)}
-          className="text-[10px] text-black-secondary hover:text-black-primary underline flex items-center gap-1 cursor-pointer"
-        >
-          <LinkSimple size={12} />
-          {showUrlInput ? "Hide Custom URL input" : "Or enter custom / remote URL"}
-        </button>
-      </div>
-
-      {showUrlInput && (
-        <div className="flex items-center gap-1.5 mt-1">
+      {/* Direct / Custom URL Input (Always Visible) */}
+      <div className="flex items-center gap-1.5 mt-0.5">
+        <div className="relative flex-1 flex items-center">
+          <LinkSimple size={13} className="absolute left-2.5 text-black-secondary pointer-events-none" />
           <input
             type="text"
-            value={customUrlInput}
-            onChange={(e) => setCustomUrlInput(e.target.value)}
-            placeholder="https://res.cloudinary.com/... or /img/..."
-            className="flex-1 border border-border p-1.5 rounded text-[11px] font-mono bg-white focus:outline-none"
+            value={preview}
+            onChange={(e) => updateImage(e.target.value)}
+            placeholder="Custom URL / path (e.g. /img/... or https://...)"
+            className="w-full pl-7 pr-2.5 py-1.5 border border-border rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none"
           />
-          <button
-            type="button"
-            onClick={() => {
-              if (customUrlInput.trim()) {
-                updateImage(customUrlInput.trim());
-                setCustomUrlInput("");
-              }
-            }}
-            className="px-3 py-1.5 bg-black-primary text-primary hover:bg-black-secondary rounded text-[11px] font-bold cursor-pointer"
-          >
-            Apply
-          </button>
         </div>
-      )}
+      </div>
 
       {/* Hidden input for form action submission */}
       <input type="hidden" name={name} value={preview} />

@@ -45,8 +45,6 @@ export default function FileUpload({
   const [dragOver, setDragOver] = useState(false);
   const [copied, setCopied] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [showUrlInput, setShowUrlInput] = useState(false);
-  const [customUrlInput, setCustomUrlInput] = useState("");
 
   if (value !== undefined && value !== prevValue) {
     setPrevValue(value);
@@ -160,7 +158,7 @@ export default function FileUpload({
           const file = e.dataTransfer.files?.[0];
           if (file) handleFile(file);
         }}
-        className={`relative border-2 border-dashed rounded-lg p-3.5 transition-all bg-white ${
+        className={`relative border border-dashed rounded-lg p-3.5 transition-all bg-white ${
           dragOver
             ? "border-primary bg-green-50 ring-2 ring-primary/40"
             : "border-border hover:border-black-primary"
@@ -262,41 +260,19 @@ export default function FileUpload({
         </div>
       )}
 
-      {/* External / Fallback URL Toggle */}
-      <div className="flex items-center justify-between text-[11px] text-black-secondary">
-        <button
-          type="button"
-          onClick={() => setShowUrlInput(!showUrlInput)}
-          className="text-[10px] text-black-secondary hover:text-black-primary underline flex items-center gap-1 cursor-pointer"
-        >
-          <LinkSimple size={12} />
-          {showUrlInput ? "Hide Direct URL input" : "Or enter external link (Google Drive, Mega, etc.)"}
-        </button>
-      </div>
-
-      {showUrlInput && (
-        <div className="flex items-center gap-1.5 mt-1">
+      {/* Direct Download URL Input (Always Visible) */}
+      <div className="flex items-center gap-1.5 mt-0.5">
+        <div className="relative flex-1 flex items-center">
+          <LinkSimple size={13} className="absolute left-2.5 text-black-secondary pointer-events-none" />
           <input
             type="text"
-            value={customUrlInput}
-            onChange={(e) => setCustomUrlInput(e.target.value)}
-            placeholder="https://..."
-            className="flex-1 border border-border p-1.5 rounded text-[11px] font-mono bg-white focus:outline-none"
+            value={fileUrl}
+            onChange={(e) => updateFileUrl(e.target.value)}
+            placeholder="Direct / external download URL (e.g. Cloudflare R2, Google Drive, Mediafire...)"
+            className="w-full pl-7 pr-2.5 py-1.5 border border-border rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none"
           />
-          <button
-            type="button"
-            onClick={() => {
-              if (customUrlInput.trim()) {
-                updateFileUrl(customUrlInput.trim());
-                setCustomUrlInput("");
-              }
-            }}
-            className="px-3 py-1.5 bg-black-primary text-primary hover:bg-black-secondary rounded text-[11px] font-bold cursor-pointer"
-          >
-            Apply
-          </button>
         </div>
-      )}
+      </div>
 
       {/* Hidden input for form action */}
       <input type="hidden" name={name} value={fileUrl} />

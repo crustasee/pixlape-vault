@@ -373,7 +373,7 @@ export default function AddAssetCardPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-border pt-4">
+            <div className="flex flex-col gap-4 pt-4">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"

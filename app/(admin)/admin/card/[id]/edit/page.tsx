@@ -424,7 +424,7 @@ export default function EditAssetPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-border pt-4">
+            <div className="grid grid-cols-3 md:grid-cols-1 gap-4 border-t border-border pt-4">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"
@@ -460,7 +460,7 @@ export default function EditAssetPage() {
             </div>
 
             {/* Download File Package (Cloudflare R2) & Donate URLs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border pt-4">
+            <div className="flex flex-col gap-4 border-t border-border pt-4">
               <FileUpload
                 name="downloadUrl"
                 label="VAULT ASSET DOWNLOAD PACKAGE"
