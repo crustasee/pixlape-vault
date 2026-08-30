@@ -6,7 +6,6 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import {
   ArrowSquareOut,
   Database,
-  Lightning,
   ShieldCheck,
   Cpu,
   HardDrives,
