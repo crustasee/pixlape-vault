@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
@@ -8,13 +10,17 @@ interface CardGridProps {
   cards?: CardItem[];
   selectedCategory?: string | null;
   limit?: number;
+  itemsPerPage?: number;
 }
 
 export default function CardGrid({
   cards = CARDS,
   selectedCategory,
   limit,
+  itemsPerPage = 8,
 }: CardGridProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+
   // Filter cards by category if selected
   const filteredCards =
     selectedCategory && selectedCategory !== "ALL" && selectedCategory !== "ALL ASSETS"
@@ -25,17 +31,46 @@ export default function CardGrid({
         )
       : cards;
 
-  const displayCards = limit ? filteredCards.slice(0, limit) : filteredCards;
+  // Reset to page 1 whenever category filter or cards array changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, cards]);
+
+  // Handle pagination calculation
+  const totalPages = limit
+    ? 1
+    : Math.max(1, Math.ceil(filteredCards.length / itemsPerPage));
+  const effectivePage = Math.min(currentPage, totalPages);
+
+  const startIndex = limit ? 0 : (effectivePage - 1) * itemsPerPage;
+  const endIndex = limit ? limit : startIndex + itemsPerPage;
+  const displayCards = limit
+    ? filteredCards.slice(0, limit)
+    : filteredCards.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    // Smooth scroll back to grid top if in view
+    if (typeof window !== "undefined") {
+      const gridElem = document.getElementById("asset-card-grid");
+      if (gridElem) {
+        gridElem.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
 
   return (
-    <main className="flex-1">
+    <main id="asset-card-grid" className="flex-1">
       {/* Active Category Filter Header */}
       {selectedCategory && selectedCategory !== "ALL" && selectedCategory !== "ALL ASSETS" && (
         <div className="mb-4 p-1.5 bg-white border border-black rounded-md flex items-center justify-between font-mono text-xs shadow-xs">
           <div className="flex items-center gap-4">
             <span className="text-black-secondary font-bold">FILTERED CATEGORY:</span>
             <CategoryBadge category={selectedCategory} />
-            <span className="text-black-secondary">({displayCards.length} assets found)</span>
+            <span className="text-black-secondary">
+              ({filteredCards.length} {filteredCards.length === 1 ? "asset" : "assets"} found)
+            </span>
           </div>
         </div>
       )}
@@ -89,12 +124,75 @@ export default function CardGrid({
         </div>
       )}
 
-      {/* Next Button */}
-      <div className="flex justify-end mt-4">
-        <button className="px-5 py-1 bg-surface border border-black-primary text-black-secondary text-sm font-mono font-semibold rounded-lg hover:scale-97 shadow-pixel hover:text-border transition-all">
-          NEXT &gt;
-        </button>
-      </div>
+      {/* Pagination Controls */}
+      {!limit && filteredCards.length > 0 && (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-4 border-t border-border font-mono">
+          {/* Asset Count / Page Indicator */}
+          <div className="text-xs text-black-secondary">
+            SHOWING <span className="font-bold text-black-primary">{startIndex + 1}</span>-
+            <span className="font-bold text-black-primary">
+              {Math.min(endIndex, filteredCards.length)}
+            </span>{" "}
+            OF <span className="font-bold text-black-primary">{filteredCards.length}</span> ASSETS
+            {totalPages > 1 && (
+              <span className="ml-2 text-text-secondary font-semibold">
+                [PAGE {effectivePage} / {totalPages}]
+              </span>
+            )}
+          </div>
+
+          {/* Page Buttons & Next / Prev navigation */}
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2">
+              {/* Previous Button */}
+              <button
+                onClick={() => handlePageChange(effectivePage - 1)}
+                disabled={effectivePage <= 1}
+                className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-md border transition-all ${
+                  effectivePage <= 1
+                    ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-surface border-black-primary text-black-primary shadow-pixel hover:bg-primary hover:scale-95 cursor-pointer"
+                }`}
+                aria-label="Previous Page"
+              >
+                &lt; PREV
+              </button>
+
+              {/* Numbered Page Buttons */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`w-7 h-7 flex items-center justify-center text-xs font-mono font-bold rounded-md border transition-all ${
+                      effectivePage === pageNum
+                        ? "bg-primary border-black-strong text-black shadow-pixel font-bold"
+                        : "bg-surface border-black-primary text-black-secondary hover:bg-border hover:text-black-primary cursor-pointer hover:scale-95"
+                    }`}
+                    aria-label={`Go to page ${pageNum}`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={() => handlePageChange(effectivePage + 1)}
+                disabled={effectivePage >= totalPages}
+                className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-md border transition-all ${
+                  effectivePage >= totalPages
+                    ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-surface border-black-primary text-black-primary shadow-pixel hover:bg-primary hover:scale-95 cursor-pointer"
+                }`}
+                aria-label="Next Page"
+              >
+                NEXT &gt;
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </main>
   );
 }
