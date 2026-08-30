@@ -7,18 +7,17 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import {
   Cards,
   Article,
-  PlusCircle,
   PencilSimple,
   Trash,
   Star,
-  Eye,
   ArrowRight,
   Database,
   Tag,
-  Lightning,
 } from '@phosphor-icons/react';
-import { useAssets, deleteAssetFromStore, CardDetail } from '@/lib/db/card';
-import { useArticles, deleteArticleFromStore, toggleArticleFeatured, ArticleItem } from '@/lib/db/article';
+import { deleteAssetFromStore, CardDetail } from '@/lib/db/card';
+import { deleteArticleFromStore, toggleArticleFeatured, ArticleItem } from '@/lib/db/article';
+import { useAssets } from '@/hooks/useAssets';
+import { useArticles } from '@/hooks/useArticles';
 import { useToast } from '@/hooks/useToast';
 import Toast from '@/components/admin/Toast';
 

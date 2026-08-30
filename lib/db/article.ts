@@ -373,8 +373,8 @@ export const ARTICLES: ArticleItem[] = [
 
 export let memoryArticles: ArticleItem[] = [...ARTICLES];
 
-type ArticleListener = () => void;
-const articleListeners: Set<ArticleListener> = new Set();
+export type ArticleListener = () => void;
+export const articleListeners: Set<ArticleListener> = new Set();
 
 function notifyArticleListeners() {
   articleListeners.forEach((listener) => {
@@ -384,29 +384,6 @@ function notifyArticleListeners() {
       // ignore errors
     }
   });
-}
-
-/**
- * React hook to subscribe to articles state changes
- */
-export function useArticles(): ArticleItem[] {
-  const [articles, setArticles] = typeof window !== 'undefined'
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      require('react').useState(() => [...memoryArticles])
-    : [[...memoryArticles], () => {}];
-
-  if (typeof window !== 'undefined') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    require('react').useEffect(() => {
-      const update = () => setArticles([...memoryArticles]);
-      articleListeners.add(update);
-      return () => {
-        articleListeners.delete(update);
-      };
-    }, []);
-  }
-
-  return articles;
 }
 
 /**

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
@@ -20,6 +20,15 @@ export default function CardGrid({
   itemsPerPage = 8,
 }: CardGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [prevCategory, setPrevCategory] = useState(selectedCategory);
+  const [prevCards, setPrevCards] = useState(cards);
+
+  // Reset to page 1 during render whenever category filter or cards array changes
+  if (selectedCategory !== prevCategory || cards !== prevCards) {
+    setPrevCategory(selectedCategory);
+    setPrevCards(cards);
+    setCurrentPage(1);
+  }
 
   // Filter cards by category if selected
   const filteredCards =
@@ -30,13 +39,6 @@ export default function CardGrid({
           )
         )
       : cards;
-
-  // Reset to page 1 whenever category filter or cards array changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, cards]);
-
-  // Handle pagination calculation
   const totalPages = limit
     ? 1
     : Math.max(1, Math.ceil(filteredCards.length / itemsPerPage));

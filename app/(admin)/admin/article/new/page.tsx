@@ -8,6 +8,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
 import RichEditor from '@/components/admin/RichEditor';
+import ImageUpload from '@/components/admin/image-upload';
 import { useToast } from '@/hooks/useToast';
 import { addArticleToStore } from '@/lib/db/article';
 import { createArticleAction } from '@/app/actions/product-actions';
@@ -18,7 +19,6 @@ import {
   Heart,
   CheckCircle,
   BookOpen,
-  Star,
 } from '@phosphor-icons/react';
 
 const CATEGORIES = [
@@ -232,40 +232,18 @@ export default function AddArticlePage() {
               </div>
             </div>
 
-            {/* Cover Image Preset & Custom */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="image" className="font-bold text-xs text-black-secondary">
-                  COVER IMAGE PRESET
-                </label>
-                <select
-                  id="image"
-                  name="image"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
-                >
-                  {ARTICLE_IMAGES.map((img) => (
-                    <option key={img.path} value={img.path}>
-                      {img.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="customImage" className="font-bold text-xs text-black-secondary">
-                  CUSTOM IMAGE URL / PATH
-                </label>
-                <input
-                  type="text"
-                  id="customImage"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  placeholder="e.g. /img/article1.svg"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Cover Image Preset & Custom Upload */}
+            <div className="border-t border-border pt-3">
+              <ImageUpload
+                name="image"
+                label="ARTICLE COVER IMAGE"
+                value={image}
+                onChange={setImage}
+                presets={ARTICLE_IMAGES}
+                folder="articles"
+                aspectRatio="banner"
+                recommendedSize="1200x630 or 16:9 banner (PNG, JPG, WEBP, SVG)"
+              />
             </div>
 
             {/* Excerpt / Summary */}

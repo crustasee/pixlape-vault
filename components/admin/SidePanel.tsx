@@ -7,15 +7,14 @@ import {
   SquaresFour,
   Cards,
   Article,
-  PlusCircle,
   ShieldCheck,
   Pulse,
   Database,
   Globe,
   SignOut,
 } from '@phosphor-icons/react';
-import { useAssets } from '@/lib/db/card';
-import { useArticles } from '@/lib/db/article';
+import { useAssets } from '@/hooks/useAssets';
+import { useArticles } from '@/hooks/useArticles';
 import { logoutAction } from '@/app/actions/auth-actions';
 
 export interface MenuItem {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,8 +8,10 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
 import RichEditor from '@/components/admin/RichEditor';
+import ImageUpload from '@/components/admin/image-upload';
 import { useToast } from '@/hooks/useToast';
-import { useArticles, updateArticleInStore } from '@/lib/db/article';
+import { updateArticleInStore } from '@/lib/db/article';
+import { useArticles } from '@/hooks/useArticles';
 import { updateArticleAction } from '@/app/actions/product-actions';
 import {
   ArrowLeft,
@@ -37,7 +39,7 @@ export default function EditArticlePage() {
   const articles = useArticles();
   const currentArticle = articles.find((a) => a.id === articleId);
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedArticleId, setLoadedArticleId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [category, setCategory] = useState('DEV');
@@ -49,20 +51,18 @@ export default function EditArticlePage() {
   const [featured, setFeatured] = useState(false);
   const { toasts, addToast, dismissToast } = useToast();
 
-  useEffect(() => {
-    if (currentArticle && !isLoaded) {
-      setTitle(currentArticle.title || '');
-      setSubtitle(currentArticle.subtitle || '');
-      setCategory(currentArticle.category || 'DEV');
-      setAuthor(currentArticle.author || 'Brandon Herera');
-      setAuthorRole(currentArticle.authorRole || 'Contributor');
-      setReadTime(currentArticle.readTime || '4 MIN READ');
-      setImage(currentArticle.image || '/img/article1.svg');
-      setExcerpt(currentArticle.excerpt || '');
-      setFeatured(Boolean(currentArticle.featured));
-      setIsLoaded(true);
-    }
-  }, [currentArticle, isLoaded]);
+  if (currentArticle && loadedArticleId !== currentArticle.id) {
+    setLoadedArticleId(currentArticle.id);
+    setTitle(currentArticle.title || '');
+    setSubtitle(currentArticle.subtitle || '');
+    setCategory(currentArticle.category || 'DEV');
+    setAuthor(currentArticle.author || 'Brandon Herera');
+    setAuthorRole(currentArticle.authorRole || 'Contributor');
+    setReadTime(currentArticle.readTime || '4 MIN READ');
+    setImage(currentArticle.image || '/img/article1.svg');
+    setExcerpt(currentArticle.excerpt || '');
+    setFeatured(Boolean(currentArticle.featured));
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,7 +111,7 @@ export default function EditArticlePage() {
     }
   };
 
-  if (!currentArticle && isLoaded) {
+  if (articles.length > 0 && !currentArticle) {
     return (
       <AdminLayout
         title="ARTICLE NOT FOUND"
@@ -282,39 +282,18 @@ export default function EditArticlePage() {
               </div>
             </div>
 
-            {/* Cover Image Preset & Custom */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="image" className="font-bold text-xs text-black-secondary">
-                  COVER IMAGE PRESET
-                </label>
-                <select
-                  id="image"
-                  name="image"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
-                >
-                  {ARTICLE_IMAGES.map((img) => (
-                    <option key={img.path} value={img.path}>
-                      {img.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="customImage" className="font-bold text-xs text-black-secondary">
-                  CUSTOM IMAGE URL
-                </label>
-                <input
-                  type="text"
-                  id="customImage"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Cover Image Preset & Custom Upload */}
+            <div className="border-t border-border pt-3">
+              <ImageUpload
+                name="image"
+                label="ARTICLE COVER IMAGE"
+                value={image}
+                onChange={setImage}
+                presets={ARTICLE_IMAGES}
+                folder="articles"
+                aspectRatio="banner"
+                recommendedSize="1200x630 or 16:9 banner (PNG, JPG, WEBP, SVG)"
+              />
             </div>
 
             {/* Excerpt / Summary */}

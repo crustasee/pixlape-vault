@@ -1,3 +1,4 @@
+// components/admin/RichEditor.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
+import { uploadToCloudinary } from "@/app/actions/cloudinary-actions";
 import {
   Bold,
   Italic,
@@ -24,7 +26,42 @@ import {
   Undo,
   Redo,
   Eraser,
+  Upload,
 } from "lucide-react";
+
+interface ToolbarButtonProps {
+  onClick: () => void;
+  isActive?: boolean;
+  disabled?: boolean;
+  title: string;
+  children: React.ReactNode;
+}
+
+function ToolbarButton({
+  onClick,
+  isActive = false,
+  disabled = false,
+  title,
+  children,
+}: ToolbarButtonProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      title={title}
+      className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer ${
+        disabled
+          ? "opacity-30 cursor-not-allowed text-gray-400"
+          : isActive
+          ? "bg-primary text-black-primary border border-black-primary shadow-xs font-bold"
+          : "bg-white text-black-secondary border border-transparent hover:border-black-primary hover:text-black-primary"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
 
 interface RichEditorProps {
   name?: string;
@@ -47,6 +84,7 @@ export default function RichEditor({
 }: RichEditorProps) {
   const initialContent = value !== undefined ? value : defaultValue;
   const [content, setContent] = useState(initialContent);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -71,8 +109,8 @@ export default function RichEditor({
       }),
     ],
     content: initialContent,
-    onUpdate: ({ editor }) => {
-      const html = editor.getHTML();
+    onUpdate: ({ editor: currentEditor }) => {
+      const html = currentEditor.getHTML();
       setContent(html);
       onChange?.(html);
     },
@@ -89,7 +127,6 @@ export default function RichEditor({
   useEffect(() => {
     if (editor && value !== undefined && value !== editor.getHTML()) {
       editor.commands.setContent(value);
-      setContent(value);
     }
   }, [value, editor]);
 
@@ -104,40 +141,44 @@ export default function RichEditor({
     );
   }
 
-  const ToolbarButton = ({
-    onClick,
-    isActive = false,
-    disabled = false,
-    title,
-    children,
-  }: {
-    onClick: () => void;
-    isActive?: boolean;
-    disabled?: boolean;
-    title: string;
-    children: React.ReactNode;
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      title={title}
-      className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer ${
-        disabled
-          ? "opacity-30 cursor-not-allowed text-gray-400"
-          : isActive
-          ? "bg-primary text-black-primary border border-black-primary shadow-xs font-bold"
-          : "bg-white text-black-secondary border border-transparent hover:border-black-primary hover:text-black-primary"
-      }`}
-    >
-      {children}
-    </button>
-  );
-
-  const addImage = () => {
+  const addImageByUrl = () => {
     const url = prompt("Enter Image URL (e.g. /img/... or https://...):");
     if (url && url.trim()) {
       editor.chain().focus().setImage({ src: url.trim() }).run();
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please choose a valid image file.");
+      return;
+    }
+
+    setIsUploadingImage(true);
+    try {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = async () => {
+        try {
+          const base64 = reader.result as string;
+          const result = await uploadToCloudinary(base64, "editor");
+          if (result.success && result.url) {
+            editor.chain().focus().setImage({ src: result.url }).run();
+          } else {
+            alert(result.error || "Failed to upload image.");
+          }
+        } catch (err) {
+          console.error("Editor image upload failed:", err);
+          alert("Image upload error.");
+        } finally {
+          setIsUploadingImage(false);
+        }
+      };
+    } catch {
+      setIsUploadingImage(false);
     }
   };
 
@@ -258,7 +299,27 @@ export default function RichEditor({
         <div className="w-px h-4 bg-border mx-1" />
 
         {/* Media & Links */}
-        <ToolbarButton onClick={addImage} title="Insert Image">
+        <div className="relative flex items-center">
+          <label
+            htmlFor="editor-img-upload"
+            className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer bg-white text-black-secondary border border-transparent hover:border-black-primary hover:text-black-primary ${
+              isUploadingImage ? "opacity-50 pointer-events-none" : ""
+            }`}
+            title="Upload Image to Cloudinary"
+          >
+            <Upload size={14} />
+          </label>
+          <input
+            id="editor-img-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+            disabled={isUploadingImage}
+          />
+        </div>
+
+        <ToolbarButton onClick={addImageByUrl} title="Insert Image by URL">
           <ImageIcon size={14} />
         </ToolbarButton>
 

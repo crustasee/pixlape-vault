@@ -9,6 +9,8 @@ import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
 import ProductIdInput from '@/components/admin/ProductInput';
 import RichEditor from '@/components/admin/RichEditor';
+import ImageUpload from '@/components/admin/image-upload';
+import FileUpload from '@/components/admin/file-upload';
 import { useToast } from '@/hooks/useToast';
 import { addAssetToStore, CardCategory, BadgeVariant } from '@/lib/db/card';
 import { createAssetAction } from '@/app/actions/product-actions';
@@ -293,8 +295,8 @@ export default function AddAssetCardPage() {
               </div>
             </div>
 
-            {/* Version & File Size & Author */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* Version & File Size & Author & License */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="version" className="font-bold text-xs text-black-secondary">
                   VERSION
@@ -321,6 +323,21 @@ export default function AddAssetCardPage() {
                   value={fileSize}
                   onChange={(e) => setFileSize(e.target.value)}
                   placeholder="18.4 MB"
+                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="license" className="font-bold text-xs text-black-secondary">
+                  LICENSE
+                </label>
+                <input
+                  type="text"
+                  id="license"
+                  name="license"
+                  value={license}
+                  onChange={(e) => setLicense(e.target.value)}
+                  placeholder="Free Commercial"
                   className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
                 />
               </div>
@@ -356,102 +373,54 @@ export default function AddAssetCardPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="thumbnail" className="font-bold text-xs text-black-secondary">
-                  THUMBNAIL PRESET
-                </label>
-                <select
-                  id="thumbnail"
-                  value={thumbnail}
-                  onChange={(e) => setThumbnail(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {THUMBNAIL_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={thumbnail}
-                  onChange={(e) => setThumbnail(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom /img/..."
-                />
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-border pt-4">
+              <ImageUpload
+                name="thumbnail"
+                label="THUMBNAIL"
+                value={thumbnail}
+                onChange={setThumbnail}
+                presets={THUMBNAIL_PRESETS}
+                folder="thumbnails"
+                aspectRatio="square"
+                recommendedSize="400x300 recommended (PNG, SVG, WEBP)"
+              />
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="banner" className="font-bold text-xs text-black-secondary">
-                  DETAIL BANNER
-                </label>
-                <select
-                  id="banner"
-                  value={banner}
-                  onChange={(e) => setBanner(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {BANNER_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={banner}
-                  onChange={(e) => setBanner(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom banner path"
-                />
-              </div>
+              <ImageUpload
+                name="banner"
+                label="DETAIL BANNER"
+                value={banner}
+                onChange={setBanner}
+                presets={BANNER_PRESETS}
+                folder="banners"
+                aspectRatio="banner"
+                recommendedSize="1200x500 banner (PNG, SVG, WEBP)"
+              />
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="icon" className="font-bold text-xs text-black-secondary">
-                  ICON PRESET
-                </label>
-                <select
-                  id="icon"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {ICON_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom icon path"
-                />
-              </div>
+              <ImageUpload
+                name="icon"
+                label="ASSET ICON"
+                value={icon}
+                onChange={setIcon}
+                presets={ICON_PRESETS}
+                folder="icons"
+                aspectRatio="icon"
+                recommendedSize="128x128 pixel/vector icon"
+              />
             </div>
 
-            {/* Download & Donate URLs */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="downloadUrl" className="font-bold text-xs text-black-secondary">
-                  DOWNLOAD PACKAGE URL
-                </label>
-                <input
-                  type="text"
-                  id="downloadUrl"
-                  name="downloadUrl"
-                  value={downloadUrl}
-                  onChange={(e) => setDownloadUrl(e.target.value)}
-                  placeholder="https://mediafire.com/... or /downloads/..."
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Download File Package (Cloudflare R2) & Donate URLs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border pt-4">
+              <FileUpload
+                name="downloadUrl"
+                label="VAULT ASSET DOWNLOAD PACKAGE"
+                value={downloadUrl}
+                onChange={setDownloadUrl}
+                folder="packages"
+                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk"
+              />
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary uppercase">
                   DONATE / SUPPORT URL
                 </label>
                 <input
@@ -461,8 +430,11 @@ export default function AddAssetCardPage() {
                   value={donateUrl}
                   onChange={(e) => setDonateUrl(e.target.value)}
                   placeholder="https://trakteer.id/..."
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-2.5 rounded bg-white text-xs font-mono focus:outline-none"
                 />
+                <p className="text-[10px] text-black-secondary font-mono">
+                  Link for user contributions or creator tips (e.g. Trakteer, Ko-fi, BuyMeACoffee).
+                </p>
               </div>
             </div>
 

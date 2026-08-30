@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -14,19 +14,18 @@ import {
   Eye,
   X,
   Cards,
-  DownloadSimple,
   HardDrives,
   Tag,
   SquaresFour,
   Table,
 } from '@phosphor-icons/react';
 import {
-  useAssets,
   deleteAssetFromStore,
   CardDetail,
   CardCategory,
   BadgeVariant,
 } from '@/lib/db/card';
+import { useAssets } from '@/hooks/useAssets';
 import Badge, { CategoryBadge } from '@/components/Badge';
 
 const CATEGORIES: ('ALL' | CardCategory)[] = [
@@ -76,10 +75,17 @@ export default function AssetCardsAdminPage() {
     return matchSearch && matchCategory && matchBadge;
   });
 
-  // Reset pagination when search or filters change
-  useEffect(() => {
+  const [prevFilter, setPrevFilter] = useState({ searchQuery, selectedCategory, selectedBadge });
+
+  // Reset pagination during render when search or filters change
+  if (
+    searchQuery !== prevFilter.searchQuery ||
+    selectedCategory !== prevFilter.selectedCategory ||
+    selectedBadge !== prevFilter.selectedBadge
+  ) {
+    setPrevFilter({ searchQuery, selectedCategory, selectedBadge });
     setCurrentPage(1);
-  }, [searchQuery, selectedCategory, selectedBadge]);
+  }
 
   // Pagination calculation (max 8 items per page)
   const totalPages = Math.max(1, Math.ceil(filteredAssets.length / ITEMS_PER_PAGE));

@@ -582,8 +582,8 @@ export const CARDS: CardDetail[] = [
 // In-memory dynamic store initialized with CARDS
 export let memoryCards: CardDetail[] = [...CARDS];
 
-type StoreListener = () => void;
-const listeners: Set<StoreListener> = new Set();
+export type StoreListener = () => void;
+export const listeners: Set<StoreListener> = new Set();
 
 function notifyListeners() {
   listeners.forEach((listener) => {
@@ -593,30 +593,6 @@ function notifyListeners() {
       // ignore errors in listeners
     }
   });
-}
-
-/**
- * React hook to subscribe to asset cards state changes
- */
-export function useAssets(): CardDetail[] {
-  // Use React dynamic import/hook safely for both client and server
-  const [assets, setAssets] = typeof window !== 'undefined'
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      require('react').useState(() => [...memoryCards])
-    : [[...memoryCards], () => {}];
-
-  if (typeof window !== 'undefined') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    require('react').useEffect(() => {
-      const update = () => setAssets([...memoryCards]);
-      listeners.add(update);
-      return () => {
-        listeners.delete(update);
-      };
-    }, []);
-  }
-
-  return assets;
 }
 
 /**

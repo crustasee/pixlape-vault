@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import AdminLayout from '@/components/admin/AdminLayout';
 import Toast from '@/components/admin/Toast';
 import { useToast } from '@/hooks/useToast';
@@ -18,15 +17,14 @@ import {
   X,
   PencilSimple,
   Article,
-  Tag,
   CheckCircle,
 } from '@phosphor-icons/react';
 import {
-  useArticles,
   deleteArticleFromStore,
   toggleArticleFeatured,
   ArticleItem,
 } from '@/lib/db/article';
+import { useArticles } from '@/hooks/useArticles';
 import {
   deleteArticleAction,
   toggleArticleFeaturedAction,

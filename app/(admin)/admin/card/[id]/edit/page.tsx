@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,20 +9,21 @@ import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
 import ProductIdInput from '@/components/admin/ProductInput';
 import RichEditor from '@/components/admin/RichEditor';
+import ImageUpload from '@/components/admin/image-upload';
+import FileUpload from '@/components/admin/file-upload';
 import { useToast } from '@/hooks/useToast';
 import {
-  useAssets,
   updateAssetInStore,
   CardCategory,
   BadgeVariant,
 } from '@/lib/db/card';
+import { useAssets } from '@/hooks/useAssets';
 import { updateAssetAction } from '@/app/actions/product-actions';
 import Badge, { CategoryBadge } from '@/components/Badge';
 import {
   ArrowLeft,
   Plus,
   Trash,
-  CheckCircle,
   Eye,
   FloppyDisk,
 } from '@phosphor-icons/react';
@@ -70,7 +71,6 @@ export default function EditAssetPage() {
     (a) => a.id === assetId || a.id === `card-${assetId}` || a.id.endsWith(assetId || '')
   );
 
-  const [isLoaded, setIsLoaded] = useState(false);
   const [productId, setProductId] = useState(assetId || '');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -96,29 +96,29 @@ export default function EditAssetPage() {
 
   const { toasts, addToast, dismissToast } = useToast();
 
-  useEffect(() => {
-    if (currentAsset && !isLoaded) {
-      setProductId(currentAsset.id || assetId || '');
-      setTitle(currentAsset.title || '');
-      setDescription(currentAsset.description || '');
-      setCategory((currentAsset.categories[0] as CardCategory) || 'TOOLS');
-      setFileFormat(currentAsset.fileType || currentAsset.fileFormat || '.ZIP');
-      setBadge(currentAsset.badge || 'free');
-      setPrice(currentAsset.price ?? (currentAsset.badge === 'free' ? 0 : 9.99));
-      setVersion(currentAsset.version || 'v1.0.0');
-      setFileSize(currentAsset.fileSize || '18.5 MB');
-      setLicense(currentAsset.license || 'Free Commercial');
-      setAuthor(currentAsset.author || 'PIXLape Lab');
-      setThumbnail(currentAsset.thumbnail || '/img/minicard001.svg');
-      setBanner(currentAsset.banner || '/img/banner01.svg');
-      setIcon(currentAsset.icon || '/img/Icontemp1.svg');
-      setDownloadUrl(currentAsset.downloadUrl || '');
-      setDonateUrl(currentAsset.donateUrl || 'https://trakteer.id');
-      setRequirements(currentAsset.requirements || []);
-      setFeatures(currentAsset.features || []);
-      setIsLoaded(true);
-    }
-  }, [currentAsset, assetId, isLoaded]);
+  const [loadedAssetId, setLoadedAssetId] = useState<string | null>(null);
+
+  if (currentAsset && loadedAssetId !== currentAsset.id) {
+    setLoadedAssetId(currentAsset.id);
+    setProductId(currentAsset.id || assetId || '');
+    setTitle(currentAsset.title || '');
+    setDescription(currentAsset.description || '');
+    setCategory((currentAsset.categories[0] as CardCategory) || 'TOOLS');
+    setFileFormat(currentAsset.fileType || currentAsset.fileFormat || '.ZIP');
+    setBadge(currentAsset.badge || 'free');
+    setPrice(currentAsset.price ?? (currentAsset.badge === 'free' ? 0 : 9.99));
+    setVersion(currentAsset.version || 'v1.0.0');
+    setFileSize(currentAsset.fileSize || '18.5 MB');
+    setLicense(currentAsset.license || 'Free Commercial');
+    setAuthor(currentAsset.author || 'PIXLape Lab');
+    setThumbnail(currentAsset.thumbnail || '/img/minicard001.svg');
+    setBanner(currentAsset.banner || '/img/banner01.svg');
+    setIcon(currentAsset.icon || '/img/Icontemp1.svg');
+    setDownloadUrl(currentAsset.downloadUrl || '');
+    setDonateUrl(currentAsset.donateUrl || 'https://trakteer.id');
+    setRequirements(currentAsset.requirements || []);
+    setFeatures(currentAsset.features || []);
+  }
 
   const handleAddRequirement = () => {
     if (!newReq.trim()) return;
@@ -189,7 +189,7 @@ export default function EditAssetPage() {
     }
   };
 
-  if (!currentAsset && isLoaded) {
+  if (assets.length > 0 && !currentAsset) {
     return (
       <AdminLayout
         title="ASSET NOT FOUND"
@@ -424,102 +424,54 @@ export default function EditAssetPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="thumbnail" className="font-bold text-xs text-black-secondary">
-                  THUMBNAIL PRESET
-                </label>
-                <select
-                  id="thumbnail"
-                  value={thumbnail}
-                  onChange={(e) => setThumbnail(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {THUMBNAIL_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={thumbnail}
-                  onChange={(e) => setThumbnail(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom /img/..."
-                />
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-border pt-4">
+              <ImageUpload
+                name="thumbnail"
+                label="THUMBNAIL"
+                value={thumbnail}
+                onChange={setThumbnail}
+                presets={THUMBNAIL_PRESETS}
+                folder="thumbnails"
+                aspectRatio="square"
+                recommendedSize="400x300 recommended (PNG, SVG, WEBP)"
+              />
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="banner" className="font-bold text-xs text-black-secondary">
-                  DETAIL BANNER
-                </label>
-                <select
-                  id="banner"
-                  value={banner}
-                  onChange={(e) => setBanner(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {BANNER_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={banner}
-                  onChange={(e) => setBanner(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom banner path"
-                />
-              </div>
+              <ImageUpload
+                name="banner"
+                label="DETAIL BANNER"
+                value={banner}
+                onChange={setBanner}
+                presets={BANNER_PRESETS}
+                folder="banners"
+                aspectRatio="banner"
+                recommendedSize="1200x500 banner (PNG, SVG, WEBP)"
+              />
 
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="icon" className="font-bold text-xs text-black-secondary">
-                  ICON PRESET
-                </label>
-                <select
-                  id="icon"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono cursor-pointer"
-                >
-                  {ICON_PRESETS.map((p) => (
-                    <option key={p.path} value={p.path}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="text"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  className="border border-border p-1.5 rounded bg-white text-[11px] font-mono"
-                  placeholder="Custom icon path"
-                />
-              </div>
+              <ImageUpload
+                name="icon"
+                label="ASSET ICON"
+                value={icon}
+                onChange={setIcon}
+                presets={ICON_PRESETS}
+                folder="icons"
+                aspectRatio="icon"
+                recommendedSize="128x128 pixel/vector icon"
+              />
             </div>
 
-            {/* Download & Donate URLs */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-border pt-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="downloadUrl" className="font-bold text-xs text-black-secondary">
-                  DOWNLOAD PACKAGE URL
-                </label>
-                <input
-                  type="text"
-                  id="downloadUrl"
-                  name="downloadUrl"
-                  value={downloadUrl}
-                  onChange={(e) => setDownloadUrl(e.target.value)}
-                  placeholder="https://mediafire.com/... or /downloads/..."
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Download File Package (Cloudflare R2) & Donate URLs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border pt-4">
+              <FileUpload
+                name="downloadUrl"
+                label="VAULT ASSET DOWNLOAD PACKAGE"
+                value={downloadUrl}
+                onChange={setDownloadUrl}
+                folder="packages"
+                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk"
+              />
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary uppercase">
                   DONATE / SUPPORT URL
                 </label>
                 <input
@@ -528,8 +480,12 @@ export default function EditAssetPage() {
                   name="donateUrl"
                   value={donateUrl}
                   onChange={(e) => setDonateUrl(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  placeholder="https://trakteer.id/..."
+                  className="border border-black-primary p-2.5 rounded bg-white text-xs font-mono focus:outline-none"
                 />
+                <p className="text-[10px] text-black-secondary font-mono">
+                  Link for user contributions or creator tips (e.g. Trakteer, Ko-fi, BuyMeACoffee).
+                </p>
               </div>
             </div>
 
