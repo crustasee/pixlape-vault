@@ -111,9 +111,19 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           <div className="flex flex-col gap-6 text-sm font-mono text-black-primary leading-relaxed">
             
             {/* ========================================== Lead Paragraph ========================================== */}
-            <p className="text-base font-medium leading-relaxed border-l-3 border-primary pl-4 text-black-primary bg-white/50 py-2 rounded-r-sm">
-              {article.leadParagraph || article.excerpt}
-            </p>
+            {(article.leadParagraph || article.excerpt)?.includes("<") &&
+            (article.leadParagraph || article.excerpt)?.includes(">") ? (
+              <div
+                className="text-base font-medium leading-relaxed border-l-3 border-primary pl-4 text-black-primary bg-white/50 py-2 rounded-r-sm prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{
+                  __html: article.leadParagraph || article.excerpt,
+                }}
+              />
+            ) : (
+              <p className="text-base font-medium leading-relaxed border-l-3 border-primary pl-4 text-black-primary bg-white/50 py-2 rounded-r-sm">
+                {article.leadParagraph || article.excerpt}
+              </p>
+            )}
 
             {/* ========================================== Dynamic Sections ========================================== */}
             {article.sections && article.sections.length > 0 && (

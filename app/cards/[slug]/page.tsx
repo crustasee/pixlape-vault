@@ -160,9 +160,16 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                   </span>
                 </div>
 
-                <div className="text-xs sm:text-sm font-mono text-text-primary leading-relaxed whitespace-pre-line">
-                  {card.description}
-                </div>
+                {card.description && card.description.includes("<") && card.description.includes(">") ? (
+                  <div
+                    className="text-xs sm:text-sm font-mono text-text-primary leading-relaxed prose prose-sm max-w-none"
+                    dangerouslySetInnerHTML={{ __html: card.description }}
+                  />
+                ) : (
+                  <div className="text-xs sm:text-sm font-mono text-text-primary leading-relaxed whitespace-pre-line">
+                    {card.description}
+                  </div>
+                )}
               </div>
 
               {/* Key Features Highlights (if present) */}

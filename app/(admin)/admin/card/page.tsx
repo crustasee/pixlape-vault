@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -17,6 +17,8 @@ import {
   DownloadSimple,
   HardDrives,
   Tag,
+  SquaresFour,
+  Table,
 } from '@phosphor-icons/react';
 import {
   useAssets,
@@ -39,12 +41,15 @@ const CATEGORIES: ('ALL' | CardCategory)[] = [
 ];
 
 const BADGES: ('ALL' | BadgeVariant)[] = ['ALL', 'free', 'paid', 'premium'];
+const ITEMS_PER_PAGE = 8;
 
 export default function AssetCardsAdminPage() {
   const assets = useAssets();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<'ALL' | CardCategory>('ALL');
   const [selectedBadge, setSelectedBadge] = useState<'ALL' | BadgeVariant>('ALL');
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [previewAsset, setPreviewAsset] = useState<CardDetail | null>(null);
   const { toasts, addToast, dismissToast } = useToast();
 
@@ -71,6 +76,18 @@ export default function AssetCardsAdminPage() {
     return matchSearch && matchCategory && matchBadge;
   });
 
+  // Reset pagination when search or filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory, selectedBadge]);
+
+  // Pagination calculation (max 8 items per page)
+  const totalPages = Math.max(1, Math.ceil(filteredAssets.length / ITEMS_PER_PAGE));
+  const effectivePage = Math.min(currentPage, totalPages);
+  const startIndex = (effectivePage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const displayedAssets = filteredAssets.slice(startIndex, endIndex);
+
   const handleDelete = (id: string, title: string) => {
     deleteAssetFromStore(id);
     if (previewAsset?.id === id) setPreviewAsset(null);
@@ -94,8 +111,8 @@ export default function AssetCardsAdminPage() {
     >
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
-      {/* Filter and Search Bar */}
-      <div className="bg-surface border border-black-primary rounded-md p-4 mb-3 flex flex-col gap-3 font-mono shadow-sm">
+      {/* Filter, Search & View Switch Bar */}
+      <div className="bg-surface border border-black-primary rounded-md p-4 mb-4 flex flex-col gap-2 font-mono shadow-sm">
         <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
           <div className="relative w-full md:max-w-md">
             <MagnifyingGlass className="w-4 h-4 text-black-secondary absolute left-3 top-1/2 -translate-y-1/2" weight="bold" />
@@ -108,35 +125,65 @@ export default function AssetCardsAdminPage() {
             />
           </div>
 
-          {/* Badge filter pills */}
-          <div className="flex items-center gap-1.5 flex-wrap w-full md:w-auto">
-            <span className="text-[11px] font-bold text-black-secondary uppercase mr-1">TIER:</span>
-            {BADGES.map((b) => (
+          <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end flex-wrap">
+            {/* View Mode Toggle (Grid vs Table) */}
+            <div className="flex items-center bg-white p-1 rounded-md border border-black-primary shadow-xs">
               <button
                 type="button"
-                key={b}
-                onClick={() => setSelectedBadge(b)}
-                className={`px-2.5 py-1 text-[11px] font-mono font-bold rounded border transition-all cursor-pointer uppercase ${
-                  selectedBadge === b
-                    ? 'bg-primary text-black-primary border-black-primary shadow-xs'
-                    : 'bg-white text-black-secondary border-border hover:border-black-primary'
+                onClick={() => setViewMode('grid')}
+                className={`flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-bold rounded transition-all cursor-pointer ${
+                  viewMode === 'grid'
+                    ? 'bg-border text-black-primary border border-black-primary shadow-xs'
+                    : 'text-black-secondary hover:text-black-primary'
                 }`}
+                title="Switch to Grid View"
               >
-                {b}
+                <SquaresFour className="w-3.5 h-3.5" weight="bold" />
               </button>
-            ))}
+              <button
+                type="button"
+                onClick={() => setViewMode('table')}
+                className={`flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-bold rounded transition-all cursor-pointer ${
+                  viewMode === 'table'
+                    ? 'bg-border text-black-primary border border-black-primary shadow-xs'
+                    : 'text-black-secondary hover:text-black-primary'
+                }`}
+                title="Switch to Table View"
+              >
+                <Table className="w-3.5 h-3.5" weight="bold" />
+              </button>
+            </div>
+
+            {/* Badge filter pills */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[11px] font-bold text-black-secondary uppercase mr-1">TIER:</span>
+              {BADGES.map((b) => (
+                <button
+                  type="button"
+                  key={b}
+                  onClick={() => setSelectedBadge(b)}
+                  className={`px-2.5 py-0.5 text-[11px] font-mono font-bold rounded-md border transition-all cursor-pointer uppercase ${
+                    selectedBadge === b
+                      ? 'bg-primary text-black-primary border-black-primary shadow-xs'
+                      : 'bg-white text-black-secondary border-border hover:border-black-primary'
+                  }`}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Category filters */}
-        <div className="flex items-center gap-1.5 flex-wrap ">
+        <div className="flex items-center gap-1.5 flex-wrap">
           <span className="text-[11px] font-bold text-black-secondary uppercase mr-1">CATEGORY:</span>
           {CATEGORIES.map((cat) => (
             <button
               type="button"
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-2.5 py-1 text-[11px] font-mono font-bold rounded border transition-all cursor-pointer uppercase ${
+              className={`px-2.5 py-0.5 text-[11px] font-mono font-bold rounded-md border transition-all cursor-pointer uppercase ${
                 selectedCategory === cat
                   ? 'bg-primary text-black-primary border-black-primary font-black shadow-xs'
                   : 'bg-white text-black-secondary border-surface hover:border-black-primary'
@@ -148,9 +195,9 @@ export default function AssetCardsAdminPage() {
         </div>
       </div>
 
-      {/* Grid List */}
+      {/* Asset Display List */}
       {filteredAssets.length === 0 ? (
-        <div className="bg-surface border border-black-primary rounded-md p-12 text-center font-mono shadow-sm">
+        <div className="bg-surface border border-black-primary rounded-md p-8 text-center font-mono shadow-sm">
           <Cards className="w-10 h-10 text-black-secondary mx-auto mb-3" weight="duotone" />
           <h3 className="text-sm font-bold uppercase text-black-primary">
             NO MATCHING ASSETS FOUND
@@ -170,9 +217,10 @@ export default function AssetCardsAdminPage() {
             RESET ALL FILTERS
           </button>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-mono">
-          {filteredAssets.map((asset: CardDetail) => (
+      ) : viewMode === 'grid' ? (
+        /* ======================== GRID VIEW (Max 8 cards per page) ======================== */
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 font-mono">
+          {displayedAssets.map((asset: CardDetail) => (
             <div
               key={asset.id}
               className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group"
@@ -209,11 +257,11 @@ export default function AssetCardsAdminPage() {
                   <div className="grid grid-cols-2 gap-2 mt-1 text-[11px] text-black-secondary bg-white p-2.5 rounded border border-border">
                     <div>
                       <span className="text-[10px] text-black-secondary/80 block">FORMAT</span>
-                      <span className="font-bold text-black-primary">{asset.fileType || asset.fileFormat || '.ZIP'}</span>
+                      <span className="font-bold text-black-primary truncate block">{asset.fileType || asset.fileFormat || '.ZIP'}</span>
                     </div>
                     <div>
                       <span className="text-[10px] text-black-secondary/80 block">VERSION / SIZE</span>
-                      <span className="font-bold text-black-primary">
+                      <span className="font-bold text-black-primary truncate block">
                         {asset.version || 'v1.0'} ({asset.fileSize || '10MB'})
                       </span>
                     </div>
@@ -225,7 +273,7 @@ export default function AssetCardsAdminPage() {
               <div className="p-3 bg-white border-t border-border flex items-center justify-between">
                 <div className="text-[11px] text-black-secondary font-bold">
                   {asset.badge === 'free' ? (
-                    <span className="text-emerald-700">FREE DOWNLOAD</span>
+                    <span className="text-emerald-700">FREE</span>
                   ) : (
                     <span className="text-amber-800">${asset.price ?? 9.99} USD</span>
                   )}
@@ -259,6 +307,195 @@ export default function AssetCardsAdminPage() {
               </div>
             </div>
           ))}
+        </div>
+      ) : (
+        /* ======================== TABLE VIEW (Max 8 rows per page) ======================== */
+        <div className="bg-white border border-black-primary rounded-md overflow-hidden font-mono shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-black-primary text-white border-b border-black uppercase text-[11px] tracking-wider">
+                  <th className="py-3 px-4 font-bold">ASSET</th>
+                  <th className="py-3 px-3 font-bold">CATEGORIES</th>
+                  <th className="py-3 px-3 font-bold">TIER</th>
+                  <th className="py-3 px-3 font-bold">FORMAT / SIZE</th>
+                  <th className="py-3 px-3 font-bold">AUTHOR & VERSION</th>
+                  <th className="py-3 px-3 font-bold">PRICE</th>
+                  <th className="py-3 px-4 font-bold text-right">ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {displayedAssets.map((asset: CardDetail) => (
+                  <tr
+                    key={asset.id}
+                    className="hover:bg-emerald-50/50 transition-colors group"
+                  >
+                    {/* Asset thumbnail & title */}
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 relative rounded border border-black-primary overflow-hidden shrink-0 bg-border">
+                          <Image
+                            src={asset.thumbnail || '/img/minicard001.svg'}
+                            alt={asset.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-bold text-black-primary group-hover:text-emerald-700 truncate max-w-xs block">
+                            {asset.title}
+                          </span>
+                          <span className="text-[10px] text-black-secondary font-semibold">
+                            #{asset.id}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* Categories */}
+                    <td className="py-3 px-3">
+                      <div className="flex flex-wrap gap-1">
+                        {asset.categories.map((cat) => (
+                          <CategoryBadge key={cat} category={cat} />
+                        ))}
+                      </div>
+                    </td>
+
+                    {/* Tier / Badge */}
+                    <td className="py-3 px-3">
+                      <Badge variant={asset.badge} />
+                    </td>
+
+                    {/* Format & Size */}
+                    <td className="py-3 px-3 text-black-secondary">
+                      <span className="font-bold text-black-primary block">
+                        {asset.fileType || asset.fileFormat || '.ZIP'}
+                      </span>
+                      <span className="text-[10px]">{asset.fileSize || '10MB'}</span>
+                    </td>
+
+                    {/* Author & Version */}
+                    <td className="py-3 px-3 text-black-secondary">
+                      <span className="font-bold text-black-primary block">
+                        {asset.version || 'v1.0.0'}
+                      </span>
+                      <span className="text-[10px] text-black-secondary truncate block max-w-30">
+                        {asset.author || 'PIXLape Lab'}
+                      </span>
+                    </td>
+
+                    {/* Price / Type */}
+                    <td className="py-3 px-3 font-bold">
+                      {asset.badge === 'free' ? (
+                        <span className="text-emerald-700">FREE</span>
+                      ) : (
+                        <span className="text-amber-800">${asset.price ?? 9.99}</span>
+                      )}
+                    </td>
+
+                    {/* Action buttons */}
+                    <td className="py-3 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setPreviewAsset(asset)}
+                          className="p-1.5 bg-surface hover:bg-border border border-black-primary rounded text-black-primary cursor-pointer transition-colors"
+                          title="Inspect Asset Details"
+                        >
+                          <Eye className="w-3.5 h-3.5" weight="bold" />
+                        </button>
+                        <Link
+                          href={`/admin/card/${asset.id}/edit`}
+                          className="p-1.5 bg-blue-100 hover:bg-blue-200 border border-blue-400 text-blue-900 rounded cursor-pointer transition-colors"
+                          title="Edit Asset"
+                        >
+                          <PencilSimple className="w-3.5 h-3.5" weight="bold" />
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(asset.id, asset.title)}
+                          className="p-1.5 bg-rose-100 hover:bg-rose-200 border border-rose-400 text-rose-800 rounded cursor-pointer transition-colors"
+                          title="Delete Asset"
+                        >
+                          <Trash className="w-3.5 h-3.5" weight="bold" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Pagination Bar (Max 8 items per page) */}
+      {filteredAssets.length > 0 && (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4 p-3 bg-surface border border-black-primary rounded-md font-mono shadow-sm">
+          {/* Count / Status Info */}
+          <div className="text-xs text-black-secondary">
+            SHOWING <span className="font-bold text-black-primary">{startIndex + 1}</span>-
+            <span className="font-bold text-black-primary">
+              {Math.min(endIndex, filteredAssets.length)}
+            </span>{" "}
+            OF <span className="font-bold text-black-primary">{filteredAssets.length}</span> ASSETS
+            {totalPages > 1 && (
+              <span className="ml-2 text-text-secondary font-semibold">
+                [PAGE {effectivePage} / {totalPages}]
+              </span>
+            )}
+          </div>
+
+          {/* Pagination Navigation */}
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2">
+              {/* Prev Button */}
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={effectivePage <= 1}
+                className={`px-3 py-1 text-xs font-mono font-semibold rounded border transition-all ${
+                  effectivePage <= 1
+                    ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-white border-black-primary text-black-primary shadow-xs hover:bg-primary cursor-pointer hover:scale-95"
+                }`}
+              >
+                &lt; PREV
+              </button>
+
+              {/* Numbered Page Buttons */}
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    type="button"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-7 h-7 flex items-center justify-center text-xs font-mono font-bold rounded border transition-all ${
+                      effectivePage === pageNum
+                        ? "bg-primary border-black-primary text-black font-black shadow-xs"
+                        : "bg-white border-border text-black-secondary hover:border-black-primary hover:text-black-primary cursor-pointer"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+              </div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={effectivePage >= totalPages}
+                className={`px-3 py-1 text-xs font-mono font-semibold rounded border transition-all ${
+                  effectivePage >= totalPages
+                    ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-white border-black-primary text-black-primary shadow-xs hover:bg-primary cursor-pointer hover:scale-95"
+                }`}
+              >
+                NEXT &gt;
+              </button>
+            </div>
+          )}
         </div>
       )}
 

@@ -58,9 +58,9 @@ export default function AdminDashboardPage() {
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
       {/* Metrics Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-4 font-mono">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-2 font-mono">
         {/* Metric 1 */}
-        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
+        <div className="bg-emerald-100 border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               TOTAL ASSETS
@@ -78,7 +78,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 2 */}
-        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
+        <div className="bg-emerald-100 border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               EDITORIAL POSTS
@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 3 */}
-        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
+        <div className="bg-emerald-100 border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               CATEGORIES ACTIVE
@@ -114,7 +114,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 4 */}
-        <div className="bg-surface border border-black-primary rounded-md p-3 flex flex-col justify-between">
+        <div className="bg-emerald-100 border border-black-primary rounded-md p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-black-secondary uppercase tracking-wider">
               DATABASE ENGINE
@@ -126,9 +126,9 @@ export default function AdminDashboardPage() {
           <div className="mt-3">
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-sm font-black text-black-primary">DRIZZLE + NEON</span>
+              <span className="text-sm font-black text-green-600">DRIZZLE + NEON</span>
             </div>
-            <span className="text-[10px] text-emerald-800 font-bold block mt-0.5">
+            <span className="text-[10px] text-black-secondary font-bold block mt-0.5">
               SYNCED & OPERATIONAL
             </span>
           </div>
@@ -303,7 +303,7 @@ export default function AdminDashboardPage() {
           <div className="mt-4 pt-3 border-t border-border flex justify-end">
             <Link
               href="/admin/article/new"
-              className="text-xs font-bold text-black-primary hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-black-secondary hover:text-border flex items-center gap-1"
             >
               + PUBLISH NEW EDITORIAL ARTICLE
             </Link>

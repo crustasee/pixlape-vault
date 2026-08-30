@@ -22,18 +22,18 @@ export function AdminLayout({
   actionSlot,
 }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-border text-black-primary font-mono flex flex-col selection:bg-primary selection:text-black-secondary">
+    <div className="min-h-screen bg-black-secondary/60 text-black-primary font-mono flex flex-col selection:bg-primary selection:text-black-secondary">
       {/* Top Fixed Header */}
       <Header />
 
       {/* Main Container Area */}
-      <div className="flex-1 pt-18 pb-10 px-4 sm:px-6 lg:px-8 max-w-full w-full mx-auto">
+      <div className="flex-1 pt-16 pb-10 px-4 sm:px-4 lg:px-6 max-w-full w-full mx-auto">
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Persistent Sidebar */}
           <SidePanel />
 
           {/* Dynamic Main Workspace View */}
-          <main className="flex-1 w-full min-w-0 flex flex-col gap-3">
+          <main className="flex-1 w-full min-w-0 flex flex-col gap-2">
             {/* Breadcrumb & Title Bar */}
             {(title || breadcrumbs.length > 0) && (
               <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">

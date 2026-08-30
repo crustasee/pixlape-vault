@@ -7,6 +7,7 @@ import Link from 'next/link';
 import AdminLayout from '@/components/admin/AdminLayout';
 import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
+import RichEditor from '@/components/admin/RichEditor';
 import { useToast } from '@/hooks/useToast';
 import { addArticleToStore } from '@/lib/db/article';
 import { createArticleAction } from '@/app/actions/product-actions';
@@ -272,15 +273,12 @@ export default function AddArticlePage() {
               <label htmlFor="excerpt" className="font-bold text-xs text-black-primary">
                 ARTICLE EXCERPT & OVERVIEW <span className="text-rose-600">*</span>
               </label>
-              <textarea
-                id="excerpt"
+              <RichEditor
                 name="excerpt"
-                rows={4}
-                required
                 value={excerpt}
-                onChange={(e) => setExcerpt(e.target.value)}
-                placeholder="Write an informative overview of the technical document or tutorial..."
-                className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                onChange={setExcerpt}
+                placeholder="Write an informative overview, technical tutorial, or rich documentation..."
+                minHeight="180px"
               />
             </div>
 

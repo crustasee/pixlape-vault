@@ -8,6 +8,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import SubmitButton from '@/components/admin/SubmitButton';
 import Toast from '@/components/admin/Toast';
 import ProductIdInput from '@/components/admin/ProductInput';
+import RichEditor from '@/components/admin/RichEditor';
 import { useToast } from '@/hooks/useToast';
 import {
   useAssets,
@@ -413,14 +414,12 @@ export default function EditAssetPage() {
               <label htmlFor="description" className="font-bold text-xs text-black-primary">
                 DESCRIPTION & DETAILS <span className="text-rose-600">*</span>
               </label>
-              <textarea
-                id="description"
+              <RichEditor
                 name="description"
-                rows={3}
-                required
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                onChange={setDescription}
+                placeholder="Provide detailed description, specifications, and features..."
+                minHeight="140px"
               />
             </div>
 

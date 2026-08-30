@@ -12,9 +12,11 @@ import {
   Pulse,
   Database,
   Globe,
+  SignOut,
 } from '@phosphor-icons/react';
 import { useAssets } from '@/lib/db/card';
 import { useArticles } from '@/lib/db/article';
+import { logoutAction } from '@/app/actions/auth-actions';
 
 export interface MenuItem {
   name: string;
@@ -38,7 +40,7 @@ const MENU_ITEMS: MenuItem[] = [
     badgeCount: (a) => a,
   },
   {
-    name: 'EDITORIAL ARTICLES',
+    name: 'ARTICLES',
     href: '/admin/article',
     icon: Article,
     badgeCount: (_, arts) => arts,
@@ -62,14 +64,14 @@ export function SidePanel({
 
   return (
     <aside
-      className={`w-full lg:w-68 bg-surface rounded-md border border-black-primary p-4 flex flex-col gap-3 shrink-0 font-mono shadow-sm ${className}`}
+      className={`w-full lg:w-58 bg-surface rounded-md border border-black-primary p-4 flex flex-col gap-2 shrink-0 font-mono ${className}`}
     >
       {/* Header section */}
       <div className="flex items-center justify-between border-b border-black-primary pb-2.5">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 bg-primary border border-black-primary rounded-full animate-pulse"></div>
           <h3 className="text-xs font-bold text-black-primary uppercase tracking-wider">
-            ++ CONTROL PANEL ++
+            CONTROL PANEL
           </h3>
         </div>
         <span className="text-[10px] px-2 py-0.5 bg-black-secondary text-white font-bold rounded-md">
@@ -139,18 +141,18 @@ export function SidePanel({
         <Link
           href="https://pixlape.vercel.app/"
           target="_blank"
-          className="w-full py-2 px-3 bg-green-300 hover:scale-97 shadow-pixel border border-black-primary text-green-950 text-xs font-mono font-bold rounded flex items-center justify-between transition-all group"
+          className="w-full py-2 px-3 bg-emerald-200 hover:scale-97 shadow-pixel border border-black-primary text-green-600 text-xs font-mono font-bold rounded-md flex items-center justify-between transition-all group"
         >
           <span className="flex items-center gap-2">
             <Globe className="w-3.5 h-3.5 text-black-secondary group-hover:text-black-primary" />
             LIVE PUBLIC VAULT
           </span>
-          <span className="text-[10px] text-black-secondary">&gt;</span>
+          <span className="text-[10px] text-green-600">&gt;</span>
         </Link>
       </div>
 
       {/* Info / Account Telemetry Box */}
-      <div className="border border-black-primary p-3 rounded-md flex flex-col mt-auto bg-border gap-2 text-xs text-black-secondary font-mono">
+      <div className="border border-black-primary p-3 rounded-md flex flex-col mt-auto bg-white gap-2 text-xs text-black-secondary font-mono">
         <div className="flex items-center justify-between text-[11px] font-bold text-black-primary border-b border-black-primary/20 pb-1.5">
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" weight="bold" />
@@ -167,7 +169,7 @@ export function SidePanel({
         <div className="flex items-center justify-between text-[11px]">
           <span className="text-black-secondary flex items-center gap-1">
             <Database className="w-3 h-3 text-emerald-700" />
-            Database:
+            Data:
           </span>
           <span className="font-bold text-red-500">Drizzle / Neon</span>
         </div>
@@ -175,10 +177,22 @@ export function SidePanel({
           <span className="text-black-secondary">Host Service:</span>
           <span className="font-bold text-black-primary flex items-center gap-1">
             <Pulse className="w-3 h-3 text-emerald-600 animate-pulse" weight="bold" />
-            pixlape-vault
+            vercel
           </span>
         </div>
       </div>
+
+      {/* Sign Out Button */}
+      <form action={logoutAction} className="w-full">
+        <button
+          type="submit"
+          className="w-full py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-400 rounded-md text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs hover:scale-98"
+          title="Sign out of Admin Session"
+        >
+          <SignOut className="w-3.5 h-3.5" weight="bold" />
+          <span>SIGN OUT</span>
+        </button>
+      </form>
     </aside>
   );
 }

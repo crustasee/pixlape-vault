@@ -86,7 +86,7 @@ export default function ArticleListPage() {
       actionSlot={
         <Link
           href="/admin/article/new"
-          className="flex items-center gap-2 px-4 py-2 bg-green-400 hover:bg-green-500 text-black-primary border border-black-primary shadow-pixel rounded-md text-xs font-mono font-black hover:scale-98 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/50 text-black-primary border border-black-primary shadow-pixel rounded-md text-xs font-mono font-black hover:scale-98 transition-all cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" weight="bold" />
           <span>PUBLISH ARTICLE</span>
@@ -117,8 +117,8 @@ export default function ArticleListPage() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-2.5 py-1 text-[11px] font-mono font-bold rounded border transition-all cursor-pointer uppercase ${
                 selectedCategory.toUpperCase() === cat.toUpperCase()
-                  ? 'bg-black-primary text-primary border-black-primary shadow-xs'
-                  : 'bg-white text-black-secondary border-border hover:bg-surface hover:border-black-primary'
+                  ? 'bg-white text-black-primary border-black-primary shadow-xs'
+                  : 'bg-border text-black-secondary border-border hover:bg-surface hover:border-black-primary'
               }`}
             >
               {cat}
