@@ -44,6 +44,12 @@ const MENU_ITEMS: MenuItem[] = [
     icon: Article,
     badgeCount: (_, arts) => arts,
   },
+  {
+    name: 'INTEGRATIONS',
+    href: '/admin/integrations',
+    icon: Database,
+    tag: 'SYS',
+  },
 ];
 
 interface SidebarProps {
@@ -178,6 +184,7 @@ export function SidePanel({
             <Pulse className="w-3 h-3 text-emerald-600 animate-pulse" weight="bold" />
             vercel
           </span>
+          
         </div>
       </div>
 
@@ -185,7 +192,7 @@ export function SidePanel({
       <form action={logoutAction} className="w-full">
         <button
           type="submit"
-          className="w-full py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-400 rounded-md text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs hover:scale-98"
+          className="w-full py-1.5 px-3 bg-rose-300 text-red-800 border border-black rounded-md text-xs font-mono font-bold flex items-center justify-center gap-3 transition-all cursor-pointer shadow-pixel hover:scale-98"
           title="Sign out of Admin Session"
         >
           <SignOut className="w-3.5 h-3.5" weight="bold" />

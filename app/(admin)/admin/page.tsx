@@ -132,6 +132,7 @@ export default function AdminDashboardPage() {
             </span>
           </div>
         </div>
+
       </div>
 
 
@@ -216,7 +217,7 @@ export default function AdminDashboardPage() {
           <div className="mt-4 pt-3 border-t border-border flex justify-end">
             <Link
               href="/admin/card/new"
-              className="text-xs font-bold text-black-primary hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-black-secondary hover:text-border flex items-center gap-1"
             >
               + ADD NEW DIGITAL ASSET
             </Link>
