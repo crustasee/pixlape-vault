@@ -50,7 +50,7 @@ export interface CardDetail extends CardItem {
 
 export const CARDS: CardDetail[] = [
   {
-    id: "card-1",
+    id: "product001",
     title: "Pixprint App V.1.02.00",
     thumbnail: "/img/minicard001.svg",
     banner: "/img/banner01.svg",
@@ -96,7 +96,7 @@ export const CARDS: CardDetail[] = [
     donateUrl: "https://trakteer.id",
   },
   {
-    id: "card-2",
+    id: "product002",
     title: "VaultBrush Pack",
     thumbnail: "/img/minicard002.svg",
     banner: "/img/tempbnr.svg",
@@ -139,7 +139,7 @@ export const CARDS: CardDetail[] = [
     donateUrl: "https://trakteer.id",
   },
   {
-    id: "card-3",
+    id: "product003",
     title: "PixGrid Icon Set",
     thumbnail: "/img/minicard003.svg",
     banner: "/img/banner01.svg",
@@ -177,9 +177,9 @@ export const CARDS: CardDetail[] = [
     donateUrl: "https://trakteer.id",
   },
   {
-    id: "card-4",
+    id: "product004",
     title: "AdobeXD V.59.0.0",
-    thumbnail: "/img/minicard004.svg",
+    thumbnail: "/img/minicard008.svg",
     banner: "/img/tempbnr.svg",
     icon: "/img/Icontemp2.svg",
     badge: "paid",
@@ -208,7 +208,7 @@ export const CARDS: CardDetail[] = [
     donateUrl: "https://trakteer.id",
   },
   {
-    id: "card-5",
+    id: "product005",
     title: "DevToolkit CLI",
     thumbnail: "/img/minicard005.svg",
     banner: "/img/banner01.svg",
@@ -235,7 +235,7 @@ export const CARDS: CardDetail[] = [
     downloadUrl: "#",
   },
   {
-    id: "card-6",
+    id: "product006",
     title: "ArtCanvas Poster",
     thumbnail: "/img/minicard006.svg",
     banner: "/img/tempbnr.svg",
@@ -264,7 +264,7 @@ export const CARDS: CardDetail[] = [
     donateUrl: "https://trakteer.id",
   },
   {
-    id: "card-7",
+    id: "product007",
     title: "MiscPack Bundle",
     thumbnail: "/img/minicard007.svg",
     banner: "/img/banner01.svg",

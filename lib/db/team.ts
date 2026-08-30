@@ -24,13 +24,13 @@ export interface TeamMember {
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: "brandon-herera",
-    name: "Brandon Herera",
+    id: "pixl001",
+    name: "cipto bengkel",
     role: "DEVELOPER + ART DIRECTION",
-    avatar: "/img/Icontemp1.svg",
-    bio: "Developer and art director for the PIXLape project since 1999. Specializes in retro UI design, C++ asset compilation, and high-performance WebAssembly engines.",
-    experienceYears: 12,
-    joinedYear: 1999,
+    avatar: "/img/Icon_admin.svg",
+    bio: "Developer and art director for the PIXLape project since 2022. Specializes in retro UI design, C++ asset compilation, and high-performance WebAssembly engines.",
+    experienceYears: 4,
+    joinedYear: 2022,
     skills: ["C++", "Next.js", "Pixel Art", "WebGL", "UI/UX Architecture"],
     resume: {
       education: "B.S. Computer Science & Visual Arts",
@@ -49,10 +49,10 @@ export const TEAM_MEMBERS: TeamMember[] = [
     },
   },
   {
-    id: "alex-mercer",
-    name: "Alex Mercer",
+    id: "pixl002",
+    name: "Jimmy Kalasnikov",
     role: "LEAD BACKEND ARCHITECT",
-    avatar: "/img/Icontemp2.svg",
+    avatar: "/img/icon_admin2.svg",
     bio: "Core backend engineer focusing on distributed vault storage, API rate limiting, and zero-latency asset distribution networks.",
     experienceYears: 8,
     joinedYear: 2021,
