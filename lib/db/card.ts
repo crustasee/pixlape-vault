@@ -17,6 +17,8 @@ export interface CardItem {
   title: string;
   /** Path relative to /public — e.g. "/img/minicard001.svg" */
   thumbnail: string;
+  /** Icon shown on grid card and detail page */
+  icon?: string;
   badge: BadgeVariant;
   categories: CardCategory[];
 }

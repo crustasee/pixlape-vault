@@ -85,14 +85,25 @@ export default function CardGrid({
               key={card.id}
               className="bg-surface rounded-md border border-black overflow-hidden flex flex-col hover:scale-102 hover:border-primary hover:bg-green-100 hover:shadow-lg transition-all duration-200"
             >
-              {/* Card thumbnail image */}
-              <div className="h-50 relative overflow-hidden bg-border border-b border-black">
-                <Image
-                  src={card.thumbnail}
-                  alt={`${card.title} preview`}
-                  fill
-                  className="object-cover"
-                />
+              {/* Card thumbnail with border background, white grid texture, and centered product icon */}
+              <div
+                className="h-48 relative overflow-hidden bg-border border-b border-black flex items-center justify-center group/thumb"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
+                  backgroundSize: "20px 20px",
+                }}
+              >
+                <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <Image
+                    src={card.icon || card.thumbnail || "/img/Icontemp1.svg"}
+                    alt={`${card.title} icon`}
+                    width={80}
+                    height={80}
+                    unoptimized
+                    className="object-contain w-full h-full drop-shadow-md"
+                  />
+                </div>
               </div>
 
               {/* Badge & Category tag */}
