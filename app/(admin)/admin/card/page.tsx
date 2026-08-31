@@ -225,34 +225,48 @@ export default function AssetCardsAdminPage() {
         </div>
       ) : viewMode === 'grid' ? (
         /* ======================== GRID VIEW (Max 8 cards per page) ======================== */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 font-mono">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono">
           {displayedAssets.map((asset: CardDetail) => (
             <div
               key={asset.id}
-              className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group"
+              className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
             >
               <div>
-                {/* Thumbnail header */}
-                <div className="h-40 relative bg-border border-b border-black-primary overflow-hidden">
-                  <Image
-                    src={asset.thumbnail || '/img/minicard001.svg'}
-                    alt={asset.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-2 left-2 flex items-center gap-1.5">
-                    <Badge variant={asset.badge} />
-                    <CategoryBadge category={asset.categories[0] || 'TOOLS'} />
-                  </div>
-                  <div className="absolute top-2 right-2">
+                {/* Thumbnail header with border background, white grid texture, and centered product icon */}
+                <div
+                  className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center group/thumb"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
+                    backgroundSize: "20px 20px",
+                  }}
+                >
+                  <div className="absolute top-2 right-2 z-20">
                     <span className="text-[10px] font-bold px-1.5 py-0.5 bg-black-primary/90 text-white rounded backdrop-blur-xs">
                       #{asset.id}
                     </span>
                   </div>
+
+                  <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <Image
+                      src={asset.icon || asset.thumbnail || '/img/Icontemp1.svg'}
+                      alt={`${asset.title} icon`}
+                      width={80}
+                      height={80}
+                      unoptimized
+                      className="object-contain w-full h-full drop-shadow-md"
+                    />
+                  </div>
+                </div>
+
+                {/* Badge & Category tag */}
+                <div className="px-4 pt-3 flex items-center justify-between">
+                  <Badge variant={asset.badge} />
+                  <CategoryBadge category={asset.categories[0] || 'TOOLS'} />
                 </div>
 
                 {/* Body Content */}
-                <div className="p-4 flex flex-col gap-2">
+                <div className="p-4 pt-2.5 flex flex-col gap-2">
                   <h3 className="font-bold text-sm text-black-primary group-hover:text-emerald-700 leading-snug line-clamp-1">
                     {asset.title}
                   </h3>
@@ -339,12 +353,21 @@ export default function AssetCardsAdminPage() {
                     {/* Asset thumbnail & title */}
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 relative rounded border border-black-primary overflow-hidden shrink-0 bg-border">
+                        <div
+                          className="w-12 h-12 relative rounded border border-black-primary overflow-hidden shrink-0 bg-border flex items-center justify-center"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
+                            backgroundSize: "12px 12px",
+                          }}
+                        >
                           <Image
-                            src={asset.thumbnail || '/img/minicard001.svg'}
+                            src={asset.icon || asset.thumbnail || '/img/Icontemp1.svg'}
                             alt={asset.title}
-                            fill
-                            className="object-cover"
+                            width={32}
+                            height={32}
+                            unoptimized
+                            className="object-contain w-8 h-8 drop-shadow-xs"
                           />
                         </div>
                         <div className="flex flex-col min-w-0">

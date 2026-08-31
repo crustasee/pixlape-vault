@@ -598,20 +598,34 @@ export default function EditAssetPage() {
 
             {/* Preview Card Component */}
             <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col shadow-pixel">
-              <div className="h-44 relative bg-border border-b border-black-primary overflow-hidden">
-                <Image
-                  src={thumbnail || '/img/minicard001.svg'}
-                  alt="Asset Thumbnail Preview"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-2 left-2 flex items-center gap-1.5">
-                  <Badge variant={badge} />
-                  <CategoryBadge category={category} />
+              {/* Card thumbnail with border background, white grid texture, and centered product icon */}
+              <div
+                className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
+                  backgroundSize: "20px 20px",
+                }}
+              >
+                <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300">
+                  <Image
+                    src={icon || thumbnail || '/img/Icontemp1.svg'}
+                    alt="Asset Icon Preview"
+                    width={80}
+                    height={80}
+                    unoptimized
+                    className="object-contain w-full h-full drop-shadow-md"
+                  />
                 </div>
               </div>
 
-              <div className="p-4 flex flex-col gap-2">
+              {/* Badge & Category tag */}
+              <div className="px-4 pt-3 flex items-center justify-between">
+                <Badge variant={badge} />
+                <CategoryBadge category={category} />
+              </div>
+
+              <div className="p-4 pt-2.5 flex flex-col gap-2">
                 <h3 className="font-bold text-sm text-black-primary leading-snug">
                   {title || 'Untitled Asset Title'}
                 </h3>

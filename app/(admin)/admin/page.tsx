@@ -162,12 +162,21 @@ export default function AdminDashboardPage() {
                   className="bg-white border border-border rounded p-2.5 flex items-center justify-between gap-3 hover:border-black-primary transition-colors"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 bg-surface border border-border rounded overflow-hidden relative shrink-0">
+                    <div
+                      className="w-10 h-10 bg-border border border-border rounded overflow-hidden relative shrink-0 flex items-center justify-center"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
+                        backgroundSize: "8px 8px",
+                      }}
+                    >
                       <Image
-                        src={asset.thumbnail || '/img/minicard001.svg'}
+                        src={asset.icon || asset.thumbnail || '/img/Icontemp1.svg'}
                         alt={asset.title}
-                        fill
-                        className="object-cover"
+                        width={28}
+                        height={28}
+                        unoptimized
+                        className="object-contain w-7 h-7 drop-shadow-xs"
                       />
                     </div>
                     <div className="min-w-0">
