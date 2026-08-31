@@ -61,7 +61,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
     <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
       <Header />
 
-      <main className="flex-1 w-full max-w-full mx-auto px-4 md:px-12 lg:px-14 mt-6 sm:mt-14 pb-14 flex flex-col gap-4">
+      <main className="flex-1 w-full max-w-full mx-auto px-4 md:px-12 lg:px-1 mt-6 sm:mt-14 pb-14 flex flex-col gap-4">
         {/* ── Breadcrumb Navigation ─────────────────────────────────────── */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
@@ -123,6 +123,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                   width={64}
                   height={64}
                   className="object-cover w-full h-full"
+                  unoptimized
                 />
               </div>
               <div className="flex flex-col gap-1.5">
