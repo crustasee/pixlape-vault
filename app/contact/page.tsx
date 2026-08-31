@@ -51,7 +51,7 @@ export default function ContactPage() {
       <main className="flex-1 w-full max-w-full mx-auto px-6 sm:px-10 pt-17 pb-16 flex flex-col gap-5">
         
         {/* Top Breadcrumb & Status */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-border pb-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3">
           <Link
             href="/"
             className="text-xs font-mono text-black-secondary hover:text-black-primary transition-colors flex items-center gap-1.5"

@@ -56,7 +56,7 @@ export interface ArticleItem {
 
 export const ARTICLES: ArticleItem[] = [
   {
-    id: "1",
+    id: "blog001",
     title: "Optimizing Retro Workflows & Vault Storage",
     subtitle: "Architecting lightweight, high-performance digital asset archives",
     excerpt:
@@ -124,7 +124,7 @@ export const ARTICLES: ArticleItem[] = [
     },
   },
   {
-    id: "2",
+    id: "blog002",
     title: "Designing Pixel-Perfect High Contrast Interfaces",
     subtitle: "Retro monochrome design principles for modern web applications",
     excerpt:
@@ -194,7 +194,7 @@ export const ARTICLES: ArticleItem[] = [
     },
   },
   {
-    id: "3",
+    id: "blog003",
     title: "Building Zero-Latency SVG Vector Icon Packs",
     subtitle: "Performance metrics and vector optimization workflows",
     excerpt:
@@ -251,7 +251,7 @@ export const ARTICLES: ArticleItem[] = [
     },
   },
   {
-    id: "4",
+    id: "blog004",
     title: "C++ WebAssembly Bindings for Browser Toolkits",
     subtitle: "Compiling native performance utilities for web runtimes",
     excerpt:
@@ -308,7 +308,7 @@ export const ARTICLES: ArticleItem[] = [
     },
   },
   {
-    id: "5",
+    id: "blog005",
     title: "Monochrome Color Palettes & User Experience",
     subtitle: "Reducing visual cognitive load with minimalist retro themes",
     excerpt:
