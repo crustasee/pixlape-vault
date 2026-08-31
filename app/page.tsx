@@ -12,7 +12,7 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-surface text-text-primary font-mono">
+    <div className="min-h-screen bg-white text-text-primary font-mono">
       <Header />
 
       <HeroBanner />
@@ -26,7 +26,7 @@ export default function HomePage() {
         <CardGrid selectedCategory={selectedCategory} />
       </div>
 
-      <div className="mx-12 flex mb-8 border-b-2 gap-8" />
+      <div className="mx-12 flex mb-8 border gap-8" />
 
       {/* ============================ARTICLE SECTION============================ */}
       <ArticleSection />

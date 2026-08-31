@@ -45,18 +45,18 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-border text-text-primary font-mono flex flex-col">
+    <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
       <Header />
 
-      <main className="max-w-full w-full px-6 sm:px-12 md:px-20 lg:px-24 mt-13 pb-12 flex-1 flex flex-col gap-3">
+      <main className="max-w-full w-full px-6 sm:px-10 md:px-12 lg:px-14 mt-13 pb-12 flex-1 flex flex-col gap-3">
         {/* ──========================================= Top Navigation & Meta Header =========================================── */}
         <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
           <div className="flex items-center gap-2">
             <Link
               href="/articles"
-              className="text-xs font-mono text-text-secondary hover:text-black-secondary transition-colors flex items-center gap-1 bg-surface px-2.5 py-1 rounded-sm border border-border hover:border-primary"
+              className="text-xs font-mono text-text-secondary hover:text-black-primary transition-colors flex items-center gap-1 px-2.5 py-1 rounded-sm"
             >
-              &lt; BACK TO ARTICLES
+              &lt; BACK
             </Link>
           </div>
 
@@ -65,28 +65,28 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
             <span>•</span>
             <span>⏱️ {article.readTime}</span>
             <span>•</span>
-            <span className="px-2 py-0.5 bg-black-secondary text-white rounded-lg font-mono text-xs">
+            <span className="px-2 py-0.5 bg-border text-black-secondary rounded-md font-mono text-xs">
               ARTICLE #{article.id}
             </span>
           </div>
         </div>
 
         {/* ──========================================= Document Container Section =========================================── */}
-        <article className="bg-surface border border-black rounded-lg p-5 sm:p-10 flex flex-col gap-8 shadow-xs">
+        <article className="bg-surface border border-black rounded-lg p-5 sm:p-10 flex flex-col gap-2 shadow-xs">
           
           {/* ========================================== Article Header ========================================== */}
           <header className="flex flex-col gap-3 border-border pb-2">
             <div className="flex items-center gap-4">
-              <span className="px-4 py-0.5 bg-border border border-black text-black-primary text-xs font-black rounded-md uppercase tracking-wide">
+              <span className="px-4 py-0.5 bg-border border border-black text-black-secondary text-xs font-black rounded-md uppercase tracking-wide">
                 {article.category}
               </span>
               <span className="text-xs font-mono text-black-secondary">
-                by <strong className="text-black-primary">{article.author}</strong>
+                by <strong className="text-black-secondary">{article.author}</strong>
               </span>
             </div>
 
             <h1 className="text-xl sm:text-3xl font-pixel text-black-primary leading-tight tracking-wide">
-              {article.title}
+             ▮ {article.title}
             </h1>
 
             {article.subtitle && (

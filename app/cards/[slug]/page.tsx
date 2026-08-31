@@ -58,18 +58,18 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
   const displayUpdated = card.updatedAt || "2026-08-20";
 
   return (
-    <div className="min-h-screen bg-border text-text-primary font-mono flex flex-col">
+    <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
       <Header />
 
-      <main className="flex-1 w-full max-w-full mx-auto px-6 sm:px-12 md:px-16 lg:px-20 mt-6 sm:mt-12 pb-16 flex flex-col gap-6">
+      <main className="flex-1 w-full max-w-full mx-auto px-4 md:px-12 lg:px-14 mt-6 sm:mt-14 pb-14 flex flex-col gap-4">
         {/* ── Breadcrumb Navigation ─────────────────────────────────────── */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 text-black-secondary hover:text-black font-bold transition-colors bg-surface px-2.5 py-1 rounded-sm border border-border hover:border-black"
+              className="inline-flex items-center gap-1 text-black-secondary hover:text-black font-bold transition-colors px-2.5 py-1 rounded-sm hover:border-black"
             >
-              <span>&lt;</span> BACK TO TROVE
+              <span>&lt;</span> BACK
             </Link>
             <span className="text-black-secondary select-none">/</span>
             <Link

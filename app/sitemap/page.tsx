@@ -62,21 +62,21 @@ export default function SiteMap() {
                 </span>
               </div>
 
-              <div className="ml-4 sm:ml-9 space-y-3">
+              <div className="ml-4 sm:ml-8 space-y-3">
                 {/* Main Pages */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <div className="flex items-center gap-4 font-pixel text-xs text-primary uppercase">
                     <span>▷</span>  _MAIN PAGES & ROUTE ENDPOINTS//
                     
                   </div>
 
-                  <div className="ml-9 space-y-2 font-mono text-xs">
+                  <div className="ml-9 font-mono text-xs">
                     <Link
                       href="/"
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:underline font-bold">/ (HOME PAGE)</span>
+                      <span className="text-white group-hover:text-surface font-bold">/ (HOME PAGE)</span>
                       <span className="text-text-secondary text-[11px] ml-auto">[INDEX] [STATIC]</span>
                     </Link>
 
@@ -85,7 +85,7 @@ export default function SiteMap() {
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:underline">/articles (ARTICLES & BLOG)</span>
+                      <span className="text-white group-hover:text-surface">/articles (ARTICLES & BLOG)</span>
                       <span className="text-text-secondary text-[11px] ml-auto">[LISTING] [DYNAMIC]</span>
                     </Link>
 
@@ -94,7 +94,7 @@ export default function SiteMap() {
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:underline">/contact (CONTACT US)</span>
+                      <span className="text-white group-hover:text-surface">/contact (CONTACT US)</span>
                       <span className="text-text-secondary text-[11px] ml-auto">[FORM] [STATIC]</span>
                     </Link>
 
@@ -103,7 +103,7 @@ export default function SiteMap() {
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:underline">/help (HELP CENTER & FAQ)</span>
+                      <span className="text-white group-hover:text-surface">/help (HELP CENTER & FAQ)</span>
                       <span className="text-text-secondary text-[11px] ml-auto">[INFO] [STATIC]</span>
                     </Link>
                   </div>
@@ -115,15 +115,15 @@ export default function SiteMap() {
                     <span>▷</span> _ASSETS/ (DIGITAL VAULT ITEMS)//
                   </div>
 
-                  <div className="ml-9 grid grid-cols-1 md:grid-cols-1 gap-2 font-mono text-xs">
+                  <div className="ml-9 grid grid-cols-1 md:grid-cols-1 font-mono text-xs">
                     {CARDS.map((card) => (
                       <Link
                         key={card.id}
                         href={`/cards/${card.id}`}
-                        className="flex items-center justify-between p-1 bg-black-primary border border-black-secondary rounded-md hover:border-primary hover:text-primary transition-all group"
+                        className="flex items-center justify-between p-1 rounded-md hover:border-primary hover:text-primary transition-all group"
                       >
-                        <div className="flex items-center gap-8 overflow-hidden">
-                          <span className="text-primary font-bold">●●●●○○</span>
+                        <div className="flex items-center gap-4 overflow-hidden">
+                          <span className="text-primary font-bold">▢</span>
                           <span className="text-white group-hover:text-primary truncate">{card.title}</span>
                         </div>
                         <span className="text-[9px] text-border font-mono uppercase shrink-0 border border-border px-1.5 py-0.5 rounded-sm ml-2">
@@ -143,7 +143,7 @@ export default function SiteMap() {
                   <div className="ml-9 space-y-1.5 font-mono text-xs">
                     <Link
                       href="/articles/1"
-                      className="flex items-center justify-between p-2 bg-black-primary border border-black-secondary rounded-md hover:border-primary hover:text-primary transition-all group"
+                      className="flex items-center justify-between p-2  border border-black-secondary rounded-md hover:border-primary hover:text-primary transition-all group"
                     >
                       <div className="flex items-center gap-9">
                         <span className="text-primary font-bold">↳</span>

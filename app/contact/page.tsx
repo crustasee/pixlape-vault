@@ -44,7 +44,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-full bg-surface text-text-primary font-mono flex flex-col">
+    <div className="min-h-screen w-full max-w-full bg-white text-text-primary font-mono flex flex-col">
       <Header />
 
       {/* Main Content Container */}
