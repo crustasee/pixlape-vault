@@ -354,7 +354,7 @@ export const CARDS: CardDetail[] = [
   },
   {
     id: "product010",
-    title: "PixelShader FX Studio",
+    title: "SVG See x64 Thumbnails Viewer",
     thumbnail: "/img/minicard001.svg",
     banner: "/img/banner01.svg",
     icon: "/img/Icontemp1.svg",
@@ -367,17 +367,16 @@ export const CARDS: CardDetail[] = [
     author: "PIXLape Lab",
     updatedAt: "2026-08-22",
     description:
-      "Real-time GLSL shader editor and post-processing FX suite for retro pixel art, CRT curvature, scanlines, and chromatic aberration effects.",
+      "Windows explorer shell extension for preview and thumbnail support for SVG files.",
     features: [
-      "Live GLSL viewport preview with FPS counter",
-      "Preset CRT, Bloom, and Vignette pixel pipelines",
-      "Export LUT and HLSL shader codes for Unity/Godot",
+      "View SVG thumbnails in Windows Explorer",
+      "Preview SVG files",
+      "View SVG metadata",
     ],
     requirements: [
-      "Windows 10/11 or macOS 12+",
-      "Dedicated GPU with OpenGL 3.3+ support",
+      "Windows 10/11",
     ],
-    downloadUrl: "https://www.mediafire.com/file/f62118y1doja5eh/Pixlape-download.rar/file",
+    downloadUrl: "https://www.mediafire.com/file/fpn7jk7j4420hy6/svg_see_x64.rar/file",
     donateUrl: "https://trakteer.id",
   },
   {
