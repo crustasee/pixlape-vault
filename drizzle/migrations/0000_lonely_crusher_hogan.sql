@@ -1,6 +1,14 @@
-CREATE TYPE "public"."BadgeVariant" AS ENUM('free', 'paid', 'premium');--> statement-breakpoint
-CREATE TYPE "public"."CardCategory" AS ENUM('APPS', 'TOOLS', 'BRUSH', 'TEMPLATE', 'ICON', 'ART FOR SELL', 'OTHERS');--> statement-breakpoint
-CREATE TABLE "articles" (
+DO $$ BEGIN
+ CREATE TYPE "public"."BadgeVariant" AS ENUM('free', 'paid', 'premium');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."CardCategory" AS ENUM('APPS', 'TOOLS', 'BRUSH', 'TEMPLATE', 'ICON', 'ART FOR SELL', 'OTHERS');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "articles" (
 	"id" text PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"subtitle" text,
@@ -25,7 +33,7 @@ CREATE TABLE "articles" (
 	"updatedAt" timestamp (3) DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "digital_assets" (
+CREATE TABLE IF NOT EXISTS "digital_assets" (
 	"id" text PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"thumbnail" text NOT NULL,
@@ -51,7 +59,7 @@ CREATE TABLE "digital_assets" (
 	"updatedAt" timestamp (3) DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "team_members" (
+CREATE TABLE IF NOT EXISTS "team_members" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"role" text NOT NULL,
