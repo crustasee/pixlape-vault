@@ -31,7 +31,7 @@ export default function ArticleSection() {
   const sideArticles = ARTICLES.filter((a) => !a.featured);
 
   return (
-    <section className="mx-12 bg-border/40 border border-black rounded-md p-6 sm:p-6 mb-8 font-mono shadow-xs">
+    <section className="mx-12 bg-surface border border-black rounded-md p-6 sm:p-6 mb-8 font-mono shadow-xs">
       {/* ── Section Title Header ── */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black pb-4 mb-6">
         <h2 className="flex items-center gap-3 text-xl sm:text-2xl font-pixel text-black-secondary uppercase tracking-wide">
