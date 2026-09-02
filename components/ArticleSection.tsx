@@ -98,10 +98,10 @@ export default function ArticleSection() {
                     <button
                       type="button"
                       onClick={() => toggleLike(article.id)}
-                      className={`px-2 py-1 rounded-lg border text-xs font-mono font-semibold transition-all cursor-pointer flex items-center gap-2 ${
+                      className={`px-2 py-1 rounded-sm border text-xs font-mono font-semibold transition-all hover:scale-96 cursor-pointer flex items-center gap-2 ${
                         likeInfo.liked
-                          ? "bg-pink-200 text-red-500 font-bold"
-                          : "bg-surface text-black-primary hover:bg-pink-300 hover:text-red-600"
+                          ? "bg-pink-300 text-red-700 font-bold"
+                          : "bg-pink-200 text-black-secondary hover:bg-pink-300 hover:text-red-600"
                       }`}
                     >
                       <span>♥</span>
@@ -111,7 +111,7 @@ export default function ArticleSection() {
 
                     <Link
                       href={`/articles/${article.id}`}
-                      className="px-5 py-1 rounded-lg bg-primary/50 border border-green-600 text-green-700 text-xs font-mono font-bold hover:scale-[1.03] active:scale-[0.98] transition-all inline-block text-center cursor-pointer uppercase shadow-xs"
+                      className="px-5 py-1 rounded-sm bg-primary/50 border border-black-primary shadow-pixel text-green-700 text-xs font-mono font-bold hover:scale-96 active:scale-95 transition-all inline-block text-center cursor-pointer uppercase"
                     >
                       Read &gt;
                     </Link>
@@ -173,10 +173,10 @@ export default function ArticleSection() {
                     <button
                       type="button"
                       onClick={() => toggleLike(article.id)}
-                      className={`px-2 py-1 rounded-lg border text-xs font-mono transition-all cursor-pointer flex items-center gap-1 ${
+                      className={`px-2 py-1 rounded-sm border text-xs font-mono transition-all hover:scale-96 cursor-pointer flex items-center gap-1 ${
                         likeInfo.liked
-                          ? "bg-pink-200 text-pink-500 font-bold"
-                          : "bg-surface text-black-primary hover:bg-pink-300 hover:text-red-600"
+                          ? "bg-pink-300 text-red-700 font-bold"
+                          : "bg-pink-200 text-black-secondary hover:bg-pink-300 hover:text-red-600"
                       }`}
                     >
                       <span>♥</span>
@@ -185,7 +185,7 @@ export default function ArticleSection() {
 
                     <Link
                       href={`/articles/${article.id}`}
-                      className="px-2 py-1 rounded-lg bg-primary/50 border text-green-700 text-xs font-mono font-bold hover:scale-[1.05] transition-all inline-block text-center cursor-pointer uppercase"
+                      className="px-2 py-1 rounded-sm bg-primary/50 border border-black-primary shadow-pixel text-green-700 text-xs font-mono font-bold hover:scale-96 transition-all inline-block text-center cursor-pointer uppercase"
                     >
                       Read &gt;
                     </Link>
