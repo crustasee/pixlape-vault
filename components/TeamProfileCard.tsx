@@ -17,8 +17,8 @@ export default function TeamProfileCard({ member }: TeamProfileCardProps) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-black-secondary pb-3">
         
         {/* White Photo Image Frame Box */}
-        <div className="relative shrink-0 w-18 h-18 sm:w-24 sm:h-24 bg-white border border-black rounded-xl p-2 flex items-center justify-center shadow-sm group">
-          <div className="relative w-full h-full overflow-hidden rounded-xs bg-surface flex items-center justify-center">
+        <div className="relative shrink-0 w-18 h-18 sm:w-24 sm:h-24 bg-white border border-black flex items-center justify-center shadow-sm group">
+          <div className="relative w-full h-full overflow-hidden bg-surface flex items-center justify-center">
             <Image
               src={member.avatar}
               alt={member.name}

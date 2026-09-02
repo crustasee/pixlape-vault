@@ -75,15 +75,15 @@ export default function Sidebar({
               onClick={() => handleCategoryClick(cat)}
               className={`w-full py-2.5 px-4 border rounded-md text-sm font-mono font-semibold transition-all cursor-pointer flex items-center justify-between text-left ${
                 isSelected
-                  ? "bg-primary border-green-700 text-green-700 shadow-xs font-bold scale-[1.04]"
-                  : "bg-border border-black-primary text-black-primary hover:bg-black-secondary/40 hover:scale-98"
+                  ? "bg-primary border-green-700 text-green-700 shadow-pixel font-bold scale-103"
+                  : "bg-border border-black-primary text-black-primary hover:bg-emerald-200 hover:scale-98"
               }`}
             >
               <span>{cat}</span>
               <span
                 className={`text-xs px-2 py-0.5 rounded-md border font-black ${
                   isSelected
-                    ? "bg-green-600 text-white border-white"
+                    ? "bg-green-500 text-white border-white"
                     : "bg-surface text-black-secondary border-border"
                 }`}
               >

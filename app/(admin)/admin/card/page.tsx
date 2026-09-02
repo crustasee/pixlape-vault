@@ -232,15 +232,15 @@ export default function AssetCardsAdminPage() {
               className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
             >
               <div>
-                {/* Thumbnail header with border background, white grid texture, and centered product icon */}
-                <div
-                  className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center group/thumb"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
-                  }}
-                >
+                {/* Thumbnail header with background image and centered product icon */}
+                <div className="h-44 relative overflow-hidden bg-surface border-b border-black-primary flex items-center justify-center group/thumb">
+                  <Image
+                    src={asset.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
+                    alt={`${asset.title} background`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-cover"
+                  />
                   <div className="absolute top-2 right-2 z-20">
                     <span className="text-[10px] font-bold px-1.5 py-0.5 bg-black-primary/90 text-white rounded backdrop-blur-xs">
                       #{asset.id}
@@ -249,7 +249,7 @@ export default function AssetCardsAdminPage() {
 
                   <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                     <Image
-                      src={asset.icon || asset.thumbnail || '/img/Icontemp1.svg'}
+                      src={asset.icon || '/img/Icontemp1.svg'}
                       alt={`${asset.title} icon`}
                       width={80}
                       height={80}

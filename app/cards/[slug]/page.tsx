@@ -116,12 +116,12 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           {/* Header Identity Row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white border border-black rounded-sm flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+              <div className="w-16 h-16 sm:w-16 sm:h-16 bg-surface flex items-center justify-center shrink-0 overflow-hidden hover:scale-105 transition-transform cursor-pointer">
                 <Image
                   src={card.icon}
                   alt={`${card.title} icon`}
-                  width={64}
-                  height={64}
+                  width={100}
+                  height={100}
                   className="object-cover w-full h-full"
                   unoptimized
                 />
