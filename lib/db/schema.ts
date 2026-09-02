@@ -8,6 +8,7 @@ import {
   timestamp,
   jsonb,
   pgEnum,
+  serial,
 } from "drizzle-orm/pg-core";
 import type {
   ArticleSectionContent,
@@ -132,6 +133,21 @@ export const teamMembers = pgTable("team_members", {
     .$onUpdate(() => new Date()),
 });
 
+// ────────────────────────────────────────── Users ──────────────────────────────────────────
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  createdAt: timestamp("createdAt", { precision: 3, mode: "date" })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updatedAt", { precision: 3, mode: "date" })
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
 // ────────────────────────────────────────── Types ──────────────────────────────────────────
 
 export type DigitalAssetSelect = typeof digitalAssets.$inferSelect;
@@ -142,3 +158,7 @@ export type ArticleInsert = typeof articles.$inferInsert;
 
 export type TeamMemberSelect = typeof teamMembers.$inferSelect;
 export type TeamMemberInsert = typeof teamMembers.$inferInsert;
+
+export type UserSelect = typeof users.$inferSelect;
+export type UserInsert = typeof users.$inferInsert;
+
