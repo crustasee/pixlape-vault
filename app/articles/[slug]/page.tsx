@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getArticleById, getAdjacentArticles } from "@/lib/db/article";
 import { notFound } from "next/navigation";
+import { FullscreenIcon } from "lucide-react";
 
 export interface ArticleDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -97,12 +98,13 @@ export default function ArticleDetailPage({ params }: ArticleDetailPageProps) {
           </header>
 
           {/* ========================================== Cover Hero Banner Image ========================================== */}
-          <div className="relative w-full h-64 sm:h-75 rounded-md overflow-hidden border border-black bg-white flex items-center justify-center p-5">
+          <div className="relative w-full h-64 rounded-md overflow-hidden border border-black bg-white">
             <Image
               src={article.image}
               alt={article.title}
               fill
-              className="object-contain p-2"
+              sizes="(max-width: 768px) 100vw, 800px"
+              className="object-cover"
               priority
             />
           </div>

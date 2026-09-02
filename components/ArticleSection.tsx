@@ -55,14 +55,15 @@ export default function ArticleSection() {
                 className="rounded-md border border-black p-5 flex flex-col sm:flex-row gap-5 min-h-55 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-md transition-all duration-200"
               >
                 {/* Image Frame Box */}
-                <div className="w-full sm:w-47.5 h-40 sm:h-auto bg-white border border-black rounded-sm flex items-center justify-center shrink-0 overflow-hidden relative p-3">
+                <div className="w-full sm:w-50 h-40 sm:h-auto self-stretch bg-white border border-black rounded-sm shrink-0 overflow-hidden relative">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-contain p-2"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                    className="object-cover"
                   />
-                  <span className="absolute top-2 left-2 px-2 py-0.5 bg-black-primary text-white text-[10px] font-pixel rounded-xs uppercase">
+                  <span className="absolute top-2 left-2 px-2 py-0.5 bg-primary text-black-primary text-[10px] font-pixel rounded-sm uppercase z-10 shadow-xs">
                     {article.category}
                   </span>
                 </div>
@@ -100,7 +101,7 @@ export default function ArticleSection() {
                       className={`px-2 py-1 rounded-lg border text-xs font-mono font-semibold transition-all cursor-pointer flex items-center gap-2 ${
                         likeInfo.liked
                           ? "bg-pink-200 text-red-500 font-bold"
-                          : "bg-surface text-black-primary hover:bg-pink-300 hover:text-white"
+                          : "bg-surface text-black-primary hover:bg-pink-300 hover:text-red-600"
                       }`}
                     >
                       <span>♥</span>
@@ -136,12 +137,13 @@ export default function ArticleSection() {
                 className="rounded-md border border-black p-4 flex gap-4 min-h-40 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-sm transition-all duration-200"
               >
                 {/* Image Icon Box */}
-                <div className="w-30 self-stretch bg-white border border-black rounded-sm flex items-center justify-center shrink-0 overflow-hidden relative p-2">
+                <div className="w-30 self-stretch bg-white border border-black rounded-sm shrink-0 overflow-hidden relative">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-contain p-1"
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    className="object-cover"
                   />
                 </div>
 
