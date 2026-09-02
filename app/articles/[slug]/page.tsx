@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getArticleById, getAdjacentArticles } from "@/lib/db/article";
 import { notFound } from "next/navigation";
-import { FullscreenIcon } from "lucide-react";
 
 export interface ArticleDetailPageProps {
   params: Promise<{ slug: string }>;

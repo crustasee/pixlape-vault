@@ -41,7 +41,6 @@ export default function ImageUpload({
   onChange,
   label = "Asset Image",
   folder = "products",
-  presets,
   aspectRatio = "auto",
   recommendedSize = "PNG, JPG, WEBP or SVG (Max 5MB)",
   className = "",
