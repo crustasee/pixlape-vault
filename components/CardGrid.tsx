@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
-import { CARDS, CardItem } from "@/lib/db/card";
+import { CARDS, CardDetail, CardItem } from "@/lib/db/card";
 
 interface CardGridProps {
-  cards?: CardItem[];
+  cards?: (CardItem | CardDetail)[];
   selectedCategory?: string | null;
   limit?: number;
   itemsPerPage?: number;
@@ -79,52 +79,89 @@ export default function CardGrid({
 
       {/* Card Grid */}
       {displayCards.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-5">
-          {displayCards.map((card) => (
-            <div
-              key={card.id}
-              className="bg-surface rounded-md border border-black overflow-hidden flex flex-col hover:scale-102 hover:border-primary hover:bg-green-100 hover:shadow-lg transition-all duration-200"
-            >
-              {/* Card thumbnail with background image and centered product icon */}
-              <div className="h-48 relative overflow-hidden bg-surface border-b border-black flex items-center justify-center group/thumb">
-                <Image
-                  src={card.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
-                  alt={`${card.title} background`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  className="object-cover"
-                />
-                <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <Image
-                    src={card.icon || "/img/Icontemp1.svg"}
-                    alt={`${card.title} icon`}
-                    width={80}
-                    height={80}
-                    unoptimized
-                    className="object-contain w-full h-full drop-shadow-md"
-                  />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-5 font-mono">
+          {displayCards.map((card) => {
+            const detail = card as CardDetail;
+            return (
+              <div
+                key={card.id}
+                className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
+              >
+                <div>
+                  {/* Thumbnail header with background image and centered product icon */}
+                  <div className="h-24 relative overflow-hidden bg-surface border-b border-black-primary flex items-center justify-center group/thumb">
+                    <Image
+                      src={card.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
+                      alt={`${card.title} background`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute top-2 right-2 z-20">
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-100 text-green-600 rounded backdrop-blur-xs">
+                        #{card.id}
+                      </span>
+                    </div>
+
+                    <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                      <Image
+                        src={card.icon || "/img/Icontemp1.svg"}
+                        alt={`${card.title} icon`}
+                        width={80}
+                        height={80}
+                        unoptimized
+                        className="object-contain w-full h-full drop-shadow-md"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Badge & Category tag */}
+                  <div className="px-4 pt-3 flex items-center justify-between">
+                    <Badge variant={card.badge} />
+                    <CategoryBadge category={card.categories[0] || "TOOLS"} />
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="p-4 pt-2.5 flex flex-col gap-2">
+                    <Link href={`/cards/${card.id}`}>
+                      <h3 className="font-bold text-sm text-black-primary group-hover:text-emerald-700 leading-snug line-clamp-1">
+                        {card.title}
+                      </h3>
+                    </Link>
+                    <p className="text-xs text-black-secondary line-clamp-2 leading-relaxed">
+                      {detail.description || "Digital vault asset package with complete resources and documentation."}
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-2 mt-1 text-[11px] text-black-secondary bg-white p-2.5 rounded border border-border">
+                      <div>
+                        <span className="text-[10px] text-black-secondary/80 block">FORMAT</span>
+                        <span className="font-bold text-black-primary truncate block">
+                          {detail.fileType || detail.fileFormat || ".ZIP"}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-black-secondary/80 block">VERSION / SIZE</span>
+                        <span className="font-bold text-black-primary truncate block">
+                          {detail.version || "v1.0"} ({detail.fileSize || "10MB"})
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Toolbar */}
+                <div className="p-3 bg-white border-border flex items-center justify-center">
+
+                  <Link
+                    href={`/cards/${card.id}`}
+                    className="px-5 py-1 bg-border border border-black-primary text-black-primary text-xs font-mono font-bold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-all text-center block"
+                  >
+                    VIEW DETAIL &gt;
+                  </Link>
                 </div>
               </div>
-
-              {/* Badge & Category tag */}
-              <div className="px-4 pt-3 flex items-center justify-between">
-                <Badge variant={card.badge} />
-                <CategoryBadge category={card.categories[0]} />
-              </div>
-
-              <div className="p-4 flex flex-col gap-2 flex-1 justify-between">
-                <h2 className="text-sm font-mono font-bold text-text-primary line-clamp-2">
-                  {card.title}
-                </h2>
-                <Link
-                  href={`/cards/${card.id}`}
-                  className="w-full py-2 bg-border border border-black-primary text-black-primary text-xs font-mono font-semibold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-all duration-200 text-center block"
-                >
-                  VIEW DETAIL PAGE &gt;
-                </Link>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         /* Empty State */

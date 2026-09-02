@@ -32,12 +32,6 @@ const CATEGORIES = [
   'COMMUNITY',
 ];
 
-const ARTICLE_IMAGES = [
-  { label: 'Article Preset 1 (Isometric Cyber)', path: '/img/article1.svg' },
-  { label: 'Article Preset 2 (Retro Vector)', path: '/img/article2.svg' },
-  { label: 'Article Preset 3 (Grid Matrix)', path: '/img/article3.svg' },
-];
-
 export default function AddArticlePage() {
   const router = useRouter();
   const [title, setTitle] = useState('');
@@ -47,7 +41,7 @@ export default function AddArticlePage() {
   const [author, setAuthor] = useState('Brandon Herera');
   const [authorRole, setAuthorRole] = useState('Lead Interface Architect');
   const [readTime, setReadTime] = useState('4 MIN READ');
-  const [image, setImage] = useState('/img/article1.svg');
+  const [image, setImage] = useState('');
   const [featured, setFeatured] = useState(false);
   const { toasts, addToast, dismissToast } = useToast();
 
@@ -232,14 +226,13 @@ export default function AddArticlePage() {
               </div>
             </div>
 
-            {/* Cover Image Preset & Custom Upload */}
+            {/* Cover Image Upload */}
             <div className="border-t border-border pt-3">
               <ImageUpload
                 name="image"
                 label="ARTICLE COVER IMAGE"
                 value={image}
                 onChange={setImage}
-                presets={ARTICLE_IMAGES}
                 folder="articles"
                 aspectRatio="banner"
                 recommendedSize="1200x630 or 16:9 banner (PNG, JPG, WEBP, SVG)"
@@ -305,7 +298,7 @@ export default function AddArticlePage() {
             </div>
 
             {/* Card Content */}
-            <div className="bg-white border border-black-primary rounded-md p-4 flex flex-col justify-between shadow-pixel">
+            <div className="bg-white border border-black-primary rounded-md p-4 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2 border-b border-border pb-2">
                   <span className="text-[10px] font-bold px-2 py-0.5 bg-black-primary text-white rounded">
@@ -348,10 +341,10 @@ export default function AddArticlePage() {
             <div className="mt-1 flex items-center justify-center p-2 rounded bg-white border border-border">
               <div className="flex items-center gap-2">
                 <Image
-                  src={image || '/img/article1.svg'}
+                  src={image || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330171/minicard007.svg'}
                   alt="Cover Preview"
-                  width={36}
-                  height={36}
+                  width={100}
+                  height={100}
                   className="rounded object-contain shrink-0"
                 />
                 <span className="text-[11px] text-black-secondary font-mono truncate">

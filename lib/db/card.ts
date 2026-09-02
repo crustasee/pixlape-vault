@@ -239,7 +239,7 @@ export const CARDS: CardDetail[] = [
     title: "ArtCanvas Poster",
     thumbnail: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg",
     banner: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788327247/banner09348.jpg",
-    icon: "/img/Icontemp2.svg",
+    icon: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788288187/Image2Icon_2.png",
     badge: "free",
     categories: ["ART FOR SELL"],
     version: "v1.0.0",

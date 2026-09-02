@@ -36,26 +36,6 @@ const CATEGORIES: CardCategory[] = [
 
 const FORMATS = ['.ZIP', '.RAR', '.PSD', '.AI', '.EPS', '.SVG', '.PNG', '.APK / .ZIP', 'OTHERS'];
 
-const THUMBNAIL_PRESETS = [
-  { label: 'Minicard 01 (App)', path: '/img/minicard001.svg' },
-  { label: 'Minicard 02 (Brush)', path: '/img/minicard002.svg' },
-  { label: 'Minicard 03 (Icons)', path: '/img/minicard003.svg' },
-  { label: 'Minicard 04 (Layout)', path: '/img/minicard004.svg' },
-  { label: 'Minicard 05 (Dev)', path: '/img/minicard005.svg' },
-  { label: 'Minicard 06 (Poster)', path: '/img/minicard006.svg' },
-  { label: 'Minicard 07 (Bundle)', path: '/img/minicard007.svg' },
-];
-
-const BANNER_PRESETS = [
-  { label: 'Banner 01 (Green/Black)', path: '/img/banner01.svg' },
-  { label: 'Temp Banner (Retro Grid)', path: '/img/tempbnr.svg' },
-];
-
-const ICON_PRESETS = [
-  { label: 'Icon Temp 1 (Floppy)', path: '/img/Icontemp1.svg' },
-  { label: 'Icon Temp 2 (Palette)', path: '/img/Icontemp2.svg' },
-];
-
 export default function AddAssetCardPage() {
   const router = useRouter();
   const [productId, setProductId] = useState('');
@@ -70,9 +50,9 @@ export default function AddAssetCardPage() {
   const [license, setLicense] = useState('Free Commercial');
   const [author, setAuthor] = useState('PIXLape Lab');
 
-  const [thumbnail, setThumbnail] = useState('/img/minicard001.svg');
-  const [banner, setBanner] = useState('/img/banner01.svg');
-  const [icon, setIcon] = useState('/img/Icontemp1.svg');
+  const [thumbnail, setThumbnail] = useState('https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg');
+  const [banner, setBanner] = useState('');
+  const [icon, setIcon] = useState('');
 
   const [downloadUrl, setDownloadUrl] = useState('');
   const [donateUrl, setDonateUrl] = useState('https://trakteer.id');
@@ -186,7 +166,7 @@ export default function AddAssetCardPage() {
                 <Tag className="w-4 h-4 text-emerald-700" weight="bold" />
                 ++ ASSET SPECIFICATION FORM ++
               </span>
-              <span className="text-[10px] px-2 py-0.5 bg-black-primary text-primary font-bold rounded">
+              <span className="text-[10px] px-2 py-0.5 bg-primary text-black-primary font-bold rounded">
                 NEW DRAFT
               </span>
             </div>
@@ -379,7 +359,6 @@ export default function AddAssetCardPage() {
                 label="THUMBNAIL"
                 value={thumbnail}
                 onChange={setThumbnail}
-                presets={THUMBNAIL_PRESETS}
                 folder="thumbnails"
                 aspectRatio="square"
                 recommendedSize="400x300 recommended (PNG, SVG, WEBP)"
@@ -390,7 +369,6 @@ export default function AddAssetCardPage() {
                 label="DETAIL BANNER"
                 value={banner}
                 onChange={setBanner}
-                presets={BANNER_PRESETS}
                 folder="banners"
                 aspectRatio="banner"
                 recommendedSize="1200x500 banner (PNG, SVG, WEBP)"
@@ -401,7 +379,6 @@ export default function AddAssetCardPage() {
                 label="ASSET ICON"
                 value={icon}
                 onChange={setIcon}
-                presets={ICON_PRESETS}
                 folder="icons"
                 aspectRatio="icon"
                 recommendedSize="128x128 pixel/vector icon"
@@ -542,10 +519,10 @@ export default function AddAssetCardPage() {
             </div>
 
             {/* Preview Card Component */}
-            <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col shadow-pixel">
+            <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col">
               {/* Card thumbnail with border background, white grid texture, and centered product icon */}
               <div
-                className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center"
+                className="h-44 relative overflow-hidden bg-border border-black-primary flex items-center justify-center"
                 style={{
                   backgroundImage:
                     "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
@@ -554,10 +531,10 @@ export default function AddAssetCardPage() {
               >
                 <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300">
                   <Image
-                    src={icon || thumbnail || '/img/Icontemp1.svg'}
+                    src={icon || thumbnail || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330203/icon_admin2.svg'}
                     alt="Asset Icon Preview"
-                    width={80}
-                    height={80}
+                    width={100}
+                    height={100}
                     unoptimized
                     className="object-contain w-full h-full drop-shadow-md"
                   />

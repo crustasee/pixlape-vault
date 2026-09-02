@@ -36,7 +36,7 @@ export function AdminLayout({
           <main className="flex-1 w-full min-w-0 flex flex-col gap-2">
             {/* Breadcrumb & Title Bar */}
             {(title || breadcrumbs.length > 0) && (
-              <div className="bg-surface border border-black-primary rounded-md p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+              <div className="bg-border border-black-primary rounded-md p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
                 <div className="flex flex-col gap-1">
                   {/* Breadcrumb row */}
                   {breadcrumbs.length > 0 && (

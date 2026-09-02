@@ -193,7 +193,7 @@ export default function ImageUpload({
     }
     return (
       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-100 border border-zinc-400 text-zinc-800 text-[10px] font-mono font-bold">
-        <ImageIcon size={10} /> PRESET / LOCAL
+        <ImageIcon size={10} /> DIRECT / CUSTOM URL
       </span>
     );
   };
@@ -250,30 +250,6 @@ export default function ImageUpload({
           </button>
         </div>
       </div>
-
-      {/* Preset Pickers if available */}
-      {presets && presets.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 p-1.5 bg-zinc-50 border border-dashed border-border rounded text-[11px]">
-          <span className="text-[10px] text-black-secondary font-bold self-center mr-1">PRESETS:</span>
-          {presets.map((preset) => {
-            const isSelected = preview === preset.path;
-            return (
-              <button
-                key={preset.path}
-                type="button"
-                onClick={() => updateImage(preset.path)}
-                className={`px-2 py-0.5 rounded text-[10px] transition-all cursor-pointer ${
-                  isSelected
-                    ? "bg-border text-black-primary font-bold border border-black-primary"
-                    : "bg-white text-black-secondary border border-border hover:border-black-primary hover:text-black-primary"
-                }`}
-              >
-                {preset.label}
-              </button>
-            );
-          })}
-        </div>
-      )}
 
       {/* Main Upload Dropzone / Preview Area */}
       <div
@@ -425,8 +401,8 @@ export default function ImageUpload({
             type="text"
             value={preview}
             onChange={(e) => updateImage(e.target.value)}
-            placeholder="Custom URL / path (e.g. /img/... or https://...)"
-            className="w-full pl-7 pr-2.5 py-1.5 border border-border rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none"
+            placeholder="Paste direct Image URL (e.g. https://res.cloudinary.com/... or https://...)"
+            className="w-full pl-7 pr-2.5 py-1.5 border border-border rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none focus:border-black-primary"
           />
         </div>
       </div>

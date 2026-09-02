@@ -24,12 +24,6 @@ import {
 
 const CATEGORIES = ['DEV', 'SYSTEMS', 'DESIGN', 'ASSETS', 'UX', 'TUTORIAL', 'NEWS', 'COMMUNITY'];
 
-const ARTICLE_IMAGES = [
-  { label: 'Article 1 (Isometric Cyber)', path: '/img/article1.svg' },
-  { label: 'Article 2 (Retro Vector)', path: '/img/article2.svg' },
-  { label: 'Article 3 (Grid Matrix)', path: '/img/article3.svg' },
-];
-
 export default function EditArticlePage() {
   const router = useRouter();
   const params = useParams();
@@ -282,14 +276,13 @@ export default function EditArticlePage() {
               </div>
             </div>
 
-            {/* Cover Image Preset & Custom Upload */}
+            {/* Cover Image Upload */}
             <div className="border-t border-border pt-3">
               <ImageUpload
                 name="image"
                 label="ARTICLE COVER IMAGE"
                 value={image}
                 onChange={setImage}
-                presets={ARTICLE_IMAGES}
                 folder="articles"
                 aspectRatio="banner"
                 recommendedSize="1200x630 or 16:9 banner (PNG, JPG, WEBP, SVG)"

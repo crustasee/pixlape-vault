@@ -233,7 +233,7 @@ export default function AssetCardsAdminPage() {
             >
               <div>
                 {/* Thumbnail header with background image and centered product icon */}
-                <div className="h-44 relative overflow-hidden bg-surface border-b border-black-primary flex items-center justify-center group/thumb">
+                <div className="h-24 relative overflow-hidden bg-surface border-b border-black-primary flex items-center justify-center group/thumb">
                   <Image
                     src={asset.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
                     alt={`${asset.title} background`}

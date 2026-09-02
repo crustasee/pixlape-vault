@@ -256,7 +256,7 @@ export default function IntegrationsPage() {
                 </div>
 
                 {/* Description */}
-                <p className="text-xs text-black-secondary leading-relaxed mb-4">
+                <p className="text-xs text-black-secondary leading-relaxed mb-4 border border-black-primary p-2 rounded bg-white">
                   {item.description}
                 </p>
               </div>

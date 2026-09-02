@@ -40,26 +40,6 @@ const CATEGORIES: CardCategory[] = [
 
 const FORMATS = ['.ZIP', '.RAR', '.PSD', '.AI', '.EPS', '.SVG', '.PNG', '.APK / .ZIP', 'OTHERS'];
 
-const THUMBNAIL_PRESETS = [
-  { label: 'Minicard 01 (App)', path: '/img/minicard001.svg' },
-  { label: 'Minicard 02 (Brush)', path: '/img/minicard002.svg' },
-  { label: 'Minicard 03 (Icons)', path: '/img/minicard003.svg' },
-  { label: 'Minicard 04 (Layout)', path: '/img/minicard004.svg' },
-  { label: 'Minicard 05 (Dev)', path: '/img/minicard005.svg' },
-  { label: 'Minicard 06 (Poster)', path: '/img/minicard006.svg' },
-  { label: 'Minicard 07 (Bundle)', path: '/img/minicard007.svg' },
-];
-
-const BANNER_PRESETS = [
-  { label: 'Banner 01 (Green/Black)', path: '/img/banner01.svg' },
-  { label: 'Temp Banner (Retro Grid)', path: '/img/tempbnr.svg' },
-];
-
-const ICON_PRESETS = [
-  { label: 'Icon Temp 1 (Floppy)', path: '/img/Icontemp1.svg' },
-  { label: 'Icon Temp 2 (Palette)', path: '/img/Icontemp2.svg' },
-];
-
 export default function EditAssetPage() {
   const router = useRouter();
   const params = useParams();
@@ -430,7 +410,6 @@ export default function EditAssetPage() {
                 label="THUMBNAIL"
                 value={thumbnail}
                 onChange={setThumbnail}
-                presets={THUMBNAIL_PRESETS}
                 folder="thumbnails"
                 aspectRatio="square"
                 recommendedSize="400x300 recommended (PNG, SVG, WEBP)"
@@ -441,7 +420,6 @@ export default function EditAssetPage() {
                 label="DETAIL BANNER"
                 value={banner}
                 onChange={setBanner}
-                presets={BANNER_PRESETS}
                 folder="banners"
                 aspectRatio="banner"
                 recommendedSize="1200x500 banner (PNG, SVG, WEBP)"
@@ -452,7 +430,6 @@ export default function EditAssetPage() {
                 label="ASSET ICON"
                 value={icon}
                 onChange={setIcon}
-                presets={ICON_PRESETS}
                 folder="icons"
                 aspectRatio="icon"
                 recommendedSize="128x128 pixel/vector icon"
@@ -585,7 +562,7 @@ export default function EditAssetPage() {
 
         {/* Right Live Card Preview (1 col) */}
         <div className="flex flex-col gap-4">
-          <div className="border border-black-primary rounded-md p-4 bg-surface flex flex-col gap-3 shadow-sm">
+          <div className="border border-black-primary rounded-md p-4 bg-surface flex flex-col gap-3">
             <div className="flex items-center justify-between border-b border-border pb-2">
               <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
                 <Eye className="w-4 h-4 text-emerald-700" weight="bold" />
@@ -597,7 +574,7 @@ export default function EditAssetPage() {
             </div>
 
             {/* Preview Card Component */}
-            <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col shadow-pixel">
+            <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col">
               {/* Card thumbnail with border background, white grid texture, and centered product icon */}
               <div
                 className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center"
