@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "PIXLAPE TROVE",
-  description: "Discover and download premium digital assets — apps, tools, brushes, templates, icons, and more.",
+  description: "Discover and download premium digital assets — apps, tools, brushes, templates, icons, and artwork.",
 };
 
 export default function RootLayout({
