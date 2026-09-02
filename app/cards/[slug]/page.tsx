@@ -96,9 +96,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
         </div>
 
         {/* ── Main Asset Container ─────────────────────────────────────── */}
-        <section className="bg-surface border border-black rounded-lg flex flex-col gap-6 p-4 sm:p-6 shadow-xs">
+        <section className="bg-surface border border-black-secondary rounded-lg flex flex-col gap-6 p-4 sm:p-6 shadow-xs">
           {/* Hero Banner */}
-          <div className="relative w-full h-44 sm:h-56 md:h-64 rounded-sm overflow-hidden bg-white border border-black group">
+          <div className="relative w-full h-46 sm:h-58 md:h-66 rounded-sm overflow-hidden bg-white border border-black group">
             <Image
               src={card.banner}
               alt={`${card.title} banner`}
@@ -107,7 +107,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               priority
             />
             <div className="absolute top-3 right-3 flex items-center gap-2">
-              <span className="bg-black/80 backdrop-blur-xs text-white border border-black px-2.5 py-1 text-[11px] font-mono font-bold rounded-xs shadow-xs uppercase">
+              <span className="bg-black/80 backdrop-blur-xs text-white border border-black px-2.5 py-1 text-[10px] font-mono font-bold rounded-sm uppercase">
                 {primaryCategory}
               </span>
             </div>
@@ -135,8 +135,8 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                   {card.categories.map((tag) => (
                     <CategoryBadge key={tag} category={tag} />
                   ))}
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-bold bg-white text-black-secondary border border-border rounded-xs">
-                    {displayVersion}
+                  <span className="px-2 py-1 text-[10px] font-mono font-bold bg-white text-black-secondary border border-border rounded-md">
+                    version {displayVersion}
                   </span>
                   <span className="text-xs text-black-secondary font-mono">
                     by <strong className="text-black-primary">{displayAuthor}</strong>
@@ -149,11 +149,11 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           {/* ── Two-Column Layout: Description Content + Sidebar ────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
             {/* Left Main Content Column */}
-            <div className="lg:col-span-8 flex flex-col gap-3 bg-white rounded-lg border border-black">
+            <div className="lg:col-span-9 flex flex-col gap-3 bg-white rounded-lg border border-border">
               {/* About & Overview Card */}
               <div className="p-5 sm:p-6 flex flex-col gap-3">
                 <div className="flex items-center justify-between border-b border-border pb-3">
-                  <h2 className="font-black text-xs sm:text-sm text-black-primary uppercase tracking-wide flex items-center gap-2">
+                  <h2 className="font-black text-xs sm:text-sm text-black-primary uppercase tracking-wide flex items-center gap-4">
                     <span>≡</span> DESCRIPTION
                   </h2>
                   <span className="text-[11px] font-mono font-bold text-black-secondary uppercase bg-surface px-2 py-0.5 border border-border rounded-xs">
@@ -256,9 +256,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
             </div>
 
             {/* Right Sidebar Column */}
-            <div className="lg:col-span-4 flex flex-col gap-5 sticky top-6">
+            <div className="lg:col-span-3 flex flex-col gap-3 sticky top-6">
               {/* Primary Download Action Card */}
-              <div className="bg-white border border-black rounded-md p-4 flex flex-col gap-3 shadow-xs">
+              <div className="bg-green-100 border rounded-md p-4 flex flex-col gap-3 shadow-xs">
                 <div className="flex items-center justify-between border-b border-border pb-2">
                   <span className="text-xs font-mono font-bold text-black-secondary uppercase tracking-wider">
                     Package Download
@@ -287,15 +287,15 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Asset Information Specifications Card */}
-              <div className="bg-white border border-black rounded-md p-4 flex flex-col gap-3 shadow-xs">
+              <div className="bg-white border rounded-md p-6 flex flex-col gap-3 shadow-xs">
                 <h3 className="font-pixel text-xs text-black-primary uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
                   <span>≡</span> ASSET INFORMATION
                 </h3>
 
-                <ul className="flex flex-col gap-2.5 text-xs font-mono text-text-secondary">
+                <ul className="flex flex-col gap-2 text-xs font-mono text-text-secondary">
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
                     <span className="font-bold text-black-primary">Category:</span>
-                    <span className="bg-surface px-1.5 py-0.5 border border-border rounded-xs text-[11px] font-bold text-black-primary uppercase">
+                    <span className="bg-surface px-2 py-0.5 border border-border rounded-xs text-[11px] font-bold text-black-primary uppercase">
                       {card.categories.join(", ")}
                     </span>
                   </li>
@@ -332,7 +332,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Support Creator Donation Box */}
-              <div className="bg-pink-50 border border-red-400 rounded-md p-4 flex flex-col gap-3 shadow-xs">
+              <div className="bg-pink-50 border border-red-300 rounded-md p-4 flex flex-col gap-3 shadow-xs">
                 <div className="flex items-center gap-2 border-b border-pink-200 pb-2">
                   <span className="text-base select-none">💖</span>
                   <h4 className="font-pixel text-xs text-black-primary uppercase">Support Creator</h4>
@@ -343,7 +343,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-pink-300 text-red-600 border border-red-600 shadow-pixel text-xs font-pixel rounded-md hover:bg-pink-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-red-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
                   DONATE →
                 </button>

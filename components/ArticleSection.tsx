@@ -33,7 +33,7 @@ export default function ArticleSection() {
   return (
     <section className="mx-12 bg-surface border border-black rounded-md p-6 sm:p-6 mb-8 font-mono shadow-xs">
       {/* ── Section Title Header ── */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black pb-4 mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4 mb-6">
         <h2 className="flex items-center gap-3 text-xl sm:text-2xl font-pixel text-black-secondary uppercase tracking-wide">
           <span className="text-border font-bold">○○○●●</span>
           <span>_BLOG_ARTICLE_VAULT</span>
@@ -52,10 +52,10 @@ export default function ArticleSection() {
             return (
               <div
                 key={article.id}
-                className="rounded-md border border-black p-5 flex flex-col sm:flex-row gap-5 min-h-55 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-md transition-all duration-200"
+                className="rounded-md border p-4 flex flex-col sm:flex-row gap-5 min-h-55 bg-white hover:scale-101 hover:shadow-md transition-all duration-200"
               >
                 {/* Image Frame Box */}
-                <div className="w-full sm:w-50 h-40 sm:h-auto self-stretch bg-white border border-black rounded-sm shrink-0 overflow-hidden relative">
+                <div className="w-full sm:w-70 h-40 sm:h-auto self-stretch bg-white border rounded-sm shrink-0 overflow-hidden relative">
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -94,7 +94,7 @@ export default function ArticleSection() {
                   </div>
 
                   {/* Action Buttons: Like & Read */}
-                  <div className="flex items-center justify-between pt-2 border-t border-border mt-auto">
+                  <div className="flex items-center justify-between pt-2 mt-auto">
                     <button
                       type="button"
                       onClick={() => toggleLike(article.id)}
@@ -134,10 +134,10 @@ export default function ArticleSection() {
             return (
               <div
                 key={article.id}
-                className="rounded-md border border-black p-4 flex gap-4 min-h-40 bg-surface hover:bg-white hover:scale-[1.01] hover:shadow-sm transition-all duration-200"
+                className="rounded-md border p-4 flex gap-4 min-h-40 bg-white hover:scale-101 hover:shadow-sm transition-all duration-200"
               >
                 {/* Image Icon Box */}
-                <div className="w-30 self-stretch bg-white border border-black rounded-sm shrink-0 overflow-hidden relative">
+                <div className="w-30 self-stretch bg-white border rounded-sm shrink-0 overflow-hidden relative">
                   <Image
                     src={article.image}
                     alt={article.title}

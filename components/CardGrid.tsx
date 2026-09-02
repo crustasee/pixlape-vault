@@ -85,11 +85,11 @@ export default function CardGrid({
             return (
               <div
                 key={card.id}
-                className="bg-surface border border-black-primary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
+                className="bg-surface border border-black-secondary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
               >
                 <div>
                   {/* Thumbnail header with background image and centered product icon */}
-                  <div className="h-24 relative overflow-hidden bg-surface border-b border-black-primary flex items-center justify-center group/thumb">
+                  <div className="h-28 relative overflow-hidden bg-surface border flex items-center justify-center group/thumb">
                     <Image
                       src={card.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
                       alt={`${card.title} background`}
@@ -98,7 +98,7 @@ export default function CardGrid({
                       className="object-cover"
                     />
                     <div className="absolute top-2 right-2 z-20">
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-emerald-100 text-green-600 rounded backdrop-blur-xs">
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 bg-white border border-border text-border rounded backdrop-blur-xs">
                         #{card.id}
                       </span>
                     </div>
@@ -107,8 +107,8 @@ export default function CardGrid({
                       <Image
                         src={card.icon || "/img/Icontemp1.svg"}
                         alt={`${card.title} icon`}
-                        width={80}
-                        height={80}
+                        width={100}
+                        height={100}
                         unoptimized
                         className="object-contain w-full h-full drop-shadow-md"
                       />
@@ -154,7 +154,7 @@ export default function CardGrid({
 
                   <Link
                     href={`/cards/${card.id}`}
-                    className="px-5 py-1 bg-border border border-black-primary text-black-primary text-xs font-mono font-bold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-all text-center block"
+                    className="px-8 py-1 bg-surface border border-black-secondary text-black-secondary text-xs font-mono font-bold shadow-pixel rounded-md hover:bg-primary hover:scale-95 transition-all text-center block"
                   >
                     VIEW DETAIL &gt;
                   </Link>
