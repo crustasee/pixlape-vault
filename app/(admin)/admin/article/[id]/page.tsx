@@ -38,7 +38,6 @@ export default function EditArticlePage() {
   const [subtitle, setSubtitle] = useState('');
   const [category, setCategory] = useState('DEV');
   const [author, setAuthor] = useState('Brandon Herera');
-  const [authorRole, setAuthorRole] = useState('Contributor');
   const [readTime, setReadTime] = useState('4 MIN READ');
   const [image, setImage] = useState('/img/article1.svg');
   const [excerpt, setExcerpt] = useState('');
@@ -52,7 +51,6 @@ export default function EditArticlePage() {
     setSubtitle(currentArticle.subtitle || '');
     setCategory(currentArticle.category || 'DEV');
     setAuthor(currentArticle.author || 'Brandon Herera');
-    setAuthorRole(currentArticle.authorRole || 'Contributor');
     setReadTime(currentArticle.readTime || '4 MIN READ');
     setImage(currentArticle.image || '/img/article1.svg');
     setExcerpt(currentArticle.excerpt || '');
@@ -84,13 +82,11 @@ export default function EditArticlePage() {
         subtitle,
         category,
         author,
-        authorRole,
         readTime,
         image,
         excerpt,
         featured,
         externalUrl: externalUrl.trim() || 'https://pixlblog-page.pixlape.workers.dev/',
-        leadParagraph: currentArticle.leadParagraph || excerpt,
       };
 
       // 1. In-memory store
@@ -262,37 +258,20 @@ export default function EditArticlePage() {
               </div>
             </div>
 
-            {/* Author & Role */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="author" className="font-bold text-xs text-black-secondary">
-                  AUTHOR NAME
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  name="author"
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                  placeholder="Brandon Herera"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="authorRole" className="font-bold text-xs text-black-secondary">
-                  AUTHOR ROLE / TITLE
-                </label>
-                <input
-                  type="text"
-                  id="authorRole"
-                  name="authorRole"
-                  value={authorRole}
-                  onChange={(e) => setAuthorRole(e.target.value)}
-                  placeholder="Lead Interface Architect"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Author Name */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="author" className="font-bold text-xs text-black-secondary">
+                AUTHOR NAME
+              </label>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Brandon Herera"
+                className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none"
+              />
             </div>
 
             {/* Cover Image Upload */}
@@ -437,8 +416,8 @@ export default function EditArticlePage() {
                 <span className="text-primary font-bold">#{currentArticle?.id}</span>
               </div>
               <div className="flex justify-between">
-                <span>Sections Attached:</span>
-                <span className="text-white font-bold">{currentArticle?.sections?.length ?? 1} blocks</span>
+                <span>Category:</span>
+                <span className="text-white font-bold">{currentArticle?.category}</span>
               </div>
               <div className="flex justify-between">
                 <span>Community Likes:</span>

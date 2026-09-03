@@ -289,84 +289,29 @@ export default function ArticleListPage() {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-black-primary block">{previewArticle.author}</span>
-                  <span className="text-[10px] text-black-secondary">{previewArticle.authorRole || 'Contributor'}</span>
+                  <span className="text-[10px] text-black-secondary font-mono">Author & Contributor</span>
                 </div>
               </div>
 
-              {/* Lead Paragraph / Excerpt */}
+              {/* Excerpt */}
               <div className="p-3.5 bg-white border border-border rounded text-xs leading-relaxed text-black-primary font-medium">
-                {previewArticle.leadParagraph || previewArticle.excerpt}
+                {previewArticle.excerpt}
               </div>
 
-              {/* Sections */}
-              {previewArticle.sections && previewArticle.sections.length > 0 && (
-                <div className="space-y-3">
-                  {previewArticle.sections.map((section, sIdx) => (
-                    <div key={sIdx} className="p-3.5 bg-surface border border-black-primary rounded">
-                      {section.title && (
-                        <h4 className="text-xs font-bold uppercase text-black-primary mb-2 border-b border-border pb-1">
-                          {section.title}
-                        </h4>
-                      )}
-                      <div className="space-y-2 text-xs text-black-secondary leading-relaxed">
-                        {section.paragraphs.map((p, pIdx) => (
-                          <p key={pIdx}>{p}</p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Quote */}
-              {previewArticle.quote && (
-                <div className="p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r text-xs italic text-black-primary">
-                  &ldquo;{previewArticle.quote.text}&rdquo;
-                  <span className="block not-italic font-bold text-[10px] text-black-secondary mt-1">
-                    — {previewArticle.quote.author}
+              {/* External URL Link */}
+              {previewArticle.externalUrl && (
+                <div className="p-3 bg-white border border-border rounded flex flex-col gap-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-black-secondary">
+                    External Article Link
                   </span>
-                </div>
-              )}
-
-              {/* Checklist */}
-              {previewArticle.checklist && (
-                <div className="p-3.5 bg-white border border-border rounded">
-                  <h4 className="text-xs font-bold uppercase text-black-primary mb-2 flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-700" weight="bold" />
-                    {previewArticle.checklist.title || 'Checklist & Rules'}
-                  </h4>
-                  <div className="space-y-2 text-xs">
-                    {previewArticle.checklist.items.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <span className="font-bold text-emerald-700 shrink-0">[{idx + 1}]</span>
-                        <div>
-                          <strong className="text-black-primary">{item.label}:</strong>{' '}
-                          <span className="text-black-secondary">{item.desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Code Snippet */}
-              {previewArticle.codeSnippet && (
-                <div className="p-3 bg-black-primary text-emerald-400 rounded text-xs font-mono">
-                  <div className="flex items-center justify-between border-b border-zinc-800 pb-1.5 mb-2 text-[10px] text-zinc-400">
-                    <span>{previewArticle.codeSnippet.label || 'TERMINAL'}</span>
-                    <span className="text-amber-300 font-bold">{previewArticle.codeSnippet.lang || 'BASH'}</span>
-                  </div>
-                  <pre className="overflow-x-auto whitespace-pre-wrap">{previewArticle.codeSnippet.code}</pre>
-                </div>
-              )}
-
-              {/* Conclusion */}
-              {previewArticle.conclusion && (
-                <div className="p-3 bg-white border border-border rounded text-xs">
-                  <strong className="block text-black-primary font-bold mb-1">
-                    {previewArticle.conclusion.title || 'Conclusion'}
-                  </strong>
-                  <p className="text-black-secondary leading-relaxed">{previewArticle.conclusion.text}</p>
+                  <a
+                    href={previewArticle.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-600 hover:underline break-all flex items-center gap-1 font-mono"
+                  >
+                    <span>↗</span> {previewArticle.externalUrl}
+                  </a>
                 </div>
               )}
 

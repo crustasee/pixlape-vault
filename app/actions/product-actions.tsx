@@ -184,7 +184,6 @@ export async function createArticleAction(payload: {
   content?: string;
   category?: string;
   author?: string;
-  authorRole?: string;
   readTime?: string;
   image?: string;
   featured?: boolean;
@@ -209,7 +208,6 @@ export async function createArticleAction(payload: {
           date: createdMemory.date,
           readTime: payload.readTime || '4 MIN READ',
           author: payload.author || 'Brandon Herera',
-          authorRole: payload.authorRole || 'Contributor',
           image: payload.image || '/img/article1.svg',
           category: payload.category || 'DEV',
           likes: 0,
@@ -222,7 +220,6 @@ export async function createArticleAction(payload: {
     }
 
     revalidatePath('/');
-    revalidatePath('/articles');
     revalidatePath('/admin');
     revalidatePath('/admin/article');
 
@@ -248,12 +245,10 @@ export async function updateArticleAction(
         if (payload.excerpt !== undefined) updateData.excerpt = payload.excerpt;
         if (payload.category !== undefined) updateData.category = payload.category;
         if (payload.author !== undefined) updateData.author = payload.author;
-        if (payload.authorRole !== undefined) updateData.authorRole = payload.authorRole;
         if (payload.readTime !== undefined) updateData.readTime = payload.readTime;
         if (payload.image !== undefined) updateData.image = payload.image;
         if (payload.featured !== undefined) updateData.featured = payload.featured;
         if (payload.externalUrl !== undefined) updateData.externalUrl = payload.externalUrl;
-        if (payload.leadParagraph !== undefined) updateData.leadParagraph = payload.leadParagraph;
 
         await db
           .update(articles)
@@ -265,7 +260,6 @@ export async function updateArticleAction(
     }
 
     revalidatePath('/');
-    revalidatePath('/articles');
     revalidatePath('/admin');
     revalidatePath('/admin/article');
 
@@ -289,7 +283,6 @@ export async function deleteArticleAction(id: string) {
     }
 
     revalidatePath('/');
-    revalidatePath('/articles');
     revalidatePath('/admin');
     revalidatePath('/admin/article');
 
@@ -316,7 +309,6 @@ export async function toggleArticleFeaturedAction(id: string) {
     }
 
     revalidatePath('/');
-    revalidatePath('/articles');
     revalidatePath('/admin');
     revalidatePath('/admin/article');
 

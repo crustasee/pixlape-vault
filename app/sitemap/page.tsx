@@ -80,14 +80,16 @@ export default function SiteMap() {
                       <span className="text-text-secondary text-[11px] ml-auto">[INDEX] [STATIC]</span>
                     </Link>
 
-                    <Link
-                      href="/articles"
+                    <a
+                      href="https://pixlblog-page.pixlape.workers.dev/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-4 hover:text-primary transition-colors py-1 group"
                     >
                       <span className="text-primary font-bold">→</span>
-                      <span className="text-white group-hover:text-surface">/articles (ARTICLES & BLOG)</span>
-                      <span className="text-text-secondary text-[11px] ml-auto">[LISTING] [DYNAMIC]</span>
-                    </Link>
+                      <span className="text-white group-hover:text-surface">/blog (ARTICLES & BLOG)</span>
+                      <span className="text-text-secondary text-[11px] ml-auto">[EXTERNAL]</span>
+                    </a>
 
                     <Link
                       href="/contact"

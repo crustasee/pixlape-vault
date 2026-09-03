@@ -10,14 +10,14 @@ export const siteConfig = {
   ogImage: "/img/banner01.svg",
   navItems: [
     { label: "HOME", href: "/" },
-    { label: "ARTICLES", href: "/articles" },
+    { label: "ARTICLES", href: "https://pixlblog-page.pixlape.workers.dev/" },
     { label: "CONTACT US", href: "/contact" },
     { label: "HELP", href: "/help" },
   ],
   footerLinks: [
     { label: "Help Center", href: "/help" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Article & Blog", href: "/articles" },
+    { label: "Article & Blog", href: "https://pixlblog-page.pixlape.workers.dev/" },
     { label: "Pixlape Team", href: "/pixlteam" },
     { label: "Sitemap", href: "/sitemap" },
     { label: "Changelog", href: "/changelog" },

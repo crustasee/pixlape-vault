@@ -10,13 +10,6 @@ import {
   pgEnum,
   serial,
 } from "drizzle-orm/pg-core";
-import type {
-  ArticleSectionContent,
-  ArticleQuote,
-  ArticleChecklistItem,
-  ArticleCodeSnippet,
-  ArticleConclusion,
-} from "./article";
 import type { TeamMember } from "./team";
 
 // ────────────────────────────────────────── Enums ──────────────────────────────────────────
@@ -85,22 +78,11 @@ export const articles = pgTable("articles", {
   date: text("date").notNull(),
   readTime: text("readTime"),
   author: text("author").notNull(),
-  authorAvatar: text("authorAvatar"),
-  authorRole: text("authorRole"),
   image: text("image"),
   category: text("category").notNull(),
   likes: integer("likes").default(0).notNull(),
   featured: boolean("featured").default(false).notNull(),
   externalUrl: text("externalUrl"),
-  leadParagraph: text("leadParagraph"),
-  sections: jsonb("sections").$type<ArticleSectionContent[]>(),
-  quote: jsonb("quote").$type<ArticleQuote>(),
-  checklist: jsonb("checklist").$type<{
-    title?: string;
-    items: ArticleChecklistItem[];
-  }>(),
-  codeSnippet: jsonb("codeSnippet").$type<ArticleCodeSnippet>(),
-  conclusion: jsonb("conclusion").$type<ArticleConclusion>(),
   createdAt: timestamp("createdAt", { precision: 3, mode: "date" })
     .defaultNow()
     .notNull(),

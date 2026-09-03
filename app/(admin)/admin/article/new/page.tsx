@@ -39,7 +39,6 @@ export default function AddArticlePage() {
   const [excerpt, setExcerpt] = useState('');
   const [category, setCategory] = useState('DEV');
   const [author, setAuthor] = useState('Brandon Herera');
-  const [authorRole, setAuthorRole] = useState('Lead Interface Architect');
   const [readTime, setReadTime] = useState('4 MIN READ');
   const [image, setImage] = useState('');
   const [featured, setFeatured] = useState(false);
@@ -66,7 +65,6 @@ export default function AddArticlePage() {
         excerpt,
         category,
         author: author.trim() || 'Brandon Herera',
-        authorRole: authorRole.trim() || 'Contributor',
         readTime: readTime.trim() || '4 MIN READ',
         image,
         featured,
@@ -211,37 +209,20 @@ export default function AddArticlePage() {
               </div>
             </div>
 
-            {/* Author & Author Role */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="author" className="font-bold text-xs text-black-secondary">
-                  AUTHOR NAME
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  name="author"
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                  placeholder="Brandon Herera"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none"
-                />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="authorRole" className="font-bold text-xs text-black-secondary">
-                  AUTHOR ROLE / TITLE
-                </label>
-                <input
-                  type="text"
-                  id="authorRole"
-                  name="authorRole"
-                  value={authorRole}
-                  onChange={(e) => setAuthorRole(e.target.value)}
-                  placeholder="Lead Interface Architect"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-              </div>
+            {/* Author Name */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="author" className="font-bold text-xs text-black-secondary">
+                AUTHOR NAME
+              </label>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Brandon Herera"
+                className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none"
+              />
             </div>
 
             {/* Cover Image Upload */}

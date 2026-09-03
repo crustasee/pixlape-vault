@@ -12,7 +12,7 @@ export default function Footer() {
   const resources = [
     { label: "Help Center", href: "/help" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Article & Blog", href: "/articles" },
+    { label: "Article & Blog", href: "https://pixlblog-page.pixlape.workers.dev/" },
     { label: "Pixlape Team", href: "/pixlteam" },
     { label: "Sitemap", href: "/sitemap" },
     { label: "Changelog", href: "/changelog" },

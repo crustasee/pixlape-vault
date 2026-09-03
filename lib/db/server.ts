@@ -13,11 +13,6 @@ import { CARDS, CardDetail, CardCategory, BadgeVariant } from "./card";
 import {
   ARTICLES,
   ArticleItem,
-  ArticleSectionContent,
-  ArticleQuote,
-  ArticleChecklistItem,
-  ArticleCodeSnippet,
-  ArticleConclusion,
 } from "./article";
 import { TEAM_MEMBERS, TeamMember } from "./team";
 
@@ -191,19 +186,11 @@ export function mapArticleToItem(
     date: article.date,
     readTime: article.readTime || "5 MIN READ",
     author: article.author,
-    authorAvatar: article.authorAvatar || undefined,
-    authorRole: article.authorRole || undefined,
     image: article.image || "/img/article2.svg",
     category: article.category,
     likes: article.likes || 0,
     featured: article.featured || false,
     externalUrl: article.externalUrl || undefined,
-    leadParagraph: article.leadParagraph || undefined,
-    sections: (article.sections as unknown as ArticleSectionContent[]) || undefined,
-    quote: (article.quote as unknown as ArticleQuote) || undefined,
-    checklist: (article.checklist as unknown as { title?: string; items: ArticleChecklistItem[] }) || undefined,
-    codeSnippet: (article.codeSnippet as unknown as ArticleCodeSnippet) || undefined,
-    conclusion: (article.conclusion as unknown as ArticleConclusion) || undefined,
   };
 }
 

@@ -158,12 +158,14 @@ export default function ContactPage() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/articles"
+                  <a
+                    href="https://pixlblog-page.pixlape.workers.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-text-secondary hover:text-primary hover:translate-x-1 inline-block transition-transform duration-150"
                   >
                     &gt; Guides & Vault Articles
-                  </Link>
+                  </a>
                 </li>
                 <li>
                   <a
