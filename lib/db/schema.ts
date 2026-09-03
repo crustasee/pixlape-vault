@@ -91,6 +91,7 @@ export const articles = pgTable("articles", {
   category: text("category").notNull(),
   likes: integer("likes").default(0).notNull(),
   featured: boolean("featured").default(false).notNull(),
+  externalUrl: text("externalUrl"),
   leadParagraph: text("leadParagraph"),
   sections: jsonb("sections").$type<ArticleSectionContent[]>(),
   quote: jsonb("quote").$type<ArticleQuote>(),

@@ -188,6 +188,7 @@ export async function createArticleAction(payload: {
   readTime?: string;
   image?: string;
   featured?: boolean;
+  externalUrl?: string;
 }) {
   try {
     const createdMemory = addArticleToStore({
@@ -213,6 +214,7 @@ export async function createArticleAction(payload: {
           category: payload.category || 'DEV',
           likes: 0,
           featured: Boolean(payload.featured),
+          externalUrl: payload.externalUrl || 'https://pixlblog-page.pixlape.workers.dev/',
         });
       } catch (dbError) {
         console.warn('⚠️ Warning: DB article insert failed, saved in memory:', dbError);
@@ -250,6 +252,7 @@ export async function updateArticleAction(
         if (payload.readTime !== undefined) updateData.readTime = payload.readTime;
         if (payload.image !== undefined) updateData.image = payload.image;
         if (payload.featured !== undefined) updateData.featured = payload.featured;
+        if (payload.externalUrl !== undefined) updateData.externalUrl = payload.externalUrl;
         if (payload.leadParagraph !== undefined) updateData.leadParagraph = payload.leadParagraph;
 
         await db
@@ -263,7 +266,6 @@ export async function updateArticleAction(
 
     revalidatePath('/');
     revalidatePath('/articles');
-    revalidatePath(`/articles/${id}`);
     revalidatePath('/admin');
     revalidatePath('/admin/article');
 

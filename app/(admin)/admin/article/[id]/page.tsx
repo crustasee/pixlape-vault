@@ -43,6 +43,7 @@ export default function EditArticlePage() {
   const [image, setImage] = useState('/img/article1.svg');
   const [excerpt, setExcerpt] = useState('');
   const [featured, setFeatured] = useState(false);
+  const [externalUrl, setExternalUrl] = useState('');
   const { toasts, addToast, dismissToast } = useToast();
 
   if (currentArticle && loadedArticleId !== currentArticle.id) {
@@ -56,6 +57,7 @@ export default function EditArticlePage() {
     setImage(currentArticle.image || '/img/article1.svg');
     setExcerpt(currentArticle.excerpt || '');
     setFeatured(Boolean(currentArticle.featured));
+    setExternalUrl(currentArticle.externalUrl || '');
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,6 +89,7 @@ export default function EditArticlePage() {
         image,
         excerpt,
         featured,
+        externalUrl: externalUrl.trim() || 'https://pixlblog-page.pixlape.workers.dev/',
         leadParagraph: currentArticle.leadParagraph || excerpt,
       };
 
@@ -202,6 +205,22 @@ export default function EditArticlePage() {
                 value={subtitle}
                 onChange={(e) => setSubtitle(e.target.value)}
                 placeholder="e.g. Deep dive into lossless compression pipelines and edge caching"
+                className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+              />
+            </div>
+
+            {/* External URL */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="externalUrl" className="font-bold text-xs text-black-primary">
+                EXTERNAL ARTICLE URL (BLOG LINK)
+              </label>
+              <input
+                type="url"
+                id="externalUrl"
+                name="externalUrl"
+                value={externalUrl}
+                onChange={(e) => setExternalUrl(e.target.value)}
+                placeholder="https://pixlblog-page.pixlape.workers.dev/..."
                 className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
               />
             </div>

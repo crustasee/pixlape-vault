@@ -141,16 +141,18 @@ export default function SiteMap() {
                   </div>
 
                   <div className="ml-9 space-y-1.5 font-mono text-xs">
-                    <Link
-                      href="/articles/1"
+                    <a
+                      href="https://pixlblog-page.pixlape.workers.dev/styleuiux/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center justify-between p-2  border border-black-secondary rounded-md hover:border-primary hover:text-primary transition-all group"
                     >
                       <div className="flex items-center gap-9">
                         <span className="text-primary font-bold">↳</span>
-                        <span className="text-white group-hover:text-primary">#01: OPTIMIZING RETRO WORKFLOWS & VAULT STORAGE</span>
+                        <span className="text-white group-hover:text-primary">#01: 10 STYLE UI/UX TREND 2026</span>
                       </div>
                       <span className="text-[10px] text-text-secondary font-mono">[AUG 22, 2026]</span>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

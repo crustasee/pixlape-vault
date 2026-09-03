@@ -197,6 +197,7 @@ export function mapArticleToItem(
     category: article.category,
     likes: article.likes || 0,
     featured: article.featured || false,
+    externalUrl: article.externalUrl || undefined,
     leadParagraph: article.leadParagraph || undefined,
     sections: (article.sections as unknown as ArticleSectionContent[]) || undefined,
     quote: (article.quote as unknown as ArticleQuote) || undefined,

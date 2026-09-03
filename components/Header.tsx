@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { label: "HOME", href: "/" },
-  { label: "ARTICLES", href: "/articles" },
+  { label: "ARTICLES", href: "https://pixlblog-page.pixlape.workers.dev/" },
   { label: "CONTACT US", href: "/contact" },
   { label: "HELP", href: "/help" },
 ];

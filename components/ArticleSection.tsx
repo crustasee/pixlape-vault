@@ -48,6 +48,7 @@ export default function ArticleSection() {
         <div className="flex flex-col gap-4 flex-1">
           {featuredArticles.map((article) => {
             const likeInfo = likesMap[article.id] || { count: article.likes, liked: false };
+            const articleUrl = article.externalUrl || "https://pixlblog-page.pixlape.workers.dev/";
 
             return (
               <div
@@ -83,11 +84,15 @@ export default function ArticleSection() {
                     </div>
 
                     {/* Title & Excerpt */}
-                    <Link href={`/articles/${article.id}`}>
+                    <a
+                      href={articleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <h3 className="text-base sm:text-lg font-mono font-bold text-black-primary hover:text-green-600 transition-colors leading-snug">
                         {article.title}
                       </h3>
-                    </Link>
+                    </a>
                     <p className="text-xs font-mono text-text-secondary leading-relaxed line-clamp-2">
                       {article.excerpt}
                     </p>
@@ -109,12 +114,14 @@ export default function ArticleSection() {
                       <span className="text-[11px] opacity-80">({likeInfo.count})</span>
                     </button>
 
-                    <Link
-                      href={`/articles/${article.id}`}
+                    <a
+                      href={articleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-5 py-1 rounded-sm bg-primary/50 border border-black-primary shadow-pixel text-green-700 text-xs font-mono font-bold hover:scale-96 active:scale-95 transition-all inline-block text-center cursor-pointer uppercase"
                     >
                       Read &gt;
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -130,6 +137,7 @@ export default function ArticleSection() {
 
           {sideArticles.map((article) => {
             const likeInfo = likesMap[article.id] || { count: article.likes, liked: false };
+            const articleUrl = article.externalUrl || "https://pixlblog-page.pixlape.workers.dev/";
 
             return (
               <div
@@ -158,11 +166,15 @@ export default function ArticleSection() {
                       </span>
                     </div>
 
-                    <Link href={`/articles/${article.id}`}>
+                    <a
+                      href={articleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <h4 className="text-xs sm:text-sm font-mono font-bold text-black-primary hover:text-green-600 transition-colors leading-snug line-clamp-2">
                        ▦ {article.title}
                       </h4>
-                    </Link>
+                    </a>
                     <p className="text-[11px] font-mono text-text-secondary leading-normal line-clamp-2">
                       {article.subtitle}
                     </p>
@@ -183,12 +195,14 @@ export default function ArticleSection() {
                       <span>({likeInfo.count})</span>
                     </button>
 
-                    <Link
-                      href={`/articles/${article.id}`}
+                    <a
+                      href={articleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-2 py-1 rounded-sm bg-primary/50 border border-black-primary shadow-pixel text-green-700 text-xs font-mono font-bold hover:scale-96 transition-all inline-block text-center cursor-pointer uppercase"
                     >
                       Read &gt;
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -200,7 +214,7 @@ export default function ArticleSection() {
       {/* ── Bottom Section Button ── */}
       <div className="flex justify-end mt-6 pt-4 border-black">
         <Link
-          href="/articles"
+          href="https://pixlblog-page.pixlape.workers.dev/"
           className="px-5 py-1 bg-surface border border-black-primary text-text-secondary text-sm font-mono font-semibold rounded-lg shadow-pixel hover:scale-97 transition-all cursor-pointer"
         >
           ALL ARTICLES &gt;

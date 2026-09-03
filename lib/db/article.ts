@@ -41,6 +41,7 @@ export interface ArticleItem {
   category: string;
   likes: number;
   featured?: boolean;
+  externalUrl?: string;
 
   // Modular detailed content fields for dynamic article pages
   leadParagraph?: string;
@@ -57,10 +58,10 @@ export interface ArticleItem {
 export const ARTICLES: ArticleItem[] = [
   {
     id: "blog001",
-    title: "Optimizing Retro Workflows & Vault Storage",
-    subtitle: "Architecting lightweight, high-performance digital asset archives",
+    title: "10 Style UI/UX yang Sedang Trend di Tahun 2026",
+    subtitle: "Menganalisis tren terkini dalam desain antarmuka pengguna dan pengalaman pengguna untuk tahun 2026",
     excerpt:
-      "Discover how modern web technologies, modular SVG graphics, and zero-dependency components form the foundation of ultra-fast digital distribution systems.",
+      "Mari kita bedah tren desain UI/UX yang paling berpengaruh di tahun 2026, lengkap dengan analisis visual dan rekomendasi implementasi praktis.",
     date: "AUG 22, 2026",
     readTime: "5 MIN READ",
     author: "PIXLape Team",
@@ -70,6 +71,7 @@ export const ARTICLES: ArticleItem[] = [
     category: "SYSTEMS",
     likes: 42,
     featured: true,
+    externalUrl: "https://pixlblog-page.pixlape.workers.dev/styleuiux/",
     leadParagraph:
       "A high-performing digital asset vault demands rigorous storage optimization and minimal runtime overhead. By combining lightweight SVG assets with modular database abstraction layers, we deliver instantaneous page transitions and zero-friction downloads.",
     sections: [
@@ -125,10 +127,10 @@ export const ARTICLES: ArticleItem[] = [
   },
   {
     id: "blog002",
-    title: "Designing Pixel-Perfect High Contrast Interfaces",
-    subtitle: "Retro monochrome design principles for modern web applications",
+    title: "Gaya Estetika Bootleg & Niche Internet Culture",
+    subtitle: "Mendalami nuansa visualculture internet yang unik dan terkurasi",
     excerpt:
-      "Exploring the aesthetic balance between high contrast borders, pixel fonts, and responsive grid layouts in modern developer tools.",
+      "Mengupas tren desain 'bootleg' dan estetika niche yang berkembang di ranah internet, menawarkan perspektif visual yang autentik dan terkurasi.",
     date: "AUG 18, 2026",
     readTime: "4 MIN READ",
     author: "PIXLape Team",
@@ -138,6 +140,7 @@ export const ARTICLES: ArticleItem[] = [
     category: "DESIGN",
     likes: 29,
     featured: true,
+    externalUrl: "https://pixlblog-page.pixlape.workers.dev/estetikabootleg/",
     leadParagraph:
       "Monochrome and high-contrast design is far more than a nostalgic throwback—it is a functional discipline that emphasizes hierarchy, sharp typography, and instantaneous visual comprehension for technical tools.",
     sections: [
@@ -195,10 +198,10 @@ export const ARTICLES: ArticleItem[] = [
   },
   {
     id: "blog003",
-    title: "Building Zero-Latency SVG Vector Icon Packs",
-    subtitle: "Performance metrics and vector optimization workflows",
+    title: "IntelliJ IDEA vs VS Code",
+    subtitle: "Membahas perbedaan antara IntelliJ IDEA dan VS Code",
     excerpt:
-      "Learn how to compress SVG assets without quality degradation using custom build pipelines and inline styling tokens.",
+      "Menganalisis kelebihan dan kekurangan IntelliJ IDEA dan VS Code untuk membantu kamu memilih editor kode yang tepat untuk kebutuhanmu.",
     date: "AUG 14, 2026",
     readTime: "3 MIN READ",
     author: "PIXLape Team",
@@ -207,6 +210,7 @@ export const ARTICLES: ArticleItem[] = [
     image: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788274873/5gagooue95h91.png",
     category: "ASSETS",
     likes: 35,
+    externalUrl: "https://pixlblog-page.pixlape.workers.dev/intellijideavscode/",
     leadParagraph:
       "Vector graphics are the backbone of modern responsive interfaces, but unoptimized SVGs can bloat DOM trees and degrade render performance. Here is our end-to-end compression and bundling workflow.",
     sections: [
@@ -252,39 +256,40 @@ export const ARTICLES: ArticleItem[] = [
   },
   {
     id: "blog004",
-    title: "C++ WebAssembly Bindings for Browser Toolkits",
-    subtitle: "Compiling native performance utilities for web runtimes",
+    title: "Sekilas tentang framework React, Next.js, dan Nuxt.js",
+    subtitle: "Membandingkan fitur, performa, dan ekosistem untuk membantu kamu memilih yang tepat",
     excerpt:
-      "A deep dive into compiling native C++ graphics tools to WebAssembly modules for browser-based asset editing.",
+      "Pelajari kelebihan, kekurangan, dan kasus penggunaan ideal dari React, Next.js, dan Nuxt.js dalam pengembangan aplikasi web modern.",
     date: "AUG 10, 2026",
     readTime: "6 MIN READ",
     author: "PIXLape Team",
     authorAvatar: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788322685/BlackBoycdd.png",
-    authorRole: "Native & WASM Systems Specialist",
+    authorRole: "Frontend Engineer",
     image: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788326611/progammingwall.jpg",
     category: "DEV",
     likes: 51,
+    externalUrl: "https://pixlblog-page.pixlape.workers.dev/nextjs/",
     leadParagraph:
-      "WebAssembly allows computationally demanding image transformations and dithering shaders to run in the client browser at near-native speeds without relying on server-side rendering farms.",
+      "WebAssembly memungkinkan transformasi gambar yang intensif secara komputasi dan shader dithering berjalan di browser klien dengan kecepatan mendekati native tanpa bergantung pada server-side rendering.",
     sections: [
       {
         title: "Emscripten Toolchain and Bindings Architecture",
         paragraphs: [
-          "By leveraging Embind and modern C++20 features, native image processing filters (such as Floyd-Steinberg dithering and Bayer matrices) can be directly exposed to JavaScript typed arrays.",
-          "Zero-copy memory sharing using WebAssembly.Memory allows large image buffers to be processed in real time at 60 frames per second inside standard browser canvases.",
+          "Dengan memanfaatkan Emscripten dan fitur modern lainnya, filter pemrosesan gambar native (seperti Floyd-Steinberg dithering dan Bayer matrices) dapat langsung diekspos ke JavaScript typed arrays.",
+          "Berbagi memori zero-copy menggunakan WebAssembly.Memory memungkinkan buffer gambar besar diproses secara real-time pada 60 frame per detik di dalam kanvas browser standar.",
         ],
       },
     ],
     quote: {
-      text: "WebAssembly brings desktop-grade computing power into the humble web browser sandbox.",
+      text: "WebAssembly membawa kekuatan komputasi sekelas desktop ke dalam browser.",
       author: "Alex Mercer",
     },
     checklist: {
-      title: "WASM Deployment Steps",
+      title: "Langkah-langkah deployment WASM",
       items: [
         {
-          label: "SharedArrayBuffer Setup",
-          desc: "Ensure appropriate cross-origin isolation headers (COOP/COEP) are configured on your host.",
+          label: "Setup SharedArrayBuffer",
+          desc: "Pastikan header cross-origin isolation yang sesuai (COOP/COEP) dikonfigurasi pada host Anda.",
         },
         {
           label: "Memory Growth Constraints",
@@ -309,18 +314,19 @@ export const ARTICLES: ArticleItem[] = [
   },
   {
     id: "blog005",
-    title: "Monochrome Color Palettes & User Experience",
-    subtitle: "Reducing visual cognitive load with minimalist retro themes",
+    title: "PATREON ? Apa itu & Bagaimana cara menghasilkan uang ",
+    subtitle: "mengenal platform patreon dan bagaimana menghasilkan uang dari sana",
     excerpt:
-      "Why retro monochrome palettes improve focus and readability for complex technical documentation and asset management.",
+      "mengenal platform patreon dan bagaimana menghasilkan uang dari sana",
     date: "AUG 05, 2026",
     readTime: "4 MIN READ",
-    author: "Brandon Herera",
+    author: "Pikun-san",
     authorAvatar: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788322685/BlackBoycdd.png",
     authorRole: "Lead Visual & Interface Designer",
     image: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788326610/monoc.jpg",
     category: "UX",
     likes: 18,
+    externalUrl: "https://pixlblog-page.pixlape.workers.dev/patreon/",
     leadParagraph:
       "In a landscape dominated by hyper-saturated interfaces and visual clutter, monochrome design creates a calm, focused environment where content and usability take center stage.",
     sections: [
@@ -414,6 +420,7 @@ export function addArticleToStore(data: Partial<ArticleItem> & { title: string }
     category: data.category || 'DEV',
     likes: data.likes || 0,
     featured: Boolean(data.featured),
+    externalUrl: data.externalUrl || 'https://pixlblog-page.pixlape.workers.dev/',
     leadParagraph: data.leadParagraph || data.excerpt,
     sections: data.sections || [
       {

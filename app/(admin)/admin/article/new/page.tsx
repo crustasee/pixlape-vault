@@ -43,6 +43,7 @@ export default function AddArticlePage() {
   const [readTime, setReadTime] = useState('4 MIN READ');
   const [image, setImage] = useState('');
   const [featured, setFeatured] = useState(false);
+  const [externalUrl, setExternalUrl] = useState('');
   const { toasts, addToast, dismissToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,6 +70,7 @@ export default function AddArticlePage() {
         readTime: readTime.trim() || '4 MIN READ',
         image,
         featured,
+        externalUrl: externalUrl.trim() || 'https://pixlblog-page.pixlape.workers.dev/',
       };
 
       // 1. In-memory store
@@ -152,6 +154,22 @@ export default function AddArticlePage() {
                 value={subtitle}
                 onChange={(e) => setSubtitle(e.target.value)}
                 placeholder="e.g. Deep dive into lossless compression pipelines and edge caching"
+                className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+              />
+            </div>
+
+            {/* External URL */}
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="externalUrl" className="font-bold text-xs text-black-primary">
+                EXTERNAL ARTICLE URL (BLOG LINK)
+              </label>
+              <input
+                type="url"
+                id="externalUrl"
+                name="externalUrl"
+                value={externalUrl}
+                onChange={(e) => setExternalUrl(e.target.value)}
+                placeholder="https://pixlblog-page.pixlape.workers.dev/..."
                 className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
               />
             </div>
