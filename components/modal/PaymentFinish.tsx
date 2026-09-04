@@ -251,7 +251,7 @@ export default function PaymentFinish({
               <div className="space-y-1.5 text-[11px]">
                 <div className="flex justify-between items-center text-black-secondary">
                   <span>Item / Keterangan:</span>
-                  <span className="font-bold text-black truncate max-w-[200px]">
+                  <span className="font-bold text-black truncate max-w-50">
                     {itemName}
                   </span>
                 </div>

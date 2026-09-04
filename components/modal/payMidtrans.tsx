@@ -414,7 +414,7 @@ export default function PayMidtransModal({
             )}
 
             {selectedMethod === "dana" && (
-              <div className="p-3.5 bg-white border border rounded-lg text-center space-y-2">
+              <div className="p-3.5 bg-white border rounded-lg text-center space-y-2">
                 <div className="w-full h-46 mx-auto rounded-md flex items-center justify-center shadow-xs">
                   <img
                     src={currentMethodDetails?.logoUrl}
@@ -423,7 +423,7 @@ export default function PayMidtransModal({
                     loading="lazy"
                   />
                 </div>
-                <h2 className="font-black text-xs font-bold text-black">
+                <h2 className="font-black text-xs text-black">
                   DOMPET DIGITAL DANA
                 </h2>
                 <p className="text-[11px] font-mono text-black-secondary">
