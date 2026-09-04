@@ -345,14 +345,14 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsMidtransOpen(true)}
-                  className="w-full py-2.5 px-3 bg-green-400 text-black border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-green-300 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
-                  MIDTRANS →
+                  PAY →
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-red-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
                   DONATE →
                 </button>

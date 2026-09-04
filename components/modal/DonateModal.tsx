@@ -67,19 +67,6 @@ export default function DonateModal({
       >
         SAWERIA
       </button>
-
-      {/* MIDTRANS Button */}
-      <button
-        type="button"
-        onClick={() => midtranseUrl && openLink(midtranseUrl)}
-        disabled={!midtranseUrl}
-        className={`w-full py-3 mt-2.5 rounded-lg text-sm shadow-pixel font-black border transition-all duration-150 text-center tracking-wider ${
-          midtranseUrl
-            ? "bg-green-400 text-black-primary border-black hover:scale-96 active:scale-99 cursor-pointer"
-            : "bg-green-400 text-black-primary border-black hover:bg-green-200 hover:scale-96 active:scale-99 cursor-not-allowed"
-        }`}
-      >MIDTRANS
-      </button>
     </Modal>
   );
 }
