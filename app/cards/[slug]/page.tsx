@@ -10,6 +10,7 @@ import CardGrid from "@/components/CardGrid";
 import Badge, { CategoryBadge } from "@/components/Badge";
 import DownloadModal from "@/components/modal/DownloadModal";
 import DonateModal from "@/components/modal/DonateModal";
+import PayMidtransModal from "@/components/modal/payMidtrans";
 import { getCardById, CARDS } from "@/lib/db/card";
 
 export interface CardDetailPageProps {
@@ -26,6 +27,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
 
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [isDonateOpen, setIsDonateOpen] = useState(false);
+  const [isMidtransOpen, setIsMidtransOpen] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
   // Smart Related Cards: Match same category first
@@ -342,6 +344,13 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 </p>
                 <button
                   type="button"
+                  onClick={() => setIsMidtransOpen(true)}
+                  className="w-full py-2.5 px-3 bg-green-400 text-black border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-green-300 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                >
+                  MIDTRANS →
+                </button>
+                <button
+                  type="button"
                   onClick={() => setIsDonateOpen(true)}
                   className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-red-300 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
@@ -388,6 +397,13 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
         onClose={() => setIsDonateOpen(false)}
         trakteerUrl={card.donateUrl || "https://trakteer.id"}
         saweriaUrl="https://saweria.co"
+      />
+
+      <PayMidtransModal
+        isOpen={isMidtransOpen}
+        onClose={() => setIsMidtransOpen(false)}
+        itemName={card.title}
+        orderId={card.id.toUpperCase()}
       />
     </div>
   );
