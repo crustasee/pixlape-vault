@@ -11,6 +11,7 @@ import {
   CardDetail,
   CardCategory,
   BadgeVariant,
+  mapAssetToCardDetail,
 } from '@/lib/db/card';
 import {
   addArticleToStore,
@@ -21,6 +22,16 @@ import {
 } from '@/lib/db/article';
 
 // ────────────────────────────────────────── Digital Asset Server Actions ──────────────────────────────────────────
+
+function safeRevalidate(paths: string[]) {
+  try {
+    for (const p of paths) {
+      revalidatePath(p);
+    }
+  } catch {
+    // Suppress revalidation errors outside Next.js request context (e.g. testing)
+  }
+}
 
 export async function createAssetAction(payload: {
   id?: string;
@@ -41,57 +52,107 @@ export async function createAssetAction(payload: {
   fileType?: string;
   license?: string;
   author?: string;
+  specs?: Record<string, string>;
+  changelog?: string;
 }) {
   try {
-    const id = payload.id && payload.id.trim() !== '' ? payload.id.trim() : `card-${Date.now().toString(36)}`;
-    const categories: CardCategory[] = payload.categories && payload.categories.length > 0 ? payload.categories : ['TOOLS'];
-    const badge: BadgeVariant = payload.badge || 'free';
-
-    // 1. Sync in-memory store
-    const createdMemory = addAssetToStore({
-      ...payload,
-      id,
-      categories,
-      badge,
-    });
-
-    // 2. Persist to Postgres database if configured
-    if (isDatabaseConfigured()) {
-      try {
-        await db.insert(digitalAssets).values({
-          id,
-          title: payload.title,
-          thumbnail: payload.thumbnail || '/img/minicard001.svg',
-          banner: payload.banner || '/img/banner01.svg',
-          icon: payload.icon || '/img/Icontemp1.svg',
-          badge,
-          categories,
-          description: payload.description || 'No description provided.',
-          requirements: payload.requirements || [],
-          features: payload.features || [],
-          downloadUrl: payload.downloadUrl || '#',
-          donateUrl: payload.donateUrl || 'https://trakteer.id',
-          price: payload.price ?? 0,
-          version: payload.version || 'v1.0.0',
-          fileSize: payload.fileSize || '10 MB',
-          fileType: payload.fileType || '.ZIP',
-          license: payload.license || 'Free Commercial',
-          author: payload.author || 'PIXLape Lab',
-        });
-      } catch (dbError) {
-        console.warn('⚠️ Warning: DB insert failed, asset saved in memory:', dbError);
-      }
+    if (!payload.title || payload.title.trim().length < 3) {
+      return { success: false, error: 'Asset title must be at least 3 characters long.' };
     }
 
-    revalidatePath('/');
-    revalidatePath('/cards');
-    revalidatePath('/admin');
-    revalidatePath('/admin/card');
+    const rawId = payload.id && payload.id.trim() !== '' ? payload.id.trim() : `card-${Date.now().toString(36)}`;
+    const id = rawId.toLowerCase().replace(/\s+/g, '-');
+    const categories: CardCategory[] =
+      payload.categories && payload.categories.length > 0 ? payload.categories : ['TOOLS'];
+    const badge = (payload.badge ? payload.badge.toLowerCase() : 'free') as BadgeVariant;
+    const price = badge === 'free' ? 0 : Number(payload.price) || 0;
 
-    return { success: true, asset: createdMemory };
+    let createdRecord: CardDetail;
+
+    if (isDatabaseConfigured()) {
+      try {
+        const [inserted] = await db
+          .insert(digitalAssets)
+          .values({
+            id,
+            title: payload.title.trim(),
+            thumbnail:
+              payload.thumbnail ||
+              'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg',
+            banner:
+              payload.banner ||
+              'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330237/minicard006.svg',
+            icon:
+              payload.icon ||
+              'https://res.cloudinary.com/lbovk2lu/image/upload/v1788328831/Printaicon-2.png',
+            badge,
+            categories,
+            description: payload.description?.trim() || 'No description provided.',
+            requirements: payload.requirements || [],
+            features: payload.features || [],
+            downloadUrl: payload.downloadUrl?.trim() || '#',
+            donateUrl: payload.donateUrl?.trim() || 'https://trakteer.id',
+            price,
+            version: payload.version?.trim() || 'v1.0.0',
+            fileSize: payload.fileSize?.trim() || '10.0 MB',
+            fileType: payload.fileType?.trim() || '.ZIP',
+            license: payload.license?.trim() || 'Free Commercial',
+            author: payload.author?.trim() || 'PIXLape Lab',
+            specs: payload.specs || undefined,
+            changelog: payload.changelog || undefined,
+          })
+          .returning();
+
+        createdRecord = mapAssetToCardDetail(inserted);
+      } catch (dbError: unknown) {
+        const msg = dbError instanceof Error ? dbError.message : String(dbError);
+        console.error('❌ Database insert failed in createAssetAction:', dbError);
+        if (msg.includes('unique constraint') || msg.includes('23505') || msg.includes('already exists')) {
+          return {
+            success: false,
+            error: `Asset ID "${id}" is already used in the database. Please choose a different ID.`,
+          };
+        }
+        return { success: false, error: `Database insert failed: ${msg}` };
+      }
+    } else {
+      createdRecord = {
+        id,
+        title: payload.title.trim(),
+        thumbnail:
+          payload.thumbnail ||
+          'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg',
+        banner:
+          payload.banner ||
+          'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330237/minicard006.svg',
+        icon:
+          payload.icon ||
+          'https://res.cloudinary.com/lbovk2lu/image/upload/v1788328831/Printaicon-2.png',
+        badge,
+        categories,
+        description: payload.description?.trim() || 'No description provided.',
+        requirements: payload.requirements || [],
+        features: payload.features || [],
+        downloadUrl: payload.downloadUrl?.trim() || '#',
+        donateUrl: payload.donateUrl?.trim() || 'https://trakteer.id',
+        price,
+        version: payload.version?.trim() || 'v1.0.0',
+        fileSize: payload.fileSize?.trim() || '10.0 MB',
+        fileType: payload.fileType?.trim() || '.ZIP',
+        license: payload.license?.trim() || 'Free Commercial',
+        author: payload.author?.trim() || 'PIXLape Lab',
+      };
+    }
+
+    // Sync in-memory store
+    addAssetToStore(createdRecord);
+
+    safeRevalidate(['/', '/cards', `/cards/${id}`, '/admin', '/admin/card']);
+
+    return { success: true, asset: createdRecord };
   } catch (error) {
-    console.error('Error creating asset:', error);
-    return { success: false, error: (error as Error).message };
+    console.error('Error in createAssetAction:', error);
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown server error' };
   }
 }
 
@@ -100,50 +161,80 @@ export async function updateAssetAction(
   payload: Partial<CardDetail>
 ) {
   try {
-    const updatedMemory = updateAssetInStore(id, payload);
+    if (!id || id.trim() === '') {
+      return { success: false, error: 'Target asset ID is required.' };
+    }
+
+    const cleanId = id.trim();
+    let updatedRecord: CardDetail | null = null;
 
     if (isDatabaseConfigured()) {
       try {
         const updateData: Record<string, unknown> = {};
-        if (payload.title !== undefined) updateData.title = payload.title;
+        if (payload.title !== undefined) updateData.title = payload.title.trim();
         if (payload.thumbnail !== undefined) updateData.thumbnail = payload.thumbnail;
         if (payload.banner !== undefined) updateData.banner = payload.banner;
         if (payload.icon !== undefined) updateData.icon = payload.icon;
-        if (payload.badge !== undefined) updateData.badge = payload.badge;
+        if (payload.badge !== undefined) {
+          updateData.badge = (payload.badge.toLowerCase() as BadgeVariant);
+        }
         if (payload.categories !== undefined) updateData.categories = payload.categories;
-        if (payload.description !== undefined) updateData.description = payload.description;
+        if (payload.description !== undefined) updateData.description = payload.description.trim();
         if (payload.requirements !== undefined) updateData.requirements = payload.requirements;
         if (payload.features !== undefined) updateData.features = payload.features;
-        if (payload.downloadUrl !== undefined) updateData.downloadUrl = payload.downloadUrl;
-        if (payload.donateUrl !== undefined) updateData.donateUrl = payload.donateUrl;
-        if (payload.price !== undefined) updateData.price = payload.price;
-        if (payload.version !== undefined) updateData.version = payload.version;
-        if (payload.fileSize !== undefined) updateData.fileSize = payload.fileSize;
-        if (payload.fileType !== undefined) updateData.fileType = payload.fileType;
-        if (payload.license !== undefined) updateData.license = payload.license;
-        if (payload.author !== undefined) updateData.author = payload.author;
+        if (payload.downloadUrl !== undefined) updateData.downloadUrl = payload.downloadUrl.trim();
+        if (payload.donateUrl !== undefined) updateData.donateUrl = payload.donateUrl.trim();
+        if (payload.price !== undefined) {
+          updateData.price = payload.badge === 'free' ? 0 : Number(payload.price) || 0;
+        }
+        if (payload.version !== undefined) updateData.version = payload.version.trim();
+        if (payload.fileSize !== undefined) updateData.fileSize = payload.fileSize.trim();
+        if (payload.fileType !== undefined) updateData.fileType = payload.fileType.trim();
+        if (payload.license !== undefined) updateData.license = payload.license.trim();
+        if (payload.author !== undefined) updateData.author = payload.author.trim();
+        if (payload.specs !== undefined) updateData.specs = payload.specs;
         if (payload.changelog !== undefined) {
           updateData.changelog = Array.isArray(payload.changelog)
             ? payload.changelog.join('\n')
             : payload.changelog;
         }
 
-        await db
+        const [updated] = await db
           .update(digitalAssets)
           .set(updateData)
-          .where(eq(digitalAssets.id, id));
-      } catch (dbError) {
-        console.warn('⚠️ Warning: DB update failed, asset updated in memory:', dbError);
+          .where(eq(digitalAssets.id, cleanId))
+          .returning();
+
+        if (updated) {
+          updatedRecord = mapAssetToCardDetail(updated);
+        } else {
+          // If no row matched cleanId, check alternate prefixed / un-prefixed ID
+          const altId = cleanId.toLowerCase().startsWith('card-')
+            ? cleanId.replace(/^card-/, '')
+            : `card-${cleanId}`;
+          const [altUpdated] = await db
+            .update(digitalAssets)
+            .set(updateData)
+            .where(eq(digitalAssets.id, altId))
+            .returning();
+          if (altUpdated) {
+            updatedRecord = mapAssetToCardDetail(altUpdated);
+          }
+        }
+      } catch (dbError: unknown) {
+        const msg = dbError instanceof Error ? dbError.message : String(dbError);
+        console.error(`❌ Database update failed for asset ${cleanId}:`, dbError);
+        return { success: false, error: `Database update failed: ${msg}` };
       }
     }
 
-    revalidatePath('/');
-    revalidatePath('/cards');
-    revalidatePath(`/cards/${id}`);
-    revalidatePath('/admin');
-    revalidatePath('/admin/card');
+    // Sync in-memory store
+    const memUpdated = updateAssetInStore(cleanId, payload);
+    const finalAsset = updatedRecord || memUpdated;
 
-    return { success: true, asset: updatedMemory };
+    safeRevalidate(['/', '/cards', `/cards/${cleanId}`, '/admin', '/admin/card']);
+
+    return { success: true, asset: finalAsset };
   } catch (error) {
     console.error('Error updating asset:', error);
     return { success: false, error: (error as Error).message };
@@ -152,20 +243,30 @@ export async function updateAssetAction(
 
 export async function deleteAssetAction(id: string) {
   try {
-    deleteAssetFromStore(id);
+    if (!id || id.trim() === '') {
+      return { success: false, error: 'Asset ID is required.' };
+    }
+
+    const cleanId = id.trim();
 
     if (isDatabaseConfigured()) {
       try {
-        await db.delete(digitalAssets).where(eq(digitalAssets.id, id));
-      } catch (dbError) {
-        console.warn('⚠️ Warning: DB delete failed, asset deleted from memory:', dbError);
+        await db.delete(digitalAssets).where(eq(digitalAssets.id, cleanId));
+        // Also attempt alternative format
+        const altId = cleanId.toLowerCase().startsWith('card-')
+          ? cleanId.replace(/^card-/, '')
+          : `card-${cleanId}`;
+        await db.delete(digitalAssets).where(eq(digitalAssets.id, altId));
+      } catch (dbError: unknown) {
+        const msg = dbError instanceof Error ? dbError.message : String(dbError);
+        console.error(`❌ Database delete failed for asset ${cleanId}:`, dbError);
+        return { success: false, error: `Database delete failed: ${msg}` };
       }
     }
 
-    revalidatePath('/');
-    revalidatePath('/cards');
-    revalidatePath('/admin');
-    revalidatePath('/admin/card');
+    deleteAssetFromStore(cleanId);
+
+    safeRevalidate(['/', '/cards', '/admin', '/admin/card']);
 
     return { success: true };
   } catch (error) {

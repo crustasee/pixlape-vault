@@ -9,7 +9,7 @@ import {
   type ArticleSelect,
   type TeamMemberSelect,
 } from "./schema";
-import { CARDS, CardDetail, CardCategory, BadgeVariant } from "./card";
+import { CARDS, CardDetail, CardCategory, BadgeVariant, mapAssetToCardDetail } from "./card";
 import {
   ARTICLES,
   ArticleItem,
@@ -18,42 +18,7 @@ import { TEAM_MEMBERS, TeamMember } from "./team";
 
 // ────────────────────────────────────────── Digital Assets Server Service ──────────────────────────────────────────
 
-/**
- * Maps a Drizzle DigitalAsset record to a frontend CardDetail object
- */
-export function mapAssetToCardDetail(
-  asset: DigitalAssetSelect | (Omit<DigitalAssetSelect, "createdAt" | "updatedAt"> & {
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
-  })
-): CardDetail {
-  return {
-    id: asset.id,
-    title: asset.title,
-    thumbnail: asset.thumbnail,
-    banner: asset.banner,
-    icon: asset.icon,
-    badge: (typeof asset.badge === "string" ? asset.badge.toLowerCase() : "free") as BadgeVariant,
-    categories: (asset.categories || []).map((cat: string) => {
-      if (cat === "ART_FOR_SELL") return "ART FOR SELL";
-      return cat as CardCategory;
-    }),
-    description: asset.description,
-    requirements: asset.requirements || [],
-    downloadUrl: asset.downloadUrl,
-    donateUrl: asset.donateUrl || undefined,
-    version: asset.version || undefined,
-    fileSize: asset.fileSize || undefined,
-    fileType: asset.fileType || undefined,
-    license: asset.license || undefined,
-    author: asset.author || undefined,
-    checksum: asset.checksum || undefined,
-    features: asset.features || [],
-    specs: (asset.specs as Record<string, string>) || undefined,
-    changelog: asset.changelog || undefined,
-    updatedAt: asset.updatedAt ? new Date(asset.updatedAt).toISOString().split("T")[0] : undefined,
-  };
-}
+export { mapAssetToCardDetail };
 
 // Backward compatibility alias
 export const mapPrismaAssetToCardDetail = mapAssetToCardDetail;

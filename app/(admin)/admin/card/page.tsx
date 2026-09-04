@@ -25,6 +25,7 @@ import {
   CardCategory,
   BadgeVariant,
 } from '@/lib/db/card';
+import { deleteAssetAction } from '@/app/actions/product-actions';
 import { useAssets } from '@/hooks/useAssets';
 import Badge, { CategoryBadge } from '@/components/Badge';
 
@@ -94,10 +95,25 @@ export default function AssetCardsAdminPage() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const displayedAssets = filteredAssets.slice(startIndex, endIndex);
 
-  const handleDelete = (id: string, title: string) => {
-    deleteAssetFromStore(id);
-    if (previewAsset?.id === id) setPreviewAsset(null);
-    addToast('info', 'ASSET REMOVED', `"${title}" (#${id}) deleted from vault repository.`);
+  const handleDelete = async (id: string, title: string) => {
+    if (!window.confirm(`Are you sure you want to delete "${title}" (#${id}) from database?`)) {
+      return;
+    }
+
+    try {
+      const res = await deleteAssetAction(id);
+      if (!res.success) {
+        addToast('error', 'DELETE FAILED', res.error || 'Could not delete asset from database.');
+        return;
+      }
+
+      deleteAssetFromStore(id);
+      if (previewAsset?.id === id) setPreviewAsset(null);
+      addToast('info', 'ASSET REMOVED', `"${title}" (#${id}) permanently deleted from database.`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to delete asset';
+      addToast('error', 'DELETE ERROR', msg);
+    }
   };
 
   return (

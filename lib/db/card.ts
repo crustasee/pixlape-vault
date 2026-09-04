@@ -48,6 +48,62 @@ export interface CardDetail extends CardItem {
   updatedAt?: string;
 }
 
+/**
+ * Maps a database DigitalAsset record to a frontend CardDetail object
+ */
+export function mapAssetToCardDetail(asset: {
+  id: string;
+  title: string;
+  thumbnail: string;
+  banner: string;
+  icon: string;
+  badge: string;
+  categories: string[];
+  description: string;
+  requirements?: string[] | null;
+  downloadUrl: string;
+  donateUrl?: string | null;
+  price?: number | null;
+  version?: string | null;
+  fileSize?: string | null;
+  fileType?: string | null;
+  license?: string | null;
+  author?: string | null;
+  checksum?: string | null;
+  features?: string[] | null;
+  specs?: unknown;
+  changelog?: string | null;
+  updatedAt?: Date | string | null;
+}): CardDetail {
+  return {
+    id: asset.id,
+    title: asset.title,
+    thumbnail: asset.thumbnail,
+    banner: asset.banner,
+    icon: asset.icon,
+    badge: (typeof asset.badge === "string" ? asset.badge.toLowerCase() : "free") as BadgeVariant,
+    categories: (asset.categories || []).map((cat: string) => {
+      if (cat === "ART_FOR_SELL") return "ART FOR SELL";
+      return cat as CardCategory;
+    }),
+    description: asset.description,
+    requirements: asset.requirements || [],
+    downloadUrl: asset.downloadUrl,
+    donateUrl: asset.donateUrl || undefined,
+    price: asset.price !== null && asset.price !== undefined ? Number(asset.price) : undefined,
+    version: asset.version || undefined,
+    fileSize: asset.fileSize || undefined,
+    fileType: asset.fileType || undefined,
+    license: asset.license || undefined,
+    author: asset.author || undefined,
+    checksum: asset.checksum || undefined,
+    features: asset.features || [],
+    specs: (asset.specs as Record<string, string>) || undefined,
+    changelog: asset.changelog || undefined,
+    updatedAt: asset.updatedAt ? new Date(asset.updatedAt).toISOString().split("T")[0] : undefined,
+  };
+}
+
 // __________________________________________ Sample Data ________________________________________________
 
 export const CARDS: CardDetail[] = [
@@ -653,7 +709,7 @@ export let memoryCards: CardDetail[] = [...CARDS];
 export type StoreListener = () => void;
 export const listeners: Set<StoreListener> = new Set();
 
-function notifyListeners() {
+export function notifyListeners() {
   listeners.forEach((listener) => {
     try {
       listener();
@@ -661,6 +717,14 @@ function notifyListeners() {
       // ignore errors in listeners
     }
   });
+}
+
+/**
+ * Replace memoryCards with fresh list (e.g. from database) and notify subscribers
+ */
+export function setMemoryCards(cards: CardDetail[]): void {
+  memoryCards = [...cards];
+  notifyListeners();
 }
 
 /**

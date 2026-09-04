@@ -68,6 +68,7 @@ export default function AddAssetCardPage() {
   const [newFeature, setNewFeature] = useState('');
 
   const { toasts, addToast, dismissToast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAddRequirement = () => {
     if (!newReq.trim()) return;
@@ -97,40 +98,53 @@ export default function AddAssetCardPage() {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const payload = {
         id: productId.trim() || undefined,
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
         categories: [category],
         fileType: fileFormat,
         badge,
-        version,
-        fileSize,
-        license,
-        author,
+        version: version.trim(),
+        fileSize: fileSize.trim(),
+        license: license.trim(),
+        author: author.trim(),
         thumbnail,
         banner,
         icon,
-        donateUrl,
-        price: badge === 'free' ? 0 : Number(price) || 9.99,
-        downloadUrl: downloadUrl || '#',
+        donateUrl: donateUrl.trim(),
+        price: badge === 'free' ? 0 : Number(price) || 0,
+        downloadUrl: downloadUrl.trim() || '#',
         requirements,
         features,
       };
 
-      // 1. Sync store immediately
-      addAssetToStore(payload);
+      // 1. Submit to database via Next.js Server Action
+      const res = await createAssetAction(payload);
 
-      // 2. Trigger server action in background for DB persistence
-      createAssetAction(payload);
+      if (!res.success) {
+        addToast('error', 'DATABASE ERROR', res.error || 'Could not save asset in database.');
+        setIsSubmitting(false);
+        return;
+      }
 
-      addToast('success', 'ASSET CREATED', `"${title}" has been added to the vault.`);
+      // 2. Sync local store
+      if (res.asset) {
+        addAssetToStore(res.asset);
+      }
+
+      addToast('success', 'ASSET CREATED', `"${title}" has been saved to the database.`);
       setTimeout(() => {
         router.push('/admin/card');
-      }, 900);
-    } catch {
-      addToast('error', 'SAVE FAILED', 'Could not create asset in vault repository.');
+        router.refresh();
+      }, 800);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Could not create asset in vault repository.';
+      addToast('error', 'SAVE FAILED', msg);
+      setIsSubmitting(false);
     }
   };
 
@@ -500,7 +514,12 @@ export default function AddAssetCardPage() {
               <span className="text-[11px] text-black-secondary">
                 * Digital assets immediately syndicate to PIXLApe Vault public feed
               </span>
-              <SubmitButton label="SAVE" loadingLabel="COMMITTING..." />
+              <SubmitButton
+                label="SAVE ASSET"
+                loadingLabel="COMMITTING TO DB..."
+                loading={isSubmitting}
+                disabled={isSubmitting}
+              />
             </div>
           </form>
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import FileUpload from '@/components/admin/file-upload';
 import { useToast } from '@/hooks/useToast';
 import {
   updateAssetInStore,
+  CardDetail,
   CardCategory,
   BadgeVariant,
 } from '@/lib/db/card';
@@ -51,6 +52,10 @@ export default function EditAssetPage() {
     (a) => a.id === assetId || a.id === `card-${assetId}` || a.id.endsWith(assetId || '')
   );
 
+  const [directAsset, setDirectAsset] = useState<CardDetail | null>(null);
+  const [isFetchingDirect, setIsFetchingDirect] = useState(false);
+  const effectiveAsset = currentAsset || directAsset;
+
   const [productId, setProductId] = useState(assetId || '');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -75,30 +80,58 @@ export default function EditAssetPage() {
   const [newFeature, setNewFeature] = useState('');
 
   const { toasts, addToast, dismissToast } = useToast();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [loadedAssetId, setLoadedAssetId] = useState<string | null>(null);
 
-  if (currentAsset && loadedAssetId !== currentAsset.id) {
-    setLoadedAssetId(currentAsset.id);
-    setProductId(currentAsset.id || assetId || '');
-    setTitle(currentAsset.title || '');
-    setDescription(currentAsset.description || '');
-    setCategory((currentAsset.categories[0] as CardCategory) || 'TOOLS');
-    setFileFormat(currentAsset.fileType || currentAsset.fileFormat || '.ZIP');
-    setBadge(currentAsset.badge || 'free');
-    setPrice(currentAsset.price ?? (currentAsset.badge === 'free' ? 0 : 9.99));
-    setVersion(currentAsset.version || 'v1.0.0');
-    setFileSize(currentAsset.fileSize || '18.5 MB');
-    setLicense(currentAsset.license || 'Free Commercial');
-    setAuthor(currentAsset.author || 'PIXLape Lab');
-    setThumbnail(currentAsset.thumbnail || '/img/minicard001.svg');
-    setBanner(currentAsset.banner || '/img/banner01.svg');
-    setIcon(currentAsset.icon || '/img/Icontemp1.svg');
-    setDownloadUrl(currentAsset.downloadUrl || '');
-    setDonateUrl(currentAsset.donateUrl || 'https://trakteer.id');
-    setRequirements(currentAsset.requirements || []);
-    setFeatures(currentAsset.features || []);
-  }
+  // Direct fetch from database API if not found immediately in cache
+  useEffect(() => {
+    if (!currentAsset && assetId) {
+      let isMounted = true;
+      setIsFetchingDirect(true);
+      fetch(`/api/cards/${assetId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (isMounted && data.success && data.data) {
+            setDirectAsset(data.data);
+          }
+        })
+        .catch((err) => {
+          console.warn('Error fetching asset directly from database:', err);
+        })
+        .finally(() => {
+          if (isMounted) setIsFetchingDirect(false);
+        });
+
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [currentAsset, assetId]);
+
+  // Synchronize form fields when asset is resolved
+  useEffect(() => {
+    if (effectiveAsset && loadedAssetId !== effectiveAsset.id) {
+      setLoadedAssetId(effectiveAsset.id);
+      setProductId(effectiveAsset.id || assetId || '');
+      setTitle(effectiveAsset.title || '');
+      setDescription(effectiveAsset.description || '');
+      setCategory((effectiveAsset.categories?.[0] as CardCategory) || 'TOOLS');
+      setFileFormat(effectiveAsset.fileType || effectiveAsset.fileFormat || '.ZIP');
+      setBadge(effectiveAsset.badge || 'free');
+      setPrice(effectiveAsset.price ?? (effectiveAsset.badge === 'free' ? 0 : 9.99));
+      setVersion(effectiveAsset.version || 'v1.0.0');
+      setFileSize(effectiveAsset.fileSize || '18.5 MB');
+      setLicense(effectiveAsset.license || 'Free Commercial');
+      setAuthor(effectiveAsset.author || 'PIXLape Lab');
+      setThumbnail(effectiveAsset.thumbnail || '/img/minicard001.svg');
+      setBanner(effectiveAsset.banner || '/img/banner01.svg');
+      setIcon(effectiveAsset.icon || '/img/Icontemp1.svg');
+      setDownloadUrl(effectiveAsset.downloadUrl || '');
+      setDonateUrl(effectiveAsset.donateUrl || 'https://trakteer.id');
+      setRequirements(effectiveAsset.requirements || []);
+      setFeatures(effectiveAsset.features || []);
+    }
+  }, [effectiveAsset, loadedAssetId, assetId]);
 
   const handleAddRequirement = () => {
     if (!newReq.trim()) return;
@@ -128,48 +161,79 @@ export default function EditAssetPage() {
       return;
     }
 
-    if (!currentAsset) {
-      addToast('error', 'NOT FOUND', 'Target asset could not be located in store.');
+    const targetId = effectiveAsset?.id || assetId;
+    if (!targetId) {
+      addToast('error', 'NOT FOUND', 'Target asset could not be located.');
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const payload = {
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
         categories: [category],
         fileType: fileFormat,
         badge,
-        version,
-        fileSize,
-        license,
-        author,
+        version: version.trim(),
+        fileSize: fileSize.trim(),
+        license: license.trim(),
+        author: author.trim(),
         thumbnail,
         banner,
         icon,
-        donateUrl,
-        price: badge === 'free' ? 0 : Number(price) || 9.99,
-        downloadUrl: downloadUrl || '#',
+        donateUrl: donateUrl.trim(),
+        price: badge === 'free' ? 0 : Number(price) || 0,
+        downloadUrl: downloadUrl.trim() || '#',
         requirements,
         features,
       };
 
-      // 1. Sync store
-      updateAssetInStore(currentAsset.id, payload);
+      // 1. Persist changes to Neon database via Server Action
+      const res = await updateAssetAction(targetId, payload);
 
-      // 2. Server action DB sync
-      updateAssetAction(currentAsset.id, payload);
+      if (!res.success) {
+        addToast('error', 'DATABASE ERROR', res.error || 'Could not update asset in database.');
+        setIsSubmitting(false);
+        return;
+      }
 
-      addToast('success', 'ASSET SAVED', `Changes to "${title}" successfully committed.`);
+      // 2. Sync local store
+      updateAssetInStore(targetId, payload);
+
+      addToast('success', 'ASSET SAVED', `Changes to "${title}" successfully saved to database.`);
       setTimeout(() => {
         router.push('/admin/card');
-      }, 900);
-    } catch {
-      addToast('error', 'SAVE FAILED', 'Could not update asset in database.');
+        router.refresh();
+      }, 800);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Could not update asset in database.';
+      addToast('error', 'SAVE FAILED', msg);
+      setIsSubmitting(false);
     }
   };
 
-  if (assets.length > 0 && !currentAsset) {
+  if (isFetchingDirect) {
+    return (
+      <AdminLayout
+        title={`LOADING ASSET #${assetId}...`}
+        subtitle="Retrieving asset specifications from database repository."
+        breadcrumbs={[
+          { label: 'ASSET CARDS', href: '/admin/card' },
+          { label: 'LOADING' },
+        ]}
+      >
+        <div className="bg-surface border border-black-primary rounded-md p-12 text-center font-mono shadow-sm">
+          <p className="text-xs text-black-secondary animate-pulse">
+            Querying Neon database for asset #{assetId}...
+          </p>
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (!isFetchingDirect && !effectiveAsset) {
     return (
       <AdminLayout
         title="ASSET NOT FOUND"
@@ -553,8 +617,10 @@ export default function EditAssetPage() {
               </span>
               <SubmitButton
                 label="SAVE ASSET CHANGES"
-                loadingLabel="SAVING CHANGES..."
+                loadingLabel="SAVING TO DATABASE..."
                 iconType="save"
+                loading={isSubmitting}
+                disabled={isSubmitting}
               />
             </div>
           </form>
