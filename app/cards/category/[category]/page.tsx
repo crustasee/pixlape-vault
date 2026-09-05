@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CardGrid from "@/components/CardGrid";
 import Link from "next/link";
-import { CARDS } from "@/lib/db/card";
+import { fetchCardsFromDb } from "@/lib/db/server";
 
 export async function generateStaticParams() {
   const categories = [
@@ -44,11 +44,13 @@ export default async function CategoryPage({
   const matchingCategory = (cat: string) => {
     return (
       cat.toLowerCase() === decodedCategory.toLowerCase() ||
-      cat.replace(/\s+/g, "-").toLowerCase() === category.toLowerCase()
+      cat.replace(/\s+/g, "-").toLowerCase() === category.toLowerCase() ||
+      cat.replace(/\s+/g, "_").toLowerCase() === category.replace(/-/g, "_").toLowerCase()
     );
   };
 
-  const filteredCards = CARDS.filter((card) =>
+  const dbCards = await fetchCardsFromDb({ category: decodedCategory });
+  const filteredCards = dbCards.filter((card) =>
     card.categories.some((c) => matchingCategory(c))
   );
 

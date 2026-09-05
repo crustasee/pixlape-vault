@@ -1,6 +1,22 @@
 import React from "react";
 
-export default function HeroBanner() {
+interface HeroBannerProps {
+  searchQuery?: string;
+  onSearch?: (query: string) => void;
+}
+
+export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerProps) {
+  const [internalSearch, setInternalSearch] = React.useState(searchQuery);
+
+  React.useEffect(() => {
+    setInternalSearch(searchQuery);
+  }, [searchQuery]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch?.(internalSearch);
+  };
+
   return (
     <section
       className="mt-17 mx-12 rounded-md h-44 flex flex-col justify-center px-8 relative mb-4 border border-black"
@@ -14,16 +30,27 @@ export default function HeroBanner() {
       </p>
 
       {/* ----------------------------------Search Bar----------------------------------------- */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 flex gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="absolute right-8 top-1/2 -translate-y-1/2 flex gap-2"
+      >
         <input
           type="text"
+          value={internalSearch}
+          onChange={(e) => {
+            setInternalSearch(e.target.value);
+            if (onSearch) onSearch(e.target.value);
+          }}
           placeholder="Search assets..."
           className="w-auto h-9.25 px-7 rounded-md bg-surface text-black-primary text-xs font-mono outline-none border border-black-primary transition-colors"
         />
-        <button className="h-9.25 px-6 bg-black-secondary text-white text-xs font-mono rounded-md border border-black hover:text-white hover:scale-95 shadow-pixel transition-all">
+        <button
+          type="submit"
+          className="h-9.25 px-6 bg-black-secondary text-white text-xs font-mono rounded-md border border-black hover:text-white hover:scale-95 shadow-pixel transition-all cursor-pointer"
+        >
           SEARCH
         </button>
-      </div>
+      </form>
     </section>
   );
 }

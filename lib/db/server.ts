@@ -44,11 +44,11 @@ export async function fetchCardsFromDb(options?: {
     }
 
     if (options?.category && options.category !== "ALL" && options.category !== "ALL ASSETS") {
-      const normalizedCat =
-        options.category === "ART FOR SELL"
-          ? "ART FOR SELL"
-          : options.category.toUpperCase().replace(/\s+/g, "_");
-      conditions.push(sql`${normalizedCat} = ANY(${digitalAssets.categories})`);
+      let validCat = options.category.toUpperCase().replace(/[-_]/g, " ").trim();
+      if (validCat === "ART FOR SELL" || validCat === "ARTFORSELL") {
+        validCat = "ART FOR SELL";
+      }
+      conditions.push(sql`${validCat}::"CardCategory" = ANY(${digitalAssets.categories})`);
     }
 
     const rows = await db.query.digitalAssets.findMany({
@@ -77,13 +77,21 @@ export async function fetchCardByIdFromDb(id: string): Promise<CardDetail | unde
       return getCardById(id);
     }
 
-    const normalizedId = id.toLowerCase().startsWith("card-") ? id : `card-${id}`;
+    const cleanId = id.trim();
+    const lowerId = cleanId.toLowerCase();
+    const normalizedId = lowerId.startsWith("card-") ? lowerId : `card-${lowerId}`;
     const asset = await db.query.digitalAssets.findFirst({
-      where: or(eq(digitalAssets.id, id), eq(digitalAssets.id, normalizedId)),
+      where: or(
+        eq(digitalAssets.id, cleanId),
+        eq(digitalAssets.id, lowerId),
+        eq(digitalAssets.id, normalizedId),
+        ilike(digitalAssets.id, cleanId),
+        ilike(digitalAssets.id, normalizedId)
+      ),
     });
 
     if (!asset) {
-      return getCardById(id);
+      return getCardById(cleanId);
     }
 
     return mapAssetToCardDetail(asset);

@@ -2,7 +2,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CardDetail, memoryCards, listeners, setMemoryCards } from '@/lib/db/card';
+import {
+  CardDetail,
+  memoryCards,
+  listeners,
+  setMemoryCards,
+  getCardById,
+  addAssetToStore,
+} from '@/lib/db/card';
 
 /**
  * React hook to subscribe to asset cards in client components,
@@ -41,4 +48,62 @@ export function useAssets(): CardDetail[] {
   }, []);
 
   return assets;
+}
+
+/**
+ * Hook to retrieve a single asset by ID, hydrating from /api/cards/[id] if not found in memory
+ */
+export function useAsset(id: string): { asset: CardDetail | undefined; isLoading: boolean } {
+  const [asset, setAsset] = useState<CardDetail | undefined>(() => getCardById(id));
+  const [isLoading, setIsLoading] = useState<boolean>(!asset);
+
+  useEffect(() => {
+    if (!id) return;
+    let isMounted = true;
+
+    // Check store first
+    const current = getCardById(id);
+    if (current) {
+      setAsset(current);
+      setIsLoading(false);
+    }
+
+    const update = () => {
+      if (isMounted) {
+        const fresh = getCardById(id);
+        if (fresh) {
+          setAsset(fresh);
+          setIsLoading(false);
+        }
+      }
+    };
+    listeners.add(update);
+
+    // Fetch from database API
+    fetch(`/api/cards/${encodeURIComponent(id)}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (isMounted && json.success && json.data) {
+          const cardData = json.data as CardDetail;
+          setAsset(cardData);
+          // Also register into in-memory store so other components know about it
+          addAssetToStore(cardData);
+        }
+      })
+      .catch((err) => {
+        console.warn(`⚠️ Could not fetch asset ${id} from API:`, err);
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+      listeners.delete(update);
+    };
+  }, [id]);
+
+  return { asset, isLoading };
 }

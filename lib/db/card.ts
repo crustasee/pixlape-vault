@@ -813,16 +813,28 @@ export function deleteAssetFromStore(id: string): boolean {
   return removed;
 }
 
-/** Filter cards by ID */
 export function getCardById(id: string): CardDetail | undefined {
-  if (!id) return memoryCards[0] || CARDS[0];
-  const normalizedId = id.toLowerCase().startsWith('card-') ? id : `card-${id}`;
+  if (!id) return undefined;
+  const cleanId = id.trim();
+  const lower = cleanId.toLowerCase();
+  const normalizedId = lower.startsWith('card-') ? lower : `card-${lower}`;
+
   return (
-    memoryCards.find((c) => c.id === id || c.id === normalizedId) ||
-    memoryCards.find((c) => c.id.endsWith(id)) ||
-    CARDS.find((c) => c.id === id || c.id === normalizedId) ||
-    memoryCards[0] ||
-    CARDS[0]
+    memoryCards.find(
+      (c) =>
+        c.id === cleanId ||
+        c.id.toLowerCase() === lower ||
+        c.id.toLowerCase() === normalizedId
+    ) ||
+    memoryCards.find((c) => c.id.toLowerCase().endsWith(lower)) ||
+    CARDS.find(
+      (c) =>
+        c.id === cleanId ||
+        c.id.toLowerCase() === lower ||
+        c.id.toLowerCase() === normalizedId
+    ) ||
+    CARDS.find((c) => c.id.toLowerCase().endsWith(lower)) ||
+    undefined
   );
 }
 

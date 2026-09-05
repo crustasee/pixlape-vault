@@ -4,41 +4,56 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge, { CategoryBadge } from "./Badge";
-import { CARDS, CardDetail, CardItem } from "@/lib/db/card";
+import { CardDetail, CardItem } from "@/lib/db/card";
+import { useAssets } from "@/hooks/useAssets";
 
 interface CardGridProps {
   cards?: (CardItem | CardDetail)[];
   selectedCategory?: string | null;
   limit?: number;
   itemsPerPage?: number;
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
 }
 
 export default function CardGrid({
-  cards = CARDS,
+  cards,
   selectedCategory,
   limit,
   itemsPerPage = 8,
+  currentPage: controlledPage,
+  onPageChange,
 }: CardGridProps) {
-  const [currentPage, setCurrentPage] = useState(1);
+  // Subscribe to reactive in-memory and database synced assets
+  const liveAssets = useAssets();
+  const effectiveCards = cards ?? liveAssets;
+
+  const [internalPage, setInternalPage] = useState(1);
+  const currentPage = controlledPage ?? internalPage;
   const [prevCategory, setPrevCategory] = useState(selectedCategory);
-  const [prevCards, setPrevCards] = useState(cards);
+  const [prevCards, setPrevCards] = useState(effectiveCards);
 
   // Reset to page 1 during render whenever category filter or cards array changes
-  if (selectedCategory !== prevCategory || cards !== prevCards) {
+  if (selectedCategory !== prevCategory || effectiveCards !== prevCards) {
     setPrevCategory(selectedCategory);
-    setPrevCards(cards);
-    setCurrentPage(1);
+    setPrevCards(effectiveCards);
+    if (!controlledPage) {
+      setInternalPage(1);
+    }
   }
 
   // Filter cards by category if selected
   const filteredCards =
     selectedCategory && selectedCategory !== "ALL" && selectedCategory !== "ALL ASSETS"
-      ? cards.filter((card) =>
+      ? effectiveCards.filter((card) =>
           card.categories.some(
-            (cat) => cat.toUpperCase() === selectedCategory.toUpperCase()
+            (cat) =>
+              cat.toUpperCase() === selectedCategory.toUpperCase() ||
+              cat.toUpperCase().replace(/\s+/g, "_") === selectedCategory.toUpperCase().replace(/\s+/g, "_")
           )
         )
-      : cards;
+      : effectiveCards;
+
   const totalPages = limit
     ? 1
     : Math.max(1, Math.ceil(filteredCards.length / itemsPerPage));
@@ -52,7 +67,11 @@ export default function CardGrid({
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    setCurrentPage(page);
+    if (onPageChange) {
+      onPageChange(page);
+    } else {
+      setInternalPage(page);
+    }
     // Smooth scroll back to grid top if in view
     if (typeof window !== "undefined") {
       const gridElem = document.getElementById("asset-card-grid");

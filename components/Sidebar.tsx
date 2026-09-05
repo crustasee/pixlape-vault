@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { CARDS } from "@/lib/db/card";
+import { CardDetail, CardItem } from "@/lib/db/card";
+import { useAssets } from "@/hooks/useAssets";
 
 const categories = [
   "ALL ASSETS",
@@ -15,19 +16,28 @@ const categories = [
 ];
 
 interface SidebarProps {
+  cards?: (CardItem | CardDetail)[];
   selectedCategory?: string | null;
   onSelectCategory?: (category: string | null) => void;
 }
 
 export default function Sidebar({
+  cards,
   selectedCategory = null,
   onSelectCategory,
 }: SidebarProps) {
-  // Get asset counts per category from card.ts
+  const liveAssets = useAssets();
+  const allCards = cards ?? liveAssets;
+
+  // Get asset counts per category from live database cards
   const getCategoryCount = (cat: string) => {
-    if (cat === "ALL ASSETS") return CARDS.length;
-    return CARDS.filter((c) =>
-      c.categories.some((item) => item.toUpperCase() === cat.toUpperCase())
+    if (cat === "ALL ASSETS") return allCards.length;
+    const catNorm = cat.toUpperCase().replace(/\s+/g, "_");
+    return allCards.filter((c) =>
+      c.categories.some((item) => {
+        const itemNorm = item.toUpperCase().replace(/\s+/g, "_");
+        return item.toUpperCase() === cat.toUpperCase() || itemNorm === catNorm;
+      })
     ).length;
   };
 
@@ -100,7 +110,7 @@ export default function Sidebar({
           <span className="text-green-600 font-bold">▣</span> 126 Online Users
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-green-600 font-bold">▣</span> {CARDS.length} Total Assets
+          <span className="text-green-600 font-bold">▣</span> {allCards.length} Total Assets
         </div>
       </div>
     </aside>

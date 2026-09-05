@@ -11,7 +11,7 @@ import Badge, { CategoryBadge } from "@/components/Badge";
 import DownloadModal from "@/components/modal/DownloadModal";
 import DonateModal from "@/components/modal/DonateModal";
 import PayMidtransModal from "@/components/modal/payMidtrans";
-import { getCardById, CARDS } from "@/lib/db/card";
+import { useAsset, useAssets } from "@/hooks/useAssets";
 
 export interface CardDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -19,20 +19,18 @@ export interface CardDetailPageProps {
 
 export default function CardDetailPage({ params }: CardDetailPageProps) {
   const { slug } = use(params);
-  const card = getCardById(slug);
-
-  if (!card) {
-    notFound();
-  }
+  const { asset: card, isLoading } = useAsset(slug);
+  const allAssets = useAssets();
 
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [isDonateOpen, setIsDonateOpen] = useState(false);
   const [isMidtransOpen, setIsMidtransOpen] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
-  // Smart Related Cards: Match same category first
+  // Smart Related Cards: Match same category first from live assets
   const relatedCards = useMemo(() => {
-    const others = CARDS.filter((c) => c.id !== card.id);
+    if (!card) return [];
+    const others = allAssets.filter((c) => c.id !== card.id);
     const sameCategory = others.filter((c) =>
       c.categories.some((cat) => card.categories.includes(cat))
     );
@@ -40,7 +38,26 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
       (c) => !c.categories.some((cat) => card.categories.includes(cat))
     );
     return [...sameCategory, ...diffCategory].slice(0, 4);
-  }, [card]);
+  }, [card, allAssets]);
+
+  if (isLoading && !card) {
+    return (
+      <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-3xl animate-pulse">📦</span>
+            <p className="font-pixel text-xs text-black-primary">LOADING ASSET #{slug}...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!card) {
+    notFound();
+  }
 
   const handleShare = () => {
     if (typeof window !== "undefined") {
