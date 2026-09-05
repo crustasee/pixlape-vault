@@ -159,7 +159,7 @@ export default function AddAssetCardPage() {
       actionSlot={
         <Link
           href="/admin/card"
-          className="flex items-center gap-1.5 px-3 py-2 bg-surface hover:bg-border border border-black-primary rounded-md text-xs font-mono font-bold transition-all shadow-xs"
+          className="flex items-center gap-1.5 px-3 py-2 bg-black-secondary text-green-50 hover:bg-border border border-black-primary rounded-md text-xs font-mono font-bold transition-all shadow-xs"
         >
           <ArrowLeft className="w-3.5 h-3.5" weight="bold" />
           <span>BACK TO LIST</span>
@@ -173,11 +173,11 @@ export default function AddAssetCardPage() {
         <div className="lg:col-span-2 flex flex-col gap-4">
           <form
             onSubmit={handleSubmit}
-            className="bg-surface border border-black-primary rounded-md p-5 flex flex-col gap-4 shadow-sm"
+            className="bg-black-secondary border border-black-primary rounded-md p-5 flex flex-col gap-4 shadow-sm"
           >
-            <div className="flex items-center justify-between border-b border-black-primary pb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
-                <Tag className="w-4 h-4 text-emerald-700" weight="bold" />
+            <div className="flex items-center justify-between border-b pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-border flex items-center gap-1.5">
+                <Tag className="w-4 h-4 text-emerald-300" weight="bold" />
                 ++ ASSET SPECIFICATION FORM ++
               </span>
               <span className="text-[10px] px-2 py-0.5 bg-primary text-black-primary font-bold rounded">
@@ -196,8 +196,8 @@ export default function AddAssetCardPage() {
 
             {/* Title */}
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="title" className="font-bold text-xs text-black-primary">
-                ASSET TITLE <span className="text-rose-600">*</span>
+              <label htmlFor="title" className="font-bold text-xs text-white">
+                ASSET TITLE <span className="text-orange-500">*</span>
               </label>
               <input
                 type="text"
@@ -215,7 +215,7 @@ export default function AddAssetCardPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {/* Category */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="category" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="category" className="font-bold text-xs text-white">
                   PRIMARY CATEGORY <span className="text-rose-600">*</span>
                 </label>
                 <select
@@ -235,7 +235,7 @@ export default function AddAssetCardPage() {
 
               {/* Badge */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="badge" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="badge" className="font-bold text-xs text-white">
                   BADGE / TIER <span className="text-rose-600">*</span>
                 </label>
                 <select
@@ -253,7 +253,7 @@ export default function AddAssetCardPage() {
 
               {/* Price */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="price" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="price" className="font-bold text-xs text-white">
                   PRICE (USD) {badge === 'free' ? '(Free)' : ''}
                 </label>
                 <input
@@ -271,7 +271,7 @@ export default function AddAssetCardPage() {
 
               {/* File Format */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="fileFormat" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="fileFormat" className="font-bold text-xs text-white">
                   FILE FORMAT / EXTENSION
                 </label>
                 <select
@@ -293,7 +293,7 @@ export default function AddAssetCardPage() {
             {/* Version & File Size & Author & License */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="version" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="version" className="font-bold text-xs text-white">
                   VERSION
                 </label>
                 <input
@@ -308,7 +308,7 @@ export default function AddAssetCardPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="fileSize" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="fileSize" className="font-bold text-xs text-white">
                   FILE SIZE
                 </label>
                 <input
@@ -323,7 +323,7 @@ export default function AddAssetCardPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="license" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="license" className="font-bold text-xs text-white">
                   LICENSE
                 </label>
                 <input
@@ -338,7 +338,7 @@ export default function AddAssetCardPage() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="author" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="author" className="font-bold text-xs text-white">
                   AUTHOR / CREATOR
                 </label>
                 <input
@@ -355,7 +355,7 @@ export default function AddAssetCardPage() {
 
             {/* Description */}
             <div className="flex flex-col gap-1">
-              <label htmlFor="description" className="font-bold text-xs text-black-primary">
+              <label htmlFor="description" className="font-bold text-xs text-white">
                 DESCRIPTION & OVERVIEW <span className="text-rose-600">*</span>
               </label>
               <RichEditor

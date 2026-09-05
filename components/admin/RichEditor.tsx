@@ -50,12 +50,12 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer ${
+      className={`p-1.5 rounded text-xs bg-black-primary font-mono transition-all flex items-center justify-center cursor-pointer shadow-pixel-sm ${
         disabled
-          ? "opacity-30 cursor-not-allowed text-gray-400"
+          ? "cursor-not-allowed text-white bg-black-primary border border-white"
           : isActive
           ? "bg-primary text-black-primary border border-black-primary shadow-xs font-bold"
-          : "bg-white text-black-secondary border border-transparent hover:border-black-primary hover:text-black-primary"
+          : "bg-black-secondary text-white border border-black-primary hover:border-black-primary hover:text-black-primary"
       }`}
     >
       {children}
@@ -201,7 +201,7 @@ export default function RichEditor({
       className={`border border-black-primary rounded-md bg-white overflow-hidden font-mono shadow-xs ${className}`}
     >
       {/* Rich Text Toolbar */}
-      <div className="bg-surface border-b border-black-primary px-2.5 py-1.5 flex flex-wrap items-center gap-1">
+      <div className="bg-black-primary border-black-primary px-2.5 py-1.5 flex flex-wrap items-center gap-1">
         {/* Headings */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -302,7 +302,7 @@ export default function RichEditor({
         <div className="relative flex items-center">
           <label
             htmlFor="editor-img-upload"
-            className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer bg-white text-black-secondary border border-transparent hover:border-black-primary hover:text-black-primary ${
+            className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer bg-black-secondary/50 shadow-pixel-sm text-white border border-black-secondary hover:border-black-primary ${
               isUploadingImage ? "opacity-50 pointer-events-none" : ""
             }`}
             title="Upload Image to Cloudinary"
@@ -368,7 +368,7 @@ export default function RichEditor({
       </div>
 
       {/* Editor Content Area */}
-      <div className="bg-white min-h-40">
+      <div className="bg-white min-h-52">
         <EditorContent editor={editor} />
       </div>
 

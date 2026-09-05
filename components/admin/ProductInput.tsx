@@ -65,13 +65,13 @@ export function ProductIdInput({
     <div className={`flex flex-col gap-1.5 font-mono ${className}`}>
       {label && (
         <div className="flex items-center justify-between">
-          <label htmlFor={id} className="text-xs font-bold text-black-primary flex items-center gap-1.5">
-            <Key className="w-3.5 h-3.5 text-black-secondary" weight="bold" />
+          <label htmlFor={id} className="text-xs font-bold text-white flex items-center gap-4">
+            <Key className="w-3.5 h-3.5 text-white" weight="bold" />
             <span>{label}</span>
             {required && <span className="text-rose-600">*</span>}
           </label>
           {value && (
-            <span className="text-[10px] text-black-secondary bg-white px-1.5 py-0.5 border border-border rounded font-bold">
+            <span className="text-[10px] text-black-secondary bg-border px-1.5 py-0.5 border rounded font-bold">
               {value.length} CHARS
             </span>
           )}

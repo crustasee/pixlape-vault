@@ -22,7 +22,7 @@ export function AdminLayout({
   actionSlot,
 }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-black-secondary/60 text-black-primary font-mono flex flex-col selection:bg-primary selection:text-black-secondary">
+    <div className="min-h-screen bg-black-primary text-black-primary font-mono flex flex-col selection:bg-primary selection:text-black-secondary">
       {/* Top Fixed Header */}
       <Header />
 
@@ -36,11 +36,11 @@ export function AdminLayout({
           <main className="flex-1 w-full min-w-0 flex flex-col gap-2">
             {/* Breadcrumb & Title Bar */}
             {(title || breadcrumbs.length > 0) && (
-              <div className="bg-border border-black-primary rounded-md p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
+              <div className="bg-black-secondary/40 rounded-md p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex flex-col gap-1">
                   {/* Breadcrumb row */}
                   {breadcrumbs.length > 0 && (
-                    <nav className="flex items-center gap-2 text-xs text-black-secondary flex-wrap">
+                    <nav className="flex items-center gap-2 text-xs text-white flex-wrap">
                       <Link
                         href="/"
                         className="flex items-center gap-1 hover:text-black-primary transition-colors"
@@ -59,7 +59,7 @@ export function AdminLayout({
                               {crumb.label}
                             </Link>
                           ) : (
-                            <span className="font-bold text-black-primary">{crumb.label}</span>
+                            <span className="font-bold text-border">{crumb.label}</span>
                           )}
                         </React.Fragment>
                       ))}
@@ -68,14 +68,14 @@ export function AdminLayout({
 
                   {title && (
                     <div className="flex items-center gap-2 mt-0.5">
-                      <h1 className="text-xl sm:text-2xl font-black tracking-wide text-black-primary font-mono">
+                      <h1 className="text-xl sm:text-2xl font-black tracking-wide text-white font-mono">
                         {title}
                       </h1>
                     </div>
                   )}
 
                   {subtitle && (
-                    <p className="text-xs text-black-secondary font-mono leading-relaxed">
+                    <p className="text-xs text-border font-mono leading-relaxed">
                       {subtitle}
                     </p>
                   )}

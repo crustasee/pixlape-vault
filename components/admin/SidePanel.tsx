@@ -69,17 +69,17 @@ export function SidePanel({
 
   return (
     <aside
-      className={`w-full lg:w-58 bg-surface rounded-md border border-black-primary p-4 flex flex-col gap-2 shrink-0 font-mono ${className}`}
+      className={`w-full lg:w-58 bg-black-secondary rounded-md border border-border p-4 flex flex-col gap-2 shrink-0 font-mono ${className}`}
     >
       {/* Header section */}
-      <div className="flex items-center justify-between border-b border-black-primary pb-2.5">
+      <div className="flex items-center justify-between border-b border-border pb-2.5">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 bg-primary border border-black-primary rounded-full animate-pulse"></div>
-          <h3 className="text-xs font-bold text-black-primary uppercase tracking-wider">
+          <h3 className="text-xs font-bold text-white uppercase tracking-wider">
             CONTROL PANEL
           </h3>
         </div>
-        <span className="text-[10px] px-2 py-0.5 bg-black-secondary text-white font-bold rounded-md">
+        <span className="text-[10px] px-2 py-0.5 bg-black-primary text-white font-bold rounded-sm">
           VAULT
         </span>
       </div>
@@ -112,13 +112,13 @@ export function SidePanel({
               className={`w-full py-2.5 px-3 border rounded-md text-xs font-mono font-bold transition-all flex items-center justify-between text-left group ${
                 isSelected
                   ? 'bg-primary border-black-primary text-black-primary shadow-pixel font-black'
-                  : 'bg-white border-border text-black-primary hover:bg-border hover:border-black-primary'
+                  : 'bg-black-primary/40 border-black-primary text-white hover:scale-98 hover:border-black-primary'
               }`}
             >
-              <div className="flex items-center gap-2.5 truncate">
+              <div className="flex items-center gap-4 truncate">
                 <Icon
                   className={`w-4 h-4 shrink-0 ${
-                    isSelected ? 'text-black-primary' : 'text-black-secondary group-hover:text-black-primary'
+                    isSelected ? 'text-black-primary' : 'text-white group-hover:text-primary'
                   }`}
                   weight={isSelected ? 'bold' : 'regular'}
                 />
@@ -126,10 +126,10 @@ export function SidePanel({
               </div>
 
               <span
-                className={`text-[10px] px-2 py-0.5 rounded border font-mono font-bold shrink-0 ml-2 ${
+                className={`text-[10px] px-2 py-1 rounded border font-mono font-bold shrink-0 ml-2 ${
                   isSelected
-                    ? 'bg-green-300 border-black-primary text-black-primary'
-                    : 'bg-surface text-black-secondary border-border group-hover:border-black-primary'
+                    ? 'bg-green-400 border-black-primary text-black-primary'
+                    : 'bg-black/40 text-border border-black-primary group-hover:border-black-primary'
                 }`}
               >
                 {badgeDisplay}
@@ -142,25 +142,25 @@ export function SidePanel({
 
 
       {/* View Public Vault Link */}
-      <div className="border-t border-border pt-3">
+      <div className="border-border pt-3">
         <Link
           href="https://pixlape.vercel.app/"
           target="_blank"
-          className="w-full py-2 px-3 bg-emerald-200 hover:scale-97 shadow-pixel border border-black-primary text-green-600 text-xs font-mono font-bold rounded-md flex items-center justify-between transition-all group"
+          className="w-full py-2 px-3 bg-blue-500 hover:scale-97 shadow-pixel border border-border text-white text-xs font-mono font-bold rounded-md flex items-center justify-between transition-all group"
         >
           <span className="flex items-center gap-2">
-            <Globe className="w-3.5 h-3.5 text-black-secondary group-hover:text-black-primary" />
+            <Globe className="w-3.5 h-3.5 text-white group-hover:text-black-primary" />
             LIVE PUBLIC VAULT
           </span>
-          <span className="text-[10px] text-green-600">&gt;</span>
+          <span className="text-[10px] text-white group-hover:text-black-primary">&gt;</span>
         </Link>
       </div>
 
       {/* Info / Account Telemetry Box */}
-      <div className="border border-black-primary p-3 rounded-md flex flex-col mt-auto bg-white gap-2 text-xs text-black-secondary font-mono">
-        <div className="flex items-center justify-between text-[11px] font-bold text-black-primary border-b border-black-primary/20 pb-1.5">
+      <div className="border border-black-primary p-3 rounded-md flex flex-col mt-auto bg-black-primary/30 gap-2 text-xs text-black-secondary font-mono">
+        <div className="flex items-center justify-between text-[11px] font-bold text-border border-b pb-1.5">
           <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" weight="bold" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" weight="bold" />
             ADMIN CONSOLE
           </span>
           <span className="px-1.5 py-0.5 bg-black-secondary text-primary text-[9px] rounded-md font-bold">
@@ -168,19 +168,19 @@ export function SidePanel({
           </span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-black-secondary">Operator:</span>
-          <span className="font-bold text-black-primary">admin</span>
+          <span className="text-border">Operator:</span>
+          <span className="font-bold text-white">admin</span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-black-secondary flex items-center gap-1">
-            <Database className="w-3 h-3 text-emerald-700" />
+          <span className="text-border flex items-center gap-1">
+            <Database className="w-3 h-3 text-emerald-200" />
             Data:
           </span>
-          <span className="font-bold text-red-500">Drizzle / Neon</span>
+          <span className="font-bold text-red-300">Drizzle / Neon</span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-black-secondary">Host Service:</span>
-          <span className="font-bold text-black-primary flex items-center gap-1">
+          <span className="text-border">Host Service:</span>
+          <span className="font-bold text-white flex items-center gap-1">
             <Pulse className="w-3 h-3 text-emerald-600 animate-pulse" weight="bold" />
             vercel
           </span>
@@ -192,7 +192,7 @@ export function SidePanel({
       <form action={logoutAction} className="w-full">
         <button
           type="submit"
-          className="w-full py-1.5 px-3 bg-rose-300 text-red-800 border border-black rounded-md text-xs font-mono font-bold flex items-center justify-center gap-3 transition-all cursor-pointer shadow-pixel hover:scale-98"
+          className="w-full py-1.5 px-3 bg-red-400 text-white border border-black rounded-md text-xs font-mono font-bold flex items-center justify-center gap-3 transition-all cursor-pointer shadow-pixel hover:scale-98"
           title="Sign out of Admin Session"
         >
           <SignOut className="w-3.5 h-3.5" weight="bold" />

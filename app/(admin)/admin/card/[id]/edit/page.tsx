@@ -25,8 +25,9 @@ import {
   ArrowLeft,
   Plus,
   Trash,
+  CheckCircle,
   Eye,
-  FloppyDisk,
+  Tag,
 } from '@phosphor-icons/react';
 
 const CATEGORIES: CardCategory[] = [
@@ -68,9 +69,9 @@ export default function EditAssetPage() {
   const [license, setLicense] = useState('Free Commercial');
   const [author, setAuthor] = useState('PIXLape Lab');
 
-  const [thumbnail, setThumbnail] = useState('/img/minicard001.svg');
-  const [banner, setBanner] = useState('/img/banner01.svg');
-  const [icon, setIcon] = useState('/img/Icontemp1.svg');
+  const [thumbnail, setThumbnail] = useState('https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg');
+  const [banner, setBanner] = useState('');
+  const [icon, setIcon] = useState('');
 
   const [downloadUrl, setDownloadUrl] = useState('');
   const [donateUrl, setDonateUrl] = useState('https://trakteer.id');
@@ -123,9 +124,9 @@ export default function EditAssetPage() {
       setFileSize(effectiveAsset.fileSize || '18.5 MB');
       setLicense(effectiveAsset.license || 'Free Commercial');
       setAuthor(effectiveAsset.author || 'PIXLape Lab');
-      setThumbnail(effectiveAsset.thumbnail || '/img/minicard001.svg');
-      setBanner(effectiveAsset.banner || '/img/banner01.svg');
-      setIcon(effectiveAsset.icon || '/img/Icontemp1.svg');
+      setThumbnail(effectiveAsset.thumbnail || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg');
+      setBanner(effectiveAsset.banner || '');
+      setIcon(effectiveAsset.icon || '');
       setDownloadUrl(effectiveAsset.downloadUrl || '');
       setDonateUrl(effectiveAsset.donateUrl || 'https://trakteer.id');
       setRequirements(effectiveAsset.requirements || []);
@@ -292,11 +293,11 @@ export default function EditAssetPage() {
           >
             <div className="flex items-center justify-between border-b border-black-primary pb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
-                <FloppyDisk className="w-4 h-4 text-emerald-700" weight="bold" />
-                {`++ MODIFY ASSET: #${currentAsset?.id || assetId} ++`}
+                <Tag className="w-4 h-4 text-emerald-700" weight="bold" />
+                ++ ASSET SPECIFICATION FORM ++
               </span>
-              <span className="text-[10px] px-2 py-0.5 bg-black-primary text-white font-bold rounded uppercase">
-                {badge}
+              <span className="text-[10px] px-2 py-0.5 bg-primary text-black-primary font-bold rounded">
+                EDIT ASSET
               </span>
             </div>
 
@@ -327,9 +328,10 @@ export default function EditAssetPage() {
               />
             </div>
 
-            {/* Category & Badge */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
+            {/* Category, Badge, Price & File Format (1 Baris) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              {/* Category */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="category" className="font-bold text-xs text-black-secondary">
                   PRIMARY CATEGORY <span className="text-rose-600">*</span>
                 </label>
@@ -338,7 +340,7 @@ export default function EditAssetPage() {
                   name="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value as CardCategory)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
+                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c} value={c}>
@@ -348,7 +350,8 @@ export default function EditAssetPage() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              {/* Badge */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="badge" className="font-bold text-xs text-black-secondary">
                   BADGE / TIER <span className="text-rose-600">*</span>
                 </label>
@@ -357,20 +360,18 @@ export default function EditAssetPage() {
                   name="badge"
                   value={badge}
                   onChange={(e) => setBadge(e.target.value as BadgeVariant)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer uppercase"
+                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer uppercase"
                 >
                   <option value="free">FREE</option>
                   <option value="paid">PAID</option>
                   <option value="premium">PREMIUM</option>
                 </select>
               </div>
-            </div>
 
-            {/* Price & File Format */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
+              {/* Price */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="price" className="font-bold text-xs text-black-secondary">
-                  PRICE (USD)
+                  PRICE (USD) {badge === 'free' ? '(Free)' : ''}
                 </label>
                 <input
                   type="number"
@@ -381,11 +382,12 @@ export default function EditAssetPage() {
                   disabled={badge === 'free'}
                   value={badge === 'free' ? 0 : price}
                   onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none disabled:text-black-secondary"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono font-bold focus:outline-none disabled:text-black-secondary"
                 />
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              {/* File Format */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="fileFormat" className="font-bold text-xs text-black-secondary">
                   FILE FORMAT / EXTENSION
                 </label>
@@ -394,7 +396,7 @@ export default function EditAssetPage() {
                   name="fileFormat"
                   value={fileFormat}
                   onChange={(e) => setFileFormat(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
+                  className="border border-black-primary p-1 rounded bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
                 >
                   {FORMATS.map((f) => (
                     <option key={f} value={f}>
@@ -405,8 +407,8 @@ export default function EditAssetPage() {
               </div>
             </div>
 
-            {/* Version & File Size & Author */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* Version & File Size & Author & License */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="version" className="font-bold text-xs text-black-secondary">
                   VERSION
@@ -418,7 +420,7 @@ export default function EditAssetPage() {
                   value={version}
                   onChange={(e) => setVersion(e.target.value)}
                   placeholder="v1.0.0"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
 
@@ -433,13 +435,28 @@ export default function EditAssetPage() {
                   value={fileSize}
                   onChange={(e) => setFileSize(e.target.value)}
                   placeholder="18.4 MB"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="license" className="font-bold text-xs text-black-secondary">
+                  LICENSE
+                </label>
+                <input
+                  type="text"
+                  id="license"
+                  name="license"
+                  value={license}
+                  onChange={(e) => setLicense(e.target.value)}
+                  placeholder="Free Commercial"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="author" className="font-bold text-xs text-black-secondary">
-                  AUTHOR
+                  AUTHOR / CREATOR
                 </label>
                 <input
                   type="text"
@@ -448,27 +465,27 @@ export default function EditAssetPage() {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   placeholder="PIXLape Lab"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Description */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label htmlFor="description" className="font-bold text-xs text-black-primary">
-                DESCRIPTION & DETAILS <span className="text-rose-600">*</span>
+                DESCRIPTION & OVERVIEW <span className="text-rose-600">*</span>
               </label>
               <RichEditor
                 name="description"
                 value={description}
                 onChange={setDescription}
-                placeholder="Provide detailed description, specifications, and features..."
-                minHeight="140px"
+                placeholder="Provide details about features, compatibility, and asset contents..."
+                minHeight="150px"
               />
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="grid grid-cols-3 md:grid-cols-1 gap-4 border-t border-border pt-4">
+            <div className="flex flex-col border border-black-primary p-2 rounded-md bg-pink-200 gap-2 shadow-pixel-sm">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"
@@ -500,8 +517,8 @@ export default function EditAssetPage() {
               />
             </div>
 
-            {/* Download File Package (Cloudflare R2) & Donate URLs */}
-            <div className="flex flex-col gap-4 border-t border-border pt-4">
+            {/* Download File Package (Cloudflare R2)*/}
+            <div className="flex flex-col gap-4 border-border pt-2">
               <FileUpload
                 name="downloadUrl"
                 label="VAULT ASSET DOWNLOAD PACKAGE"
@@ -514,28 +531,10 @@ export default function EditAssetPage() {
                 folder="packages"
                 acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk,.tar.gz,.7z,.exe"
               />
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary uppercase">
-                  DONATE / SUPPORT URL
-                </label>
-                <input
-                  type="text"
-                  id="donateUrl"
-                  name="donateUrl"
-                  value={donateUrl}
-                  onChange={(e) => setDonateUrl(e.target.value)}
-                  placeholder="https://trakteer.id/..."
-                  className="border border-black-primary p-2.5 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-                <p className="text-[10px] text-black-secondary font-mono">
-                  Link for user contributions or creator tips (e.g. Trakteer, Ko-fi, BuyMeACoffee).
-                </p>
-              </div>
             </div>
 
             {/* Dynamic Requirements Manager */}
-            <div className="flex flex-col gap-2 border-t border-border pt-3">
+            <div className="flex flex-col gap-2 border-border pt-3">
               <label className="font-bold text-xs text-black-secondary uppercase">
                 SYSTEM REQUIREMENTS
               </label>
@@ -621,8 +620,7 @@ export default function EditAssetPage() {
               </span>
               <SubmitButton
                 label="SAVE ASSET CHANGES"
-                loadingLabel="SAVING TO DATABASE..."
-                iconType="save"
+                loadingLabel="COMMITTING TO DB..."
                 loading={isSubmitting}
                 disabled={isSubmitting}
               />
@@ -632,7 +630,7 @@ export default function EditAssetPage() {
 
         {/* Right Live Card Preview (1 col) */}
         <div className="flex flex-col gap-4">
-          <div className="border border-black-primary rounded-md p-4 bg-surface flex flex-col gap-3">
+          <div className="border border-black-primary rounded-md p-4 bg-surface flex flex-col gap-3 shadow-sm">
             <div className="flex items-center justify-between border-b border-border pb-2">
               <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
                 <Eye className="w-4 h-4 text-emerald-700" weight="bold" />
@@ -647,7 +645,7 @@ export default function EditAssetPage() {
             <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col">
               {/* Card thumbnail with border background, white grid texture, and centered product icon */}
               <div
-                className="h-44 relative overflow-hidden bg-border border-b border-black-primary flex items-center justify-center"
+                className="h-44 relative overflow-hidden bg-border border-black-primary flex items-center justify-center"
                 style={{
                   backgroundImage:
                     "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
@@ -656,10 +654,10 @@ export default function EditAssetPage() {
               >
                 <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300">
                   <Image
-                    src={icon || thumbnail || '/img/Icontemp1.svg'}
+                    src={icon || thumbnail || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330203/icon_admin2.svg'}
                     alt="Asset Icon Preview"
-                    width={80}
-                    height={80}
+                    width={100}
+                    height={100}
                     unoptimized
                     className="object-contain w-full h-full drop-shadow-md"
                   />
@@ -703,26 +701,22 @@ export default function EditAssetPage() {
 
           <div className="flex flex-col bg-black-primary text-white border border-black-primary rounded-md p-4 text-xs font-mono">
             <span className="font-bold text-primary text-xs uppercase block mb-2">
-              ASSET CARD STATUS
+              VAULT ASSET RULES
             </span>
-            <div className="space-y-1.5 text-[11px] text-zinc-300">
-              <div className="flex justify-between">
-                <span>Asset ID:</span>
-                <span className="text-primary font-bold">#{currentAsset?.id || assetId}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Features:</span>
-                <span className="text-white font-bold">{features.length} items</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Requirements:</span>
-                <span className="text-white font-bold">{requirements.length} items</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Updated:</span>
-                <span className="text-white">{currentAsset?.updatedAt || 'Recent'}</span>
-              </div>
-            </div>
+            <ul className="space-y-1.5 text-[11px] text-zinc-300">
+              <li className="flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" weight="bold" />
+                Asset cards link to /cards/[id] detail pages
+              </li>
+              <li className="flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" weight="bold" />
+                Provide direct verified download links
+              </li>
+              <li className="flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" weight="bold" />
+                Category filters apply across sidebar and search
+              </li>
+            </ul>
           </div>
         </div>
       </div>

@@ -219,7 +219,7 @@ export default function AssetCardsAdminPage() {
 
       {/* Asset Display List */}
       {filteredAssets.length === 0 ? (
-        <div className="bg-surface border border-black-primary rounded-md p-8 text-center font-mono shadow-sm">
+        <div className="bg-black-secondary/40 border border-black-primary rounded-md p-8 text-center font-mono shadow-sm">
           <Cards className="w-10 h-10 text-black-secondary mx-auto mb-3" weight="duotone" />
           <h3 className="text-sm font-bold uppercase text-black-primary">
             NO MATCHING ASSETS FOUND
