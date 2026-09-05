@@ -214,7 +214,7 @@ export default function ImageUpload({
   };
 
   return (
-    <div className={`flex flex-col rounded-md bg-purple-200 border border-black-primary py-2 px-4 gap-2 font-mono shadow-pixel-sm ${className}`}>
+    <div className={`flex flex-col py-2 px-3 gap-2 font-mono ${className}`}>
       {/* Header with Label and Storage Target Toggle */}
       <div className="flex flex-wrap items-center justify-between">
         <label htmlFor={`upload-${name}`} className="font-bold text-xs text-black-primary uppercase flex items-center gap-1.5">
@@ -259,7 +259,7 @@ export default function ImageUpload({
         }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`relative border border-black-primary rounded-lg text-center transition-all bg-pink-200 overflow-hidden shadow-pixel-sm hover:scale-98 ${
+        className={`relative border border-black-primary rounded-lg text-center transition-all bg-purple-200 overflow-hidden shadow-pixel-sm hover:scale-98 ${
           dragOver
             ? "border-black-secondary bg-green-50 ring-2 ring-primary/40"
             : "border-black-secondary hover:border-black-primary"

@@ -211,9 +211,10 @@ export default function AddAssetCardPage() {
               />
             </div>
 
-            {/* Category & Badge */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
+            {/* Category, Badge, Price & File Format (1 Baris) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              {/* Category */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="category" className="font-bold text-xs text-black-secondary">
                   PRIMARY CATEGORY <span className="text-rose-600">*</span>
                 </label>
@@ -222,7 +223,7 @@ export default function AddAssetCardPage() {
                   name="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value as CardCategory)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
+                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c} value={c}>
@@ -232,7 +233,8 @@ export default function AddAssetCardPage() {
                 </select>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              {/* Badge */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="badge" className="font-bold text-xs text-black-secondary">
                   BADGE / TIER <span className="text-rose-600">*</span>
                 </label>
@@ -241,20 +243,18 @@ export default function AddAssetCardPage() {
                   name="badge"
                   value={badge}
                   onChange={(e) => setBadge(e.target.value as BadgeVariant)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer uppercase"
+                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer uppercase"
                 >
                   <option value="free">FREE</option>
                   <option value="paid">PAID</option>
                   <option value="premium">PREMIUM</option>
                 </select>
               </div>
-            </div>
 
-            {/* Price (if paid/premium) & File Format */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="flex flex-col gap-1.5">
+              {/* Price */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="price" className="font-bold text-xs text-black-secondary">
-                  PRICE (USD) {badge === 'free' ? '(Disabled for Free)' : ''}
+                  PRICE (USD) {badge === 'free' ? '(Free)' : ''}
                 </label>
                 <input
                   type="number"
@@ -265,11 +265,12 @@ export default function AddAssetCardPage() {
                   disabled={badge === 'free'}
                   value={badge === 'free' ? 0 : price}
                   onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none disabled:text-black-secondary"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono font-bold focus:outline-none disabled:text-black-secondary"
                 />
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              {/* File Format */}
+              <div className="flex flex-col gap-1">
                 <label htmlFor="fileFormat" className="font-bold text-xs text-black-secondary">
                   FILE FORMAT / EXTENSION
                 </label>
@@ -278,7 +279,7 @@ export default function AddAssetCardPage() {
                   name="fileFormat"
                   value={fileFormat}
                   onChange={(e) => setFileFormat(e.target.value)}
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold cursor-pointer"
+                  className="border border-black-primary p-1 rounded bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
                 >
                   {FORMATS.map((f) => (
                     <option key={f} value={f}>
@@ -302,7 +303,7 @@ export default function AddAssetCardPage() {
                   value={version}
                   onChange={(e) => setVersion(e.target.value)}
                   placeholder="v1.0.0"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
 
@@ -317,7 +318,7 @@ export default function AddAssetCardPage() {
                   value={fileSize}
                   onChange={(e) => setFileSize(e.target.value)}
                   placeholder="18.4 MB"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
 
@@ -332,7 +333,7 @@ export default function AddAssetCardPage() {
                   value={license}
                   onChange={(e) => setLicense(e.target.value)}
                   placeholder="Free Commercial"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
 
@@ -347,13 +348,13 @@ export default function AddAssetCardPage() {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   placeholder="PIXLape Lab"
-                  className="border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Description */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label htmlFor="description" className="font-bold text-xs text-black-primary">
                 DESCRIPTION & OVERVIEW <span className="text-rose-600">*</span>
               </label>
@@ -362,12 +363,12 @@ export default function AddAssetCardPage() {
                 value={description}
                 onChange={setDescription}
                 placeholder="Provide details about features, compatibility, and asset contents..."
-                minHeight="140px"
+                minHeight="150px"
               />
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col border border-black-primary p-2 rounded-md bg-pink-200 gap-2 shadow-pixel-sm">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"
@@ -400,7 +401,7 @@ export default function AddAssetCardPage() {
             </div>
 
             {/* Download File Package (Cloudflare R2)*/}
-            <div className="flex flex-col gap-4 border-border pt-4">
+            <div className="flex flex-col gap-4 border-border pt-2">
               <FileUpload
                 name="downloadUrl"
                 label="VAULT ASSET DOWNLOAD PACKAGE"
