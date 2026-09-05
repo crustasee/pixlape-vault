@@ -507,8 +507,12 @@ export default function EditAssetPage() {
                 label="VAULT ASSET DOWNLOAD PACKAGE"
                 value={downloadUrl}
                 onChange={setDownloadUrl}
+                onFileMeta={({ size, format }) => {
+                  if (size) setFileSize(size);
+                  if (format) setFileFormat(format);
+                }}
                 folder="packages"
-                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk"
+                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk,.tar.gz,.7z,.exe"
               />
 
               <div className="flex flex-col gap-1.5">

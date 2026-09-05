@@ -165,6 +165,7 @@ export default function ImageUpload({
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) handleUpload(file);
+    e.target.value = "";
   };
 
   const handleCopyUrl = () => {
@@ -206,46 +207,46 @@ export default function ImageUpload({
       case "banner":
         return "aspect-[21/9] max-h-36";
       case "icon":
-        return "w-20 h-20";
+        return "w-24 h-24";
       default:
         return "max-h-44";
     }
   };
 
   return (
-    <div className={`flex flex-col gap-2 font-mono ${className}`}>
+    <div className={`flex flex-col rounded-md bg-purple-200 border border-black-primary py-2 px-4 gap-2 font-mono shadow-pixel-sm ${className}`}>
       {/* Header with Label and Storage Target Toggle */}
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between">
         <label htmlFor={`upload-${name}`} className="font-bold text-xs text-black-primary uppercase flex items-center gap-1.5">
           <ImageIcon size={14} className="text-black-secondary" />
           {label}
         </label>
 
         {/* Target Pipeline Toggle */}
-        <div className="flex items-center gap-1 bg-zinc-100 p-0.5 rounded border border-border text-[10px]">
+        <div className="flex items-center gap-1 bg-white p-0.5 rounded-md border border-black-primary text-[10px]">
           <button
             type="button"
             onClick={() => setStorageTarget("cloudinary")}
-            className={`px-2 py-0.5 rounded transition-all cursor-pointer font-bold ${
+            className={`px-2 py-0.5 rounded-md transition-all cursor-pointer font-bold ${
               storageTarget === "cloudinary"
-                ? "bg-primary text-black-primary border border-black-primary shadow-xs"
+                ? "bg-yellow-300 text-blue-600 border border-blue-600 shadow-pixel-sm"
                 : "text-black-secondary hover:text-black-primary"
             }`}
             title="Upload with automatic WebP/AVIF compression and responsive CDN delivery"
           >
-            Cloudinary (Optimized)
+            CDN
           </button>
           <button
             type="button"
             onClick={() => setStorageTarget("r2")}
-            className={`px-2 py-0.5 rounded transition-all cursor-pointer font-bold ${
+            className={`px-2 py-0.5 rounded-md transition-all cursor-pointer font-bold ${
               storageTarget === "r2"
-                ? "bg-primary text-black-primary border border-black-primary shadow-xs"
+                ? "bg-pink-200 text-red-600 border border-red-600 shadow-pixel-sm"
                 : "text-black-secondary hover:text-black-primary"
             }`}
             title="Upload directly to Cloudflare R2 Vault (Zero Egress Storage)"
           >
-            Cloudflare R2
+            C R2
           </button>
         </div>
       </div>
@@ -258,10 +259,10 @@ export default function ImageUpload({
         }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`relative border border-black rounded-lg p-3 text-center transition-all bg-white overflow-hidden ${
+        className={`relative border border-black-primary rounded-lg text-center transition-all bg-pink-200 overflow-hidden shadow-pixel-sm hover:scale-98 ${
           dragOver
-            ? "border-primary bg-green-50 ring-2 ring-primary/40"
-            : "border-border hover:border-black-primary"
+            ? "border-black-secondary bg-green-50 ring-2 ring-primary/40"
+            : "border-black-secondary hover:border-black-primary"
         } ${isUploading ? "pointer-events-none opacity-80" : ""}`}
       >
         <input
@@ -274,9 +275,9 @@ export default function ImageUpload({
         />
 
         {preview ? (
-          <div className="relative flex flex-col-2 items-center gap-2 py-1">
+          <div className="relative flex flex-col-2 items-center gap-2 py-2 px-4 rounded-md">
             {/* Image Preview Container */}
-            <div className={`relative rounded border border-black-primary bg-white overflow-hidden shadow-xs ${getAspectClass()}`}>
+            <div className={`relative rounded-md border border-black-primary bg-white overflow-hidden ${getAspectClass()}`}>
               {preview.startsWith("/") ? (
                 // Local static preset
                 <Image
@@ -301,7 +302,7 @@ export default function ImageUpload({
             </div>
 
             {/* Preview Status & Controls */}
-            <div className="flex flex-wrap items-center justify-between w-full pt-1 px-1 text-[11px] gap-2 border-t border-border z-20">
+            <div className="flex flex-wrap items-center justify-between w-full pt-1 px-1 text-[11px] gap-2 border-border z-20">
               <div className="flex items-center gap-2 truncate">
                 {getSourceBadge()}
                 <span className="text-[10px] text-black-secondary truncate max-w-44" title={preview}>
@@ -339,8 +340,8 @@ export default function ImageUpload({
           </div>
         ) : (
           <div className="py-5 px-2 flex flex-col items-center justify-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-zinc-100 border border-border flex items-center justify-center text-black-secondary group-hover:text-black-primary">
-              <CloudArrowUp size={22} weight="duotone" />
+            <div className="w-10 h-10 flex items-center justify-center text-blue-600 group-hover:text-black-primary">
+              <CloudArrowUp size={26} weight="duotone" />
             </div>
 
             <div className="space-y-0.5">
@@ -393,15 +394,15 @@ export default function ImageUpload({
       )}
 
       {/* Direct / Custom URL Input (Always Visible) */}
-      <div className="flex items-center gap-1.5 mt-0.5">
+      <div className="flex items-center gap-2 mt-0.5">
         <div className="relative flex-1 flex items-center">
-          <LinkSimple size={13} className="absolute left-2.5 text-black-secondary pointer-events-none" />
+          <LinkSimple size={13} className="absolute left-3 text-black-secondary pointer-events-none" />
           <input
             type="text"
             value={preview}
             onChange={(e) => updateImage(e.target.value)}
             placeholder="Paste direct Image URL (e.g. https://res.cloudinary.com/... or https://...)"
-            className="w-full pl-7 pr-2.5 py-1.5 border border-border rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none focus:border-black-primary"
+            className="w-full pl-7 pr-2.5 py-2 border border-black-secondary rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none focus:border-black-primary"
           />
         </div>
       </div>

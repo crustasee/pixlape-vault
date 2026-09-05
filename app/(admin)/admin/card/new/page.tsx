@@ -367,7 +367,7 @@ export default function AddAssetCardPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="flex flex-col gap-4 pt-4">
+            <div className="flex flex-col gap-2">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"
@@ -399,38 +399,24 @@ export default function AddAssetCardPage() {
               />
             </div>
 
-            {/* Download File Package (Cloudflare R2) & Donate URLs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border pt-4">
+            {/* Download File Package (Cloudflare R2)*/}
+            <div className="flex flex-col gap-4 border-border pt-4">
               <FileUpload
                 name="downloadUrl"
                 label="VAULT ASSET DOWNLOAD PACKAGE"
                 value={downloadUrl}
                 onChange={setDownloadUrl}
+                onFileMeta={({ size, format }) => {
+                  if (size) setFileSize(size);
+                  if (format) setFileFormat(format);
+                }}
                 folder="packages"
-                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk"
+                acceptedTypes=".zip,.rar,.psd,.abr,.ai,.fig,.sketch,.pdf,.apk,.tar.gz,.7z,.exe"
               />
-
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="donateUrl" className="font-bold text-xs text-black-secondary uppercase">
-                  DONATE / SUPPORT URL
-                </label>
-                <input
-                  type="text"
-                  id="donateUrl"
-                  name="donateUrl"
-                  value={donateUrl}
-                  onChange={(e) => setDonateUrl(e.target.value)}
-                  placeholder="https://trakteer.id/..."
-                  className="border border-black-primary p-2.5 rounded bg-white text-xs font-mono focus:outline-none"
-                />
-                <p className="text-[10px] text-black-secondary font-mono">
-                  Link for user contributions or creator tips (e.g. Trakteer, Ko-fi, BuyMeACoffee).
-                </p>
-              </div>
             </div>
 
             {/* Dynamic Requirements Manager */}
-            <div className="flex flex-col gap-2 border-t border-border pt-3">
+            <div className="flex flex-col gap-2 border-border pt-3">
               <label className="font-bold text-xs text-black-secondary uppercase">
                 SYSTEM REQUIREMENTS
               </label>
