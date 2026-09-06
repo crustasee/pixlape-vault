@@ -92,8 +92,8 @@ const PAYMENT_METHODS: MethodOption[] = [
     tag: "E-WALLET",
     tagColor: "bg-orange-100 text-orange-700 border-orange-500",
     description: "Bayar cepat dengan saldo ShopeePay atau SPayLater",
-    logoUrl: "https://www.freelogovectors.net/wp-content/uploads/2023/10/shopeepay-logo-freelogovectors.net_.png",
-    icon: <Wallet className="w-5 h-5 text-orange-600" />,
+    logoUrl: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788701354/shopeepay.svg",
+    icon: <Wallet className="w-12 h-5 text-orange-600" />,
     bgHover: "hover:bg-orange-50",
     borderColor: "border-orange-400",
   },
@@ -103,7 +103,7 @@ const PAYMENT_METHODS: MethodOption[] = [
     tag: "E-WALLET",
     tagColor: "bg-sky-100 text-sky-700 border-sky-500",
     description: "Konfirmasi instan via akun dan dompet digital DANA",
-    logoUrl: "https://www.freelogovectors.net/wp-content/uploads/2023/10/dana-logo-freelogovectors.net_.png",
+    logoUrl: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788701354/dana.svg",
     icon: <CreditCard className="w-5 h-5 text-sky-600" />,
     bgHover: "hover:bg-sky-50",
     borderColor: "border-sky-400",
@@ -121,19 +121,19 @@ const VA_BANKS = [
     id: "mandiri",
     name: "Mandiri VA",
     code: "MANDIRI",
-    logoUrl: "https://www.freelogovectors.net/wp-content/uploads/2023/10/mandiri-logo-freelogovectors.net_.png",
+    logoUrl: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788701354/mandiri.svg",
   },
   {
     id: "bni",
     name: "BNI VA",
     code: "BNI",
-    logoUrl: "https://www.freelogovectors.net/wp-content/uploads/2019/09/bni-logo-bank-negara-indonesia.png",
+    logoUrl: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788701354/bni.svg",
   },
   {
     id: "bri",
     name: "BRI VA",
     code: "BRI",
-    logoUrl: "https://www.freelogovectors.net/wp-content/uploads/2023/02/bri-logo-freelogovectors.net_.png",
+    logoUrl: "https://res.cloudinary.com/lbovk2lu/image/upload/v1788701354/bri.svg",
   },
   {
     id: "seabank",
@@ -263,10 +263,10 @@ export default function PayMidtransModal({
                 key={method.id}
                 type="button"
                 onClick={() => handleSelectMethodClick(method.id)}
-                className={`w-full group text-left p-1 rounded-md border border-black bg-green-100 shadow-pixel hover:scale-96 active:translate-x-0 active:translate-y-0 transition-all duration-150 cursor-pointer flex items-center justify-center`}
+                className={`w-full group text-left p-1 rounded-md border border-black bg-white shadow-pixel hover:scale-96 active:translate-x-0 active:translate-y-0 transition-all duration-150 cursor-pointer flex items-center justify-center`}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-24 h-12 shrink-0 flex items-center justify-center transition-transform overflow-hidden">
+                  <div className="w-34 h-9 shrink-0 flex items-center justify-center transition-transform overflow-hidden">
                     <img
                       src={method.logoUrl}
                       alt={method.name}
