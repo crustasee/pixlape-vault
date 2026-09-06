@@ -65,13 +65,13 @@ export function ProductIdInput({
     <div className={`flex flex-col gap-1.5 font-mono ${className}`}>
       {label && (
         <div className="flex items-center justify-between">
-          <label htmlFor={id} className="text-xs font-bold text-white flex items-center gap-4">
-            <Key className="w-3.5 h-3.5 text-white" weight="bold" />
+          <label htmlFor={id} className="text-xs font-bold text-zinc-300 flex items-center gap-2">
+            <Key className="w-3.5 h-3.5 text-primary" weight="bold" />
             <span>{label}</span>
-            {required && <span className="text-rose-600">*</span>}
+            {required && <span className="text-rose-500">*</span>}
           </label>
           {value && (
-            <span className="text-[10px] text-black-secondary bg-border px-1.5 py-0.5 border rounded font-bold">
+            <span className="text-[10px] text-zinc-400 bg-zinc-900 px-1.5 py-0.5 border border-zinc-800 rounded font-bold">
               {value.length} CHARS
             </span>
           )}
@@ -90,8 +90,10 @@ export function ProductIdInput({
             required={required}
             disabled={disabled}
             readOnly={readOnly}
-            className={`w-full border border-black-primary px-3 py-2 rounded text-xs font-mono font-bold focus:outline-none transition-colors ${
-              disabled ? 'bg-surface text-black-secondary cursor-not-allowed' : 'bg-white text-black-primary'
+            className={`w-full border px-3 py-2 rounded text-xs font-mono font-bold focus:outline-none transition-colors ${
+              disabled
+                ? 'bg-zinc-950 text-zinc-500 border-zinc-800 cursor-not-allowed'
+                : 'bg-zinc-950 border-zinc-700 text-zinc-100 placeholder:text-zinc-500 focus:border-primary'
             } ${inputClassName}`}
           />
         </div>
@@ -101,7 +103,7 @@ export function ProductIdInput({
             type="button"
             onClick={handleGenerate}
             title="Auto-generate Random ID"
-            className="flex items-center gap-1 px-2.5 py-2 bg-surface hover:bg-border text-black-primary border border-black-primary rounded text-xs font-bold font-mono transition-all active:scale-95 cursor-pointer shrink-0"
+            className="flex items-center gap-1 px-2.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded text-xs font-bold font-mono transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <ArrowsClockwise className="w-3.5 h-3.5" weight="bold" />
             <span className="hidden sm:inline text-[10px]">GENERATE</span>
@@ -113,16 +115,16 @@ export function ProductIdInput({
             type="button"
             onClick={handleCopy}
             title="Copy ID to Clipboard"
-            className="flex items-center gap-1 px-2.5 py-2 bg-surface hover:bg-border text-black-primary border border-black-primary rounded text-xs font-mono transition-all active:scale-95 cursor-pointer shrink-0"
+            className="flex items-center gap-1 px-2.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded text-xs font-mono transition-all active:scale-95 cursor-pointer shrink-0"
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-600" weight="bold" />
-                <span className="hidden sm:inline text-[10px] text-emerald-600 font-bold">COPIED</span>
+                <Check className="w-3.5 h-3.5 text-emerald-400" weight="bold" />
+                <span className="hidden sm:inline text-[10px] text-emerald-400 font-bold">COPIED</span>
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5 text-black-secondary" weight="bold" />
+                <Copy className="w-3.5 h-3.5 text-zinc-400" weight="bold" />
                 <span className="hidden sm:inline text-[10px]">COPY</span>
               </>
             )}
@@ -130,7 +132,7 @@ export function ProductIdInput({
         )}
       </div>
 
-      {helperText && <span className="text-[10px] text-black-secondary">{helperText}</span>}
+      {helperText && <span className="text-[10px] text-zinc-500">{helperText}</span>}
     </div>
   );
 }

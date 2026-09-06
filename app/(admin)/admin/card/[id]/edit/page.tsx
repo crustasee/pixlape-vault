@@ -225,8 +225,8 @@ export default function EditAssetPage() {
           { label: 'LOADING' },
         ]}
       >
-        <div className="bg-surface border border-black-primary rounded-md p-12 text-center font-mono shadow-sm">
-          <p className="text-xs text-black-secondary animate-pulse">
+        <div className="bg-zinc-900/90 border border-zinc-800 rounded-md p-12 text-center font-mono shadow-sm">
+          <p className="text-xs text-zinc-400 animate-pulse">
             Querying Neon database for asset #{assetId}...
           </p>
         </div>
@@ -244,16 +244,16 @@ export default function EditAssetPage() {
           { label: 'NOT FOUND' },
         ]}
       >
-        <div className="bg-surface border border-black-primary rounded-md p-12 text-center font-mono shadow-sm">
-          <h3 className="text-sm font-bold uppercase text-black-primary mb-2">
+        <div className="bg-zinc-900/90 border border-zinc-800 rounded-md p-12 text-center font-mono shadow-sm">
+          <h3 className="text-sm font-bold uppercase text-zinc-200 mb-2">
             {`ASSET ID #${assetId} NOT FOUND`}
           </h3>
-          <p className="text-xs text-black-secondary mb-4">
+          <p className="text-xs text-zinc-400 mb-4">
             This card may have been removed or the ID in the route URL is invalid.
           </p>
           <Link
             href="/admin/card"
-            className="px-4 py-2 bg-primary text-black-primary border border-black-primary rounded-md text-xs font-bold font-mono shadow-pixel inline-block"
+            className="px-4 py-2 bg-primary text-black font-black border border-primary rounded-md text-xs font-mono shadow-pixel inline-block hover:bg-emerald-400"
           >
             RETURN TO ASSET LIST
           </Link>
@@ -275,7 +275,7 @@ export default function EditAssetPage() {
       actionSlot={
         <Link
           href="/admin/card"
-          className="flex items-center gap-1.5 px-3 py-2 bg-surface hover:bg-border border border-black-primary rounded-md text-xs font-mono font-bold transition-all shadow-xs"
+          className="flex items-center gap-1.5 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 hover:text-primary rounded-md text-xs font-mono font-bold transition-all shadow-xs"
         >
           <ArrowLeft className="w-3.5 h-3.5" weight="bold" />
           <span>BACK TO LIST</span>
@@ -289,14 +289,14 @@ export default function EditAssetPage() {
         <div className="lg:col-span-2 flex flex-col gap-4">
           <form
             onSubmit={handleSubmit}
-            className="bg-surface border border-black-primary rounded-md p-5 flex flex-col gap-4 shadow-sm"
+            className="bg-zinc-900/90 border border-zinc-800 rounded-md p-5 flex flex-col gap-4 shadow-sm"
           >
-            <div className="flex items-center justify-between border-b border-black-primary pb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
-                <Tag className="w-4 h-4 text-emerald-700" weight="bold" />
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
+                <Tag className="w-4 h-4 text-primary" weight="bold" />
                 ++ ASSET SPECIFICATION FORM ++
               </span>
-              <span className="text-[10px] px-2 py-0.5 bg-primary text-black-primary font-bold rounded">
+              <span className="text-[10px] px-2 py-0.5 bg-primary text-black font-black rounded">
                 EDIT ASSET
               </span>
             </div>
@@ -313,8 +313,8 @@ export default function EditAssetPage() {
 
             {/* Title */}
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="title" className="font-bold text-xs text-black-primary">
-                ASSET TITLE <span className="text-rose-600">*</span>
+              <label htmlFor="title" className="font-bold text-xs text-zinc-300">
+                ASSET TITLE <span className="text-rose-500">*</span>
               </label>
               <input
                 type="text"
@@ -324,7 +324,7 @@ export default function EditAssetPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Pixprint Utility V.1.02"
-                className="border border-black-primary p-2 rounded bg-white text-xs font-mono font-bold focus:outline-none"
+                className="border border-zinc-700 p-2 rounded bg-zinc-950 text-zinc-100 text-xs font-mono font-bold focus:outline-none focus:border-primary"
               />
             </div>
 
@@ -332,15 +332,15 @@ export default function EditAssetPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {/* Category */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="category" className="font-bold text-xs text-black-secondary">
-                  PRIMARY CATEGORY <span className="text-rose-600">*</span>
+                <label htmlFor="category" className="font-bold text-xs text-zinc-300">
+                  PRIMARY CATEGORY <span className="text-rose-500">*</span>
                 </label>
                 <select
                   id="category"
                   name="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value as CardCategory)}
-                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono font-bold cursor-pointer focus:border-primary"
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c} value={c}>
@@ -352,15 +352,15 @@ export default function EditAssetPage() {
 
               {/* Badge */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="badge" className="font-bold text-xs text-black-secondary">
-                  BADGE / TIER <span className="text-rose-600">*</span>
+                <label htmlFor="badge" className="font-bold text-xs text-zinc-300">
+                  BADGE / TIER <span className="text-rose-500">*</span>
                 </label>
                 <select
                   id="badge"
                   name="badge"
                   value={badge}
                   onChange={(e) => setBadge(e.target.value as BadgeVariant)}
-                  className="border border-black-primary p-1 rounded-sm bg-green-100 text-[10px] font-mono font-bold cursor-pointer uppercase"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono font-bold cursor-pointer uppercase focus:border-primary"
                 >
                   <option value="free">FREE</option>
                   <option value="paid">PAID</option>
@@ -370,7 +370,7 @@ export default function EditAssetPage() {
 
               {/* Price */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="price" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="price" className="font-bold text-xs text-zinc-300">
                   PRICE (USD) {badge === 'free' ? '(Free)' : ''}
                 </label>
                 <input
@@ -382,13 +382,13 @@ export default function EditAssetPage() {
                   disabled={badge === 'free'}
                   value={badge === 'free' ? 0 : price}
                   onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
-                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono font-bold focus:outline-none disabled:text-black-secondary"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono font-bold focus:outline-none focus:border-primary disabled:text-zinc-600"
                 />
               </div>
 
               {/* File Format */}
               <div className="flex flex-col gap-1">
-                <label htmlFor="fileFormat" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="fileFormat" className="font-bold text-xs text-zinc-300">
                   FILE FORMAT / EXTENSION
                 </label>
                 <select
@@ -396,7 +396,7 @@ export default function EditAssetPage() {
                   name="fileFormat"
                   value={fileFormat}
                   onChange={(e) => setFileFormat(e.target.value)}
-                  className="border border-black-primary p-1 rounded bg-green-100 text-[10px] font-mono font-bold cursor-pointer"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono font-bold cursor-pointer focus:border-primary"
                 >
                   {FORMATS.map((f) => (
                     <option key={f} value={f}>
@@ -410,7 +410,7 @@ export default function EditAssetPage() {
             {/* Version & File Size & Author & License */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="version" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="version" className="font-bold text-xs text-zinc-300">
                   VERSION
                 </label>
                 <input
@@ -420,12 +420,12 @@ export default function EditAssetPage() {
                   value={version}
                   onChange={(e) => setVersion(e.target.value)}
                   placeholder="v1.0.0"
-                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono focus:outline-none focus:border-primary"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="fileSize" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="fileSize" className="font-bold text-xs text-zinc-300">
                   FILE SIZE
                 </label>
                 <input
@@ -435,12 +435,12 @@ export default function EditAssetPage() {
                   value={fileSize}
                   onChange={(e) => setFileSize(e.target.value)}
                   placeholder="18.4 MB"
-                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono focus:outline-none focus:border-primary"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="license" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="license" className="font-bold text-xs text-zinc-300">
                   LICENSE
                 </label>
                 <input
@@ -450,12 +450,12 @@ export default function EditAssetPage() {
                   value={license}
                   onChange={(e) => setLicense(e.target.value)}
                   placeholder="Free Commercial"
-                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono focus:outline-none focus:border-primary"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="author" className="font-bold text-xs text-black-secondary">
+                <label htmlFor="author" className="font-bold text-xs text-zinc-300">
                   AUTHOR / CREATOR
                 </label>
                 <input
@@ -465,15 +465,15 @@ export default function EditAssetPage() {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   placeholder="PIXLape Lab"
-                  className="border border-black-primary p-1 rounded bg-green-50 text-[10px] font-mono focus:outline-none"
+                  className="border border-zinc-700 p-1.5 rounded bg-zinc-950 text-zinc-100 text-[10px] font-mono focus:outline-none focus:border-primary"
                 />
               </div>
             </div>
 
             {/* Description */}
             <div className="flex flex-col gap-1">
-              <label htmlFor="description" className="font-bold text-xs text-black-primary">
-                DESCRIPTION & OVERVIEW <span className="text-rose-600">*</span>
+              <label htmlFor="description" className="font-bold text-xs text-zinc-300">
+                DESCRIPTION & OVERVIEW <span className="text-rose-500">*</span>
               </label>
               <RichEditor
                 name="description"
@@ -485,7 +485,7 @@ export default function EditAssetPage() {
             </div>
 
             {/* Images: Thumbnail, Banner, Icon */}
-            <div className="flex flex-col border border-black-primary p-2 rounded-md bg-pink-200 gap-2 shadow-pixel-sm">
+            <div className="flex flex-col border border-zinc-800 text-zinc-200 p-3 rounded-md bg-zinc-950/60 gap-3 shadow-pixel-sm">
               <ImageUpload
                 name="thumbnail"
                 label="THUMBNAIL"
@@ -518,7 +518,7 @@ export default function EditAssetPage() {
             </div>
 
             {/* Download File Package (Cloudflare R2)*/}
-            <div className="flex flex-col gap-4 border-border pt-2">
+            <div className="flex flex-col gap-4 border-zinc-800 pt-2">
               <FileUpload
                 name="downloadUrl"
                 label="VAULT ASSET DOWNLOAD PACKAGE"
@@ -534,8 +534,8 @@ export default function EditAssetPage() {
             </div>
 
             {/* Dynamic Requirements Manager */}
-            <div className="flex flex-col gap-2 border-border pt-3">
-              <label className="font-bold text-xs text-black-secondary uppercase">
+            <div className="flex flex-col gap-2 border-t border-zinc-800 pt-3">
+              <label className="font-bold text-xs text-zinc-400 uppercase">
                 SYSTEM REQUIREMENTS
               </label>
               <div className="flex gap-2">
@@ -544,12 +544,12 @@ export default function EditAssetPage() {
                   value={newReq}
                   onChange={(e) => setNewReq(e.target.value)}
                   placeholder="Add requirement item..."
-                  className="flex-1 border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="flex-1 border border-zinc-700 p-2 rounded bg-zinc-950 text-zinc-100 text-xs font-mono focus:outline-none focus:border-primary"
                 />
                 <button
                   type="button"
                   onClick={handleAddRequirement}
-                  className="px-3 py-2 bg-surface hover:bg-border border border-black-primary rounded text-xs font-bold cursor-pointer"
+                  className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 rounded text-xs font-bold cursor-pointer transition-colors"
                 >
                   <Plus className="w-4 h-4" weight="bold" />
                 </button>
@@ -558,13 +558,13 @@ export default function EditAssetPage() {
                 {requirements.map((req, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 text-xs bg-white border border-border px-2.5 py-1 rounded"
+                    className="inline-flex items-center gap-1.5 text-xs bg-zinc-950 border border-zinc-800 text-zinc-200 px-2.5 py-1 rounded"
                   >
                     <span>{req}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveRequirement(idx)}
-                      className="text-rose-600 hover:text-rose-800 cursor-pointer"
+                      className="text-rose-400 hover:text-rose-300 cursor-pointer"
                     >
                       <Trash className="w-3 h-3" />
                     </button>
@@ -574,8 +574,8 @@ export default function EditAssetPage() {
             </div>
 
             {/* Dynamic Features Manager */}
-            <div className="flex flex-col gap-2 border-t border-border pt-3">
-              <label className="font-bold text-xs text-black-secondary uppercase">
+            <div className="flex flex-col gap-2 border-t border-zinc-800 pt-3">
+              <label className="font-bold text-xs text-zinc-400 uppercase">
                 KEY HIGHLIGHT FEATURES
               </label>
               <div className="flex gap-2">
@@ -584,12 +584,12 @@ export default function EditAssetPage() {
                   value={newFeature}
                   onChange={(e) => setNewFeature(e.target.value)}
                   placeholder="Add feature bullet point..."
-                  className="flex-1 border border-black-primary p-2 rounded bg-white text-xs font-mono focus:outline-none"
+                  className="flex-1 border border-zinc-700 p-2 rounded bg-zinc-950 text-zinc-100 text-xs font-mono focus:outline-none focus:border-primary"
                 />
                 <button
                   type="button"
                   onClick={handleAddFeature}
-                  className="px-3 py-2 bg-surface hover:bg-border border border-black-primary rounded text-xs font-bold cursor-pointer"
+                  className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 rounded text-xs font-bold cursor-pointer transition-colors"
                 >
                   <Plus className="w-4 h-4" weight="bold" />
                 </button>
@@ -598,15 +598,15 @@ export default function EditAssetPage() {
                 {features.map((feat, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 text-xs bg-white border border-border px-2.5 py-1 rounded"
+                    className="inline-flex items-center gap-1.5 text-xs bg-zinc-950 border border-zinc-800 text-zinc-200 px-2.5 py-1 rounded"
                   >
                     <span>{feat}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveFeature(idx)}
-                      className="text-rose-600 hover:text-rose-800 cursor-pointer"
+                      className="text-rose-400 hover:text-rose-300 cursor-pointer"
                     >
-                      <Trash className="w-3 h-3" />
+                      <Trash className="w-3.5 h-3.5" />
                     </button>
                   </span>
                 ))}
@@ -614,8 +614,8 @@ export default function EditAssetPage() {
             </div>
 
             {/* Submit Button */}
-            <div className="mt-3 pt-4 border-t border-black-primary flex items-center justify-between">
-              <span className="text-[11px] text-black-secondary">
+            <div className="mt-3 pt-4 border-t border-zinc-800 flex items-center justify-between">
+              <span className="text-[11px] text-zinc-500">
                 * Updates will instantly propagate to the public vault
               </span>
               <SubmitButton
@@ -630,27 +630,22 @@ export default function EditAssetPage() {
 
         {/* Right Live Card Preview (1 col) */}
         <div className="flex flex-col gap-4">
-          <div className="border border-black-primary rounded-md p-4 bg-surface flex flex-col gap-3 shadow-sm">
-            <div className="flex items-center justify-between border-b border-border pb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-black-primary flex items-center gap-1.5">
-                <Eye className="w-4 h-4 text-emerald-700" weight="bold" />
+          <div className="border border-zinc-800 rounded-md p-4 bg-zinc-900/90 flex flex-col gap-3 shadow-sm">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
+                <Eye className="w-4 h-4 text-primary" weight="bold" />
                 LIVE VAULT CARD PREVIEW
               </span>
-              <span className="text-[10px] bg-black-primary text-white px-2 py-0.5 rounded font-bold uppercase">
+              <span className="text-[10px] bg-zinc-950 text-zinc-300 border border-zinc-800 px-2 py-0.5 rounded font-bold uppercase">
                 {badge}
               </span>
             </div>
 
             {/* Preview Card Component */}
-            <div className="bg-white border border-black-primary rounded-md overflow-hidden flex flex-col">
+            <div className="bg-zinc-950 border border-zinc-800 rounded-md overflow-hidden flex flex-col">
               {/* Card thumbnail with border background, white grid texture, and centered product icon */}
               <div
-                className="h-44 relative overflow-hidden bg-border border-black-primary flex items-center justify-center"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(255, 255, 255, 0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1px, transparent 1px)",
-                  backgroundSize: "20px 20px",
-                }}
+                className="h-44 relative overflow-hidden bg-zinc-900 border-b border-zinc-800 flex items-center justify-center"
               >
                 <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300">
                   <Image
@@ -671,27 +666,27 @@ export default function EditAssetPage() {
               </div>
 
               <div className="p-4 pt-2.5 flex flex-col gap-2">
-                <h3 className="font-bold text-sm text-black-primary leading-snug">
+                <h3 className="font-bold text-sm text-zinc-100 leading-snug">
                   {title || 'Untitled Asset Title'}
                 </h3>
-                <p className="text-xs text-black-secondary line-clamp-3 bg-surface p-2 rounded border border-border">
+                <p className="text-xs text-zinc-400 line-clamp-3 bg-zinc-900/80 p-2 rounded border border-zinc-800">
                   {description || 'Provide an asset description in the form to preview how it will appear in the public vault catalog.'}
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 text-[11px] text-black-secondary mt-1">
+                <div className="grid grid-cols-2 gap-2 text-[11px] text-zinc-400 mt-1">
                   <div>
-                    <span className="text-[10px] text-black-secondary/80 block">FORMAT:</span>
-                    <strong className="text-black-primary">{fileFormat}</strong>
+                    <span className="text-[10px] text-zinc-500 block">FORMAT:</span>
+                    <strong className="text-zinc-200">{fileFormat}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-black-secondary/80 block">VERSION:</span>
-                    <strong className="text-black-primary">{version} ({fileSize})</strong>
+                    <span className="text-[10px] text-zinc-500 block">VERSION:</span>
+                    <strong className="text-zinc-200">{version} ({fileSize})</strong>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-border flex items-center justify-between text-xs">
-                  <span className="text-black-secondary">By {author || 'PIXLape Lab'}</span>
-                  <span className="font-black text-black-primary">
+                <div className="pt-2 border-t border-zinc-800 flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">By {author || 'PIXLape Lab'}</span>
+                  <span className="font-black text-zinc-100">
                     {badge === 'free' ? 'FREE' : `$${price} USD`}
                   </span>
                 </div>
@@ -699,11 +694,11 @@ export default function EditAssetPage() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-black-primary text-white border border-black-primary rounded-md p-4 text-xs font-mono">
+          <div className="flex flex-col bg-zinc-900/90 text-zinc-200 border border-zinc-800 rounded-md p-4 text-xs font-mono shadow-sm">
             <span className="font-bold text-primary text-xs uppercase block mb-2">
               VAULT ASSET RULES
             </span>
-            <ul className="space-y-1.5 text-[11px] text-zinc-300">
+            <ul className="space-y-1.5 text-[11px] text-zinc-400">
               <li className="flex items-center gap-1.5">
                 <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" weight="bold" />
                 Asset cards link to /cards/[id] detail pages

@@ -179,20 +179,20 @@ export default function ImageUpload({
     if (!preview) return null;
     if (preview.includes("cloudinary.com")) {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 border border-emerald-500 text-emerald-800 text-[10px] font-mono font-bold">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-700 text-emerald-400 text-[10px] font-mono font-bold">
           <Sparkle size={10} weight="fill" /> CLOUDINARY CDN
         </span>
       );
     }
     if (preview.includes("r2.cloudflarestorage.com") || preview.includes("r2.dev")) {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-100 border border-amber-500 text-amber-900 text-[10px] font-mono font-bold">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-950/80 border border-amber-700 text-amber-300 text-[10px] font-mono font-bold">
           <HardDrive size={10} weight="fill" /> CLOUDFLARE R2
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-100 border border-zinc-400 text-zinc-800 text-[10px] font-mono font-bold">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-bold">
         <ImageIcon size={10} /> DIRECT / CUSTOM URL
       </span>
     );
@@ -217,20 +217,20 @@ export default function ImageUpload({
     <div className={`flex flex-col py-2 px-3 gap-2 font-mono ${className}`}>
       {/* Header with Label and Storage Target Toggle */}
       <div className="flex flex-wrap items-center justify-between">
-        <label htmlFor={`upload-${name}`} className="font-bold text-xs text-black-primary uppercase flex items-center gap-1.5">
-          <ImageIcon size={14} className="text-black-secondary" />
+        <label htmlFor={`upload-${name}`} className="font-bold text-xs text-zinc-200 uppercase flex items-center gap-1.5">
+          <ImageIcon size={14} className="text-zinc-400" />
           {label}
         </label>
 
         {/* Target Pipeline Toggle */}
-        <div className="flex items-center gap-1 bg-white p-0.5 rounded-md border border-black-primary text-[10px]">
+        <div className="flex items-center gap-1 bg-zinc-950 p-0.5 rounded-md border border-zinc-800 text-[10px]">
           <button
             type="button"
             onClick={() => setStorageTarget("cloudinary")}
             className={`px-2 py-0.5 rounded-md transition-all cursor-pointer font-bold ${
               storageTarget === "cloudinary"
-                ? "bg-yellow-300 text-blue-600 border border-blue-600 shadow-pixel-sm"
-                : "text-black-secondary hover:text-black-primary"
+                ? "bg-zinc-800 text-primary border border-zinc-700 shadow-xs"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
             title="Upload with automatic WebP/AVIF compression and responsive CDN delivery"
           >
@@ -241,8 +241,8 @@ export default function ImageUpload({
             onClick={() => setStorageTarget("r2")}
             className={`px-2 py-0.5 rounded-md transition-all cursor-pointer font-bold ${
               storageTarget === "r2"
-                ? "bg-pink-200 text-red-600 border border-red-600 shadow-pixel-sm"
-                : "text-black-secondary hover:text-black-primary"
+                ? "bg-zinc-800 text-primary border border-zinc-700 shadow-xs"
+                : "text-zinc-400 hover:text-zinc-200"
             }`}
             title="Upload directly to Cloudflare R2 Vault (Zero Egress Storage)"
           >
@@ -259,10 +259,10 @@ export default function ImageUpload({
         }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`relative border border-black-primary rounded-lg text-center transition-all bg-purple-200 overflow-hidden shadow-pixel-sm hover:scale-98 ${
+        className={`relative border rounded-lg text-center transition-all bg-zinc-950/60 overflow-hidden ${
           dragOver
-            ? "border-black-secondary bg-green-50 ring-2 ring-primary/40"
-            : "border-black-secondary hover:border-black-primary"
+            ? "border-primary bg-primary/10 ring-2 ring-primary/40"
+            : "border-zinc-800 hover:border-zinc-700"
         } ${isUploading ? "pointer-events-none opacity-80" : ""}`}
       >
         <input
@@ -275,9 +275,9 @@ export default function ImageUpload({
         />
 
         {preview ? (
-          <div className="relative flex flex-col-2 items-center gap-2 py-2 px-4 rounded-md">
+          <div className="relative flex flex-col items-center gap-2 py-3 px-4 rounded-md">
             {/* Image Preview Container */}
-            <div className={`relative rounded-md border border-black-primary bg-white overflow-hidden ${getAspectClass()}`}>
+            <div className={`relative rounded-md border border-zinc-800 bg-zinc-900 overflow-hidden ${getAspectClass()}`}>
               {preview.startsWith("/") ? (
                 // Local static preset
                 <Image
@@ -302,10 +302,10 @@ export default function ImageUpload({
             </div>
 
             {/* Preview Status & Controls */}
-            <div className="flex flex-wrap items-center justify-between w-full pt-1 px-1 text-[11px] gap-2 border-border z-20">
+            <div className="flex flex-wrap items-center justify-between w-full pt-1 px-1 text-[11px] gap-2 border-t border-zinc-800/80 z-20">
               <div className="flex items-center gap-2 truncate">
                 {getSourceBadge()}
-                <span className="text-[10px] text-black-secondary truncate max-w-44" title={preview}>
+                <span className="text-[10px] text-zinc-400 truncate max-w-44" title={preview}>
                   {preview}
                 </span>
               </div>
@@ -317,10 +317,10 @@ export default function ImageUpload({
                     e.stopPropagation();
                     handleCopyUrl();
                   }}
-                  className="px-2 py-1 bg-zinc-100 hover:bg-zinc-200 text-black-primary rounded border border-border text-[10px] flex items-center gap-1 cursor-pointer"
+                  className="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded border border-zinc-700 text-[10px] flex items-center gap-1 cursor-pointer transition-colors"
                   title="Copy Image URL"
                 >
-                  {copied ? <Check size={12} className="text-green-600" /> : <Copy size={12} />}
+                  {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
                   {copied ? "Copied" : "Copy"}
                 </button>
 
@@ -330,7 +330,7 @@ export default function ImageUpload({
                     e.stopPropagation();
                     updateImage("");
                   }}
-                  className="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded border border-rose-200 text-[10px] flex items-center gap-1 cursor-pointer font-bold"
+                  className="px-2 py-1 bg-rose-950/60 hover:bg-rose-900/60 text-rose-400 rounded border border-rose-900 text-[10px] flex items-center gap-1 cursor-pointer font-bold transition-colors"
                   title="Remove Image"
                 >
                   <Trash size={12} /> Clear
@@ -339,23 +339,23 @@ export default function ImageUpload({
             </div>
           </div>
         ) : (
-          <div className="py-5 px-2 flex flex-col items-center justify-center gap-2">
-            <div className="w-10 h-10 flex items-center justify-center text-blue-600 group-hover:text-black-primary">
-              <CloudArrowUp size={26} weight="duotone" />
+          <div className="py-6 px-2 flex flex-col items-center justify-center gap-2">
+            <div className="w-10 h-10 flex items-center justify-center text-zinc-500 group-hover:text-primary transition-colors">
+              <CloudArrowUp size={28} weight="duotone" />
             </div>
 
             <div className="space-y-0.5">
-              <p className="text-xs font-bold text-black-primary">
+              <p className="text-xs font-bold text-zinc-300">
                 {isUploading
                   ? `UPLOADING TO ${storageTarget.toUpperCase()}...`
                   : "DRAG & DROP IMAGE OR BROWSE"}
               </p>
-              <p className="text-[10px] text-black-secondary">{recommendedSize}</p>
+              <p className="text-[10px] text-zinc-500">{recommendedSize}</p>
             </div>
 
-            <div className="flex items-center gap-2 text-[10px] text-black-secondary font-mono">
+            <div className="flex items-center gap-2 text-[10px] text-zinc-400 font-mono">
               <span>Target:</span>
-              <span className="font-bold text-black-primary underline">
+              <span className="font-bold text-zinc-200 underline decoration-zinc-600">
                 {storageTarget === "cloudinary" ? "Cloudinary Auto-Format" : "Cloudflare R2 Bucket"}
               </span>
             </div>
@@ -364,12 +364,12 @@ export default function ImageUpload({
 
         {/* Upload Progress Bar */}
         {isUploading && (
-          <div className="absolute inset-x-0 bottom-0 bg-black-primary/10 p-2 backdrop-blur-xs flex flex-col gap-1 z-30">
-            <div className="flex justify-between text-[10px] font-bold text-black-primary px-1">
+          <div className="absolute inset-x-0 bottom-0 bg-zinc-950/90 border-t border-zinc-800 p-2 backdrop-blur-xs flex flex-col gap-1 z-30">
+            <div className="flex justify-between text-[10px] font-bold text-zinc-300 px-1">
               <span>Uploading to {storageTarget === "cloudinary" ? "Cloudinary" : "R2"}...</span>
               <span>{uploadProgress}%</span>
             </div>
-            <div className="w-full bg-zinc-200 rounded-full h-1.5 overflow-hidden">
+            <div className="w-full bg-zinc-800 rounded-full h-1.5 overflow-hidden border border-zinc-700">
               <div
                 className="bg-primary h-full transition-all duration-200"
                 style={{ width: `${uploadProgress}%` }}
@@ -381,12 +381,12 @@ export default function ImageUpload({
 
       {/* Error Message */}
       {errorMessage && (
-        <div className="p-2 rounded bg-rose-50 border border-rose-300 text-rose-700 text-[11px] font-mono flex items-center justify-between">
+        <div className="p-2 rounded bg-rose-950/60 border border-rose-800 text-rose-300 text-[11px] font-mono flex items-center justify-between">
           <span>⚠️ {errorMessage}</span>
           <button
             type="button"
             onClick={() => setErrorMessage(null)}
-            className="text-rose-500 hover:text-rose-800 text-xs ml-2 cursor-pointer font-bold"
+            className="text-rose-400 hover:text-rose-200 text-xs ml-2 cursor-pointer font-bold"
           >
             ✕
           </button>
@@ -396,13 +396,13 @@ export default function ImageUpload({
       {/* Direct / Custom URL Input (Always Visible) */}
       <div className="flex items-center gap-2 mt-0.5">
         <div className="relative flex-1 flex items-center">
-          <LinkSimple size={13} className="absolute left-3 text-black-secondary pointer-events-none" />
+          <LinkSimple size={13} className="absolute left-3 text-zinc-500 pointer-events-none" />
           <input
             type="text"
             value={preview}
             onChange={(e) => updateImage(e.target.value)}
             placeholder="Paste direct Image URL (e.g. https://res.cloudinary.com/... or https://...)"
-            className="w-full pl-7 pr-2.5 py-2 border border-black-secondary rounded text-[11px] font-mono bg-white text-black-primary focus:outline-none focus:border-black-primary"
+            className="w-full pl-7 pr-2.5 py-2 border border-zinc-800 rounded text-[11px] font-mono bg-zinc-950 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-700 transition-colors"
           />
         </div>
       </div>

@@ -50,12 +50,12 @@ function ToolbarButton({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className={`p-1.5 rounded text-xs bg-black-primary font-mono transition-all flex items-center justify-center cursor-pointer shadow-pixel-sm ${
+      className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer shadow-xs ${
         disabled
-          ? "cursor-not-allowed text-white bg-black-primary border border-white"
+          ? "cursor-not-allowed text-zinc-600 bg-zinc-900 border border-zinc-800"
           : isActive
-          ? "bg-primary text-black-primary border border-black-primary shadow-xs font-bold"
-          : "bg-black-secondary text-white border border-black-primary hover:border-black-primary hover:text-black-primary"
+          ? "bg-primary text-black border border-primary shadow-xs font-bold"
+          : "bg-zinc-800 text-zinc-300 border border-zinc-700 hover:bg-zinc-700 hover:text-white"
       }`}
     >
       {children}
@@ -104,7 +104,7 @@ export default function RichEditor({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-emerald-600 underline font-semibold hover:text-emerald-800",
+          class: "text-primary underline font-semibold hover:text-emerald-300",
         },
       }),
     ],
@@ -117,7 +117,7 @@ export default function RichEditor({
     editorProps: {
       attributes: {
         class:
-          "prose max-w-none text-xs font-mono text-black-primary leading-relaxed focus:outline-none p-3.5",
+          "prose prose-invert max-w-none text-xs font-mono text-zinc-100 leading-relaxed focus:outline-none p-3.5",
         style: `min-height: ${minHeight};`,
       },
     },
@@ -133,7 +133,7 @@ export default function RichEditor({
   if (!editor) {
     return (
       <div
-        className={`border border-black-primary rounded-md bg-white p-4 font-mono text-xs text-black-secondary flex items-center justify-center ${className}`}
+        className={`border border-zinc-800 rounded-md bg-zinc-900 p-4 font-mono text-xs text-zinc-500 flex items-center justify-center ${className}`}
         style={{ minHeight }}
       >
         <span>INITIALIZING RICH EDITOR...</span>
@@ -198,10 +198,10 @@ export default function RichEditor({
 
   return (
     <div
-      className={`border border-black-primary rounded-md bg-white overflow-hidden font-mono shadow-xs ${className}`}
+      className={`border border-zinc-800 rounded-md bg-zinc-900 overflow-hidden font-mono shadow-xs ${className}`}
     >
       {/* Rich Text Toolbar */}
-      <div className="bg-black-primary border-black-primary px-2.5 py-1.5 flex flex-wrap items-center gap-1">
+      <div className="bg-zinc-950 border-b border-zinc-800 px-2.5 py-1.5 flex flex-wrap items-center gap-1">
         {/* Headings */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -227,7 +227,7 @@ export default function RichEditor({
           <Heading3 size={14} />
         </ToolbarButton>
 
-        <div className="w-px h-4 bg-border mx-1" />
+        <div className="w-px h-4 bg-zinc-800 mx-1" />
 
         {/* Text Formatting */}
         <ToolbarButton
@@ -262,7 +262,7 @@ export default function RichEditor({
           <Code size={14} />
         </ToolbarButton>
 
-        <div className="w-px h-4 bg-border mx-1" />
+        <div className="w-px h-4 bg-zinc-800 mx-1" />
 
         {/* Lists & Blockquote */}
         <ToolbarButton
@@ -296,13 +296,13 @@ export default function RichEditor({
           <Minus size={14} />
         </ToolbarButton>
 
-        <div className="w-px h-4 bg-border mx-1" />
+        <div className="w-px h-4 bg-zinc-800 mx-1" />
 
         {/* Media & Links */}
         <div className="relative flex items-center">
           <label
             htmlFor="editor-img-upload"
-            className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer bg-black-secondary/50 shadow-pixel-sm text-white border border-black-secondary hover:border-black-primary ${
+            className={`p-1.5 rounded text-xs font-mono transition-all flex items-center justify-center cursor-pointer bg-zinc-800 shadow-xs text-zinc-300 border border-zinc-700 hover:bg-zinc-700 hover:text-white ${
               isUploadingImage ? "opacity-50 pointer-events-none" : ""
             }`}
             title="Upload Image to Cloudinary"
@@ -347,7 +347,7 @@ export default function RichEditor({
           <Eraser size={14} />
         </ToolbarButton>
 
-        <div className="w-px h-4 bg-border mx-1" />
+        <div className="w-px h-4 bg-zinc-800 mx-1" />
 
         {/* Undo / Redo */}
         <ToolbarButton
@@ -368,7 +368,7 @@ export default function RichEditor({
       </div>
 
       {/* Editor Content Area */}
-      <div className="bg-white min-h-52">
+      <div className="bg-zinc-900 min-h-52 text-zinc-100">
         <EditorContent editor={editor} />
       </div>
 

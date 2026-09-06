@@ -69,24 +69,24 @@ export function SidePanel({
 
   return (
     <aside
-      className={`w-full lg:w-58 bg-black-secondary rounded-md border border-border p-4 flex flex-col gap-2 shrink-0 font-mono ${className}`}
+      className={`w-full lg:w-58 bg-zinc-900/90 rounded-md border border-zinc-800 p-4 flex flex-col gap-2 shrink-0 font-mono ${className}`}
     >
       {/* Header section */}
-      <div className="flex items-center justify-between border-b border-border pb-2.5">
+      <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 bg-primary border border-black-primary rounded-full animate-pulse"></div>
-          <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+          <div className="w-2.5 h-2.5 bg-primary border border-primary/50 rounded-full animate-pulse"></div>
+          <h3 className="text-xs font-bold text-zinc-100 uppercase tracking-wider">
             CONTROL PANEL
           </h3>
         </div>
-        <span className="text-[10px] px-2 py-0.5 bg-black-primary text-white font-bold rounded-sm">
+        <span className="text-[10px] px-2 py-0.5 bg-zinc-800 text-zinc-300 font-bold rounded-sm border border-zinc-700">
           VAULT
         </span>
       </div>
 
       {/* Main Navigation links */}
       <nav className="flex flex-col gap-2">
-        <span className="text-[10px] font-bold text-black-secondary uppercase tracking-wider px-1">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider px-1">
           NAVIGATION
         </span>
         {MENU_ITEMS.map((item) => {
@@ -111,14 +111,14 @@ export function SidePanel({
               onClick={() => onSelectMenu?.(item.name)}
               className={`w-full py-2.5 px-3 border rounded-md text-xs font-mono font-bold transition-all flex items-center justify-between text-left group ${
                 isSelected
-                  ? 'bg-primary border-black-primary text-black-primary shadow-pixel font-black'
-                  : 'bg-black-primary/40 border-black-primary text-white hover:scale-98 hover:border-black-primary'
+                  ? 'bg-primary border-primary text-black shadow-pixel font-black'
+                  : 'bg-zinc-950/60 border-zinc-800/80 text-zinc-300 hover:border-zinc-700 hover:text-zinc-100 hover:bg-zinc-800/50'
               }`}
             >
               <div className="flex items-center gap-4 truncate">
                 <Icon
                   className={`w-4 h-4 shrink-0 ${
-                    isSelected ? 'text-black-primary' : 'text-white group-hover:text-primary'
+                    isSelected ? 'text-black' : 'text-zinc-400 group-hover:text-primary'
                   }`}
                   weight={isSelected ? 'bold' : 'regular'}
                 />
@@ -128,8 +128,8 @@ export function SidePanel({
               <span
                 className={`text-[10px] px-2 py-1 rounded border font-mono font-bold shrink-0 ml-2 ${
                   isSelected
-                    ? 'bg-green-400 border-black-primary text-black-primary'
-                    : 'bg-black/40 text-border border-black-primary group-hover:border-black-primary'
+                    ? 'bg-black/20 border-black/30 text-black'
+                    : 'bg-zinc-900 text-zinc-400 border-zinc-800 group-hover:border-zinc-700'
                 }`}
               >
                 {badgeDisplay}
@@ -139,52 +139,49 @@ export function SidePanel({
         })}
       </nav>
 
-
-
       {/* View Public Vault Link */}
-      <div className="border-border pt-3">
+      <div className="border-t border-zinc-800 pt-3 mt-1">
         <Link
           href="https://pixlape.vercel.app/"
           target="_blank"
-          className="w-full py-2 px-3 bg-blue-500 hover:scale-97 shadow-pixel border border-border text-white text-xs font-mono font-bold rounded-md flex items-center justify-between transition-all group"
+          className="w-full py-2 px-3 bg-zinc-800/80 hover:bg-zinc-800 shadow-pixel border border-zinc-700 text-zinc-200 hover:text-primary text-xs font-mono font-bold rounded-md flex items-center justify-between transition-all group"
         >
           <span className="flex items-center gap-2">
-            <Globe className="w-3.5 h-3.5 text-white group-hover:text-black-primary" />
+            <Globe className="w-3.5 h-3.5 text-zinc-400 group-hover:text-primary" />
             LIVE PUBLIC VAULT
           </span>
-          <span className="text-[10px] text-white group-hover:text-black-primary">&gt;</span>
+          <span className="text-[10px] text-zinc-400 group-hover:text-primary">&gt;</span>
         </Link>
       </div>
 
       {/* Info / Account Telemetry Box */}
-      <div className="border border-black-primary p-3 rounded-md flex flex-col mt-auto bg-black-primary/30 gap-2 text-xs text-black-secondary font-mono">
-        <div className="flex items-center justify-between text-[11px] font-bold text-border border-b pb-1.5">
+      <div className="border border-zinc-800 p-3 rounded-md flex flex-col mt-auto bg-zinc-950/70 gap-2 text-xs text-zinc-400 font-mono">
+        <div className="flex items-center justify-between text-[11px] font-bold text-zinc-300 border-b border-zinc-800/80 pb-1.5">
           <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" weight="bold" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" weight="bold" />
             ADMIN CONSOLE
           </span>
-          <span className="px-1.5 py-0.5 bg-black-secondary text-primary text-[9px] rounded-md font-bold">
+          <span className="px-1.5 py-0.5 bg-zinc-800 text-primary text-[9px] rounded-md font-bold border border-zinc-700">
             ROOT
           </span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-border">Operator:</span>
-          <span className="font-bold text-white">admin</span>
+          <span className="text-zinc-400">Operator:</span>
+          <span className="font-bold text-zinc-200">admin</span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-border flex items-center gap-1">
-            <Database className="w-3 h-3 text-emerald-200" />
+          <span className="text-zinc-400 flex items-center gap-1">
+            <Database className="w-3 h-3 text-emerald-400" />
             Data:
           </span>
-          <span className="font-bold text-red-300">Drizzle / Neon</span>
+          <span className="font-bold text-emerald-400">Drizzle / Neon</span>
         </div>
         <div className="flex items-center justify-between text-[11px]">
-          <span className="text-border">Host Service:</span>
-          <span className="font-bold text-white flex items-center gap-1">
-            <Pulse className="w-3 h-3 text-emerald-600 animate-pulse" weight="bold" />
+          <span className="text-zinc-400">Host Service:</span>
+          <span className="font-bold text-zinc-200 flex items-center gap-1">
+            <Pulse className="w-3 h-3 text-emerald-400 animate-pulse" weight="bold" />
             vercel
           </span>
-          
         </div>
       </div>
 
@@ -192,7 +189,7 @@ export function SidePanel({
       <form action={logoutAction} className="w-full">
         <button
           type="submit"
-          className="w-full py-1.5 px-3 bg-red-400 text-white border border-black rounded-md text-xs font-mono font-bold flex items-center justify-center gap-3 transition-all cursor-pointer shadow-pixel hover:scale-98"
+          className="w-full py-1.5 px-3 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/80 rounded-md text-xs font-mono font-bold flex items-center justify-center gap-3 transition-all cursor-pointer shadow-pixel hover:scale-98"
           title="Sign out of Admin Session"
         >
           <SignOut className="w-3.5 h-3.5" weight="bold" />

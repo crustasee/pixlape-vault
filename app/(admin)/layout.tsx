@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import AdminThemeScope from '@/components/admin/AdminThemeScope';
 
 export const metadata: Metadata = {
   title: 'PIXLApe Vault Admin Console',
@@ -11,5 +12,11 @@ export default function AdminRootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <div className="dark min-h-screen bg-zinc-950 text-zinc-100 font-mono antialiased selection:bg-primary selection:text-black">
+      <AdminThemeScope />
+      {children}
+    </div>
+  );
 }
+
