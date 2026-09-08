@@ -63,7 +63,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col justify-between font-mono text-zinc-100 p-4 sm:p-6 selection:bg-primary selection:text-black">
+    <div className="min-h-screen bg-black-primary flex flex-col justify-between font-mono text-zinc-100 p-4 sm:p-6 selection:bg-primary selection:text-black">
       {/* Top Navbar Brand */}
       <header className="flex items-center justify-between max-w-5xl w-full mx-auto py-2">
         <Link
@@ -193,12 +193,8 @@ function LoginForm() {
               </div>
 
               {/* Quick Demo Fill Helper */}
-              <div className="flex items-center justify-between bg-zinc-950 border border-zinc-800 rounded p-2.5 text-[11px]">
-                <span className="text-zinc-400 flex items-center gap-1">
-                  <Key className="w-3.5 h-3.5 text-primary" weight="bold" />
-                  Default: <code className="font-bold text-zinc-200">admin</code> /{' '}
-                  <code className="font-bold text-zinc-200">pixlape2026</code>
-                </span>
+              <div className="flex items-center justify-between bg-zinc-800 border border-zinc-800 rounded p-2.5 text-[11px]">
+                
                 <button
                   type="button"
                   onClick={handleFillDemo}
