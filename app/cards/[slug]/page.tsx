@@ -117,7 +117,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
         {/* ── Main Asset Container ─────────────────────────────────────── */}
         <section className="bg-surface border border-black-secondary rounded-lg flex flex-col gap-6 p-4 sm:p-6 shadow-xs">
           {/* Hero Banner */}
-          <div className="relative w-full h-46 sm:h-58 md:h-66 rounded-sm overflow-hidden bg-white border border-black group">
+          <div className="relative w-full h-52 sm:h-64 md:h-74 rounded-sm overflow-hidden bg-white border group">
             <Image
               src={card.banner}
               alt={`${card.title} banner`}
@@ -277,9 +277,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
             {/* Right Sidebar Column */}
             <div className="lg:col-span-3 flex flex-col gap-3 sticky top-6">
               {/* Primary Download Action Card */}
-              <div className="bg-green-100 border rounded-md p-4 flex flex-col gap-3 shadow-xs">
-                <div className="flex items-center justify-between border-b border-border pb-2">
-                  <span className="text-xs font-mono font-bold text-black-secondary uppercase tracking-wider">
+              <div className="bg-emerald-100 border rounded-md p-4 flex flex-col gap-3">
+                <div className="flex items-center justify-between border-b border-emerald-500 pb-2">
+                  <span className="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider">
                     Package Download
                   </span>
                   <span className="px-2 py-0.5 text-[10px] font-bold bg-primary-light text-primary-dim border border-primary rounded-xs">
@@ -287,20 +287,20 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                   </span>
                 </div>
 
-                <div className="flex justify-between items-baseline text-xs font-mono text-text-secondary">
+                <div className="flex justify-between items-baseline text-xs font-mono text-emerald-600">
                   <span>File Size:</span>
-                  <strong className="text-black-primary font-bold">{displaySize}</strong>
+                  <strong className="text-emerald-700 font-bold">{displaySize}</strong>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsDownloadOpen(true)}
-                  className="w-full py-3 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black hover:scale-98 transition-all duration-150 cursor-pointer shadow-pixel font-bold flex items-center justify-center gap-2 text-center"
+                  className="w-full py-2 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black hover:scale-98 transition-all duration-200 cursor-pointer shadow-pixel-sm font-bold flex items-center justify-center gap-2 text-center"
                 >
                   <span>⬇</span> DOWNLOAD
                 </button>
 
-                <p className="text-[10px] text-center text-text-muted font-mono">
+                <p className="text-[10px] text-center text-emerald-400 font-mono">
                   Safe & verified archive • Instant direct download
                 </p>
               </div>
@@ -351,8 +351,8 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Support Creator Donation Box */}
-              <div className="bg-pink-50 border border-red-300 rounded-md p-4 flex flex-col gap-3 shadow-xs">
-                <div className="flex items-center gap-2 border-b border-pink-200 pb-2">
+              <div className="bg-pink-50 border border-red-300 rounded-md p-4 flex flex-col gap-3">
+                <div className="flex items-center gap-2 border-pink-200 pb-2">
                   <span className="text-base select-none">💖</span>
                   <h4 className="font-pixel text-xs text-black-primary uppercase">Support Creator</h4>
                 </div>
@@ -362,14 +362,14 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsMidtransOpen(true)}
-                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
-                  PAY →
+                  Support →
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
                 >
                   DONATE →
                 </button>
