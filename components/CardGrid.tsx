@@ -108,13 +108,13 @@ export default function CardGrid({
               >
                 <div>
                   {/* Thumbnail header with background image and centered product icon */}
-                  <div className="h-28 relative overflow-hidden bg-surface border flex items-center justify-center group/thumb opacity-75">
+                  <div className="h-28 relative overflow-hidden bg-surface border flex items-center justify-center group/thumb">
                     <Image
                       src={card.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
                       alt={`${card.title} background`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover"
+                      className="object-cover opacity-75"
                     />
                     <div className="absolute top-2 right-2 z-20">
                       <span className="text-[9px] font-bold px-1.5 py-0.5 bg-white border border-border text-border rounded backdrop-blur-xs">
