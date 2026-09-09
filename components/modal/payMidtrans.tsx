@@ -305,7 +305,7 @@ export default function PayMidtransModal({
               <div className="bg-red-50/70 border border-red-200 rounded-lg text-center space-y-2.5">
                 <div className="w-full mx-auto bg-white rounded-md flex items-center justify-center p-2 shadow-xs">
                   <img
-                    src="https://res.cloudinary.com/lbovk2lu/image/upload/v1788508579/qrissimulation.svg"
+                    src="https://res.cloudinary.com/lbovk2lu/image/upload/v1788972109/Puzzle_Code_GIF_by_Sam_Omo.gif"
                     alt="QRIS Official"
                     className="max-h-full max-w-full object-contain"
                     loading="lazy"
