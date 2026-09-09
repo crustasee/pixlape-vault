@@ -64,7 +64,7 @@ export default function ContactPage() {
               STATUS: <strong>DISPATCH ONLINE</strong>
             </span>
             <span className="text-border">|</span>
-            <span className="px-3 py-1 rounded-md bg-surface border border-border text-black-secondary">
+            <span className="px-3 py-1 rounded-md bg-surface border text-black-secondary">
               AVG RESPONSE: &lt; 24H
             </span>
           </div>
