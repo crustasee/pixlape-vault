@@ -29,31 +29,31 @@ export default function DonateModal({
         type="button"
         onClick={onClose}
         aria-label="Close modal"
-        className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-pink-500 text-white border border-black hover:scale-97 active:scale-97 transition-all duration-150 flex items-center shadow-pixel justify-center text-xl font-mono font-bold cursor-pointer"
+        className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-red-400 text-white border border-black hover:scale-97 active:scale-97 transition-all duration-150 flex items-center justify-center shadow-pixel-sm text-xl font-bold cursor-pointer"
       >
         ✕
       </button>
 
       {/* Heading */}
-      <h2 className="text-xs font-mono uppercase tracking-widest text-black-secondary text-center mb-1">
-        Support the creator
+      <h2 className="text-xs font-mono uppercase tracking-widest text-rose-400 text-center mb-1">
+        Support me
       </h2>
-      <h1 className="text-base sm:text-lg font-pixel font-bold text-black-primary text-center mb-3 tracking-wide">
-        TIP FOR CREATOR
+      <h1 className="text-base sm:text-lg font-pixel font-bold text-rose-500 text-center mb-3 tracking-wide">
+        DONATE FOR CREATOR
       </h1>
 
       <hr className="w-full border-t border-border my-4" />
 
       {/* Icon placeholder */}
-      <div className="w-20 h-20 mx-auto my-3 rounded-md bg-white border border-border flex items-center justify-center text-black-secondary text-xs font-mono font-bold shadow-xs">
-        <Image src="/logopx.svg" alt="Logo" width={100} height={100} />
+      <div className="w-52 h-52 mx-auto border bg-pink-300/60 my-3 rounded-lg flex items-center justify-center">
+        <Image src="https://res.cloudinary.com/lbovk2lu/image/upload/v1788327329/Pixel_Art_GIF.gif" alt="Logo" width={170} height={170} />
       </div>
 
       {/* Trakteer Button */}
     <button
     type="button"
     onClick={() => openLink(trakteerUrl)}
-    className="w-full py-3 mt-2.5 rounded-lg bg-red-400 shadow-pixel text-white text-sm font-black border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+    className="w-full py-3 mt-2.5 rounded-lg bg-red-400 shadow-pixel text-white text-sm font-black border border-black hover:scale-97 active:scale-96 transition-all duration-300 cursor-pointer text-center tracking-wider"
     >
       TRAKTEER
     </button>
@@ -63,7 +63,7 @@ export default function DonateModal({
       <button
         type="button"
         onClick={() => openLink(saweriaUrl)}
-        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 shadow-pixel text-white text-sm font-black border border-black hover:text-white hover:scale-97 active:scale-[0.99] transition-all duration-150 cursor-pointer text-center tracking-wider"
+        className="w-full py-3 mt-2.5 rounded-lg bg-pink-400 shadow-pixel text-white text-sm font-black border border-black hover:scale-97 active:scale-96 transition-all duration-300 cursor-pointer text-center tracking-wider"
       >
         SAWERIA
       </button>

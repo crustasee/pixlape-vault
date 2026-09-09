@@ -33,7 +33,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[480px] bg-surface border-2 border-black rounded-lg p-6 sm:p-8 font-mono shadow-2xl"
+        className="relative w-full max-w-[480px] bg-surface border rounded-lg p-6 sm:p-8 font-mono shadow-2xl"
       >
         {children}
       </div>

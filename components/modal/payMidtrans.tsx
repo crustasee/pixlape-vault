@@ -263,14 +263,14 @@ export default function PayMidtransModal({
                 key={method.id}
                 type="button"
                 onClick={() => handleSelectMethodClick(method.id)}
-                className={`w-full group text-left p-1 rounded-md border border-black bg-white shadow-pixel hover:scale-96 active:translate-x-0 active:translate-y-0 transition-all duration-150 cursor-pointer flex items-center justify-center`}
+                className={`w-full group text-left p-1 rounded-md border border-black bg-white shadow-pixel-sm hover:scale-97 hover:bg-emerald-100 active:scale-96 transition-all duration-300 cursor-pointer flex items-center justify-center`}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-34 h-9 shrink-0 flex items-center justify-center transition-transform overflow-hidden">
+                  <div className="w-34 h-8 shrink-0 flex items-center justify-center transition-transform overflow-hidden">
                     <img
                       src={method.logoUrl}
                       alt={method.name}
-                      className="max-h-full max-w-full object-contain"
+                      className="max-h-6 max-w-full object-contain"
                       loading="lazy"
                     />
                   </div>
@@ -334,7 +334,7 @@ export default function PayMidtransModal({
                         onClick={() => setSelectedBank(bank.id)}
                         className={`w-full flex items-center justify-between px-12 py-2 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer ${
                           isBankSelected
-                            ? "border-black bg-blue-100 text-black shadow-pixel-sm font-black"
+                            ? "border-black bg-green-100 text-black shadow-pixel-sm font-black"
                             : "border-border bg-white text-black-secondary hover:border-black"
                         }`}
                       >
@@ -343,7 +343,7 @@ export default function PayMidtransModal({
                             <img
                               src={bank.logoUrl}
                               alt={bank.name}
-                              className="max-h-full max-w-full object-contain"
+                              className="max-h-6 max-w-full object-contain"
                               loading="lazy"
                             />
                           </div>

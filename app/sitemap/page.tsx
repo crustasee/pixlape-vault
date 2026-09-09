@@ -143,30 +143,10 @@ export default function SiteMapPage() {
           <h1 className="text-xl font-pixel text-black-secondary tracking-wide uppercase">
             +++ SYSTEM MAP // PIXLAPE_VAULT +++
           </h1>
-          <p className="text-xs text-text-secondary font-mono">
-            Full route index, asset directory &amp; category map.
-          </p>
+        
         </div>
 
-        {/* ── Stats Bar ─────────────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { label: "TOTAL ROUTES", value: `${ROUTES.length + ASSET_CATEGORIES.length}` },
-            { label: "VAULT ASSETS", value: `${CARDS.length}` },
-            { label: "CATEGORIES", value: `${ASSET_CATEGORIES.length}` },
-            { label: "STATUS", value: "OPTIMAL" },
-          ].map(({ label, value }) => (
-            <div
-              key={label}
-              className="bg-border border border-black rounded-md px-4 py-3 flex flex-col gap-1"
-            >
-              <span className="text-[10px] text-text-secondary uppercase tracking-widest">
-                {label}
-              </span>
-              <span className="text-sm font-pixel text-black-secondary">{value}</span>
-            </div>
-          ))}
-        </div>
+        
 
         {/* ── Main Terminal Container ───────────────────────── */}
         <div className="bg-black border border-black-primary rounded-lg overflow-hidden shadow-lg">

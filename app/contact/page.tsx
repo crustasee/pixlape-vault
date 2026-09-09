@@ -48,7 +48,7 @@ export default function ContactPage() {
       <Header />
 
       {/* Main Content Container */}
-      <main className="flex-1 w-full max-w-full mx-auto px-6 sm:px-10 pt-17 pb-16 flex flex-col gap-5">
+      <main className="flex-1 w-full max-w-full mx-auto px-6 sm:px-10 pt-16 pb-12 flex flex-col gap-2">
         
         {/* Top Breadcrumb & Status */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3">
@@ -71,11 +71,11 @@ export default function ContactPage() {
         </div>
 
         {/* Hero Banner Header */}
-        <section className="bg-border border border-black rounded-md p-6 sm:p-8 flex flex-col gap-5 relative overflow-hidden">
+        <section className="bg-border border border rounded-md p-6 sm:p-8 flex flex-col gap-5 relative overflow-hidden">
           <div className="inline-flex items-center gap-2 text-xs font-black text-black-primary absolute top-3 right-3">
             <span>+++++[ PROTOCOL: DIRECT_TRANSMISSION ]++++++</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-pixel font-bold text-black-secondary tracking-wide">
+          <h1 className="text-xl sm:text-2 xl font-pixel font-bold text-black-secondary tracking-wide">
             ++ TRANSMIT TO PIXLAPE ++
           </h1>
           <p className="border border-black rounded-sm bg-surface p-2 text-xs sm:text-sm text-text-secondary max-w-full leading-relaxed">

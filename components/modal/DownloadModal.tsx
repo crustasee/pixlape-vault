@@ -47,7 +47,7 @@ function DownloadModalContent({
         type="button"
         onClick={onClose}
         aria-label="Close modal"
-        className="absolute top-3 right-4 w-9 h-9 rounded-lg bg-pink-400 text-white border border-black hover:scale-96 shadow-pixel hover:text-red-600 transition-all duration-150 flex items-center justify-center text-xl font-mono font-bold cursor-pointer"
+        className="absolute top-3 right-4 w-7 h-7 rounded-md bg-pink-400 text-white border border-black hover:scale-97 hover:bg-red-600 shadow-pixel-sm transition-all duration-150 flex items-center justify-center text-xl font-mono font-bold cursor-pointer"
       >
         ✕
       </button>
@@ -62,31 +62,22 @@ function DownloadModalContent({
         {isReady ? "Your link is ready below" : "Countdown download link ......."}
       </h2>
 
-      <hr className="w-full border-t-2 border-black-secondary my-7" />
+      <hr className="w-full border-t border-black-secondary my-7" />
 
       {/* Download CTA Button */}
       <button
         type="button"
         onClick={handleDownload}
         disabled={!isReady}
-        className={`w-full rounded-lg py-3 mt-3 text-sm font-pixel shadow-pixel font-bold border transition-all duration-150 text-center ${
+        className={`w-full rounded-lg py-3 mt-3 text-sm font-pixel shadow-pixel font-bold border transition-all duration-300 text-center ${
           isReady
-            ? "bg-green-400 text-black-primary border-black hover:bg-primary hover:scale-96 active:scale-98 cursor-pointer"
-            : "bg-black-secondary/20 text-black-secondary border-border cursor-not-allowed"
+            ? "bg-green-400 text-black-primary border-black hover:bg-primary hover:scale-98 active:scale-96 cursor-pointer"
+            : "text-pink-100 border border-black bg-pink-200 cursor-not-allowed"
         }`}
       >
         {isReady
           ? "READY TO DOWNLOAD !"
           : `PLEASE WAIT ${secondsLeft} SECONDS`}
-      </button>
-
-      {/* Donate CTA Button */}
-      <button
-        type="button"
-        onClick={onDonateOpen}
-        className="w-full py-3 mt-3 rounded-lg bg-pink-400 text-black-primary text-xs sm:text-sm font-pixel shadow-pixel font-bold border border-black hover:scale-97 active:scale-98 transition-all duration-150 cursor-pointer text-center"
-      >
-        DONATE ❤️
       </button>
     </>
   );
