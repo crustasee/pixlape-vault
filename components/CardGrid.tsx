@@ -108,7 +108,7 @@ export default function CardGrid({
               >
                 <div>
                   {/* Thumbnail header with background image and centered product icon */}
-                  <div className="h-28 relative overflow-hidden bg-surface border flex items-center justify-center group/thumb">
+                  <div className="h-28 relative overflow-hidden bg-surface border flex items-center justify-center group/thumb opacity-75">
                     <Image
                       src={card.thumbnail || "https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg"}
                       alt={`${card.title} background`}
