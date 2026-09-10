@@ -71,7 +71,7 @@ export default function ContactPage() {
         </div>
 
         {/* Hero Banner Header */}
-        <section className="bg-border border border rounded-md p-6 sm:p-8 flex flex-col gap-5 relative overflow-hidden">
+        <section className="bg-border border rounded-md p-6 sm:p-8 flex flex-col gap-5 relative overflow-hidden">
           <div className="inline-flex items-center gap-2 text-xs font-black text-black-primary absolute top-3 right-3">
             <span>+++++[ PROTOCOL: DIRECT_TRANSMISSION ]++++++</span>
           </div>
