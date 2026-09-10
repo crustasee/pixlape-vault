@@ -17,7 +17,6 @@ import {
   X,
   PencilSimple,
   Article,
-  CheckCircle,
 } from '@phosphor-icons/react';
 import {
   deleteArticleFromStore,

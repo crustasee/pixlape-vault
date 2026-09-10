@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import HeroBanner from "@/components/HeroBanner";
@@ -23,8 +23,11 @@ function HomeContent() {
 
   const assets = useAssets();
 
-  // Sync state when URL searchParams change
-  useEffect(() => {
+  const searchParamsString = searchParams.toString();
+  const [prevParamsString, setPrevParamsString] = useState(searchParamsString);
+
+  if (searchParamsString !== prevParamsString) {
+    setPrevParamsString(searchParamsString);
     const cat = searchParams.get("category");
     setSelectedCategory(cat || null);
 
@@ -33,7 +36,7 @@ function HomeContent() {
 
     const query = searchParams.get("search");
     setSearchQuery(query || "");
-  }, [searchParams]);
+  }
 
   // Update browser URL query string without page reload
   const updateUrl = (cat: string | null, page: number, search: string) => {

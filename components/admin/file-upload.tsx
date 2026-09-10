@@ -1,7 +1,7 @@
 // components/admin/file-upload.tsx
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   getPresignedUploadUrl,
   deleteFileFromR2,
@@ -56,12 +56,10 @@ export default function FileUpload({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (value !== undefined && value !== prevValue) {
-      setPrevValue(value);
-      setFileUrl(value);
-    }
-  }, [value, prevValue]);
+  if (value !== undefined && value !== prevValue) {
+    setPrevValue(value);
+    setFileUrl(value);
+  }
 
   const updateFileUrl = (url: string) => {
     setFileUrl(url);

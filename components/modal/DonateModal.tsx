@@ -18,7 +18,6 @@ export default function DonateModal({
   onClose,
   trakteerUrl = "https://trakteer.id/pixlape/tip",
   saweriaUrl = "https://saweria.co/pixlape",
-  midtranseUrl = "https://www.midtrans.com/id",
 }: DonateModalProps) {
   const openLink = (url: string) => window.open(url, "_blank");
 

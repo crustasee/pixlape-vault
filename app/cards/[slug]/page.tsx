@@ -12,6 +12,7 @@ import DownloadModal from "@/components/modal/DownloadModal";
 import DonateModal from "@/components/modal/DonateModal";
 import PayMidtransModal from "@/components/modal/payMidtrans";
 import { useAsset, useAssets } from "@/hooks/useAssets";
+import { getTrakteerLink, getSaweriaLink } from "@/lib/payments";
 
 export interface CardDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -412,8 +413,8 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
       <DonateModal
         isOpen={isDonateOpen}
         onClose={() => setIsDonateOpen(false)}
-        trakteerUrl={card.donateUrl || "https://trakteer.id"}
-        saweriaUrl="https://saweria.co"
+        trakteerUrl={getTrakteerLink(card.donateUrl)}
+        saweriaUrl={getSaweriaLink()}
       />
 
       <PayMidtransModal

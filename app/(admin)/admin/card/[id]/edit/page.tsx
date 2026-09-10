@@ -88,51 +88,49 @@ export default function EditAssetPage() {
   useEffect(() => {
     if (!currentAsset && assetId) {
       let isMounted = true;
-      setIsFetchingDirect(true);
-      fetch(`/api/cards/${assetId}`)
-        .then((res) => res.json())
-        .then((data) => {
+      const fetchDirect = async () => {
+        setIsFetchingDirect(true);
+        try {
+          const res = await fetch(`/api/cards/${assetId}`);
+          const data = await res.json();
           if (isMounted && data.success && data.data) {
             setDirectAsset(data.data);
           }
-        })
-        .catch((err) => {
+        } catch (err) {
           console.warn('Error fetching asset directly from database:', err);
-        })
-        .finally(() => {
+        } finally {
           if (isMounted) setIsFetchingDirect(false);
-        });
-
+        }
+      };
+      fetchDirect();
       return () => {
         isMounted = false;
       };
     }
   }, [currentAsset, assetId]);
 
-  // Synchronize form fields when asset is resolved
-  useEffect(() => {
-    if (effectiveAsset && loadedAssetId !== effectiveAsset.id) {
-      setLoadedAssetId(effectiveAsset.id);
-      setProductId(effectiveAsset.id || assetId || '');
-      setTitle(effectiveAsset.title || '');
-      setDescription(effectiveAsset.description || '');
-      setCategory((effectiveAsset.categories?.[0] as CardCategory) || 'TOOLS');
-      setFileFormat(effectiveAsset.fileType || effectiveAsset.fileFormat || '.ZIP');
-      setBadge(effectiveAsset.badge || 'free');
-      setPrice(effectiveAsset.price ?? (effectiveAsset.badge === 'free' ? 0 : 9.99));
-      setVersion(effectiveAsset.version || 'v1.0.0');
-      setFileSize(effectiveAsset.fileSize || '18.5 MB');
-      setLicense(effectiveAsset.license || 'Free Commercial');
-      setAuthor(effectiveAsset.author || 'PIXLape Lab');
-      setThumbnail(effectiveAsset.thumbnail || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg');
-      setBanner(effectiveAsset.banner || '');
-      setIcon(effectiveAsset.icon || '');
-      setDownloadUrl(effectiveAsset.downloadUrl || '');
-      setDonateUrl(effectiveAsset.donateUrl || 'https://trakteer.id');
-      setRequirements(effectiveAsset.requirements || []);
-      setFeatures(effectiveAsset.features || []);
-    }
-  }, [effectiveAsset, loadedAssetId, assetId]);
+  // Synchronize form fields during render when asset is resolved
+  if (effectiveAsset && loadedAssetId !== effectiveAsset.id) {
+    setLoadedAssetId(effectiveAsset.id);
+    setProductId(effectiveAsset.id || assetId || '');
+    setTitle(effectiveAsset.title || '');
+    setDescription(effectiveAsset.description || '');
+    setCategory((effectiveAsset.categories?.[0] as CardCategory) || 'TOOLS');
+    setFileFormat(effectiveAsset.fileType || effectiveAsset.fileFormat || '.ZIP');
+    setBadge(effectiveAsset.badge || 'free');
+    setPrice(effectiveAsset.price ?? (effectiveAsset.badge === 'free' ? 0 : 9.99));
+    setVersion(effectiveAsset.version || 'v1.0.0');
+    setFileSize(effectiveAsset.fileSize || '18.5 MB');
+    setLicense(effectiveAsset.license || 'Free Commercial');
+    setAuthor(effectiveAsset.author || 'PIXLape Lab');
+    setThumbnail(effectiveAsset.thumbnail || 'https://res.cloudinary.com/lbovk2lu/image/upload/v1788330128/bgthumb.svg');
+    setBanner(effectiveAsset.banner || '');
+    setIcon(effectiveAsset.icon || '');
+    setDownloadUrl(effectiveAsset.downloadUrl || '');
+    setDonateUrl(effectiveAsset.donateUrl || 'https://trakteer.id');
+    setRequirements(effectiveAsset.requirements || []);
+    setFeatures(effectiveAsset.features || []);
+  }
 
   const handleAddRequirement = () => {
     if (!newReq.trim()) return;

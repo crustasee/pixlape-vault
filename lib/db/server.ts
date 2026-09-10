@@ -5,11 +5,10 @@ import {
   digitalAssets,
   articles,
   teamMembers,
-  type DigitalAssetSelect,
   type ArticleSelect,
   type TeamMemberSelect,
 } from "./schema";
-import { CARDS, CardDetail, CardCategory, BadgeVariant, mapAssetToCardDetail } from "./card";
+import { CARDS, CardDetail, BadgeVariant, mapAssetToCardDetail } from "./card";
 import {
   ARTICLES,
   ArticleItem,

@@ -8,11 +8,13 @@ interface HeroBannerProps {
 
 export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerProps) {
   const [internalSearch, setInternalSearch] = React.useState(searchQuery);
+  const [prevSearchQuery, setPrevSearchQuery] = React.useState(searchQuery);
   const [isFocused, setIsFocused] = React.useState(false);
 
-  React.useEffect(() => {
+  if (searchQuery !== prevSearchQuery) {
+    setPrevSearchQuery(searchQuery);
     setInternalSearch(searchQuery);
-  }, [searchQuery]);
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -3,28 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const resources = [
-    { label: "Help Center", href: "/help" },
-    { label: "Contact Us", href: "/contact" },
-    { label: "Article & Blog", href: "https://pixlblog-page.pixlape.workers.dev/" },
-    { label: "Pixlape Team", href: "/pixlteam" },
-    { label: "Sitemap", href: "/sitemap" },
-    { label: "Changelog", href: "/changelog" },
-  ];
-
-  const socials = [
-    { name: "GitHub", href: "https://github.com", icon: "⌗" },
-    { name: "Twitter", href: "https://twitter.com", icon: "𝕏" },
-    { name: "Instagram", href: "https://instagram.com", icon: "◈" },
-    { name: "LinkedIn", href: "https://linkedin.com", icon: "▣" },
-    { name: "Discord", href: "https://discord.com", icon: "⌂" },
-  ];
 
   return (
     <footer className="w-full border-t-2 border-black bg-black text-white font-mono mt-auto">
@@ -45,7 +29,7 @@ export default function Footer() {
 
             {/* ---------------------------------------------------------Social Icons Bar---------------------------------------------------------------------- */}
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              {socials.map((social) => (
+              {siteConfig.socials.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
@@ -67,7 +51,7 @@ export default function Footer() {
               _NAVIGATE_
             </h3>
             <ul className="flex flex-col gap-2 text-xs text-[#aaaaaa]">
-              {resources.map((item) => (
+              {siteConfig.footerLinks.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}

@@ -12,7 +12,6 @@ import {
   Terminal,
   ArrowRight,
   ArrowLeft,
-  Key,
   WarningCircle,
   CheckCircle,
   Pulse,

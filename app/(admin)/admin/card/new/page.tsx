@@ -55,7 +55,7 @@ export default function AddAssetCardPage() {
   const [icon, setIcon] = useState('');
 
   const [downloadUrl, setDownloadUrl] = useState('');
-  const [donateUrl, setDonateUrl] = useState('https://trakteer.id');
+  const [donateUrl] = useState('https://trakteer.id');
   const [requirements, setRequirements] = useState<string[]>([
     'Compatible with Windows 10/11 & macOS',
     'Standard graphic editor required',

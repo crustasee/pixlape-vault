@@ -2,13 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
-
-const NAV_ITEMS = [
-  { label: "HOME", href: "/" },
-  { label: "ARTICLES", href: "https://pixlblog-page.pixlape.workers.dev/" },
-  { label: "CONTACT US", href: "/contact" },
-  { label: "HELP", href: "/help" },
-];
+import { siteConfig } from "@/config/site";
 
 export default function Header() {
   return (
@@ -26,7 +20,7 @@ export default function Header() {
       {/* Navigation Links & Dark Mode Toggle */}
       <div className="ml-auto flex items-center gap-4 sm:gap-6">
         <nav className="flex items-center gap-4 sm:gap-6">
-          {NAV_ITEMS.map((item) => (
+          {siteConfig.navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}

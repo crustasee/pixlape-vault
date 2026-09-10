@@ -56,17 +56,18 @@ export function useAssets(): CardDetail[] {
 export function useAsset(id: string): { asset: CardDetail | undefined; isLoading: boolean } {
   const [asset, setAsset] = useState<CardDetail | undefined>(() => getCardById(id));
   const [isLoading, setIsLoading] = useState<boolean>(!asset);
+  const [prevId, setPrevId] = useState(id);
+
+  if (id !== prevId) {
+    setPrevId(id);
+    const initial = getCardById(id);
+    setAsset(initial);
+    setIsLoading(!initial);
+  }
 
   useEffect(() => {
     if (!id) return;
     let isMounted = true;
-
-    // Check store first
-    const current = getCardById(id);
-    if (current) {
-      setAsset(current);
-      setIsLoading(false);
-    }
 
     const update = () => {
       if (isMounted) {

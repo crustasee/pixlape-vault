@@ -79,6 +79,16 @@ function DownloadModalContent({
           ? "READY TO DOWNLOAD !"
           : `PLEASE WAIT ${secondsLeft} SECONDS`}
       </button>
+
+      {isReady && onDonateOpen && (
+        <button
+          type="button"
+          onClick={onDonateOpen}
+          className="w-full mt-2.5 py-1 text-[11px] font-mono text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 transition-colors cursor-pointer text-center"
+        >
+          💖 Support the creator while downloading
+        </button>
+      )}
     </>
   );
 }

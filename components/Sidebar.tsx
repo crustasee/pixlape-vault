@@ -3,17 +3,9 @@
 import React from "react";
 import { CardDetail, CardItem } from "@/lib/db/card";
 import { useAssets } from "@/hooks/useAssets";
+import { siteConfig } from "@/config/site";
 
-const categories = [
-  "ALL ASSETS",
-  "APPS",
-  "TOOLS",
-  "BRUSH",
-  "TEMPLATE",
-  "ICON",
-  "ART FOR SELL",
-  "OTHERS",
-];
+const categories = siteConfig.categories;
 
 interface SidebarProps {
   cards?: (CardItem | CardDetail)[];
