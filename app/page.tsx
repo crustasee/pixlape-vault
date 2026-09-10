@@ -85,7 +85,7 @@ function HomeContent() {
     : assets;
 
   return (
-    <div className="min-h-screen bg-white text-text-primary font-mono">
+    <div className="min-h-screen bg-surface text-text-primary font-mono transition-colors duration-200">
       <Header />
 
       <HeroBanner searchQuery={searchQuery} onSearch={handleSearch} />
@@ -119,7 +119,7 @@ export default function HomePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-white text-text-primary font-mono flex items-center justify-center">
+        <div className="min-h-screen bg-surface text-text-primary font-mono flex items-center justify-center">
           <span className="text-sm font-bold font-pixel">LOADING PIXLAPE VAULT...</span>
         </div>
       }

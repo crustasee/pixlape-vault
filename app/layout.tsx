@@ -29,9 +29,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${jetbrainsMono.variable} ${pressStart2P.variable} font-mono h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-mono bg-surface text-text-primary">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-mono bg-surface text-text-primary transition-colors duration-200">
         {children}
       </body>
     </html>

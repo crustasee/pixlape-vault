@@ -42,7 +42,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
 
   if (isLoading && !card) {
     return (
-      <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
+      <div className="min-h-screen bg-surface text-text-primary font-mono flex flex-col transition-colors duration-200">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
@@ -77,7 +77,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
   const displayUpdated = card.updatedAt || "2026-08-20";
 
   return (
-    <div className="min-h-screen bg-white text-text-primary font-mono flex flex-col">
+    <div className="min-h-screen bg-surface text-text-primary font-mono flex flex-col transition-colors duration-200">
       <Header />
 
       <main className="flex-1 w-full max-w-full mx-auto px-4 md:px-12 lg:px-12 mt-12 sm:mt-14 lg:mt-14 pb-14 flex flex-col gap-2">
@@ -86,19 +86,19 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 text-black-secondary hover:text-black font-bold transition-colors px-2.5 py-1 rounded-sm hover:border-black"
+              className="inline-flex items-center gap-1 text-black-secondary hover:text-black dark:text-zinc-400 dark:hover:text-zinc-100 font-bold transition-colors px-2.5 py-1 rounded-sm hover:border-black"
             >
               <span>&lt;</span> BACK
             </Link>
-            <span className="text-black-secondary select-none">/</span>
+            <span className="text-black-secondary dark:text-zinc-600 select-none">/</span>
             <Link
               href={`/cards/category/${primaryCategory.toLowerCase().replace(/\s+/g, "-")}`}
-              className="text-black-secondary hover:text-black uppercase font-bold transition-colors"
+              className="text-black-secondary hover:text-black dark:text-zinc-400 dark:hover:text-zinc-100 uppercase font-bold transition-colors"
             >
               {primaryCategory}
             </Link>
-            <span className="text-black-secondary select-none">/</span>
-            <span className="text-black-primary font-bold truncate max-w-45 sm:max-w-75">
+            <span className="text-black-secondary dark:text-zinc-600 select-none">/</span>
+            <span className="text-black-primary dark:text-zinc-100 font-bold truncate max-w-45 sm:max-w-75">
               {card.title}
             </span>
           </div>
@@ -106,7 +106,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface border border-border hover:border-black rounded-sm text-xs text-black-primary font-bold hover:bg-primary hover:text-black transition-all cursor-pointer shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface dark:bg-zinc-800/80 border border-border dark:border-zinc-700 hover:border-black dark:hover:border-primary/60 rounded-sm text-xs text-black-primary dark:text-zinc-200 font-bold hover:bg-primary hover:text-black transition-all cursor-pointer shadow-xs"
             title="Copy asset link"
           >
             <span>🔗</span>
@@ -115,9 +115,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
         </div>
 
         {/* ── Main Asset Container ─────────────────────────────────────── */}
-        <section className="bg-surface border border-black-secondary rounded-lg flex flex-col gap-6 p-4 sm:p-6 shadow-xs">
+        <section className="bg-surface border border-black-secondary dark:border-zinc-800 rounded-lg flex flex-col gap-6 p-4 sm:p-6 shadow-xs">
           {/* Hero Banner */}
-          <div className="relative w-full h-52 sm:h-64 md:h-74 rounded-sm overflow-hidden bg-white border group">
+          <div className="relative w-full h-52 sm:h-64 md:h-74 rounded-sm overflow-hidden bg-white dark:bg-zinc-900 border dark:border-zinc-800 group">
             <Image
               src={card.banner}
               alt={`${card.title} banner`}
@@ -135,7 +135,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           {/* Header Identity Row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 sm:w-16 sm:h-16 bg-surface flex items-center justify-center shrink-0 overflow-hidden hover:scale-105 transition-transform cursor-pointer">
+              <div className="w-16 h-16 sm:w-16 sm:h-16 bg-surface dark:bg-zinc-800/80 border dark:border-zinc-700 rounded-sm flex items-center justify-center shrink-0 overflow-hidden hover:scale-105 transition-transform cursor-pointer">
                 <Image
                   src={card.icon}
                   alt={`${card.title} icon`}
@@ -146,7 +146,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <h1 className="text-lg sm:text-2xl font-pixel text-black-primary tracking-wide">
+                <h1 className="text-lg sm:text-2xl font-pixel text-black-primary dark:text-zinc-100 tracking-wide">
                   ◆ {card.title}
                 </h1>
                 <div className="flex flex-wrap items-center gap-2">
@@ -154,11 +154,11 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                   {card.categories.map((tag) => (
                     <CategoryBadge key={tag} category={tag} />
                   ))}
-                  <span className="px-2 py-1 text-[10px] font-mono font-bold bg-white text-black-secondary border border-border rounded-md">
+                  <span className="px-2 py-1 text-[10px] font-mono font-bold bg-white dark:bg-zinc-800 text-black-secondary dark:text-zinc-300 border border-border dark:border-zinc-700 rounded-md">
                     version {displayVersion}
                   </span>
-                  <span className="text-xs text-black-secondary font-mono">
-                    by <strong className="text-black-primary">{displayAuthor}</strong>
+                  <span className="text-xs text-black-secondary dark:text-zinc-400 font-mono">
+                    by <strong className="text-black-primary dark:text-zinc-100">{displayAuthor}</strong>
                   </span>
                 </div>
               </div>
@@ -168,14 +168,14 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
           {/* ── Two-Column Layout: Description Content + Sidebar ────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
             {/* Left Main Content Column */}
-            <div className="lg:col-span-9 flex flex-col gap-3 bg-white rounded-lg border border-border">
+            <div className="lg:col-span-9 flex flex-col gap-3 bg-white dark:bg-card rounded-lg border border-border dark:border-border-strong transition-colors">
               {/* About & Overview Card */}
               <div className="p-5 sm:p-6 flex flex-col gap-3">
                 <div className="flex items-center justify-between border-b border-border pb-3">
-                  <h2 className="font-black text-xs sm:text-sm text-black-primary uppercase tracking-wide flex items-center gap-4">
+                  <h2 className="font-black text-xs sm:text-sm text-black-primary dark:text-zinc-100 uppercase tracking-wide flex items-center gap-4">
                     <span>≡</span> DESCRIPTION
                   </h2>
-                  <span className="text-[11px] font-mono font-bold text-black-secondary uppercase bg-surface px-2 py-0.5 border border-border rounded-xs">
+                  <span className="text-[11px] font-mono font-bold text-black-secondary dark:text-zinc-300 uppercase bg-surface dark:bg-zinc-800/80 px-2 py-0.5 border border-border dark:border-zinc-700 rounded-xs">
                     {displayLicense}
                   </span>
                 </div>
@@ -195,7 +195,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               {/* Key Features Highlights (if present) */}
               {card.features && card.features.length > 0 && (
                 <div className="p-5 sm:p-6 shadow-xs flex flex-col gap-4">
-                  <h3 className="font-black text-xs sm:text-xs text-black-primary uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
+                  <h3 className="font-black text-xs sm:text-xs text-black-primary dark:text-zinc-100 uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
                     <span>≡</span> KEY HIGHLIGHTS & FEATURES
                   </h3>
 
@@ -203,12 +203,12 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                     {card.features.map((feat, idx) => (
                       <div
                         key={idx}
-                        className="p-3 bg-surface border border-border rounded-sm flex items-start gap-2.5 hover:border-black transition-colors"
+                        className="p-3 bg-surface dark:bg-zinc-800/50 border border-border dark:border-zinc-700 rounded-sm flex items-start gap-2.5 hover:border-black dark:hover:border-primary/60 transition-colors"
                       >
-                        <span className="text-primary-dim bg-primary/20 border border-primary/40 px-1 rounded-xs font-bold text-xs leading-none mt-0.5 select-none">
+                        <span className="text-primary-dim dark:text-primary bg-primary/20 dark:bg-primary/10 border border-primary/40 dark:border-primary/30 px-1 rounded-xs font-bold text-xs leading-none mt-0.5 select-none">
                           ✔
                         </span>
-                        <span className="text-xs font-mono text-black-primary">
+                        <span className="text-xs font-mono text-black-primary dark:text-zinc-200">
                           {feat}
                         </span>
                       </div>
@@ -220,15 +220,15 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               {/* Technical Specifications Table (if present) */}
               {card.specs && Object.keys(card.specs).length > 0 && (
                 <div className="p-5 sm:p-6 shadow-xs flex flex-col gap-4">
-                  <h3 className="font-black text-xs sm:text-xs text-black-primary uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
+                  <h3 className="font-black text-xs sm:text-xs text-black-primary dark:text-zinc-100 uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
                     <span>≡</span> TECHNICAL SPECIFICATIONS
                   </h3>
 
-                  <div className="border border-black rounded-sm overflow-hidden">
+                  <div className="border border-black dark:border-zinc-700 rounded-sm overflow-hidden">
                     <table className="w-full text-left text-xs font-mono border-collapse">
                       <thead>
-                        <tr className="bg-black-secondary text-white">
-                          <th className="p-2.5 w-1/3 border-r border-black font-bold uppercase tracking-wider">
+                        <tr className="bg-black-secondary dark:bg-zinc-800 text-white dark:text-zinc-100">
+                          <th className="p-2.5 w-1/3 border-r border-black dark:border-zinc-700 font-bold uppercase tracking-wider">
                             Property
                           </th>
                           <th className="p-2.5 font-bold uppercase tracking-wider">
@@ -236,13 +236,13 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border bg-white">
+                      <tbody className="divide-y divide-border dark:divide-zinc-800 bg-white dark:bg-zinc-900/60">
                         {Object.entries(card.specs).map(([key, val], idx) => (
-                          <tr key={idx} className="hover:bg-primary-light transition-colors">
-                            <td className="p-2.5 font-bold text-black-primary border-r border-border">
+                          <tr key={idx} className="hover:bg-primary-light dark:hover:bg-emerald-950/20 transition-colors">
+                            <td className="p-2.5 font-bold text-black-primary dark:text-zinc-200 border-r border-border dark:border-zinc-800">
                               {key}
                             </td>
-                            <td className="p-2.5 text-text-secondary">
+                            <td className="p-2.5 text-text-secondary dark:text-zinc-300">
                               {val}
                             </td>
                           </tr>
@@ -253,21 +253,19 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 </div>
               )}
 
-            
-
               {/* Release Notes / Changelog (if present) */}
               {card.changelog && (
                 <div className="p-5 sm:p-6 shadow-xs flex flex-col gap-4">
                   <div className="flex items-center justify-between border-b border-border pb-2">
-                    <h3 className="font-pixel text-xs sm:text-sm text-black-primary uppercase tracking-wide flex items-center gap-2">
+                    <h3 className="font-pixel text-xs sm:text-sm text-black-primary dark:text-zinc-100 uppercase tracking-wide flex items-center gap-2">
                       <span>▣</span> VERSION HISTORY & RELEASE NOTES
                     </h3>
-                    <span className="text-xs font-mono bg-surface px-2 py-0.5 border border-border rounded-xs font-bold">
+                    <span className="text-xs font-mono bg-surface dark:bg-zinc-800/80 px-2 py-0.5 border border-border dark:border-zinc-700 rounded-xs font-bold text-black-primary dark:text-zinc-200">
                       {displayVersion}
                     </span>
                   </div>
 
-                  <div className="text-xs font-mono text-text-primary leading-relaxed whitespace-pre-line">
+                  <div className="text-xs font-mono text-text-primary dark:text-zinc-200 leading-relaxed whitespace-pre-line">
                     {typeof card.changelog === "string" ? card.changelog : card.changelog.join("\n• ")}
                   </div>
                 </div>
@@ -277,71 +275,71 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
             {/* Right Sidebar Column */}
             <div className="lg:col-span-3 flex flex-col gap-3 sticky top-6">
               {/* Primary Download Action Card */}
-              <div className="bg-emerald-100 border rounded-md p-4 flex flex-col gap-3">
-                <div className="flex items-center justify-between border-b border-emerald-500 pb-2">
-                  <span className="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider">
-                    Package Download
+              <div className="bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800/80 rounded-md p-4 flex flex-col gap-3 shadow-xs dark:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-colors">
+                <div className="flex items-center justify-between border-b border-emerald-400/50 dark:border-emerald-800/80 pb-2">
+                  <span className="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <span>▼</span> Package Download
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold bg-primary-light text-primary-dim border border-primary rounded-xs">
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-primary-light text-primary-dim border border-primary dark:bg-emerald-900/60 dark:text-emerald-200 dark:border-emerald-600 rounded-xs">
                     {card.fileType || ".ZIP"}
                   </span>
                 </div>
 
-                <div className="flex justify-between items-baseline text-xs font-mono text-emerald-600">
+                <div className="flex justify-between items-baseline text-xs font-mono text-emerald-800 dark:text-emerald-300/90">
                   <span>File Size:</span>
-                  <strong className="text-emerald-700 font-bold">{displaySize}</strong>
+                  <strong className="text-emerald-950 dark:text-emerald-200 font-bold">{displaySize}</strong>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsDownloadOpen(true)}
-                  className="w-full py-2 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black hover:scale-98 transition-all duration-200 cursor-pointer shadow-pixel-sm font-bold flex items-center justify-center gap-2 text-center"
+                  className="w-full py-2.5 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black dark:border-emerald-400/40 hover:scale-98 active:scale-95 transition-all duration-200 cursor-pointer shadow-pixel-sm hover:shadow-glow font-bold flex items-center justify-center gap-2 text-center"
                 >
                   <span>⬇</span> DOWNLOAD
                 </button>
 
-                <p className="text-[10px] text-center text-emerald-400 font-mono">
+                <p className="text-[10px] text-center text-emerald-700 dark:text-emerald-400/80 font-mono">
                   Safe & verified archive • Instant direct download
                 </p>
               </div>
 
               {/* Asset Information Specifications Card */}
-              <div className="bg-white border rounded-md p-6 flex flex-col gap-3 shadow-xs">
-                <h3 className="font-pixel text-xs text-black-primary uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
+              <div className="bg-white dark:bg-card border border-border dark:border-border-strong rounded-md p-6 flex flex-col gap-3 shadow-xs transition-colors">
+                <h3 className="font-pixel text-xs text-black-primary dark:text-zinc-100 uppercase tracking-wide border-b border-border pb-2 flex items-center gap-2">
                   <span>≡</span> ASSET INFORMATION
                 </h3>
 
-                <ul className="flex flex-col gap-2 text-xs font-mono text-text-secondary">
+                <ul className="flex flex-col gap-2 text-xs font-mono text-text-secondary dark:text-zinc-400">
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">Category:</span>
-                    <span className="bg-surface px-2 py-0.5 border border-border rounded-xs text-[11px] font-bold text-black-primary uppercase">
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Category:</span>
+                    <span className="bg-surface dark:bg-zinc-800/80 px-2 py-0.5 border border-border dark:border-zinc-700 rounded-xs text-[11px] font-bold text-black-primary dark:text-zinc-200 uppercase">
                       {card.categories.join(", ")}
                     </span>
                   </li>
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">Version:</span>
-                    <span className="font-bold text-black-primary">{displayVersion}</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Version:</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-100">{displayVersion}</span>
                   </li>
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">License:</span>
-                    <span className="text-green-700 font-bold uppercase">{displayLicense}</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">License:</span>
+                    <span className="text-green-700 dark:text-emerald-400 font-bold uppercase">{displayLicense}</span>
                   </li>
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">Author:</span>
-                    <span className="font-bold text-black-primary">{displayAuthor}</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Author:</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-100">{displayAuthor}</span>
                   </li>
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">Requirements:</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Requirements:</span>
                     <span>{card.requirements.length} Items Listed</span>
                   </li>
                   <li className="flex justify-between border-b border-dotted border-border pb-1.5">
-                    <span className="font-bold text-black-primary">Updated:</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Updated:</span>
                     <span>{displayUpdated}</span>
                   </li>
                   <li className="flex justify-between items-center">
-                    <span className="font-bold text-black-primary">Checksum:</span>
+                    <span className="font-bold text-black-primary dark:text-zinc-200">Checksum:</span>
                     <span
-                      className="font-mono text-[10px] text-black-secondary truncate max-w-35"
+                      className="font-mono text-[10px] text-black-secondary dark:text-zinc-400 truncate max-w-35"
                       title={card.checksum || "SHA-256 Validated"}
                     >
                       {card.checksum ? card.checksum.slice(0, 16) + "..." : "SHA-256 Valid"}
@@ -351,25 +349,27 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Support Creator Donation Box */}
-              <div className="bg-pink-50 border border-red-300 rounded-md p-4 flex flex-col gap-3">
-                <div className="flex items-center gap-2 border-pink-200 pb-2">
+              <div className="bg-pink-50 dark:bg-rose-950/20 border border-red-300 dark:border-rose-900/50 rounded-md p-4 flex flex-col gap-3 shadow-xs dark:shadow-[0_0_20px_rgba(244,63,94,0.08)] transition-colors">
+                <div className="flex items-center gap-2 border-b border-pink-200 dark:border-rose-900/50 pb-2">
                   <span className="text-base select-none">💖</span>
-                  <h4 className="font-pixel text-xs text-black-primary uppercase">Support Creator</h4>
+                  <h4 className="font-pixel text-xs text-black-primary dark:text-rose-300 uppercase tracking-wide">
+                    Support Creator
+                  </h4>
                 </div>
-                <p className="text-xs font-mono text-text-secondary leading-relaxed">
+                <p className="text-xs font-mono text-text-secondary dark:text-zinc-300 leading-relaxed">
                   Enjoying this asset package? A small tip helps keep free tools and open community assets active!
                 </p>
                 <button
                   type="button"
                   onClick={() => setIsMidtransOpen(true)}
-                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-sky-500/20 dark:text-sky-300 dark:border-sky-500/60 dark:hover:bg-sky-500/30 dark:hover:border-sky-400 dark:shadow-[0_0_12px_rgba(14,165,233,0.2)]"
                 >
                   Support →
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-rose-600/30 dark:text-rose-200 dark:border-rose-500/60 dark:hover:bg-rose-600/40 dark:hover:border-rose-400 dark:shadow-[0_0_12px_rgba(244,63,94,0.2)]"
                 >
                   DONATE →
                 </button>
