@@ -239,7 +239,7 @@ function DocumentView() {
           </aside>
 
           {/* Legal Document Content */}
-          <article className="lg:col-span-8 flex flex-col gap-8">
+          <article className="lg:col-span-8 flex flex-col gap-2">
             {/* ═══════════════════════════════════════════════════════ */}
             {/* TAB: TERMS OF SERVICE                                  */}
             {/* ═══════════════════════════════════════════════════════ */}
@@ -664,7 +664,7 @@ function DocumentView() {
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                     All digital tools, brush libraries, templates, and UI components marked with the green{" "}
-                    <span className="font-pixel px-1.5 py-0.5 rounded-xs border border-primary text-primary bg-primary/10">
+                    <span className="font-bold px-1.5 py-0.5 rounded-xs border border-primary text-primary bg-primary/10">
                       FREE
                     </span>{" "}
                     badge are distributed under the standard Pixlape Free License (modeled on CC-BY and MIT principles).
@@ -698,11 +698,11 @@ function DocumentView() {
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                     Assets labeled with{" "}
-                    <span className="font-pixel px-1.5 py-0.5 rounded-xs border border-yellow-400 text-yellow-400 bg-yellow-400/10">
+                    <span className="font-bold px-1.5 py-0.5 rounded-xs border border-yellow-400 text-yellow-400 bg-yellow-400/10">
                       PREMIUM
                     </span>{" "}
                     or{" "}
-                    <span className="font-pixel px-1.5 py-0.5 rounded-xs border border-blue-400 text-blue-400 bg-blue-400/10">
+                    <span className="font-bold px-1.5 py-0.5 rounded-xs border border-blue-400 text-blue-400 bg-blue-400/10">
                       PAID
                     </span>{" "}
                     are curated showcases linking directly to creator-authorized storefronts (e.g., Gumroad, itch.io, or
