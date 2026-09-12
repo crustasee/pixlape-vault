@@ -87,6 +87,30 @@ const ROUTES = [
     icon: "◎",
     external: false,
   },
+  {
+    path: "/document/license",
+    label: "/document/license — ASSET LICENSE",
+    desc: "Commercial distribution, free licenses, CC/MIT rules & creator IP",
+    tags: ["LEGAL", "STATIC"],
+    icon: "◈",
+    external: false,
+  },
+  {
+    path: "/document/privacy",
+    label: "/document/privacy — PRIVACY POLICY",
+    desc: "Zero-tracking directive, telemetry guidelines & user rights",
+    tags: ["LEGAL", "STATIC"],
+    icon: "◎",
+    external: false,
+  },
+  {
+    path: "/document/terms",
+    label: "/document/terms — TERMS OF SERVICE",
+    desc: "Operational covenants, safety timers & platform stipulations",
+    tags: ["LEGAL", "STATIC"],
+    icon: "▤",
+    external: false,
+  },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -133,31 +157,28 @@ export default function SiteMapPage() {
         {/* ── Back ─────────────────────────────────────────── */}
         <Link
           href="/"
-          className="self-start text-xs font-mono text-text-secondary hover:text-primary transition-colors flex items-center gap-2"
+          className="self-start text-xs font-mono text-text-secondary dark:text-zinc-400 hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-2"
         >
           &lt; BACK
         </Link>
 
         {/* ── Page Title ───────────────────────────────────── */}
         <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-pixel text-black-secondary tracking-wide uppercase">
+          <h1 className="text-xl font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase">
             +++ SYSTEM MAP // PIXLAPE_VAULT +++
           </h1>
-        
         </div>
 
-        
-
         {/* ── Main Terminal Container ───────────────────────── */}
-        <div className="bg-black border border-black-primary rounded-lg overflow-hidden shadow-lg">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden shadow-2xl">
           {/* Terminal title bar */}
-          <div className="flex items-center gap-3 px-4 py-2.5 bg-black-primary border-b border-black-secondary">
+          <div className="flex items-center gap-3 px-4 py-2.5 bg-zinc-900 border-b border-zinc-800">
             <div className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-              <span className="w-2.5 h-2.5 rounded-full bg-primary/70" />
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-primary/80" />
             </div>
-            <span className="text-[10px] font-pixel text-text-secondary tracking-widest ml-2">
+            <span className="text-[10px] font-pixel text-zinc-400 tracking-widest ml-2">
               PIXLAPE_VAULT — SITEMAP.SYS
             </span>
             <span className="ml-auto flex items-center gap-1.5 text-[10px] text-primary font-mono">
@@ -167,7 +188,7 @@ export default function SiteMapPage() {
           </div>
 
           {/* ── Section 1: Main Routes ────────────────────────── */}
-          <div className="p-6 border-b border-black-primary">
+          <div className="p-6 border-b border-zinc-800">
             <div className="flex items-center gap-3 mb-4">
               <span className="font-pixel text-[10px] text-primary">▷</span>
               <span className="font-pixel text-xs text-primary tracking-wider">
@@ -183,7 +204,7 @@ export default function SiteMapPage() {
                     href={route.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-black-primary transition-colors cursor-pointer"
+                    className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-zinc-900/80 transition-colors cursor-pointer"
                   >
                     <RouteRow route={route} />
                   </a>
@@ -191,7 +212,7 @@ export default function SiteMapPage() {
                   <Link
                     key={route.path}
                     href={route.path}
-                    className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-black-primary transition-colors cursor-pointer"
+                    className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-zinc-900/80 transition-colors cursor-pointer"
                   >
                     <RouteRow route={route} />
                   </Link>
@@ -201,13 +222,13 @@ export default function SiteMapPage() {
           </div>
 
           {/* ── Section 2: Asset Categories (collapsible) ──────── */}
-          <div className="p-6 border-b border-black-primary">
+          <div className="p-6 border-b border-zinc-800">
             <div className="flex items-center gap-3 mb-4">
               <span className="font-pixel text-[10px] text-primary">▷</span>
               <span className="font-pixel text-xs text-primary tracking-wider">
                 _ASSETS/ (DIGITAL VAULT — CATEGORY MAP)//
               </span>
-              <span className="ml-auto text-[10px] text-text-secondary font-mono">
+              <span className="ml-auto text-[10px] text-zinc-400 font-mono">
                 {CARDS.length} items
               </span>
             </div>
@@ -216,10 +237,10 @@ export default function SiteMapPage() {
             <div className="ml-4 flex flex-wrap gap-2 mb-5">
               <button
                 onClick={() => setActiveCategory("ALL")}
-                className={`text-[10px] font-pixel px-3 py-1.5 rounded-sm border transition-colors cursor-pointer ${
+                className={`text-[10px] font-pixel px-3 py-1.5 rounded-sm border transition-all cursor-pointer ${
                   activeCategory === "ALL"
-                    ? "border-primary text-primary bg-primary/10"
-                    : "border-black-secondary text-text-secondary hover:border-primary/60 hover:text-primary/70"
+                    ? "border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(0,255,0,0.15)]"
+                    : "border-zinc-800 text-zinc-400 bg-zinc-900/40 hover:border-zinc-700 hover:text-zinc-200 hover:bg-zinc-800/60"
                 }`}
               >
                 ALL ({CARDS.length})
@@ -228,10 +249,10 @@ export default function SiteMapPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`text-[10px] font-pixel px-3 py-1.5 rounded-sm border transition-colors cursor-pointer flex items-center gap-1.5 ${
+                  className={`text-[10px] font-pixel px-3 py-1.5 rounded-sm border transition-all cursor-pointer flex items-center gap-1.5 ${
                     activeCategory === cat
-                      ? "border-primary text-primary bg-primary/10"
-                      : "border-black-secondary text-text-secondary hover:border-primary/60 hover:text-primary/70"
+                      ? "border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(0,255,0,0.15)]"
+                      : "border-zinc-800 text-zinc-400 bg-zinc-900/40 hover:border-zinc-700 hover:text-zinc-200 hover:bg-zinc-800/60"
                   }`}
                 >
                   <span>{CATEGORY_ICONS[cat]}</span>
@@ -249,20 +270,21 @@ export default function SiteMapPage() {
                   const isOpen = expandedCategories.has(cat);
 
                   return (
-                    <div key={cat} className="border border-black-primary rounded-md overflow-hidden">
+                    <div key={cat} className="border border-zinc-800 rounded-md overflow-hidden bg-zinc-950/40">
                       {/* Category header — toggle */}
                       <button
                         onClick={() => toggleCategory(cat)}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 bg-black-primary hover:bg-black-secondary/60 transition-colors text-left cursor-pointer"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 bg-zinc-900/90 hover:bg-zinc-800 transition-colors text-left cursor-pointer"
                       >
                         <span className="text-primary text-xs">{CATEGORY_ICONS[cat]}</span>
-                        <span className="font-pixel text-[10px] text-white tracking-wider uppercase">
+                        <span className="font-pixel text-[10px] text-zinc-100 tracking-wider uppercase">
                           /cards/category/{cat.toLowerCase().replace(/\s+/g, "-")}
                         </span>
-                        <span className="text-[10px] text-text-secondary ml-1">
+                        <span className="text-[10px] text-zinc-400 ml-1">
                           ({cards.length})
                         </span>
-                        <span className="ml-auto text-primary text-xs transition-transform duration-200"
+                        <span
+                          className="ml-auto text-primary text-xs transition-transform duration-200"
                           style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
                         >
                           ▷
@@ -271,27 +293,27 @@ export default function SiteMapPage() {
 
                       {/* Cards list */}
                       {isOpen && (
-                        <div className="divide-y divide-black-primary/60">
+                        <div className="divide-y divide-zinc-800/60">
                           {cards.map((card) => (
                             <Link
                               key={card.id}
                               href={`/cards/${card.id}`}
-                              className="group flex items-center gap-3 px-5 py-2 hover:bg-black-primary/50 transition-colors"
+                              className="group flex items-center gap-3 px-5 py-2 hover:bg-zinc-900/70 transition-colors"
                             >
                               <span className="text-primary text-xs shrink-0">▢</span>
-                              <span className="text-white text-xs group-hover:text-primary transition-colors truncate flex-1">
+                              <span className="text-zinc-200 text-xs group-hover:text-primary transition-colors truncate flex-1">
                                 {card.title}
                               </span>
-                              <span className="text-[9px] font-mono text-text-secondary shrink-0">
+                              <span className="text-[9px] font-mono text-zinc-500 shrink-0">
                                 /cards/{card.id}
                               </span>
                               <span
                                 className={`text-[9px] font-pixel px-1.5 py-0.5 rounded-sm border shrink-0 ${
                                   card.badge === "free"
-                                    ? "border-primary/50 text-primary"
+                                    ? "border-primary/50 text-primary bg-primary/5"
                                     : card.badge === "premium"
-                                    ? "border-yellow-400/50 text-yellow-400"
-                                    : "border-blue-400/50 text-blue-400"
+                                    ? "border-yellow-400/50 text-yellow-400 bg-yellow-400/5"
+                                    : "border-blue-400/50 text-blue-400 bg-blue-400/5"
                                 }`}
                               >
                                 {BADGE_LABELS[card.badge]}
@@ -307,7 +329,7 @@ export default function SiteMapPage() {
             ) : (
               /* Filtered flat list */
               <div className="ml-4 flex flex-col gap-1">
-                <div className="text-[10px] text-text-secondary font-mono mb-2 px-1">
+                <div className="text-[10px] text-zinc-400 font-mono mb-2 px-1">
                   Showing {filteredCards.length} result{filteredCards.length !== 1 ? "s" : ""} in{" "}
                   <span className="text-primary">{activeCategory}</span>
                 </div>
@@ -315,22 +337,22 @@ export default function SiteMapPage() {
                   <Link
                     key={card.id}
                     href={`/cards/${card.id}`}
-                    className="group flex items-center gap-3 px-3 py-2 rounded-md hover:bg-black-primary transition-colors"
+                    className="group flex items-center gap-3 px-3 py-2 rounded-md hover:bg-zinc-900/70 transition-colors"
                   >
                     <span className="text-primary text-xs shrink-0">▢</span>
-                    <span className="text-white text-xs group-hover:text-primary transition-colors truncate flex-1">
+                    <span className="text-zinc-200 text-xs group-hover:text-primary transition-colors truncate flex-1">
                       {card.title}
                     </span>
-                    <span className="text-[9px] font-mono text-text-secondary shrink-0">
+                    <span className="text-[9px] font-mono text-zinc-500 shrink-0">
                       /cards/{card.id}
                     </span>
                     <span
                       className={`text-[9px] font-pixel px-1.5 py-0.5 rounded-sm border shrink-0 ${
                         card.badge === "free"
-                          ? "border-primary/50 text-primary"
+                          ? "border-primary/50 text-primary bg-primary/5"
                           : card.badge === "premium"
-                          ? "border-yellow-400/50 text-yellow-400"
-                          : "border-blue-400/50 text-blue-400"
+                          ? "border-yellow-400/50 text-yellow-400 bg-yellow-400/5"
+                          : "border-blue-400/50 text-blue-400 bg-blue-400/5"
                       }`}
                     >
                       {BADGE_LABELS[card.badge]}
@@ -342,7 +364,7 @@ export default function SiteMapPage() {
           </div>
 
           {/* ── Section 3: Articles ───────────────────────────── */}
-          <div className="p-6 border-b border-black-primary">
+          <div className="p-6 border-b border-zinc-800">
             <div className="flex items-center gap-3 mb-4">
               <span className="font-pixel text-[10px] text-primary">▷</span>
               <span className="font-pixel text-xs text-primary tracking-wider">
@@ -355,20 +377,20 @@ export default function SiteMapPage() {
                 href="https://pixlblog-page.pixlape.workers.dev/styleuiux/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-black-primary transition-colors"
+                className="group flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-zinc-900/80 transition-colors"
               >
                 <span className="text-primary font-bold text-xs mt-0.5 shrink-0">↳</span>
                 <div className="flex-1 min-w-0">
-                  <div className="text-white text-xs group-hover:text-primary transition-colors">
+                  <div className="text-zinc-200 text-xs group-hover:text-primary transition-colors">
                     #01: 10 STYLE UI/UX TREND 2026
                   </div>
-                  <div className="text-[10px] text-text-secondary mt-0.5">
+                  <div className="text-[10px] text-zinc-400 mt-0.5">
                     External blog post — pixlblog-page.pixlape.workers.dev
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-1 shrink-0">
-                  <span className="text-[9px] text-text-secondary font-mono">AUG 22, 2026</span>
-                  <span className="text-[9px] border border-yellow-500/40 text-yellow-400 px-1.5 py-0.5 rounded-sm font-pixel">
+                  <span className="text-[9px] text-zinc-500 font-mono">AUG 22, 2026</span>
+                  <span className="text-[9px] border border-yellow-500/40 text-yellow-400 bg-yellow-500/10 px-1.5 py-0.5 rounded-sm font-pixel">
                     EXTERNAL
                   </span>
                 </div>
@@ -396,16 +418,16 @@ export default function SiteMapPage() {
                 >
                   <span className="text-red-400/70 font-bold text-xs mt-0.5 shrink-0">⊗</span>
                   <div className="flex-1 min-w-0">
-                    <div className="text-text-secondary text-xs">
+                    <div className="text-zinc-400 text-xs">
                       {r.path} — {r.label}
                     </div>
-                    <div className="text-[10px] text-text-muted mt-0.5">{r.desc}</div>
+                    <div className="text-[10px] text-zinc-500 mt-0.5">{r.desc}</div>
                   </div>
                   <div className="flex gap-1 shrink-0">
                     {r.tags.map((t) => (
                       <span
                         key={t}
-                        className="text-[9px] border border-red-500/30 text-red-400/60 px-1.5 py-0.5 rounded-sm font-pixel"
+                        className="text-[9px] border border-red-500/30 text-red-400/80 bg-red-500/5 px-1.5 py-0.5 rounded-sm font-pixel"
                       >
                         {t}
                       </span>
@@ -418,9 +440,9 @@ export default function SiteMapPage() {
         </div>
 
         {/* ── Footer note ───────────────────────────────────── */}
-        <div className="flex items-center justify-between text-[10px] text-text-secondary font-mono pb-2">
+        <div className="flex items-center justify-between text-[10px] text-text-secondary dark:text-zinc-400 font-mono pb-2">
           <span>PIXLAPE_VAULT / SITEMAP.SYS — AUTO-GENERATED INDEX</span>
-          <span className="text-primary">
+          <span className="text-primary font-bold">
             {ROUTES.length + ASSET_CATEGORIES.length} ROUTES INDEXED
           </span>
         </div>
@@ -449,10 +471,10 @@ function RouteRow({
         {route.icon}
       </span>
       <div className="flex-1 min-w-0">
-        <span className="text-white text-xs group-hover:text-primary transition-colors font-mono">
+        <span className="text-zinc-200 text-xs group-hover:text-primary transition-colors font-mono">
           {route.label}
         </span>
-        <div className="text-[10px] text-text-secondary mt-0.5">{route.desc}</div>
+        <div className="text-[10px] text-zinc-400 mt-0.5">{route.desc}</div>
       </div>
       <div className="flex gap-1 shrink-0 flex-wrap justify-end">
         {route.tags.map((tag) => (
@@ -462,8 +484,8 @@ function RouteRow({
               tag === "CURRENT"
                 ? "border-primary/60 text-primary bg-primary/10"
                 : tag === "EXTERNAL"
-                ? "border-yellow-500/40 text-yellow-400/80"
-                : "border-black-secondary text-text-secondary"
+                ? "border-yellow-500/40 text-yellow-400/80 bg-yellow-500/10"
+                : "border-zinc-800 text-zinc-400 bg-zinc-900/40"
             }`}
           >
             {tag}

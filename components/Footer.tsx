@@ -77,11 +77,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4 text-[11px]">
-            <a href="#" className="hover:text-primary transition-colors">PRIVACY</a>
+            <Link href="/document/privacy" className="hover:text-primary transition-colors">PRIVACY</Link>
             <span>•</span>
-            <a href="#" className="hover:text-primary transition-colors">TERMS</a>
+            <Link href="/document/terms" className="hover:text-primary transition-colors">TERMS</Link>
             <span>•</span>
-            <a href="#" className="hover:text-primary transition-colors">LICENSE</a>
+            <Link href="/document/license" className="hover:text-primary transition-colors">LICENSE</Link>
           </div>
 
           <button
