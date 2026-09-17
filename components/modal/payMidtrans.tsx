@@ -339,7 +339,7 @@ export default function PayMidtransModal({
                         }`}
                       >
                         <div className="flex items-center justify-between w-full">
-                          <div className="w-full h-9 rounded flex items-center justify-center shrink-0 shadow-xs px-2 py-0.5 bg-transparent dark:bg-white/95">
+                          <div className="w-full h-9 rounded flex items-center justify-center shrink-0 shadow-xs px-2 py-0.5 bg-transparent">
                             <img
                               src={bank.logoUrl}
                               alt={bank.name}
