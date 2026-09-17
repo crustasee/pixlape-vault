@@ -67,7 +67,7 @@ export default function Footer() {
       </div>
 
       {/* ── ----------------------------------------Bottom Bar & Copyright ── ---------------------------------------- */}
-      <div className="border-t border-black bg-black-primary py-4 px-4 lg:px-10">
+      <div className="border-t border-black py-4 px-4 lg:px-10">
         <div className="max-w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-border/60">
           
           <div className="flex items-center gap-2">
@@ -87,7 +87,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="px-4 py-1 bg-black-primary border border-black-secondary rounded-lg text-xs text-black-secondary hover:text-primary hover:border-primary transition-all duration-150 cursor-pointer flex items-center gap-3"
+            className="px-4 py-1 bg-border border border-black-secondary rounded-lg text-xs text-black-secondary hover:text-primary hover:border-primary transition-all duration-150 cursor-pointer flex items-center gap-3"
           >
             <span>▲</span> TOP
           </button>

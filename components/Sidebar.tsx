@@ -47,7 +47,7 @@ export default function Sidebar({
   return (
     <aside className="w-72 bg-surface rounded-md border border-black-primary p-6 flex flex-col gap-4 shrink-0 font-mono">
       {/* ================================TAB filter Cattegory============================================ */}
-      <div className="flex items-center justify-between mt-1 border-b border-black pb-2">
+      <div className="flex items-center justify-between mt-1 border-b pb-2">
         <h3 className="text-xs font-pixel text-black-primary uppercase tracking-wider">
           ++ Categories
         </h3>
@@ -75,9 +75,9 @@ export default function Sidebar({
               type="button"
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`w-full py-2.5 px-4 border rounded-md text-sm font-mono font-semibold transition-all cursor-pointer flex items-center justify-between text-left ${
+              className={`w-full py-2 px-4 border rounded-md text-sm font-mono font-semibold transition-all cursor-pointer flex items-center justify-between text-left ${
                 isSelected
-                  ? "bg-primary border-green-700 text-green-700 shadow-pixel font-bold scale-103"
+                  ? "bg-primary border-green-700 text-green-700 shadow-pixel-sm font-bold scale-104"
                   : "bg-border border-black-primary text-black-primary hover:bg-emerald-200 hover:scale-98"
               }`}
             >
@@ -97,12 +97,12 @@ export default function Sidebar({
       </div>
 
       {/*-------------------InfoStats-------------------*/}
-      <div className="border border-white p-3 rounded-sm flex flex-col mt-auto bg-border/40 gap-2 text-xs text-black-secondary font-mono">
+      <div className="border p-3 rounded-sm flex flex-col mt-auto bg-border/40 gap-2 text-xs text-black-secondary font-mono">
         <div className="flex items-center gap-4">
-          <span className="text-green-600 font-bold">▣</span> 126 Online Users
+          <span className="text-primary font-mono animate-ping">◉</span> 126 Online Users
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-green-600 font-bold">▣</span> {allCards.length} Total Assets
+          <span className="text-primary font-mono">≡</span> {allCards.length} Total Assets
         </div>
       </div>
     </aside>

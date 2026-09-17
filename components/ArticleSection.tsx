@@ -34,12 +34,12 @@ export default function ArticleSection() {
     <section className="mx-12 bg-surface border border-black rounded-md p-6 sm:p-6 mb-8 font-mono shadow-xs">
       {/* ── Section Title Header ── */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4 mb-6">
-        <h2 className="flex items-center gap-3 text-xl sm:text-2xl font-pixel text-black-secondary uppercase tracking-wide">
-          <span className="text-border font-bold">○○○●●</span>
-          <span>_BLOG_ARTICLE_VAULT</span>
+        <h2 className="flex items-center gap-3 text-md sm:text-lg font-pixel text-black-secondary uppercase tracking-wide">
+          <span className="text-border font-bold">▤</span>
+          <span>_PIXL_BLOG</span>
         </h2>
         <span className="text-xs font-mono text-text-secondary">
-          TOTAL PUBLISHED: {ARTICLES.length} ARTICLES
+          PUBLISHED: {ARTICLES.length} ARTICLES
         </span>
       </div>
 

@@ -94,7 +94,7 @@ function HomeContent() {
       <HeroBanner searchQuery={searchQuery} onSearch={handleSearch} />
 
       {/* ============================MAIN LAYOUT: Sidebar + Content============================ */}
-      <div className="mx-12 flex gap-8 mb-8">
+      <div className="mx-12 flex gap-3 mb-6">
         <Sidebar
           cards={assets}
           selectedCategory={selectedCategory}
