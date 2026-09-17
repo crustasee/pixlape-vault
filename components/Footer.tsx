@@ -36,7 +36,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="px-3 py-1.5 text-xs bg-black border border-black-secondary rounded-sm hover:border-primary hover:text-primary hover:bg-black-primary transition-all duration-150 flex items-center gap-1.5"
+                  className="px-3 py-1.5 text-xs bg-black border border-black-secondary rounded-sm hover:border-primary hover:text-primary transition-all duration-150 flex items-center gap-1.5"
                 >
                   <span className="text-xs text-black-secondary hover:text-primary">{social.icon}</span>
                   <span>{social.name}</span>

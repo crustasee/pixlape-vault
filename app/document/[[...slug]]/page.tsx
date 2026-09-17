@@ -76,12 +76,12 @@ function DocumentView() {
 
       <main className="flex-1 w-full max-w-8xl mx-auto px-4 sm:px-8 lg:px-12 pt-16 pb-16 flex flex-col gap-2">
         {/* ── Breadcrumb & Document Switcher Tabs ──────────────── */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 dark:border-zinc-800 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <Link
             href="/"
             className="self-start text-xs font-mono text-black-secondary hover:text-black-primary dark:text-zinc-400 dark:hover:text-primary transition-colors flex items-center gap-2"
           >
-            <span>&lt;</span> BACK TO TROVE
+            <span>&lt;</span> BACK
           </Link>
 
           {/* Legal Navigation Tabs */}
@@ -93,7 +93,7 @@ function DocumentView() {
                   key={tab.id}
                   type="button"
                   onClick={() => handleTabSwitch(tab.id)}
-                  className={`px-3 py-1.5 rounded-sm transition-all duration-150 flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-8 py-2 rounded-sm transition-all duration-150 flex items-center gap-1 cursor-pointer ${
                     isActive
                       ? "bg-primary text-black font-bold shadow-xs"
                       : "border border-border dark:border-zinc-700 bg-surface dark:bg-zinc-900 text-black-secondary dark:text-zinc-400 hover:text-primary hover:border-primary"
@@ -108,7 +108,7 @@ function DocumentView() {
 
         {/* ── Dynamic Hero Banner ─────────────────────────────── */}
         {activeTab === "terms" && (
-          <section className="bg-border/60 dark:bg-zinc-900/90 border border-black dark:border-zinc-800 rounded-lg p-6 sm:p-8 relative overflow-hidden shadow-xs">
+          <section className="bg-border/60 dark:bg-zinc-900/90 border border-black dark:border-zinc-800 rounded-lg p-6 sm:p-8 relative overflow-hidden">
             <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-zinc-600 dark:text-zinc-400 mb-2">
               <span className="px-2 py-0.5 rounded-xs bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-black-primary dark:text-zinc-200">
                 OPERATING COVENANT // REF: PV-TOS-2026.08
@@ -116,7 +116,7 @@ function DocumentView() {
               <span className="text-primary font-bold">STATUS: ENFORCED PROTOCOL</span>
             </div>
 
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
+            <h1 className="text-md sm:text-lg lg:text-lg font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
               +++ TERMS OF SERVICE &amp; OPERATING DIRECTIVE +++
             </h1>
 
@@ -145,7 +145,7 @@ function DocumentView() {
               <span className="text-primary font-bold">ZERO TRACKER DIRECTIVE</span>
             </div>
 
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
+            <h1 className="text-md sm:text-lg lg:text-lg font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
               +++ DATA PRIVACY &amp; TELEMETRY DIRECTIVE +++
             </h1>
 
@@ -174,7 +174,7 @@ function DocumentView() {
               <span className="text-primary font-bold">STATUS: RATIFIED &amp; ENFORCED</span>
             </div>
 
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
+            <h1 className="text-md sm:text-lg lg:text-lg font-pixel text-black-primary dark:text-zinc-100 tracking-wide uppercase mt-1 mb-3">
               +++ PIXLAPE ASSET LICENSING PROTOCOL +++
             </h1>
 
@@ -195,11 +195,11 @@ function DocumentView() {
         )}
 
         {/* ── Main Layout: Table of Contents & Content Body ────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 items-start">
           {/* Sticky Sidebar Table of Contents */}
-          <aside className="lg:col-span-4 sticky top-20 border border-black dark:border-zinc-800 rounded-lg bg-surface dark:bg-zinc-900/60 p-5 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-pixel text-black-primary dark:text-zinc-200 mb-4 pb-2 border-b border-border dark:border-zinc-800">
-              <span>▷</span> TABLE OF CONTENTS
+          <aside className="lg:col-span-4 sticky top-20 border border-black dark:border-zinc-800 rounded-lg bg-surface dark:bg-zinc-900/60 p-5">
+            <div className="flex items-center gap-2 text-sm font-bold text-black-primary dark:text-zinc-200 mb-4 pb-2 border-b border-border dark:border-zinc-800">
+              <span>≡</span> TABLE OF CONTENTS
             </div>
             <nav className="flex flex-col gap-1.5 text-xs font-mono">
               {sections.map((sec) => (
@@ -209,7 +209,7 @@ function DocumentView() {
                   className="px-2.5 py-1.5 rounded-sm text-zinc-600 dark:text-zinc-400 hover:text-primary hover:bg-zinc-200/60 dark:hover:bg-zinc-800/80 transition-colors flex items-center justify-between"
                 >
                   <span>{sec.label}</span>
-                  <span className="text-[10px] text-zinc-400">↳</span>
+                  <span className="text-[10px] text-zinc-400">▶</span>
                 </a>
               ))}
             </nav>
@@ -251,7 +251,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 01</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       ACCEPTANCE OF TERMS
                     </h2>
                   </div>
@@ -269,7 +269,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 02</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PLATFORM DESCRIPTION &amp; INTENDED USE
                     </h2>
                   </div>
@@ -287,7 +287,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 03</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       ACCEPTABLE USE &amp; SYSTEM INTEGRITY
                     </h2>
                   </div>
@@ -325,7 +325,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 04</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       DOWNLOADS &amp; SAFETY VERIFICATION TIMERS
                     </h2>
                   </div>
@@ -346,7 +346,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 05</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       CREATOR SUBMISSIONS &amp; ACCURACY
                     </h2>
                   </div>
@@ -363,7 +363,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 06</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       CREATOR TIPS &amp; VOLUNTARY DONATIONS
                     </h2>
                   </div>
@@ -380,7 +380,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 07</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       LIMITATION OF LIABILITY
                     </h2>
                   </div>
@@ -398,7 +398,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 08</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       AMENDMENTS &amp; TERMINATION
                     </h2>
                   </div>
@@ -422,7 +422,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 01</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PRIVACY PHILOSOPHY &amp; ARCHITECTURE
                     </h2>
                   </div>
@@ -444,7 +444,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 02</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       DATA WE COLLECT (MINIMAL FOOTPRINT)
                     </h2>
                   </div>
@@ -477,7 +477,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 03</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PURPOSE OF DATA PROCESSING
                     </h2>
                   </div>
@@ -498,7 +498,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 04</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       COOKIES &amp; LOCAL STORAGE
                     </h2>
                   </div>
@@ -526,7 +526,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 05</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       THIRD-PARTY INTEGRATIONS
                     </h2>
                   </div>
@@ -558,7 +558,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 06</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       SECURITY &amp; DATA RETENTION
                     </h2>
                   </div>
@@ -575,7 +575,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 07</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       USER RIGHTS (GDPR &amp; GLOBAL STANDARDS)
                     </h2>
                   </div>
@@ -600,7 +600,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 08</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PRIVACY OFFICER CONTACT
                     </h2>
                   </div>
@@ -610,8 +610,8 @@ function DocumentView() {
                   </p>
                   <div className="p-4 rounded-md border border-border dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/80 text-xs text-zinc-700 dark:text-zinc-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                      <span className="font-bold block text-black-primary dark:text-zinc-100">DATA PRIVACY DIRECTORY</span>
-                      <span>Email: contact@pixlape.com</span>
+                      <span className="font-bold block text-zinc-900 dark:text-zinc-100">DATA PRIVACY DIRECTORY</span>
+                      <span>Email: project@keratuli.site</span>
                     </div>
                     <Link
                       href="/contact"
@@ -635,7 +635,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 01</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       LICENSE SCOPE &amp; GRANT
                     </h2>
                   </div>
@@ -658,7 +658,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 02</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PIXLAPE FREE COMMERCIAL LICENSE
                     </h2>
                   </div>
@@ -692,7 +692,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 03</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PREMIUM &amp; PAID ASSETS
                     </h2>
                   </div>
@@ -720,7 +720,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 04</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PERMITTED APPLICATIONS
                     </h2>
                   </div>
@@ -758,7 +758,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-red-500 text-xs font-pixel">§ 05</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       PROHIBITED USES (NEGATIVE COVENANTS)
                     </h2>
                   </div>
@@ -797,7 +797,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 06</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       CREATOR INTELLECTUAL PROPERTY
                     </h2>
                   </div>
@@ -814,7 +814,7 @@ function DocumentView() {
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-primary text-xs font-pixel">§ 07</span>
-                    <h2 className="text-lg font-pixel text-black-primary dark:text-zinc-100">
+                    <h2 className="text-sm font-pixel text-black-primary dark:text-zinc-100">
                       WARRANTY DISCLAIMER &amp; DMCA NOTICE
                     </h2>
                   </div>
@@ -834,7 +834,7 @@ function DocumentView() {
                       href="mailto:contact@pixlape.com"
                       className="text-primary underline hover:text-primary-hover"
                     >
-                      contact@pixlape.com
+                      project@keratuli.site
                     </a>{" "}
                     or via our{" "}
                     <Link href="/contact" className="text-primary underline hover:text-primary-hover">

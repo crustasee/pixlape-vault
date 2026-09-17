@@ -33,9 +33,9 @@ export const siteConfig = {
     "OTHERS",
   ] as const,
   socials: [
-    { name: "GitHub", href: "https://github.com", icon: "⌗" },
+    { name: "GitHub", href: "https://github.com", icon: "▢" },
     { name: "Twitter", href: "https://twitter.com", icon: "𝕏" },
-    { name: "Instagram", href: "https://instagram.com", icon: "◈" },
+    { name: "Instagram", href: "https://instagram.com", icon: "▢" },
     { name: "LinkedIn", href: "https://linkedin.com", icon: "▣" },
     { name: "Discord", href: "https://discord.com", icon: "⌂" },
   ],

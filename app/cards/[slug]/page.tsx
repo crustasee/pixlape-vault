@@ -273,10 +273,10 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               )}
             </div>
 
-            {/* Right Sidebar Column */}
+            {/* ========================================== Right Sidebar Column ========================================== */}
             <div className="lg:col-span-3 flex flex-col gap-3 sticky top-6">
               {/* Primary Download Action Card */}
-              <div className="bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800/80 rounded-md p-4 flex flex-col gap-3 shadow-xs dark:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-colors">
+              <div className="bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800/80 rounded-md p-4 flex flex-col gap-3 transition-colors">
                 <div className="flex items-center justify-between border-b border-emerald-400/50 dark:border-emerald-800/80 pb-2">
                   <span className="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider flex items-center gap-1.5">
                     <span>▼</span> Package Download
@@ -294,7 +294,7 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsDownloadOpen(true)}
-                  className="w-full py-2.5 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black dark:border-emerald-400/40 hover:scale-98 active:scale-95 transition-all duration-200 cursor-pointer shadow-pixel-sm hover:shadow-glow font-bold flex items-center justify-center gap-2 text-center"
+                  className="w-full py-2 px-4 bg-primary text-black font-pixel text-xs rounded-md border border-black dark:border-emerald-400/40 hover:scale-98 active:scale-95 transition-all duration-300 cursor-pointer shadow-pixel-sm hover:shadow-glow font-bold flex items-center justify-center gap-2 text-center"
                 >
                   <span>⬇</span> DOWNLOAD
                 </button>
@@ -350,9 +350,9 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
               </div>
 
               {/* Support Creator Donation Box */}
-              <div className="bg-pink-50 dark:bg-rose-950/20 border border-red-300 dark:border-rose-900/50 rounded-md p-4 flex flex-col gap-3 shadow-xs dark:shadow-[0_0_20px_rgba(244,63,94,0.08)] transition-colors">
+              <div className="bg-pink-50 dark:bg-rose-950/20 border border-red-300 dark:border-rose-900/50 rounded-md p-4 flex flex-col gap-3 transition-colors">
                 <div className="flex items-center gap-2 border-b border-pink-200 dark:border-rose-900/50 pb-2">
-                  <span className="text-base select-none">💖</span>
+                  <span className="text-base select-none">●</span>
                   <h4 className="font-pixel text-xs text-black-primary dark:text-rose-300 uppercase tracking-wide">
                     Support Creator
                   </h4>
@@ -363,16 +363,16 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
                 <button
                   type="button"
                   onClick={() => setIsMidtransOpen(true)}
-                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-sky-500/20 dark:text-sky-300 dark:border-sky-500/60 dark:hover:bg-sky-500/30 dark:hover:border-sky-400 dark:shadow-[0_0_12px_rgba(14,165,233,0.2)]"
+                  className="w-full py-2.5 px-3 bg-blue-300 text-black border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-blue-400 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-sky-500/20 dark:text-sky-300 dark:border-sky-500/60 dark:hover:bg-sky-500/30 dark:hover:border-sky-400"
                 >
                   Support →
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsDonateOpen(true)}
-                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-rose-600/30 dark:text-rose-200 dark:border-rose-500/60 dark:hover:bg-rose-600/40 dark:hover:border-rose-400 dark:shadow-[0_0_12px_rgba(244,63,94,0.2)]"
+                  className="w-full py-2.5 px-3 bg-red-400 text-white border border-black shadow-pixel-sm text-xs font-pixel rounded-md hover:bg-red-500 hover:scale-98 active:scale-95 transition-all duration-150 cursor-pointer text-center font-bold flex items-center justify-center gap-2 dark:bg-rose-600/30 dark:text-rose-200 dark:border-rose-500/60 dark:hover:bg-rose-600/40 dark:hover:border-rose-400"
                 >
-                  DONATE →
+                  DONATE +
                 </button>
               </div>
             </div>
@@ -382,8 +382,8 @@ export default function CardDetailPage({ params }: CardDetailPageProps) {
         {/* ── Related Assets Grid ─────────────────────────────────────── */}
         <section className="flex flex-col gap-4 pt-4">
           <div className="flex items-center justify-between border-b border-border pb-2">
-            <h2 className="text-xs font-pixel uppercase tracking-wide text-black-secondary flex items-center gap-2">
-              <span>▩</span> Related Assets from Trove
+            <h2 className="text-xs font-bold uppercase tracking-wide text-black-secondary flex items-center gap-2">
+              <span>▩</span> RELATED DOWNLOAD
             </h2>
             <Link
               href="/"
