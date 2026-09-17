@@ -117,14 +117,14 @@ export default function CardGrid({
                       className="object-cover opacity-75"
                     />
                     <div className="absolute top-2 right-2 z-20">
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 bg-white border border-border text-border rounded backdrop-blur-xs">
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 bg-white border border-border text-black-primary rounded">
                         #{card.id}
                       </span>
                     </div>
 
                     <div className="relative z-10 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                       <Image
-                        src={card.icon || "/img/Icontemp1.svg"}
+                        src={card.icon || "/public/logop2.svg"}
                         alt={`${card.title} icon`}
                         width={100}
                         height={100}
