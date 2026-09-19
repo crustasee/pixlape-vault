@@ -78,7 +78,7 @@ export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerPro
                 <div className={`absolute left-4 top-1/2 -translate-y-1/2 text-xs font-mono transition-colors duration-200 ${
                   isFocused ? "text-primary" : "text-black-tertiary"
                 }`}>
-                  🔍
+                  ↪
                 </div>
                 <input
                   type="text"
@@ -100,7 +100,7 @@ export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerPro
                 type="submit"
                 className="px-6 py-2 bg-black-secondary text-white text-xs font-mono font-bold rounded-md 
                   border border-black-primary transition-all duration-200
-                  hover:scale-98 hover:text-primary hover:border-primary
+                  hover:scale-97 hover:text-primary hover:border-primary
                   active:scale-95 active:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.2)]
                   shadow-pixel cursor-pointer whitespace-nowrap
                   focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
