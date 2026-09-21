@@ -104,7 +104,7 @@ export default function CardGrid({
             return (
               <div
                 key={card.id}
-                className="bg-surface border border-black-secondary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-[1.01]"
+                className="bg-surface border border-black-secondary rounded-md overflow-hidden flex flex-col justify-between hover:border-primary transition-all shadow-sm group hover:scale-102"
               >
                 <div>
                   {/* Thumbnail header with background image and centered product icon */}
