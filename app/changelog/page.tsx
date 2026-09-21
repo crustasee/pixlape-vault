@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const CHANGELOG_LOGS = [
   {
-    version: "v1.4.2-STABLE",
+    version: "v1.0.2-STABLE",
     date: "AUG 22, 2026",
     title: "Vault Asset Categorization & Markdown Documentation Engine",
     changes: [
@@ -18,7 +18,7 @@ const CHANGELOG_LOGS = [
     ],
   },
   {
-    version: "v1.2.0",
+    version: "v1.0.0",
     date: "AUG 10, 2026",
     title: "Theme System & Component Architecture Overhaul",
     changes: [
