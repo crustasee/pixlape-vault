@@ -3,7 +3,42 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  GithubLogo,
+  XLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  DiscordLogo,
+  YoutubeLogo,
+  TwitchLogo,
+  TiktokLogo,
+} from "@phosphor-icons/react";
 import { siteConfig } from "@/config/site";
+
+const getSocialIcon = (name: string) => {
+  const key = name.toLowerCase();
+  switch (key) {
+    case "github":
+      return GithubLogo;
+    case "twitter":
+    case "x":
+      return XLogo;
+    case "instagram":
+      return InstagramLogo;
+    case "linkedin":
+      return LinkedinLogo;
+    case "discord":
+      return DiscordLogo;
+    case "youtube":
+      return YoutubeLogo;
+    case "twitch":
+      return TwitchLogo;
+    case "tiktok":
+      return TiktokLogo;
+    default:
+      return null;
+  }
+};
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -28,20 +63,31 @@ export default function Footer() {
             </div>
 
             {/* ---------------------------------------------------------Social Icons Bar---------------------------------------------------------------------- */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              {siteConfig.socials.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  className="px-3 py-1.5 text-xs bg-black border border-black-secondary rounded-sm hover:border-primary hover:text-primary transition-all duration-150 flex items-center gap-1.5"
-                >
-                  <span className="text-xs text-black-secondary hover:text-primary">{social.icon}</span>
-                  <span>{social.name}</span>
-                </a>
-              ))}
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+              {siteConfig.socials.map((social) => {
+                const IconComponent = getSocialIcon(social.name);
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    title={social.name}
+                    className="w-9 h-9 rounded-sm bg-black border border-black-secondary text-neutral-400 hover:text-primary hover:border-primary hover:bg-black-primary/50 transition-all duration-150 flex items-center justify-center group"
+                  >
+                    {IconComponent ? (
+                      <IconComponent
+                        size={18}
+                        weight="bold"
+                        className="group-hover:scale-110 transition-transform duration-150"
+                      />
+                    ) : (
+                      <span className="text-xs">{social.icon}</span>
+                    )}
+                  </a>
+                );
+              })}
             </div>
           </div>
 

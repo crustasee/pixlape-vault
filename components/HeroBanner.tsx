@@ -56,8 +56,8 @@ export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerPro
           <div className="mb-10">
             {/* Main Title with Glitch Effect */}
             <div className="mb-4">
-              <h1 className="text-5xl md:text-6xl font-pixel tracking-widest text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] mb-3 
-                hover:text-primary transition-colors duration-200 cursor-pointer">
+              <h1 className="text-4xl md:text-5xl font-pixel tracking-widest text-white mb-3 
+                hover:text-border transition-colors duration-200 cursor-pointer">
                 ++PIXLAPE_TROVE++
               </h1>
               <div className="flex items-center gap-3">
@@ -66,7 +66,7 @@ export default function HeroBanner({ searchQuery = "", onSearch }: HeroBannerPro
           </div>
 
           {/* Search Bar Section */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
             <form
               onSubmit={handleSubmit}
               className="flex gap-3 flex-1 sm:flex-none sm:w-auto group"

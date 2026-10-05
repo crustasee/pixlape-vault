@@ -99,7 +99,7 @@ export default function Sidebar({
       {/*-------------------InfoStats-------------------*/}
       <div className="border p-3 rounded-sm flex flex-col mt-auto bg-border/40 gap-2 text-xs text-black-secondary font-mono">
         <div className="flex items-center gap-4">
-          <span className="text-primary font-mono animate-ping">◉</span> 126 Online Users
+          <span className="text-primary font-mono animate-ping">◉</span> 34 Online Users
         </div>
         <div className="flex items-center gap-4">
           <span className="text-primary font-mono">≡</span> {allCards.length} Total Assets
